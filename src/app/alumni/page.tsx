@@ -1,5 +1,6 @@
 import { EmptyState } from "@/components/empty-state";
 import { PageHero } from "@/components/page-hero";
+import { program } from "@/lib/site";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = { title: "Alumni" };
@@ -16,7 +17,7 @@ export default function AlumniPage() {
         <EmptyState
           title="Alumni roll is not posted"
           body="Send names, years, and next schools to the staff when you have them. This page will hold all-time players, college commits, and anyone who reached pro ball."
-          action={{ href: "/contact", label: "Submit an alum" }}
+          action={{ href: `mailto:${program.email}`, label: "Email an alum note" }}
         />
         <div className="grid gap-4 md:grid-cols-3">
           {[

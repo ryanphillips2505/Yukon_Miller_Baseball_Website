@@ -39,6 +39,11 @@ const hubs = [
     label: "Recruiting",
     copy: "College commits and a direct line for coaches who want film or visits.",
   },
+  {
+    href: "/camps",
+    label: "Camps",
+    copy: "Fall camps for ages 7–12 at Miller Field — dates, prices, and the live registration form.",
+  },
 ];
 
 export default function HomePage() {

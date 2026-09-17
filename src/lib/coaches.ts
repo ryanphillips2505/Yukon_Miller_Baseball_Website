@@ -16,5 +16,9 @@ export const coaches: Coach[] = [
   { id: "ray", name: "Damien Ray", role: "Assistant Coach" },
 ];
 
-export const managersNote =
-  "Managers and trainers will post here once the staff list for the next season is set.";
+export const supportStaff: Coach[] = [
+  { id: "woodruff", name: "Scotlyn Woodruff", role: "Manager" },
+  { id: "matadamas", name: "Yoslin Matadamas", role: "Manager" },
+  { id: "jones", name: "Breed Jones", role: "Student Assistant" },
+  { id: "hormier", name: "Londyn Hormier", role: "Student Social Media" },
+];

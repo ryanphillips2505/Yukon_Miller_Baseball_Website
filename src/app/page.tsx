@@ -47,47 +47,42 @@ export default function HomePage() {
   return (
     <div>
       <section className="relative overflow-hidden border-b border-white/8 bg-black">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(200,16,46,0.28),transparent_52%)]" />
-        <div className="relative mx-auto grid max-w-6xl items-center gap-8 px-4 py-10 sm:px-6 sm:py-16 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)] lg:gap-12">
-          <div className="mx-auto w-full max-w-xl lg:max-w-none">
-            <BrandLogo
-              variant="primary"
-              priority
-              sizes="(max-width: 640px) 92vw, (max-width: 1024px) 80vw, 640px"
-              className="h-auto w-full rounded-sm"
-            />
-          </div>
-          <div>
-            <p className="text-[0.7rem] font-semibold tracking-[0.28em] text-red-400 uppercase">
-              Yukon High School · {program.classification}
-            </p>
-            <h1 className="font-heading mt-3 text-5xl leading-[0.92] text-white uppercase sm:text-7xl">
-              Home of the
-              <br />
-              Millers
-            </h1>
-            <p className="mt-5 max-w-xl text-base leading-7 text-zinc-300 sm:text-lg">
-              Yukon Miller baseball is the next step for a top-end Class 6A
-              program — players, families, and the Home Run Club on one site
-              that is built to be used, not just looked at.
-            </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Link
-                href="/schedule"
-                className={cn(buttonVariants(), "h-11 px-5 text-sm uppercase")}
-              >
-                See the schedule
-              </Link>
-              <Link
-                href="/roster"
-                className={cn(
-                  buttonVariants({ variant: "outline" }),
-                  "h-11 border-white/20 px-5 text-sm uppercase",
-                )}
-              >
-                View the roster
-              </Link>
-            </div>
+        <div className="mx-auto max-w-6xl px-4 pt-6 sm:px-6 sm:pt-8">
+          <BrandLogo
+            variant="primary"
+            priority
+            sizes="(max-width: 640px) 94vw, (max-width: 1024px) 90vw, 1152px"
+            className="mx-auto h-auto w-full"
+          />
+        </div>
+        <div className="relative mx-auto max-w-3xl px-4 pb-12 text-center sm:px-6 sm:pb-16">
+          <p className="text-[0.7rem] font-semibold tracking-[0.28em] text-red-400 uppercase">
+            Yukon High School · {program.classification}
+          </p>
+          <h1 className="font-heading mt-3 text-4xl leading-[0.92] text-white uppercase sm:text-6xl">
+            Home of the Millers
+          </h1>
+          <p className="mx-auto mt-5 max-w-xl text-base leading-7 text-zinc-300 sm:text-lg">
+            Yukon Miller baseball is the next step for a top-end Class 6A
+            program — players, families, and the Home Run Club on one site
+            that is built to be used, not just looked at.
+          </p>
+          <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+            <Link
+              href="/schedule"
+              className={cn(buttonVariants(), "h-11 px-5 text-sm uppercase")}
+            >
+              See the schedule
+            </Link>
+            <Link
+              href="/roster"
+              className={cn(
+                buttonVariants({ variant: "outline" }),
+                "h-11 border-white/20 px-5 text-sm uppercase",
+              )}
+            >
+              View the roster
+            </Link>
           </div>
         </div>
       </section>

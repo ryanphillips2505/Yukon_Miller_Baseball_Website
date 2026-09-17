@@ -7,10 +7,10 @@ export function SiteFooter() {
     <footer className="mt-auto border-t border-white/10 bg-black">
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-12 sm:px-6 md:grid-cols-[1.2fr_1fr_1fr]">
         <div>
-          <div className="max-w-[16rem]">
+          <div className="max-w-[20rem]">
             <BrandLogo
               variant="primary"
-              sizes="(max-width: 768px) 70vw, 256px"
+              sizes="(max-width: 768px) 70vw, 320px"
               className="h-auto w-full"
               alt="Yukon Baseball"
             />

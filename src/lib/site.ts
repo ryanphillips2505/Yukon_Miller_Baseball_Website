@@ -1,9 +1,9 @@
 export const brand = {
   primary: {
-    src: "/images/yukon-baseball-primary-logo.jpg",
-    width: 1536,
-    height: 1024,
-    alt: "Yukon Baseball — interlocking YM inside the outline of Oklahoma",
+    src: "/images/yukon-baseball-primary-logo.png",
+    width: 1774,
+    height: 887,
+    alt: "Yukon Baseball — Oklahoma outline with YM mark and Yukon, Oklahoma wordmark",
   },
   mark: {
     src: "/images/logo-mark.jpg",

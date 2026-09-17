@@ -18,7 +18,7 @@ npm start
 
 ## What is live in this first slice
 
-- Brand start is the Yukon Baseball primary mark (YM inside the Oklahoma outline)
+- Brand start is the Yukon Baseball lockup (Oklahoma outline, YM mark, Yukon Baseball wordmark)
 - Home, schedule, roster, coaches, news, recruiting, camps, alumni, Home Run Club, fan info, facilities, records, media, and contact
 - Real program copy from the current public site (staff names, fields, HRC officers, sponsorships, commit board, TCA store code)
 - Empty states for schedule, roster, photos, camps, alumni, records, and media — no fake games or fake player photos

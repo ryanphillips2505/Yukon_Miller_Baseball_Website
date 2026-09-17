@@ -32,7 +32,7 @@ Edit the typed files in `src/lib/`:
 
 - `schedule.ts` — 2027 master, Varsity, JV Red, and JV White games
 - `roster.ts` — program roster names, bats, and throws
-- `coaches.ts` — optional `photo` paths under `/public/images`
+- `coaches.ts` — coaching staff, managers, student staff, and optional `photo` paths under `/public/images`
 - `commits.ts` — commit board names, schools, and baseball logos
 - `news.ts` — articles and commit announcements
 - `support.ts` — HRC and sponsorships

@@ -19,10 +19,6 @@ export default function ContactPage() {
           <h2 className="font-heading mt-3 text-3xl tracking-wide text-white uppercase sm:text-4xl">
             Email the staff
           </h2>
-          <p className="mt-4 max-w-xl text-sm leading-6 text-zinc-400">
-            Families, college coaches, and media use the same address. Open it
-            in your email app — nothing is typed or stored on this page.
-          </p>
           <a
             href={`mailto:${program.email}`}
             className="mt-6 block break-all text-xl text-red-400 hover:text-red-300 sm:text-2xl"

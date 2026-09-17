@@ -22,8 +22,9 @@ npm start
 - Home, schedule, roster, coaches, news, recruiting, camps, alumni, Home Run Club, fan info, facilities, records, media, and contact
 - Real program copy from the current public site (staff names, fields, HRC officers, sponsorships, commit board, TCA store code)
 - 2027 master / Varsity / JV Red / JV White schedules posted from the program sheet
-- Empty states for photos, camps, alumni, records, and media — no fake games or fake player photos
+- Empty states for photos, alumni, records, and media — no fake games or fake player photos
 - Program roster posted A–Z with bats and throws, no numbers
+- Fall baseball camps posted on `/camps` with the flyer, QR, and live registration form
 
 ## Adding content later
 
@@ -35,5 +36,6 @@ Edit the typed files in `src/lib/`:
 - `commits.ts` — commit board names, schools, and baseball logos
 - `news.ts` — articles and commit announcements
 - `support.ts` — HRC and sponsorships
+- `camps.ts` — fall camp sessions, payment, and the registration form URL
 
 Drop images in `public/images/` and point the `photo` fields at them.

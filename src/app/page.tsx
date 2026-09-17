@@ -27,7 +27,7 @@ const hubs = [
   {
     href: "/support",
     label: "Home Run Club",
-    copy: "Sponsorships, volunteers, and the parent group that keeps two fields going.",
+    copy: "Sponsorships, volunteers, and the parent group that keeps Miller Field going.",
   },
   {
     href: "/fans",

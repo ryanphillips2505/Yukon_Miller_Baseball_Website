@@ -12,7 +12,7 @@ const hubs = [
   {
     href: "/schedule",
     label: "Schedule",
-    copy: "Varsity, JV Red, and JV White on one board once the staff posts dates.",
+    copy: "2027 master, Varsity, JV Red, and JV White boards from the program sheet.",
   },
   {
     href: "/roster",
@@ -27,7 +27,7 @@ const hubs = [
   {
     href: "/support",
     label: "Home Run Club",
-    copy: "Sponsorships, volunteers, and the parent group that keeps two fields going.",
+    copy: "Sponsorships, volunteers, and the parent group that keeps Miller Field going.",
   },
   {
     href: "/fans",
@@ -98,7 +98,7 @@ export default function HomePage() {
                 {team.field}
               </p>
               <p className="mt-1 text-sm text-zinc-400">
-                Dates post on the schedule board.
+                2027 dates are on the schedule board.
               </p>
             </div>
           ))}

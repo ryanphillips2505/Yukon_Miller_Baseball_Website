@@ -63,7 +63,7 @@ export default function FansPage() {
           {[
             {
               title: "Come watch",
-              copy: "Please come by and catch a game. Both diamonds sit on the high school campus so families can walk between Varsity and JV.",
+              copy: "Please come by and catch a game. Miller Field sits on the high school campus behind Yukon High School.",
             },
             {
               title: "Help a night",
@@ -87,7 +87,7 @@ export default function FansPage() {
         </section>
 
         <p className="text-sm text-zinc-500">
-          {fields[0].name} and {fields[1].name} — see the{" "}
+          {fields[0].name} — see the{" "}
           <Link href="/facilities" className="text-red-400 hover:text-red-300">
             facilities
           </Link>{" "}

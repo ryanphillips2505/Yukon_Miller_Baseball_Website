@@ -57,7 +57,7 @@ export const allNav = [...navPrimary, ...navMore];
 export const teams = [
   { id: "varsity", label: "Varsity", field: "Miller Field" },
   { id: "jv-red", label: "JV Red", field: "Miller Field" },
-  { id: "jv-white", label: "JV White", field: "The Hill" },
+  { id: "jv-white", label: "JV White", field: "Miller Field" },
 ] as const;
 
 export type TeamId = (typeof teams)[number]["id"];

@@ -11,7 +11,7 @@ export default function SchedulePage() {
       <PageHero
         kicker="2027 season"
         title="Schedule"
-        lede="One board for Varsity, JV Red, and JV White. Games appear here when the staff releases the master schedule — not before."
+        lede="Master, Varsity, JV Red, and JV White from the program sheet. Home games are at Miller Field."
       />
       <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
         <div className="mb-8 grid gap-3 sm:grid-cols-3">

@@ -10,9 +10,9 @@ export default function FacilitiesPage() {
   return (
     <div>
       <PageHero
-        kicker="Home diamonds"
+        kicker="Home field"
         title="Facilities"
-        lede="Miller Field and The Hill sit behind Yukon High School. Photos of the park will replace these frames when Ryan adds them."
+        lede="Miller Field sits behind Yukon High School. Photos of the park will replace these frames when Ryan adds them."
       />
       <div className="mx-auto max-w-6xl space-y-8 px-4 py-10 sm:px-6">
         {fields.map((field) => (

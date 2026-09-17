@@ -13,11 +13,8 @@ export default function ContactPage() {
       <PageHero kicker="Staff & HRC" title="Contact" />
       <div className="mx-auto grid max-w-6xl gap-8 px-4 py-10 sm:px-6 lg:grid-cols-[1.1fr_0.9fr]">
         <div className="rounded-2xl border border-white/10 bg-zinc-950 p-6 sm:p-8">
-          <p className="text-[0.7rem] font-semibold tracking-[0.22em] text-red-400 uppercase">
-            Program email
-          </p>
-          <h2 className="font-heading mt-3 text-3xl tracking-wide text-white uppercase sm:text-4xl">
-            Email the staff
+          <h2 className="font-heading text-3xl tracking-wide text-white uppercase sm:text-4xl">
+            Email
           </h2>
           <a
             href={`mailto:${program.email}`}

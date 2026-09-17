@@ -192,8 +192,8 @@ export default function HomePage() {
             Full staff
           </Link>
         </div>
-        <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
-          {coaches.slice(0, 5).map((coach) => (
+        <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+          {coaches.map((coach) => (
             <div
               key={coach.id}
               className="overflow-hidden rounded-2xl border border-white/10 bg-zinc-950"

@@ -7,14 +7,13 @@ export type Coach = {
 
 export const coaches: Coach[] = [
   { id: "phillips", name: "Ryan Phillips", role: "Head Coach" },
-  { id: "lowmiller", name: "Coach Lowmiller", role: "Assistant Coach" },
-  { id: "pearson", name: "Coach Pearson", role: "Assistant Coach" },
-  { id: "furlong", name: "Coach Furlong", role: "Assistant Coach" },
-  { id: "haines", name: "Coach Haines", role: "Assistant Coach" },
-  { id: "gaughan", name: "Coach Gaughan", role: "Assistant Coach" },
-  { id: "lockett", name: "Coach Lockett", role: "Assistant Coach" },
-  { id: "booth", name: "Coach Booth", role: "Assistant Coach" },
-  { id: "knutson", name: "Coach Knutson", role: "Assistant Coach" },
+  { id: "furlong", name: "Jason Furlong", role: "Assistant Coach" },
+  { id: "lockett", name: "Clay Lockett", role: "Assistant Coach" },
+  { id: "haines", name: "Dakota Haines", role: "Assistant Coach" },
+  { id: "teel", name: "Caleb Teel", role: "Assistant Coach" },
+  { id: "booth", name: "Zac Booth", role: "Assistant Coach" },
+  { id: "knutson", name: "Ryan Knutson", role: "Assistant Coach" },
+  { id: "ray", name: "Damien Ray", role: "Assistant Coach" },
 ];
 
 export const managersNote =

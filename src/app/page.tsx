@@ -17,7 +17,7 @@ const hubs = [
   {
     href: "/roster",
     label: "Roster",
-    copy: "Players by team after tryouts — names and numbers, no filler photos.",
+    copy: "The program roster, A–Z, with bats and throws. No filler photos.",
   },
   {
     href: "/news",

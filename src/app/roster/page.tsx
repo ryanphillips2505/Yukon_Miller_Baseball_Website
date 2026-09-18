@@ -10,7 +10,7 @@ export default function RosterPage() {
       <PageHero
         kicker="Players"
         title="Roster"
-        lede="The program roster, listed A–Z. Numbers stay off this board until the staff assigns them."
+        lede="The program roster, listed A–Z. Select a player for name, class, position, bats, throws, and photo."
       />
       <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
         <RosterBoard />

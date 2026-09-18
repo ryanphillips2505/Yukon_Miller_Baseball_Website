@@ -1,4 +1,5 @@
 import { AllStateHall } from "@/components/all-state-hall";
+import { MillersDrafted } from "@/components/millers-drafted";
 import { allStateHall } from "@/lib/all-state";
 import type { Metadata } from "next";
 
@@ -9,8 +10,9 @@ export const metadata: Metadata = {
 
 export default function AlumniPage() {
   return (
-    <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 sm:py-10">
+    <div className="mx-auto max-w-6xl space-y-8 px-4 py-8 sm:px-6 sm:py-10">
       <AllStateHall />
+      <MillersDrafted />
     </div>
   );
 }

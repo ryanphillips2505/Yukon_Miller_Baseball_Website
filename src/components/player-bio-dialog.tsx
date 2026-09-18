@@ -101,8 +101,8 @@ export function PlayerBioDialog({
             <div className="grid grid-cols-2 gap-3 px-5 py-5 sm:grid-cols-4 sm:px-6">
               <BioStat label="Grad year" value={bioValue(player.gradYear)} />
               <BioStat label="Position" value={bioValue(player.position)} />
-              <BioStat label="Throws" value={player.bats} />
-              <BioStat label="Bats" value={player.throws} />
+              <BioStat label="Throws" value={bioValue(player.bats)} />
+              <BioStat label="Bats" value={bioValue(player.throws)} />
             </div>
 
             <div className="flex items-center justify-between gap-3 border-t border-white/10 px-4 py-3 sm:px-5">

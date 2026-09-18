@@ -1,5 +1,11 @@
 import { PageHero } from "@/components/page-hero";
-import { fields, parkFacts, parkPhotos, type ParkPhoto } from "@/lib/facilities";
+import {
+  clubhousePhotos,
+  fields,
+  parkFacts,
+  parkPhotos,
+  type FacilityPhoto,
+} from "@/lib/facilities";
 import { program } from "@/lib/site";
 import type { Metadata } from "next";
 import Image from "next/image";
@@ -7,22 +13,26 @@ import Image from "next/image";
 export const metadata: Metadata = {
   title: "Facilities",
   description:
-    "Miller Field, home of Yukon Miller Baseball behind Yukon High School.",
+    "Miller Field and the Yukon Miller Baseball clubhouse behind Yukon High School.",
 };
 
 function PhotoCard({
   photo,
+  venue,
   priority = false,
 }: {
-  photo: ParkPhoto;
+  photo: FacilityPhoto;
+  venue: string;
   priority?: boolean;
 }) {
-  const isTile = photo.layout === "tile";
+  const framed = photo.layout === "tile" || photo.layout === "portrait";
+  const frameClass =
+    photo.layout === "portrait" ? "relative aspect-[3/4]" : "relative aspect-[4/3]";
 
   return (
     <figure className="overflow-hidden rounded-2xl border border-white/10 bg-zinc-950">
-      {isTile ? (
-        <div className="relative aspect-[4/3]">
+      {framed ? (
+        <div className={frameClass}>
           <Image
             src={photo.src}
             alt={photo.alt}
@@ -48,77 +58,153 @@ function PhotoCard({
           {photo.caption}
         </p>
         <p className="text-[0.62rem] tracking-[0.18em] text-zinc-500 uppercase">
-          Miller Field
+          {venue}
         </p>
       </figcaption>
     </figure>
   );
 }
 
+function PhotoGallery({
+  photos,
+  venue,
+  priorityFirst = false,
+}: {
+  photos: FacilityPhoto[];
+  venue: string;
+  priorityFirst?: boolean;
+}) {
+  const groups: { layout: FacilityPhoto["layout"]; photos: FacilityPhoto[] }[] =
+    [];
+
+  for (const photo of photos) {
+    const stacked = photo.layout === "tile" || photo.layout === "portrait";
+    const last = groups[groups.length - 1];
+    if (stacked && last && last.layout === photo.layout) {
+      last.photos.push(photo);
+    } else {
+      groups.push({ layout: photo.layout, photos: [photo] });
+    }
+  }
+
+  return (
+    <div className="space-y-3">
+      {groups.map((group, index) => {
+        const first = index === 0;
+        if (group.layout === "tile" || group.layout === "portrait") {
+          return (
+            <div key={`${group.layout}-${group.photos[0].id}`} className="grid gap-3 md:grid-cols-2">
+              {group.photos.map((photo, photoIndex) => (
+                <PhotoCard
+                  key={photo.id}
+                  photo={photo}
+                  venue={venue}
+                  priority={priorityFirst && first && photoIndex === 0}
+                />
+              ))}
+            </div>
+          );
+        }
+
+        return (
+          <PhotoCard
+            key={group.photos[0].id}
+            photo={group.photos[0]}
+            venue={venue}
+            priority={priorityFirst && first}
+          />
+        );
+      })}
+    </div>
+  );
+}
+
+function SectionHeading({
+  kicker,
+  title,
+}: {
+  kicker: string;
+  title: string;
+}) {
+  return (
+    <header className="mb-6">
+      <p className="text-[0.7rem] font-semibold tracking-[0.24em] text-red-400 uppercase">
+        {kicker}
+      </p>
+      <h2 className="font-heading mt-2 text-4xl tracking-wide text-white uppercase sm:text-5xl">
+        {title}
+      </h2>
+    </header>
+  );
+}
+
 export default function FacilitiesPage() {
   const field = fields[0];
-  const feature = parkPhotos.find((photo) => photo.layout === "feature");
-  const wide = parkPhotos.find((photo) => photo.layout === "wide");
-  const tiles = parkPhotos.filter((photo) => photo.layout === "tile");
 
   return (
     <div className="bg-black">
-      <PageHero kicker="Home field" title="Miller Field" />
+      <PageHero kicker="Home of the Millers" title="Facilities" />
 
-      <section className="border-b border-white/8">
-        <div className="mx-auto grid max-w-6xl grid-cols-2 gap-px bg-white/8 lg:grid-cols-4">
-          {parkFacts.map((fact) => (
-            <div key={fact.label} className="bg-black px-4 py-5 sm:px-6 sm:py-6">
-              <p className="text-[0.62rem] tracking-[0.2em] text-zinc-500 uppercase">
-                {fact.label}
+      <section>
+        <div className="mx-auto max-w-6xl px-4 pt-10 sm:px-6 sm:pt-14">
+          <SectionHeading kicker="Home field" title="Miller Field" />
+        </div>
+
+        <div className="border-y border-white/8">
+          <div className="mx-auto grid max-w-6xl grid-cols-2 gap-px bg-white/8 lg:grid-cols-4">
+            {parkFacts.map((fact) => (
+              <div key={fact.label} className="bg-black px-4 py-5 sm:px-6 sm:py-6">
+                <p className="text-[0.62rem] tracking-[0.2em] text-zinc-500 uppercase">
+                  {fact.label}
+                </p>
+                <p className="mt-2 text-sm tracking-wide text-white sm:text-base">
+                  {fact.value}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="mx-auto max-w-6xl space-y-10 px-4 py-10 sm:px-6 sm:py-14">
+          <PhotoGallery photos={parkPhotos} venue="Miller Field" priorityFirst />
+
+          <article className="grid gap-8 border-t border-white/8 pt-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
+            <div>
+              <p className="text-[0.65rem] tracking-[0.22em] text-red-400 uppercase">
+                {field.usedBy}
               </p>
-              <p className="mt-2 text-sm tracking-wide text-white sm:text-base">
-                {fact.value}
+              <h3 className="font-heading mt-2 text-3xl tracking-wide text-white uppercase sm:text-4xl">
+                The park
+              </h3>
+              <p className="mt-4 max-w-2xl text-base leading-7 text-zinc-400">
+                {field.summary}
               </p>
             </div>
-          ))}
+            <div className="lg:text-right">
+              <p className="text-sm leading-6 text-zinc-300">
+                {program.street}
+                <br />
+                {program.cityStateZip}
+              </p>
+              <a
+                href={program.mapsUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="mt-3 inline-block text-sm tracking-wide text-red-400 uppercase hover:text-red-300"
+              >
+                Directions
+              </a>
+            </div>
+          </article>
         </div>
       </section>
 
-      <div className="mx-auto max-w-6xl space-y-3 px-4 py-10 sm:px-6 sm:py-14">
-        {feature ? <PhotoCard photo={feature} priority /> : null}
-        {wide ? <PhotoCard photo={wide} /> : null}
-
-        <div className="grid gap-3 md:grid-cols-2">
-          {tiles.map((photo) => (
-            <PhotoCard key={photo.id} photo={photo} />
-          ))}
+      <section className="border-t border-white/8">
+        <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-14">
+          <SectionHeading kicker="Inside" title="The Clubhouse" />
+          <PhotoGallery photos={clubhousePhotos} venue="The Clubhouse" />
         </div>
-
-        <article className="grid gap-8 border-t border-white/8 pt-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
-          <div>
-            <p className="text-[0.65rem] tracking-[0.22em] text-red-400 uppercase">
-              {field.usedBy}
-            </p>
-            <h2 className="font-heading mt-2 text-3xl tracking-wide text-white uppercase sm:text-4xl">
-              The park
-            </h2>
-            <p className="mt-4 max-w-2xl text-base leading-7 text-zinc-400">
-              {field.summary}
-            </p>
-          </div>
-          <div className="lg:text-right">
-            <p className="text-sm leading-6 text-zinc-300">
-              {program.street}
-              <br />
-              {program.cityStateZip}
-            </p>
-            <a
-              href={program.mapsUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="mt-3 inline-block text-sm tracking-wide text-red-400 uppercase hover:text-red-300"
-            >
-              Directions
-            </a>
-          </div>
-        </article>
-      </div>
+      </section>
     </div>
   );
 }

@@ -127,7 +127,7 @@ export function SiteHeader() {
         </nav>
 
         <div className="flex items-center gap-3">
-          <NikeSwoosh className="h-2.5 w-auto text-white/70 sm:h-3" />
+          <NikeSwoosh className="h-3.5 w-10 text-white/75" />
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger
               className={cn(

@@ -1,23 +1,94 @@
-export const parkPhotos = {
-  night: {
+export type ParkPhoto = {
+  id: string;
+  src: string;
+  alt: string;
+  caption: string;
+  width: number;
+  height: number;
+  layout: "feature" | "wide" | "tile";
+};
+
+export const parkPhotos: ParkPhoto[] = [
+  {
+    id: "aerial-mark",
+    src: "/images/facilities/miller-field-aerial-mark.jpg",
+    alt: "Aerial of Miller Field with Yukon and Millers in the turf and the YM mark behind home",
+    caption: "Yukon Millers",
+    width: 2200,
+    height: 1177,
+    layout: "feature",
+  },
+  {
+    id: "night",
     src: "/images/facilities/miller-field-night.jpg",
-    alt: "Miller Field at night, lights on over the grandstand and turf",
+    alt: "Miller Field at night with the lights on over the grandstand and turf",
+    caption: "Under the lights",
     width: 2800,
     height: 893,
+    layout: "wide",
   },
-  diamond: {
+  {
+    id: "diamond",
     src: "/images/facilities/miller-field-diamond.jpg",
     alt: "Miller Field from home plate, looking to the Yukon Millers grandstand",
+    caption: "From home",
     width: 2048,
     height: 1536,
+    layout: "tile",
   },
-  yukonY: {
+  {
+    id: "yukon-y",
     src: "/images/facilities/miller-field-yukon-y.jpg",
     alt: "Yukon painted in the Miller Field turf, with the grandstand beyond",
+    caption: "The turf",
     width: 2200,
     height: 1650,
+    layout: "tile",
   },
-} as const;
+  {
+    id: "aerial-clubhouse",
+    src: "/images/facilities/miller-field-aerial-clubhouse.jpg",
+    alt: "Aerial of the Miller Field clubhouse and grandstand, with the diamond beyond",
+    caption: "Miller Field",
+    width: 2200,
+    height: 1162,
+    layout: "tile",
+  },
+  {
+    id: "grandstand",
+    src: "/images/facilities/miller-field-grandstand.jpg",
+    alt: "Looking in from the field to the Miller Field grandstand and press box",
+    caption: "The grandstand",
+    width: 2200,
+    height: 1167,
+    layout: "tile",
+  },
+  {
+    id: "lockers-club",
+    src: "/images/facilities/miller-field-lockers-club.jpg",
+    alt: "Yukon Miller Baseball lockers with home and road jerseys hanging",
+    caption: "The clubhouse",
+    width: 2000,
+    height: 1500,
+    layout: "tile",
+  },
+  {
+    id: "lockers-home",
+    src: "/images/facilities/miller-field-lockers-home.jpg",
+    alt: "Miller Field lockers with Yukon home and pinstripe jerseys",
+    caption: "Game day",
+    width: 2000,
+    height: 1500,
+    layout: "tile",
+  },
+];
+
+export const parkFacts = [
+  { label: "Opened", value: "2014" },
+  { label: "Clubs", value: "Varsity · JV Red · JV White" },
+  { label: "Host", value: "State · Regional · Showcase" },
+  { label: "City", value: "Yukon, Oklahoma" },
+] as const;
 
 export const fields = [
   {
@@ -25,7 +96,7 @@ export const fields = [
     name: "Miller Field",
     usedBy: "Varsity, JV Red, and JV White",
     summary:
-      "Miller Field opened in 2014 behind Yukon High School. The Home Run Club calls it Yukon’s premier baseball facility — the program has hosted state and regional tournaments plus showcase events for high school players from across Oklahoma.",
+      "Opened in 2014 behind Yukon High School. Home of Yukon Miller Baseball, and the park that has hosted state, regional, and showcase baseball for programs from across Oklahoma.",
     notes: [
       "Main stadium behind the high school on Yukon Parkway",
       "Concession stand and sponsor signage at the varsity field",

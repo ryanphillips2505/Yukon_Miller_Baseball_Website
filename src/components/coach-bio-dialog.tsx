@@ -108,17 +108,16 @@ export function CoachBioDialog({
               </div>
             </div>
 
-            <div className="grid grid-cols-1 gap-3 px-5 py-5 sm:grid-cols-2 sm:px-6">
-              <BioStat
-                label="Years coaching"
-                value={bioLine(bio?.yearsCoaching)}
-              />
+            <div className="space-y-3 px-5 py-5 sm:px-6">
+              <p className="font-heading text-xl tracking-wide text-white uppercase sm:text-2xl">
+                Years Coaching - {bioLine(bio?.yearsCoaching)}
+              </p>
               <BioStat label="Spouse and kids" value={bioLine(bio?.family)} />
             </div>
 
             <div className="space-y-5 border-t border-white/8 px-5 py-5 sm:px-6">
               {bio?.familyDetail ? (
-                <BioBlock label="Family" value={bio.familyDetail} />
+                <BioBlock label="Family and more" value={bio.familyDetail} />
               ) : null}
               <BioBlock
                 label="Coaching history"

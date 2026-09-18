@@ -31,6 +31,7 @@ const sponsorLogos: Record<string, SponsorLogo> = {
   "bell-carpet": { src: "/images/sponsors/logos/bell-carpet.png", width: 420, height: 420 },
   "brady-built": { src: "/images/sponsors/logos/brady-built.png", width: 250, height: 69 },
   "browns-driving-school": { src: "/images/sponsors/logos/browns-driving-school.png", width: 780, height: 231 },
+  "clemens-blair": { src: "/images/sponsors/logos/clemens-blair.png", width: 1139, height: 720 },
   "coles-garden": { src: "/images/sponsors/logos/coles-garden.png", width: 800, height: 212 },
   "cooper-autogroup": { src: "/images/sponsors/logos/cooper-autogroup.png", width: 900, height: 251 },
   "crabtree": { src: "/images/sponsors/logos/crabtree.png", width: 900, height: 207 },

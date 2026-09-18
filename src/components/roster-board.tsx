@@ -1,7 +1,12 @@
-import { displayName, players, rosterGroups } from "@/lib/roster";
+"use client";
+
+import { PlayerBioDialog } from "@/components/player-bio-dialog";
+import { displayName, players, rosterGroups, type Player } from "@/lib/roster";
+import { useState } from "react";
 
 export function RosterBoard() {
   const groups = rosterGroups();
+  const [selected, setSelected] = useState<Player | null>(null);
 
   return (
     <section className="overflow-hidden rounded-2xl border border-white/12 bg-black shadow-[0_30px_80px_rgba(0,0,0,0.45)]">
@@ -17,8 +22,8 @@ export function RosterBoard() {
               Program Roster
             </h2>
             <p className="mt-3 max-w-xl text-sm leading-6 text-zinc-400">
-              Alphabetical. No numbers. Bats and throws as posted by the
-              program.
+              Alphabetical. Select a player for the bio card. Move up and down
+              the list without leaving the popup.
             </p>
           </div>
           <div>
@@ -47,31 +52,40 @@ export function RosterBoard() {
             </div>
             <ul>
               {squad.map((player) => (
-                <li
-                  key={player.id}
-                  className="grid grid-cols-[minmax(0,1fr)_2.25rem_2.75rem] items-center gap-3 px-5 py-3.5 sm:grid-cols-[minmax(0,1fr)_4rem_4.5rem] sm:gap-4 sm:px-7 even:bg-white/[0.02]"
-                >
-                  <p className="min-w-0 font-heading text-xl tracking-wide text-white uppercase">
-                    {displayName(player)}
-                  </p>
-                  <p className="text-center font-heading text-lg text-zinc-200">
-                    <span className="mr-1 text-[0.6rem] tracking-[0.16em] text-zinc-500 uppercase sm:hidden">
-                      B
-                    </span>
-                    {player.bats}
-                  </p>
-                  <p className="text-center font-heading text-lg text-zinc-200">
-                    <span className="mr-1 text-[0.6rem] tracking-[0.16em] text-zinc-500 uppercase sm:hidden">
-                      T
-                    </span>
-                    {player.throws}
-                  </p>
+                <li key={player.id} className="even:bg-white/[0.02]">
+                  <button
+                    type="button"
+                    onClick={() => setSelected(player)}
+                    className="grid w-full grid-cols-[minmax(0,1fr)_2.25rem_2.75rem] items-center gap-3 px-5 py-3.5 text-left transition-colors hover:bg-white/[0.06] focus-visible:bg-white/[0.08] focus-visible:outline-none sm:grid-cols-[minmax(0,1fr)_4rem_4.5rem] sm:gap-4 sm:px-7"
+                  >
+                    <p className="min-w-0 font-heading text-xl tracking-wide text-white uppercase">
+                      {displayName(player)}
+                    </p>
+                    <p className="text-center font-heading text-lg text-zinc-200">
+                      <span className="mr-1 text-[0.6rem] tracking-[0.16em] text-zinc-500 uppercase sm:hidden">
+                        B
+                      </span>
+                      {player.bats}
+                    </p>
+                    <p className="text-center font-heading text-lg text-zinc-200">
+                      <span className="mr-1 text-[0.6rem] tracking-[0.16em] text-zinc-500 uppercase sm:hidden">
+                        T
+                      </span>
+                      {player.throws}
+                    </p>
+                  </button>
                 </li>
               ))}
             </ul>
           </section>
         ))}
       </div>
+
+      <PlayerBioDialog
+        player={selected}
+        onClose={() => setSelected(null)}
+        onSelect={setSelected}
+      />
     </section>
   );
 }

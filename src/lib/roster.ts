@@ -6,6 +6,9 @@ export type Player = {
   lastName: string;
   bats: Hand;
   throws: Hand;
+  gradYear?: number;
+  position?: string;
+  photo?: string;
 };
 
 const programPlayers: Omit<Player, "id">[] = [
@@ -85,6 +88,29 @@ export const players: Player[] = programPlayers
 
 export function displayName(player: Player) {
   return `${player.lastName}, ${player.firstName}`;
+}
+
+export function fullName(player: Player) {
+  return `${player.firstName} ${player.lastName}`;
+}
+
+export function playerIndex(id: string, list: Player[] = players) {
+  return list.findIndex((player) => player.id === id);
+}
+
+export function adjacentPlayer(
+  id: string,
+  direction: -1 | 1,
+  list: Player[] = players,
+) {
+  const index = playerIndex(id, list);
+  if (index < 0 || list.length === 0) return undefined;
+  return list[(index + direction + list.length) % list.length];
+}
+
+export function bioValue(value?: string | number) {
+  if (value === undefined || value === "") return "—";
+  return String(value);
 }
 
 export function rosterGroups(list: Player[] = players) {

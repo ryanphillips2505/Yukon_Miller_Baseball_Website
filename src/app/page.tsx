@@ -51,7 +51,7 @@ export default function HomePage() {
                   News
                 </Link>
               </div>
-              <NikeSwoosh className="mt-6 h-3 w-auto text-white/45" />
+              <NikeSwoosh className="mt-6 h-5 w-14 text-white/50" />
             </div>
           </div>
           <div className="h-16 sm:h-20" aria-hidden />

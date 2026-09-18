@@ -7,15 +7,14 @@ type NikeSwooshProps = {
 export function NikeSwoosh({ className }: NikeSwooshProps) {
   return (
     <svg
-      viewBox="0 7.6 24 8"
-      className={cn("shrink-0", className)}
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 1275 445"
+      fill="currentColor"
+      className={cn("block shrink-0 overflow-visible", className)}
       role="img"
       aria-label="Nike"
     >
-      <path
-        fill="currentColor"
-        d="M24 7.8 6.442 15.276c-1.156.532-2.347.574-3.447 0C1.156 14.209 0 12.951 0 12.951s.428.075 1.134.075c1.388 0 3.244-.332 5.308-1.241L24 7.8z"
-      />
+      <path d="M35.6 444.8s575.3-203.1 1131.4-240.9c0 0-287.4 27.3-430.2 132.4 0 0-38.5 27.8-81.6 52.8 0 0 236.4-87.3 511.8-98.2L1275 0S687.7 434.1 35.6 444.8z" />
     </svg>
   );
 }

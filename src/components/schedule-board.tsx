@@ -4,6 +4,7 @@ import {
   formatGameDate,
   gameCount,
   gamesForView,
+  isAwayGame,
   masterDays,
   phaseLabel,
   scheduleNotes,
@@ -26,6 +27,33 @@ function teamLabel(id: TeamId) {
 
 function gameLine(game: Game) {
   return [game.time, game.venue].filter(Boolean).join(" · ");
+}
+
+function matchupClass(game: Game) {
+  return isAwayGame(game.location) ? "text-red-400" : "text-white";
+}
+
+function GameMatchup({ game, className }: { game: Game; className?: string }) {
+  return (
+    <span className={cn(matchupClass(game), className)}>
+      {versusLabel(game.location)} {game.opponent}
+    </span>
+  );
+}
+
+function HomeAwayKey() {
+  return (
+    <div className="flex flex-wrap items-center gap-x-5 gap-y-1 text-[0.62rem] tracking-[0.18em] uppercase">
+      <span className="inline-flex items-center gap-2 text-white">
+        <span className="size-1.5 rounded-full bg-white" aria-hidden />
+        Home · vs
+      </span>
+      <span className="inline-flex items-center gap-2 text-red-400">
+        <span className="size-1.5 rounded-full bg-[#c8102e]" aria-hidden />
+        Away · @
+      </span>
+    </div>
+  );
 }
 
 export function ScheduleBoard() {
@@ -54,6 +82,9 @@ export function ScheduleBoard() {
               Games
             </p>
           </div>
+        </div>
+        <div className="mx-auto max-w-6xl px-4 pt-4 sm:px-6">
+          <HomeAwayKey />
         </div>
         <div className="mx-auto mt-6 flex max-w-6xl gap-1 overflow-x-auto px-4 sm:px-6">
           {views.map((item) => (
@@ -148,10 +179,8 @@ function MasterCell({ label, games: cellGames }: { label: string; games: Game[] 
         <p className="text-sm text-zinc-600">—</p>
       ) : (
         cellGames.map((game) => (
-          <p key={game.id} className="text-sm leading-6 text-zinc-200">
-            <span className="text-white">
-              {versusLabel(game.location)} {game.opponent}
-            </span>
+          <p key={game.id} className="text-sm leading-6">
+            <GameMatchup game={game} />
             {gameLine(game) ? (
               <span className="text-zinc-500"> · {gameLine(game)}</span>
             ) : null}
@@ -189,8 +218,8 @@ function TeamList({ days }: { days: ReturnType<typeof masterDays> }) {
                     {formatGameDate(day.date)}
                   </p>
                 </div>
-                <p className="font-heading text-xl tracking-wide text-white uppercase">
-                  {versusLabel(game.location)} {game.opponent}
+                <p className="font-heading text-xl tracking-wide uppercase">
+                  <GameMatchup game={game} />
                 </p>
                 <p className="text-sm tracking-wide text-zinc-400 uppercase">
                   {[game.time, game.venue].filter(Boolean).join(" · ") || "TBA"}

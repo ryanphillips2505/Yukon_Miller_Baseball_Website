@@ -1,7 +1,6 @@
 import { PageHero } from "@/components/page-hero";
 import {
   clubhousePhotos,
-  fields,
   millerFieldHistory,
   parkFacts,
   parkPhotos,
@@ -140,8 +139,6 @@ function SectionHeading({
 }
 
 export default function FacilitiesPage() {
-  const field = fields[0];
-
   return (
     <div className="bg-black">
       <PageHero kicker="Home of the Millers" title="Facilities" />
@@ -176,10 +173,7 @@ export default function FacilitiesPage() {
         <div className="mx-auto max-w-6xl space-y-10 px-4 py-10 sm:px-6 sm:py-14">
           <PhotoGallery photos={parkPhotos} venue="Miller Field" priorityFirst />
 
-          <article className="flex flex-col gap-4 border-t border-white/8 pt-10 sm:flex-row sm:items-end sm:justify-between">
-            <p className="text-[0.65rem] tracking-[0.22em] text-red-400 uppercase">
-              {field.usedBy}
-            </p>
+          <article className="flex flex-col gap-4 border-t border-white/8 pt-10 sm:flex-row sm:items-end sm:justify-end">
             <div className="sm:text-right">
               <p className="text-sm leading-6 text-zinc-300">
                 {program.street}

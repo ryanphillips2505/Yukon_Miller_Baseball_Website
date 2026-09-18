@@ -24,10 +24,10 @@ function Mark({
     return (
       <div
         className={cn(
-          "flex shrink-0 items-center justify-center rounded-xl bg-[#f4f1ea] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.06),0_0_0_1px_rgba(0,0,0,0.18)]",
-          size === "sm" && "h-12 w-[4.25rem] p-1.5",
-          size === "md" && "h-14 w-[5.25rem] p-2",
-          size === "lg" && "h-[4.5rem] w-[8.5rem] p-2.5",
+          "flex shrink-0 items-center justify-center overflow-hidden rounded-xl bg-[#f4f1ea] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.06),0_0_0_1px_rgba(0,0,0,0.18)]",
+          size === "sm" && "h-12 w-[5.5rem] p-1.5",
+          size === "md" && "h-14 w-[6.75rem] p-2",
+          size === "lg" && "h-[4.5rem] w-[9.5rem] p-2.5",
         )}
       >
         <Image
@@ -35,7 +35,7 @@ function Mark({
           alt=""
           width={sponsor.logo.width}
           height={sponsor.logo.height}
-          className="h-full w-auto max-w-full object-contain"
+          className="h-auto max-h-full w-auto max-w-full object-contain"
         />
       </div>
     );

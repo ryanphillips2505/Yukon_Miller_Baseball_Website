@@ -41,7 +41,7 @@ export default function CoachesPage() {
       <PageHero
         kicker="Staff"
         title="Coaches"
-        lede="The Yukon Miller staff as listed by the program — coaches, managers, and students. Headshots post when Ryan adds them."
+        lede="The Yukon Miller staff as listed by the program — coaches, managers, and students."
       />
       <div className="mx-auto max-w-6xl space-y-12 px-4 py-10 sm:px-6">
         <section>

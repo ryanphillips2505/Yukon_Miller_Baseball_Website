@@ -10,7 +10,7 @@ export const coaches: Coach[] = [
   { id: "furlong", name: "Jason Furlong", role: "Assistant Coach", photo: "/images/coaches/jason-furlong.jpg" },
   { id: "lockett", name: "Clay Lockett", role: "Assistant Coach", photo: "/images/coaches/clay-lockett.jpg" },
   { id: "haines", name: "Dakota Haines", role: "Assistant Coach", photo: "/images/coaches/dakota-haines.jpg" },
-  { id: "teel", name: "Caleb Teel", role: "Assistant Coach" },
+  { id: "teel", name: "Caleb Teel", role: "Assistant Coach", photo: "/images/coaches/caleb-teel.jpg" },
   { id: "booth", name: "Zac Booth", role: "Assistant Coach", photo: "/images/coaches/zac-booth.jpg" },
   { id: "knutson", name: "Ryan Knutson", role: "Assistant Coach" },
   { id: "ray", name: "Damien Ray", role: "Assistant Coach" },

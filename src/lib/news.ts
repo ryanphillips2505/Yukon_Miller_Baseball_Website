@@ -30,6 +30,12 @@ export const articles: Article[] = [
     category: "Commit",
     excerpt:
       "Pace is headed to Oral Roberts University, the NCAA Division I Golden Eagles in Tulsa.",
+    image: {
+      src: "/images/news/drake-pace-oral-roberts.jpg",
+      alt: "Drake Pace swinging through a pitch in a Yukon Miller uniform",
+      width: 1169,
+      height: 741,
+    },
     body: [
       "Yukon High School baseball announced that Drake Pace has committed to Oral Roberts University.",
       "ORU is Tulsa’s Division I club — a Summit League regular with a College World Series on the résumé, now playing at Chapman Park.",

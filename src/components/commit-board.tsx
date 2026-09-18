@@ -17,10 +17,6 @@ export function CommitBoard() {
             <h2 className="font-heading mt-2 text-4xl leading-none tracking-wide text-white uppercase sm:text-5xl">
               Commit Board
             </h2>
-            <p className="mt-3 max-w-xl text-sm leading-6 text-zinc-400">
-              Official next schools, posted like a draft board — player, program,
-              and the baseball mark they will wear.
-            </p>
           </div>
           <div className="flex items-center gap-4 border-l border-white/10 pl-4 sm:border-l-0 sm:pl-0">
             <div>

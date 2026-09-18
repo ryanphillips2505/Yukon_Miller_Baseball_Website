@@ -7,7 +7,6 @@ import {
   masterDays,
   phaseLabel,
   scheduleNotes,
-  scheduleNotice,
   versusLabel,
   type Game,
   type ScheduleView,
@@ -26,13 +25,7 @@ function teamLabel(id: TeamId) {
 }
 
 function gameLine(game: Game) {
-  return [
-    `${versusLabel(game.location)} ${game.opponent}`,
-    game.time,
-    game.venue,
-  ]
-    .filter(Boolean)
-    .join(" · ");
+  return [game.time, game.venue].filter(Boolean).join(" · ");
 }
 
 export function ScheduleBoard() {
@@ -42,42 +35,37 @@ export function ScheduleBoard() {
   const listedGames = useMemo(() => gameCount(visible), [visible]);
 
   return (
-    <section className="overflow-hidden rounded-2xl border border-white/12 bg-black shadow-[0_30px_80px_rgba(0,0,0,0.45)]">
-      <header className="relative overflow-hidden border-b border-white/10 bg-[linear-gradient(180deg,#1a0a0d_0%,#0a0a0c_100%)]">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_12%_0%,rgba(200,16,46,0.28),transparent_42%)]" />
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#c8102e] to-transparent" />
-        <div className="relative flex flex-col gap-5 px-5 py-6 sm:flex-row sm:items-end sm:justify-between sm:px-7">
+    <section>
+      <header className="border-b border-white/10">
+        <div className="mx-auto flex max-w-6xl items-end justify-between gap-6 px-4 pt-6 sm:px-6 sm:pt-8">
           <div>
             <p className="text-[0.68rem] font-semibold tracking-[0.32em] text-red-400 uppercase">
-              2027 season
+              2027
             </p>
-            <h2 className="font-heading mt-2 text-4xl leading-none tracking-wide text-white uppercase sm:text-5xl">
-              {view === "master" ? "Master schedule" : `${teamLabel(view)} schedule`}
-            </h2>
-            <p className="mt-3 max-w-xl text-sm leading-6 text-zinc-400">
-              {scheduleNotice}
-            </p>
+            <h1 className="font-heading mt-2 text-4xl leading-none tracking-wide text-white uppercase sm:text-6xl">
+              {view === "master" ? "Schedule" : teamLabel(view)}
+            </h1>
           </div>
-          <div>
-            <p className="font-heading text-4xl leading-none text-white">
+          <div className="pb-1 text-right">
+            <p className="font-heading text-4xl leading-none text-white sm:text-5xl">
               {String(listedGames).padStart(2, "0")}
             </p>
-            <p className="mt-1 text-[0.65rem] tracking-[0.2em] text-zinc-500 uppercase">
+            <p className="mt-1 text-[0.62rem] tracking-[0.22em] text-zinc-500 uppercase">
               Games
             </p>
           </div>
         </div>
-        <div className="relative flex flex-wrap gap-2 px-5 pb-5 sm:px-7">
+        <div className="mx-auto mt-6 flex max-w-6xl gap-1 overflow-x-auto px-4 sm:px-6">
           {views.map((item) => (
             <button
               key={item.id}
               type="button"
               onClick={() => setView(item.id)}
               className={cn(
-                "rounded-full border px-3 py-1.5 text-xs font-medium tracking-wide uppercase",
-                view === item.id
-                  ? "border-red-600 bg-red-700 text-white"
-                  : "border-white/10 bg-white/4 text-zinc-400 hover:text-white",
+                "relative shrink-0 px-3 py-3 text-[0.8rem] font-medium tracking-[0.14em] uppercase transition-colors",
+                view === item.id ? "text-white" : "text-zinc-500 hover:text-white",
+                view === item.id &&
+                  "after:absolute after:right-3 after:bottom-0 after:left-3 after:h-0.5 after:bg-[#c8102e]",
               )}
             >
               {item.label}
@@ -86,15 +74,17 @@ export function ScheduleBoard() {
         </div>
       </header>
 
-      {view === "master" ? <MasterTable days={days} /> : <TeamList days={days} />}
+      <div className="mx-auto max-w-6xl px-4 sm:px-6">
+        {view === "master" ? <MasterTable days={days} /> : <TeamList days={days} />}
 
-      <footer className="space-y-1 border-t border-white/10 px-5 py-5 sm:px-7">
-        {scheduleNotes.map((note) => (
-          <p key={note} className="text-xs tracking-wide text-zinc-500 uppercase">
-            {note}
-          </p>
-        ))}
-      </footer>
+        <footer className="space-y-1 border-t border-white/8 py-5">
+          {scheduleNotes.map((note) => (
+            <p key={note} className="text-xs tracking-wide text-zinc-500 uppercase">
+              {note}
+            </p>
+          ))}
+        </footer>
+      </div>
     </section>
   );
 }
@@ -106,7 +96,7 @@ function MasterTable({
 }) {
   return (
     <div>
-      <div className="hidden grid-cols-[7.5rem_1fr_1fr_1fr] gap-3 border-b border-white/8 px-5 py-2 text-[0.62rem] tracking-[0.2em] text-zinc-500 uppercase lg:grid lg:px-7">
+      <div className="hidden grid-cols-[7.5rem_1fr_1fr_1fr] gap-3 border-b border-white/8 py-3 text-[0.62rem] tracking-[0.2em] text-zinc-500 uppercase lg:grid">
         <span>Date</span>
         <span>Varsity</span>
         <span>JV Red</span>
@@ -122,15 +112,15 @@ function MasterTable({
         return (
           <div key={day.date}>
             {showPhase ? (
-              <div className="bg-zinc-950/80 px-5 py-2 sm:px-7">
-                <p className="font-heading text-lg tracking-[0.2em] text-red-400">
+              <div className="border-b border-white/8 py-2.5">
+                <p className="text-[0.68rem] font-semibold tracking-[0.28em] text-red-400 uppercase">
                   {phaseLabel[day.phase]}
                 </p>
               </div>
             ) : null}
-            <div className="grid gap-3 border-b border-white/8 px-5 py-4 even:bg-white/[0.02] lg:grid-cols-[7.5rem_1fr_1fr_1fr] lg:items-start lg:px-7">
+            <div className="grid gap-3 border-b border-white/8 py-3.5 even:bg-white/[0.015] lg:grid-cols-[7.5rem_1fr_1fr_1fr] lg:items-start">
               <div>
-                <p className="text-[0.65rem] tracking-[0.16em] text-zinc-500 uppercase">
+                <p className="text-[0.62rem] tracking-[0.16em] text-zinc-500 uppercase">
                   {day.weekday}
                 </p>
                 <p className="font-heading text-lg tracking-wide text-white uppercase">
@@ -159,7 +149,12 @@ function MasterCell({ label, games: cellGames }: { label: string; games: Game[] 
       ) : (
         cellGames.map((game) => (
           <p key={game.id} className="text-sm leading-6 text-zinc-200">
-            {gameLine(game)}
+            <span className="text-white">
+              {versusLabel(game.location)} {game.opponent}
+            </span>
+            {gameLine(game) ? (
+              <span className="text-zinc-500"> · {gameLine(game)}</span>
+            ) : null}
           </p>
         ))
       )}
@@ -175,8 +170,8 @@ function TeamList({ days }: { days: ReturnType<typeof masterDays> }) {
         return (
           <li key={day.date}>
             {showPhase ? (
-              <div className="bg-zinc-950/80 px-5 py-2 sm:px-7">
-                <p className="font-heading text-lg tracking-[0.2em] text-red-400">
+              <div className="border-b border-white/8 py-2.5">
+                <p className="text-[0.68rem] font-semibold tracking-[0.28em] text-red-400 uppercase">
                   {phaseLabel[day.phase]}
                 </p>
               </div>
@@ -184,10 +179,10 @@ function TeamList({ days }: { days: ReturnType<typeof masterDays> }) {
             {day.games.map((game) => (
               <div
                 key={game.id}
-                className="grid gap-1 border-b border-white/8 px-5 py-4 sm:grid-cols-[7.5rem_minmax(0,1fr)_auto] sm:items-center sm:px-7 even:bg-white/[0.02]"
+                className="grid gap-1 border-b border-white/8 py-3.5 sm:grid-cols-[7.5rem_minmax(0,1fr)_auto] sm:items-center even:bg-white/[0.015]"
               >
                 <div>
-                  <p className="text-[0.65rem] tracking-[0.16em] text-zinc-500 uppercase">
+                  <p className="text-[0.62rem] tracking-[0.16em] text-zinc-500 uppercase">
                     {day.weekday}
                   </p>
                   <p className="font-heading text-lg tracking-wide text-white uppercase">
@@ -197,10 +192,8 @@ function TeamList({ days }: { days: ReturnType<typeof masterDays> }) {
                 <p className="font-heading text-xl tracking-wide text-white uppercase">
                   {versusLabel(game.location)} {game.opponent}
                 </p>
-                <p className="text-sm text-zinc-400">
-                  {[game.time ?? "Time TBA", game.venue, game.location]
-                    .filter(Boolean)
-                    .join(" · ")}
+                <p className="text-sm tracking-wide text-zinc-400 uppercase">
+                  {[game.time, game.venue].filter(Boolean).join(" · ") || "TBA"}
                 </p>
               </div>
             ))}

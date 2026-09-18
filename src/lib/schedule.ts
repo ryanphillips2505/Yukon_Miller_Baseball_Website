@@ -126,9 +126,6 @@ export const games: Game[] = drafts.map((game, index) => ({
   id: `${game.date}-${game.team}-${index}`,
 }));
 
-export const scheduleNotice =
-  "From the 2027 master sheet. Changes go to players through their team’s coach and parent rep. The sheet marks district games with a star — none are starred yet.";
-
 export const scheduleNotes = [
   "Monday, February 15 — scrimmages can start",
   "Spring break — March 15–19",

@@ -1,4 +1,5 @@
 import { BrandLogo } from "@/components/brand-logo";
+import { NikeSwoosh } from "@/components/nike-swoosh";
 import { buttonVariants } from "@/components/ui/button";
 import { commits } from "@/lib/commits";
 import { latestArticles } from "@/lib/news";
@@ -50,6 +51,7 @@ export default function HomePage() {
                   News
                 </Link>
               </div>
+              <NikeSwoosh className="mt-6 h-3 w-auto text-white/45" />
             </div>
           </div>
           <div className="h-16 sm:h-20" aria-hidden />

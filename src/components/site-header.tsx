@@ -10,6 +10,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { BrandLogo } from "@/components/brand-logo";
+import { NikeSwoosh } from "@/components/nike-swoosh";
 import { allNav, navMore, navPrimary, program } from "@/lib/site";
 import { cn } from "@/lib/utils";
 import { ChevronDown, Menu } from "lucide-react";
@@ -125,20 +126,22 @@ export function SiteHeader() {
           </div>
         </nav>
 
-        <Sheet open={open} onOpenChange={setOpen}>
-          <SheetTrigger
-            className={cn(
-              buttonVariants({ variant: "outline", size: "icon" }),
-              "border-white/15 bg-transparent text-white hover:bg-white/10 lg:hidden",
-            )}
-            aria-label="Open menu"
-          >
-            <Menu />
-          </SheetTrigger>
-          <SheetContent
-            side="right"
-            className="w-[min(22rem,100%)] border-white/10 bg-zinc-950 text-white"
-          >
+        <div className="flex items-center gap-3">
+          <NikeSwoosh className="h-2.5 w-auto text-white/70 sm:h-3" />
+          <Sheet open={open} onOpenChange={setOpen}>
+            <SheetTrigger
+              className={cn(
+                buttonVariants({ variant: "outline", size: "icon" }),
+                "border-white/15 bg-transparent text-white hover:bg-white/10 lg:hidden",
+              )}
+              aria-label="Open menu"
+            >
+              <Menu />
+            </SheetTrigger>
+            <SheetContent
+              side="right"
+              className="w-[min(22rem,100%)] border-white/10 bg-zinc-950 text-white"
+            >
             <SheetHeader>
               <SheetTitle className="font-heading tracking-wide text-white uppercase">
                 {program.name}
@@ -164,8 +167,9 @@ export function SiteHeader() {
                 </Link>
               ))}
             </nav>
-          </SheetContent>
-        </Sheet>
+            </SheetContent>
+          </Sheet>
+        </div>
       </div>
     </header>
   );

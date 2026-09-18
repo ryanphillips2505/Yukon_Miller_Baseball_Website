@@ -62,19 +62,21 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 border-b border-white/10 bg-black/70 backdrop-blur-md">
       <div className="mx-auto flex h-14 max-w-6xl items-center justify-between gap-6 px-4 sm:px-6">
-        <Link href="/" className="flex min-w-0 items-center gap-2.5">
-          <BrandLogo
-            variant="mark"
-            priority
-            sizes="28px"
-            className="size-7 w-7 shrink-0 rounded-sm object-cover"
-            alt="Yukon Baseball"
-          />
-          <span className="font-heading text-[0.72rem] tracking-[0.2em] text-white uppercase">
-            Yukon Baseball
-          </span>
-          <NikeSwoosh className="ml-1 h-4 w-12 opacity-90" />
-        </Link>
+        <div className="flex min-w-0 items-center gap-2.5">
+          <Link href="/" className="flex min-w-0 items-center gap-2.5">
+            <BrandLogo
+              variant="mark"
+              priority
+              sizes="28px"
+              className="size-7 w-7 shrink-0 rounded-sm object-cover"
+              alt="Yukon Baseball"
+            />
+            <span className="font-heading truncate text-[0.72rem] tracking-[0.2em] text-white uppercase">
+              Yukon Baseball
+            </span>
+          </Link>
+          <NikeSwoosh size="md" className="opacity-90" />
+        </div>
 
         <nav className="hidden items-center lg:flex">
           {navPrimary.map((item) => (

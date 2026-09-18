@@ -58,7 +58,7 @@ export default function HomePage() {
       </section>
 
       <div className="flex justify-center border-b border-white/8 bg-black py-5">
-        <NikeSwoosh className="h-5 w-[3.85rem] opacity-80" />
+        <NikeSwoosh size="lg" className="opacity-90" />
       </div>
 
       <section className="bg-black">

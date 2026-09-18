@@ -384,3 +384,12 @@ export const featuredSponsors = [
 ];
 
 export const sponsorCount = sponsors.length;
+
+export const sponsorshipForm = {
+  href: "/2026-2027-sponsorship-form.pdf",
+  title: "2026–27 Sponsorship Form",
+  previewSrc: "/images/sponsors/2026-2027-sponsorship-form.jpg",
+  previewWidth: 1224,
+  previewHeight: 1584,
+  pages: 3,
+} as const;

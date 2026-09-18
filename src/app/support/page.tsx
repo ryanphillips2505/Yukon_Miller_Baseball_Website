@@ -1,6 +1,6 @@
 import { PageHero } from "@/components/page-hero";
 import { buttonVariants } from "@/components/ui/button";
-import { sponsorCount } from "@/lib/sponsors";
+import { sponsorCount, sponsorshipForm } from "@/lib/sponsors";
 import { hrc, officers, sponsorshipTiers, tcaStore } from "@/lib/support";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
@@ -84,13 +84,25 @@ export default function SupportPage() {
         </section>
 
         <section>
-          <h2 className="font-heading text-2xl tracking-wide text-white uppercase">
-            2026–27 sponsorships
-          </h2>
-          <p className="mt-2 max-w-2xl text-sm leading-6 text-zinc-400">
-            Yukon Baseball will build a custom package if these tiers do not
-            fit. Artwork and design follow after you email the club.
-          </p>
+          <div className="flex flex-wrap items-end justify-between gap-3">
+            <div>
+              <h2 className="font-heading text-2xl tracking-wide text-white uppercase">
+                2026–27 sponsorships
+              </h2>
+              <p className="mt-2 max-w-2xl text-sm leading-6 text-zinc-400">
+                Yukon Baseball will build a custom package if these tiers do not
+                fit. Artwork and design follow after you email the club.
+              </p>
+            </div>
+            <a
+              href={sponsorshipForm.href}
+              target="_blank"
+              rel="noreferrer"
+              className={cn(buttonVariants(), "h-10 px-4 uppercase")}
+            >
+              Open the form
+            </a>
+          </div>
           <div className="mt-6 grid gap-3 md:grid-cols-2">
             {sponsorshipTiers.map((tier) => (
               <article

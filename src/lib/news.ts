@@ -1,3 +1,6 @@
+import type { ArticleBlock } from "@/lib/news-blocks";
+import { class2aYukonStory } from "@/lib/news-class-2a-yukon";
+
 export type Article = {
   slug: string;
   title: string;
@@ -5,9 +8,11 @@ export type Article = {
   category: "News" | "Commit" | "Update";
   excerpt: string;
   body: string[];
+  blocks?: ArticleBlock[];
 };
 
 export const articles: Article[] = [
+  class2aYukonStory,
   {
     slug: "drake-pace-oral-roberts",
     title: "Drake Pace commits to Oral Roberts",

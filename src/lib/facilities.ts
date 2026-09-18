@@ -114,7 +114,7 @@ export const parkFacts = [
 ] as const;
 
 export const millerFieldHistory = [
-  "Miller Field opened in 2014 behind Yukon High School — a covered grandstand, a press box, and Yukon painted in the turf. It is the home park for Varsity, JV Red, and JV White, and it has become one of the OSSAA’s regular postseason stops: 6A regionals, Class 5A and Class B state rounds, showcases, and the Class 2A fall quarterfinals and semifinals.",
+  "Miller Field opened in 2014 behind Yukon High School — a covered grandstand, a press box, and Yukon painted in the turf. It has become one of the OSSAA’s regular postseason stops: 6A regionals, Class 5A and Class B state rounds, showcases, and the Class 2A fall quarterfinals and semifinals.",
   "The Millers have won the regional on this field five times — 2015, 2016, 2017, 2021, and 2026. Each of those titles sent Yukon to the Class 6A state tournament. The 2015 and 2017 clubs reached the semifinals. In 2026 they beat Choctaw 7–6 on their own turf and won a state quarterfinal before the run ended. The program’s state championship is 1982, a generation before this park opened.",
 ] as const;
 

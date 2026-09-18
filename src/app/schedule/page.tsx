@@ -1,5 +1,6 @@
 import { PageHero } from "@/components/page-hero";
 import { ScheduleBoard } from "@/components/schedule-board";
+import { gameCount, games } from "@/lib/schedule";
 import { teams } from "@/lib/site";
 import type { Metadata } from "next";
 
@@ -23,7 +24,9 @@ export default function SchedulePage() {
               <p className="font-heading text-lg tracking-wide text-white uppercase">
                 {team.label}
               </p>
-              <p className="text-sm text-zinc-400">Home site: {team.field}</p>
+              <p className="text-sm text-zinc-400">
+                {gameCount(games.filter((game) => game.team === team.id))} games
+              </p>
             </div>
           ))}
         </div>

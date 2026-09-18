@@ -161,6 +161,20 @@ export function gamesForView(view: ScheduleView) {
   return games.filter((game) => game.team === view);
 }
 
+export function listedGameCount(game: Pick<Game, "time" | "phase">) {
+  if (game.phase === "scrimmage") return 0;
+  if (!game.time) return 1;
+  const times = game.time
+    .split("/")
+    .map((part) => part.trim())
+    .filter(Boolean);
+  return times.length > 1 ? times.length : 1;
+}
+
+export function gameCount(list: Game[]) {
+  return list.reduce((total, game) => total + listedGameCount(game), 0);
+}
+
 export function masterDays(list: Game[] = games) {
   const byDate = new Map<
     string,

@@ -2,6 +2,7 @@
 
 import {
   formatGameDate,
+  gameCount,
   gamesForView,
   masterDays,
   phaseLabel,
@@ -38,6 +39,7 @@ export function ScheduleBoard() {
   const [view, setView] = useState<ScheduleView>("master");
   const visible = useMemo(() => gamesForView(view), [view]);
   const days = useMemo(() => masterDays(visible), [visible]);
+  const listedGames = useMemo(() => gameCount(visible), [visible]);
 
   return (
     <section className="overflow-hidden rounded-2xl border border-white/12 bg-black shadow-[0_30px_80px_rgba(0,0,0,0.45)]">
@@ -58,7 +60,7 @@ export function ScheduleBoard() {
           </div>
           <div>
             <p className="font-heading text-4xl leading-none text-white">
-              {String(visible.length).padStart(2, "0")}
+              {String(listedGames).padStart(2, "0")}
             </p>
             <p className="mt-1 text-[0.65rem] tracking-[0.2em] text-zinc-500 uppercase">
               Games

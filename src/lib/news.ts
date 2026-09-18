@@ -17,8 +17,7 @@ export const articles: Article[] = [
       "Pace is headed to Oral Roberts University, the NCAA Division I Golden Eagles in Tulsa.",
     body: [
       "Yukon High School baseball announced that Drake Pace has committed to Oral Roberts University.",
-      "ORU plays NCAA Division I baseball in the Summit League at J.L. Johnson Stadium in Tulsa, Oklahoma. The Golden Eagles wear navy and Vegas gold.",
-      "College decisions post here as players make them official. Families and college coaches can reach the staff at yukonmillerbaseball@gmail.com.",
+      "ORU is Tulsa’s Division I club — a Summit League regular with a College World Series on the résumé, now playing at Chapman Park.",
     ],
   },
   {
@@ -30,8 +29,7 @@ export const articles: Article[] = [
       "Strange is the latest Miller to keep playing after high school, signing with Hutchinson Community College.",
     body: [
       "Yukon High School baseball announced that Clayton Strange has committed to Hutchinson Community College.",
-      "The Blue Dragons play NJCAA Division I baseball in the Kansas Jayhawk Community College Conference at Hobart–Detter Field in Hutchinson, Kansas.",
-      "College decisions post here as players make them official. Families and college coaches can reach the staff at yukonmillerbaseball@gmail.com.",
+      "The Blue Dragons just finished No. 22 in NJCAA Division I at 46-15 after a record 131-homer season — two years after a 51-win Jayhawk West title.",
     ],
   },
   {
@@ -43,8 +41,7 @@ export const articles: Article[] = [
       "McClure will play for the Barton Cougars, NJCAA Division I baseball in Great Bend, Kansas.",
     body: [
       "Yukon High School baseball announced that Pryce McClure has committed to Barton Community College.",
-      "The Cougars play NJCAA Division I baseball in the Kansas Jayhawk Community College Conference at Lawson-Biggs Field in Great Bend, Kansas.",
-      "College decisions post here as players make them official. Families and college coaches can reach the staff at yukonmillerbaseball@gmail.com.",
+      "The Cougars just knocked off No. 2 Cloud County and reached the Plains District final four — NJCAA Division I baseball in Great Bend.",
     ],
   },
 ];

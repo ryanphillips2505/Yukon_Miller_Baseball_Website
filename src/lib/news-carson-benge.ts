@@ -9,9 +9,9 @@ export const carsonBengeStory = {
     "Carson Benge’s path from Yukon High School to Opening Day with the New York Mets.",
   image: {
     src: "/images/news/carson-benge-mets.jpg",
-    alt: "Carson Benge in a New York Mets home uniform, holding a bat over his shoulder",
-    width: 333,
-    height: 266,
+    alt: "Carson Benge batting in a New York Mets home uniform at Citi Field",
+    width: 2400,
+    height: 800,
   },
   body: [
     "Before he wore a New York Mets uniform at Citi Field, Carson Benge wore Yukon.",

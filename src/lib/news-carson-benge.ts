@@ -8,7 +8,7 @@ export const carsonBengeStory = {
   excerpt:
     "Carson Benge’s path from Yukon High School to Opening Day with the New York Mets.",
   image: {
-    src: "/images/news/carson-benge-mets.jpg",
+    src: "/images/news/carson-benge-at-bat.jpg",
     alt: "Carson Benge batting in a New York Mets home uniform at Citi Field",
     width: 2400,
     height: 800,

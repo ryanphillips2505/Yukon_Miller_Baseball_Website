@@ -42,7 +42,7 @@ export default function NewsPage() {
                       alt={article.image.alt}
                       width={article.image.width}
                       height={article.image.height}
-                      className="mt-4 h-28 w-auto shrink-0 rounded-xl object-cover sm:mt-0"
+                      className="mt-4 h-36 w-full rounded-xl object-cover object-center sm:mt-0 sm:h-24 sm:w-44 sm:shrink-0"
                     />
                   ) : null}
                 </Link>

@@ -142,7 +142,7 @@ export default function HomePage() {
                     alt={featured.image.alt}
                     width={featured.image.width}
                     height={featured.image.height}
-                    className="h-56 w-full object-cover object-top sm:h-72"
+                    className="h-56 w-full object-cover object-center sm:h-72"
                   />
                 ) : null}
                 <div className="p-8 sm:p-10">

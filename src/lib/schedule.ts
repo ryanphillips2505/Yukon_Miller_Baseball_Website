@@ -153,6 +153,10 @@ export function versusLabel(location: GameLocation) {
   return "vs";
 }
 
+export function isAwayGame(location: GameLocation) {
+  return location === "away";
+}
+
 export function gamesForView(view: ScheduleView) {
   if (view === "master") return games;
   return games.filter((game) => game.team === view);

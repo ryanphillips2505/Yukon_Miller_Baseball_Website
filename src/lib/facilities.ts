@@ -30,8 +30,8 @@ export const parkPhotos: ParkPhoto[] = [
   {
     id: "diamond",
     src: "/images/facilities/miller-field-diamond.jpg",
-    alt: "Miller Field from home plate, looking to the Yukon Millers grandstand",
-    caption: "From home",
+    alt: "Center field view of Miller Field, looking in to home plate and the grandstand",
+    caption: "Center field view",
     width: 2048,
     height: 1536,
     layout: "tile",
@@ -41,8 +41,8 @@ export const parkPhotos: ParkPhoto[] = [
     src: "/images/facilities/miller-field-yukon-y.jpg",
     alt: "Yukon painted in the Miller Field turf, with the grandstand beyond",
     caption: "The turf",
-    width: 2200,
-    height: 1650,
+    width: 1800,
+    height: 1350,
     layout: "tile",
   },
   {

@@ -20,13 +20,34 @@ function Mark({
   sponsor: Sponsor;
   size?: "sm" | "md" | "lg";
 }) {
+  if (sponsor.logo) {
+    return (
+      <div
+        className={cn(
+          "flex shrink-0 items-center justify-center rounded-xl bg-[#f4f1ea] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.06),0_0_0_1px_rgba(0,0,0,0.18)]",
+          size === "sm" && "h-12 w-[4.25rem] p-1.5",
+          size === "md" && "h-14 w-[5.25rem] p-2",
+          size === "lg" && "h-[4.5rem] w-[8.5rem] p-2.5",
+        )}
+      >
+        <Image
+          src={sponsor.logo.src}
+          alt=""
+          width={sponsor.logo.width}
+          height={sponsor.logo.height}
+          className="h-full w-auto max-w-full object-contain"
+        />
+      </div>
+    );
+  }
+
   return (
     <div
       className={cn(
         "flex shrink-0 items-center justify-center rounded-xl border border-white/10 bg-gradient-to-br from-red-950/80 via-zinc-950 to-black font-heading tracking-wide text-white uppercase shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]",
         size === "sm" && "h-12 w-12 text-sm",
-        size === "md" && "h-16 w-16 text-lg",
-        size === "lg" && "h-20 w-20 text-2xl",
+        size === "md" && "h-14 w-14 text-lg",
+        size === "lg" && "h-[4.5rem] w-[4.5rem] text-2xl",
       )}
       aria-hidden
     >
@@ -136,10 +157,6 @@ export function SponsorBoard() {
               <h2 className="font-heading mt-2 text-4xl leading-none tracking-wide text-white uppercase sm:text-6xl">
                 The wall
               </h2>
-              <p className="mt-4 max-w-xl text-sm leading-6 text-zinc-400">
-                Every name on the 2026 Home Run Club sign sheet — the businesses
-                and families on Miller Field this year.
-              </p>
             </div>
             <div className="flex flex-col items-start gap-4 lg:items-end">
               <div>

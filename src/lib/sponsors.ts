@@ -8,6 +8,12 @@ export type SponsorTierId =
   | "home-run"
   | "triple";
 
+export type SponsorLogo = {
+  src: string;
+  width: number;
+  height: number;
+};
+
 export type Sponsor = {
   id: string;
   name: string;
@@ -15,6 +21,39 @@ export type Sponsor = {
   tier: SponsorTierId;
   placement: string;
   newThisYear?: boolean;
+  logo?: SponsorLogo;
+};
+
+const sponsorLogos: Record<string, SponsorLogo> = {
+  "army-national-guard": { src: "/images/sponsors/logos/army-national-guard.png", width: 420, height: 420 },
+  "bad-brads": { src: "/images/sponsors/logos/bad-brads.png", width: 181, height: 113 },
+  "bancfirst": { src: "/images/sponsors/logos/bancfirst.png", width: 900, height: 185 },
+  "bell-carpet": { src: "/images/sponsors/logos/bell-carpet.png", width: 420, height: 420 },
+  "brady-built": { src: "/images/sponsors/logos/brady-built.png", width: 250, height: 69 },
+  "browns-driving-school": { src: "/images/sponsors/logos/browns-driving-school.png", width: 780, height: 231 },
+  "coles-garden": { src: "/images/sponsors/logos/coles-garden.png", width: 800, height: 212 },
+  "cooper-autogroup": { src: "/images/sponsors/logos/cooper-autogroup.png", width: 900, height: 251 },
+  "crabtree": { src: "/images/sponsors/logos/crabtree.png", width: 900, height: 207 },
+  "cso-orthodontics": { src: "/images/sponsors/logos/cso-orthodontics.png", width: 900, height: 298 },
+  "earls-rib-palace": { src: "/images/sponsors/logos/earls-rib-palace.png", width: 622, height: 420 },
+  "fire-by-trade": { src: "/images/sponsors/logos/fire-by-trade.png", width: 900, height: 301 },
+  "five-iron-golf": { src: "/images/sponsors/logos/five-iron-golf.png", width: 303, height: 40 },
+  "fm-bank": { src: "/images/sponsors/logos/fm-bank.png", width: 683, height: 132 },
+  "gatlin": { src: "/images/sponsors/logos/gatlin.png", width: 385, height: 130 },
+  "h-spraying": { src: "/images/sponsors/logos/h-spraying.png", width: 900, height: 273 },
+  "h2-health": { src: "/images/sponsors/logos/h2-health.png", width: 219, height: 125 },
+  "harris-ellis": { src: "/images/sponsors/logos/harris-ellis.png", width: 300, height: 161 },
+  "interbank": { src: "/images/sponsors/logos/interbank.png", width: 900, height: 164 },
+  "livewell": { src: "/images/sponsors/logos/livewell.png", width: 269, height: 270 },
+  "notable-roofing": { src: "/images/sponsors/logos/notable-roofing.png", width: 900, height: 238 },
+  "platinum-heat-air": { src: "/images/sponsors/logos/platinum-heat-air.png", width: 420, height: 420 },
+  "rkpb": { src: "/images/sponsors/logos/rkpb.png", width: 373, height: 420 },
+  "tfcu": { src: "/images/sponsors/logos/tfcu.png", width: 398, height: 134 },
+  "the-lokal": { src: "/images/sponsors/logos/the-lokal.png", width: 695, height: 420 },
+  "together-we-church": { src: "/images/sponsors/logos/together-we-church.png", width: 381, height: 420 },
+  "trane": { src: "/images/sponsors/logos/trane.png", width: 900, height: 299 },
+  "warriors-for-freedom": { src: "/images/sponsors/logos/warriors-for-freedom.png", width: 455, height: 420 },
+  "yukon-national-bank": { src: "/images/sponsors/logos/yukon-national-bank.png", width: 567, height: 106 },
 };
 
 export const sponsorTiers: {
@@ -73,7 +112,7 @@ export const sponsorTiers: {
   },
 ];
 
-export const sponsors: Sponsor[] = [
+const sponsorList: Sponsor[] = [
   {
     id: "cooper-autogroup",
     name: "Cooper Autogroup",
@@ -367,6 +406,11 @@ export const sponsors: Sponsor[] = [
     placement: "Triple Club · entry-gate sign",
   },
 ];
+
+export const sponsors: Sponsor[] = sponsorList.map((sponsor) => ({
+  ...sponsor,
+  logo: sponsorLogos[sponsor.id],
+}));
 
 export function sponsorsByTier(tier: SponsorTierId) {
   return sponsors

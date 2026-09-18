@@ -3,6 +3,7 @@ import { buttonVariants } from "@/components/ui/button";
 import { getArticle, articles } from "@/lib/news";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
@@ -44,6 +45,24 @@ export default async function NewsArticlePage({
       <h1 className="font-heading mt-3 text-4xl tracking-wide text-white uppercase sm:text-5xl">
         {article.title}
       </h1>
+      {article.excerpt ? (
+        <p className="mt-4 max-w-2xl text-lg leading-8 text-zinc-400">
+          {article.excerpt}
+        </p>
+      ) : null}
+      {article.image ? (
+        <figure className="mt-8 overflow-hidden rounded-2xl border border-white/10 bg-zinc-950">
+          <Image
+            src={article.image.src}
+            alt={article.image.alt}
+            width={article.image.width}
+            height={article.image.height}
+            priority
+            className="h-auto w-full"
+            sizes="(max-width: 896px) 100vw, 896px"
+          />
+        </figure>
+      ) : null}
       {article.blocks ? (
         <NewsStory blocks={article.blocks} />
       ) : (

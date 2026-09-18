@@ -134,17 +134,28 @@ export default function HomePage() {
             <div className="mt-10 grid gap-4 lg:grid-cols-[1.35fr_0.85fr]">
               <Link
                 href={`/news/${featured.slug}`}
-                className="rounded-2xl border border-white/12 bg-black p-8 transition-colors hover:border-red-700/40 sm:p-10"
+                className="overflow-hidden rounded-2xl border border-white/12 bg-black transition-colors hover:border-red-700/40"
               >
-                <p className="text-[0.65rem] tracking-[0.2em] text-red-400 uppercase">
-                  {featured.category}
-                </p>
-                <h3 className="font-heading mt-4 text-4xl leading-[0.92] tracking-wide text-white uppercase sm:text-5xl">
-                  {featured.title}
-                </h3>
-                <p className="mt-5 max-w-xl text-base leading-7 text-zinc-400">
-                  {featured.excerpt}
-                </p>
+                {featured.image ? (
+                  <Image
+                    src={featured.image.src}
+                    alt={featured.image.alt}
+                    width={featured.image.width}
+                    height={featured.image.height}
+                    className="h-56 w-full object-cover object-top sm:h-72"
+                  />
+                ) : null}
+                <div className="p-8 sm:p-10">
+                  <p className="text-[0.65rem] tracking-[0.2em] text-red-400 uppercase">
+                    {featured.category}
+                  </p>
+                  <h3 className="font-heading mt-4 text-4xl leading-[0.92] tracking-wide text-white uppercase sm:text-5xl">
+                    {featured.title}
+                  </h3>
+                  <p className="mt-5 max-w-xl text-base leading-7 text-zinc-400">
+                    {featured.excerpt}
+                  </p>
+                </div>
               </Link>
               <div className="grid gap-4">
                 {moreNews.map((article) => (

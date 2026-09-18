@@ -1,4 +1,5 @@
 import type { ArticleBlock } from "@/lib/news-blocks";
+import Image from "next/image";
 
 function Paragraph({ text }: { text: string }) {
   return <p className="text-base leading-7 text-zinc-300">{text}</p>;
@@ -53,15 +54,17 @@ export function NewsStory({ blocks }: { blocks: ArticleBlock[] }) {
               ) : null}
               <div className="overflow-x-auto">
                 <table className="min-w-full text-left text-sm">
-                  <thead>
-                    <tr className="border-b border-white/8 text-[0.65rem] tracking-[0.16em] text-zinc-500 uppercase">
-                      {block.headers.map((header) => (
-                        <th key={header} className="px-4 py-3 font-medium sm:px-5">
-                          {header}
-                        </th>
-                      ))}
-                    </tr>
-                  </thead>
+                  {block.headers.some(Boolean) ? (
+                    <thead>
+                      <tr className="border-b border-white/8 text-[0.65rem] tracking-[0.16em] text-zinc-500 uppercase">
+                        {block.headers.map((header) => (
+                          <th key={header} className="px-4 py-3 font-medium sm:px-5">
+                            {header}
+                          </th>
+                        ))}
+                      </tr>
+                    </thead>
+                  ) : null}
                   <tbody>
                     {block.rows.map((row) => (
                       <tr
@@ -134,6 +137,59 @@ export function NewsStory({ blocks }: { blocks: ArticleBlock[] }) {
                     {item.detail}
                   </p>
                 </article>
+              ))}
+            </div>
+          );
+        }
+
+        if (block.type === "image") {
+          return (
+            <figure
+              key={key}
+              className="overflow-hidden rounded-2xl border border-white/10 bg-zinc-950"
+            >
+              <Image
+                src={block.src}
+                alt={block.alt}
+                width={block.width}
+                height={block.height}
+                className="h-auto w-full"
+                sizes="(max-width: 896px) 100vw, 896px"
+              />
+              {block.caption ? (
+                <figcaption className="border-t border-white/8 px-4 py-3 text-sm text-zinc-400">
+                  {block.caption}
+                </figcaption>
+              ) : null}
+            </figure>
+          );
+        }
+
+        if (block.type === "gallery") {
+          return (
+            <div
+              key={key}
+              className="grid gap-3 sm:grid-cols-2"
+            >
+              {block.photos.map((photo) => (
+                <figure
+                  key={photo.src}
+                  className="overflow-hidden rounded-2xl border border-white/10 bg-zinc-950"
+                >
+                  <Image
+                    src={photo.src}
+                    alt={photo.alt}
+                    width={photo.width}
+                    height={photo.height}
+                    className="h-auto w-full"
+                    sizes="(max-width: 768px) 100vw, 448px"
+                  />
+                  {photo.caption ? (
+                    <figcaption className="border-t border-white/8 px-4 py-3 text-sm text-zinc-400">
+                      {photo.caption}
+                    </figcaption>
+                  ) : null}
+                </figure>
               ))}
             </div>
           );

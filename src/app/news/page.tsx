@@ -2,6 +2,7 @@ import { EmptyState } from "@/components/empty-state";
 import { PageHero } from "@/components/page-hero";
 import { articles } from "@/lib/news";
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 
 export const metadata: Metadata = { title: "News" };
@@ -22,17 +23,28 @@ export default function NewsPage() {
               <li key={article.slug}>
                 <Link
                   href={`/news/${article.slug}`}
-                  className="block rounded-2xl border border-white/10 bg-zinc-950 p-6 hover:border-red-700/50"
+                  className="block rounded-2xl border border-white/10 bg-zinc-950 p-6 hover:border-red-700/50 sm:flex sm:items-center sm:gap-6"
                 >
-                  <p className="text-[0.65rem] tracking-[0.18em] text-red-400 uppercase">
-                    {article.category} · {article.date}
-                  </p>
-                  <h2 className="font-heading mt-2 text-2xl tracking-wide text-white uppercase">
-                    {article.title}
-                  </h2>
-                  <p className="mt-3 text-sm leading-6 text-zinc-400">
-                    {article.excerpt}
-                  </p>
+                  <div className="min-w-0 flex-1">
+                    <p className="text-[0.65rem] tracking-[0.18em] text-red-400 uppercase">
+                      {article.category} · {article.date}
+                    </p>
+                    <h2 className="font-heading mt-2 text-2xl tracking-wide text-white uppercase">
+                      {article.title}
+                    </h2>
+                    <p className="mt-3 text-sm leading-6 text-zinc-400">
+                      {article.excerpt}
+                    </p>
+                  </div>
+                  {article.image ? (
+                    <Image
+                      src={article.image.src}
+                      alt={article.image.alt}
+                      width={article.image.width}
+                      height={article.image.height}
+                      className="mt-4 h-28 w-auto shrink-0 rounded-xl object-cover sm:mt-0"
+                    />
+                  ) : null}
                 </Link>
               </li>
             ))}

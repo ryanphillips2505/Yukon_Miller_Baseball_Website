@@ -21,4 +21,22 @@ export type ArticleBlock =
       type: "glance";
       items: { year: string; team: string; result: string; note: string }[];
     }
-  | { type: "note"; text: string };
+  | { type: "note"; text: string }
+  | {
+      type: "image";
+      src: string;
+      alt: string;
+      caption?: string;
+      width: number;
+      height: number;
+    }
+  | {
+      type: "gallery";
+      photos: {
+        src: string;
+        alt: string;
+        caption?: string;
+        width: number;
+        height: number;
+      }[];
+    };

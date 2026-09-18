@@ -9,6 +9,10 @@ export const hrc = {
     "The Home Run Club is the parent volunteer group behind Yukon Miller baseball. HRC funds much of the care for Miller Field, uniforms, baseballs, bats, practice gear, tournaments, and extra activities during the school year.",
   meetings:
     "Meetings have been held at 6:00 p.m. in the Blackbox Theater on the south side of Yukon High School. Confirm the next date with the officers — times move for holidays and get posted on social media.",
+  volunteerSignup: {
+    href: "https://signup.com/go/BHtuvug",
+    label: "Volunteer Sign Up",
+  },
 };
 
 export const officers = [

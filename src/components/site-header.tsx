@@ -24,10 +24,10 @@ function isActive(pathname: string, href: string) {
 
 const tabClass = (active: boolean) =>
   cn(
-    "relative inline-flex h-16 items-center px-3 text-[0.8rem] font-medium tracking-[0.14em] uppercase transition-colors",
+    "relative inline-flex h-16 items-center px-2.5 text-[0.78rem] font-medium tracking-[0.12em] uppercase transition-colors",
     active ? "text-white" : "text-zinc-400 hover:text-white",
     active &&
-      "after:absolute after:right-3 after:bottom-0 after:left-3 after:h-0.5 after:bg-[#c8102e]",
+      "after:absolute after:right-2.5 after:bottom-0 after:left-2.5 after:h-0.5 after:bg-[#c8102e]",
   );
 
 export function SiteHeader() {

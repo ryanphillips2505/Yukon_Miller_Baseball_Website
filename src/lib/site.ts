@@ -40,21 +40,21 @@ export const program = {
 
 export const navPrimary = [
   { href: "/", label: "Home" },
-  { href: "/schedule", label: "Schedule" },
+  { href: "/news", label: "News" },
   { href: "/roster", label: "Roster" },
   { href: "/coaches", label: "Coaches" },
-  { href: "/news", label: "News" },
-  { href: "/support", label: "Support" },
-  { href: "/contact", label: "Contact" },
+  { href: "/schedule", label: "Schedule" },
+  { href: "/sponsors", label: "Sponsors" },
+  { href: "/facilities", label: "Facilities" },
 ] as const;
 
 export const navMore = [
-  { href: "/sponsors", label: "Sponsors" },
+  { href: "/support", label: "Support" },
+  { href: "/contact", label: "Contact" },
   { href: "/recruiting", label: "Recruiting" },
   { href: "/camps", label: "Camps" },
   { href: "/alumni", label: "Alumni" },
   { href: "/fans", label: "Fan info" },
-  { href: "/facilities", label: "Facilities" },
   { href: "/records", label: "Records" },
   { href: "/media", label: "Media" },
 ] as const;

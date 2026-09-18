@@ -1,14 +1,16 @@
-export type ParkPhoto = {
+export type FacilityPhoto = {
   id: string;
   src: string;
   alt: string;
   caption: string;
   width: number;
   height: number;
-  layout: "feature" | "wide" | "tile";
+  layout: "feature" | "wide" | "tile" | "portrait";
 };
 
-export const parkPhotos: ParkPhoto[] = [
+export type ParkPhoto = FacilityPhoto;
+
+export const parkPhotos: FacilityPhoto[] = [
   {
     id: "aerial-mark",
     src: "/images/facilities/miller-field-aerial-mark.jpg",
@@ -25,6 +27,15 @@ export const parkPhotos: ParkPhoto[] = [
     caption: "Under the lights",
     width: 2800,
     height: 893,
+    layout: "wide",
+  },
+  {
+    id: "aerial-clubhouse",
+    src: "/images/facilities/miller-field-aerial-clubhouse.jpg",
+    alt: "Aerial of the Miller Field clubhouse and grandstand, with the diamond beyond",
+    caption: "Miller Field",
+    width: 2200,
+    height: 1162,
     layout: "wide",
   },
   {
@@ -45,22 +56,52 @@ export const parkPhotos: ParkPhoto[] = [
     height: 1350,
     layout: "tile",
   },
+];
+
+export const clubhousePhotos: FacilityPhoto[] = [
   {
-    id: "aerial-clubhouse",
-    src: "/images/facilities/miller-field-aerial-clubhouse.jpg",
-    alt: "Aerial of the Miller Field clubhouse and grandstand, with the diamond beyond",
-    caption: "Miller Field",
+    id: "room",
+    src: "/images/facilities/clubhouse-room.jpg",
+    alt: "Yukon Miller Baseball clubhouse with the YM rug and empty lockers",
+    caption: "The clubhouse",
     width: 2200,
-    height: 1162,
+    height: 1650,
+    layout: "feature",
+  },
+  {
+    id: "lockers",
+    src: "/images/facilities/clubhouse-lockers.jpg",
+    alt: "Yukon home, road, and pinstripe jerseys hanging above the YM baseball rug",
+    caption: "The lockers",
+    width: 1680,
+    height: 2240,
+    layout: "portrait",
+  },
+  {
+    id: "red-mark",
+    src: "/images/facilities/clubhouse-red-mark.jpg",
+    alt: "YM mark on the clubhouse wall under red light",
+    caption: "Millers red",
+    width: 1680,
+    height: 2240,
+    layout: "portrait",
+  },
+  {
+    id: "mark",
+    src: "/images/facilities/clubhouse-mark.jpg",
+    alt: "Red YM mark on the wood slat wall in the Yukon Miller clubhouse",
+    caption: "The mark",
+    width: 1800,
+    height: 1350,
     layout: "tile",
   },
   {
-    id: "lockers-club",
-    src: "/images/facilities/miller-field-lockers-club.jpg",
-    alt: "Yukon Miller Baseball lockers with home and road jerseys hanging",
-    caption: "The clubhouse",
-    width: 2000,
-    height: 1500,
+    id: "red-room",
+    src: "/images/facilities/clubhouse-red-room.jpg",
+    alt: "Yukon Miller clubhouse under red light with the YM rug in the center",
+    caption: "Lights out",
+    width: 1800,
+    height: 1350,
     layout: "tile",
   },
 ];

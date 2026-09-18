@@ -68,22 +68,6 @@ export default function SupportPage() {
         </section>
 
         <section>
-          <h2 className="font-heading text-2xl tracking-wide text-white uppercase">
-            What HRC has hosted
-          </h2>
-          <ul className="mt-4 grid gap-2 sm:grid-cols-2">
-            {hrc.history.map((item) => (
-              <li
-                key={item}
-                className="rounded-xl border border-white/8 bg-zinc-950 px-4 py-3 text-sm text-zinc-300"
-              >
-                {item}
-              </li>
-            ))}
-          </ul>
-        </section>
-
-        <section>
           <div className="flex flex-wrap items-end justify-between gap-3">
             <div>
               <h2 className="font-heading text-2xl tracking-wide text-white uppercase">

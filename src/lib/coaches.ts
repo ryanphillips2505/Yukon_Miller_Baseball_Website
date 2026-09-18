@@ -60,7 +60,7 @@ export const coaches: Coach[] = [
       familyDetail:
         "Married Kyra in December 2016. They have three kids, Collins, Quinn, and Kellen. He began his college career at Seminole State, then was a two-year starter at Southern Nazarene University before a knee injury cut his senior season short.",
       history:
-        "After graduation he began coaching at Edmond Santa Fe and spent six seasons there. He was the head coach at Moore High School for two seasons (2023–2024). He is entering his third season at Yukon.",
+        "After graduation he began coaching at Edmond Santa Fe, spent six seasons there, and won a state championship as an assistant in 2019. He was the head coach at Moore High School for two seasons (2023–2024). He is entering his third season at Yukon.",
       whyYukon:
         "His favorite thing about Yukon is how much the community cares about Yukon athletics.",
     },

@@ -13,27 +13,25 @@ export default function HomePage() {
   return (
     <div>
       <section className="relative overflow-hidden border-b border-white/8 bg-black">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(200,16,46,0.22),transparent_48%)]" />
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(200,16,46,0.18),transparent_62%)]" />
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-[#c8102e] to-transparent" />
-        <div className="pointer-events-none absolute top-8 left-1/2 w-[min(90vw,52rem)] -translate-x-1/2 opacity-[0.14]">
+        <div className="relative mx-auto flex max-w-6xl flex-col items-center px-4 py-8 text-center sm:px-6 sm:py-10">
           <BrandLogo
             variant="state"
             priority
-            sizes="(max-width: 768px) 90vw, 832px"
-            className="h-auto w-full"
+            sizes="180px"
+            className="h-auto w-28 opacity-90 sm:w-36"
           />
-        </div>
-        <div className="relative mx-auto flex min-h-[32rem] max-w-6xl flex-col items-center justify-end px-4 pb-14 text-center sm:min-h-[38rem] sm:px-6 sm:pb-16">
-          <p className="text-[0.68rem] font-semibold tracking-[0.32em] text-red-400 uppercase">
+          <p className="mt-4 text-[0.65rem] font-semibold tracking-[0.32em] text-red-400 uppercase">
             OSSAA Class 6A Baseball Program
           </p>
-          <h1 className="font-heading mt-4 text-5xl leading-[0.9] text-white uppercase sm:text-7xl lg:text-8xl">
+          <h1 className="font-heading mt-2 text-4xl leading-none text-white uppercase sm:text-5xl lg:text-6xl">
             Home of the Millers
           </h1>
-          <div className="mt-8 flex flex-wrap justify-center gap-3">
+          <div className="mt-5 flex flex-wrap justify-center gap-2.5">
             <Link
               href="/roster"
-              className={cn(buttonVariants(), "h-11 px-6 text-sm uppercase")}
+              className={cn(buttonVariants(), "h-9 px-5 text-xs uppercase")}
             >
               Players
             </Link>
@@ -41,7 +39,7 @@ export default function HomePage() {
               href="/news"
               className={cn(
                 buttonVariants({ variant: "outline" }),
-                "h-11 border-white/20 px-6 text-sm uppercase",
+                "h-9 border-white/20 px-5 text-xs uppercase",
               )}
             >
               News
@@ -51,13 +49,13 @@ export default function HomePage() {
       </section>
 
       <section className="bg-black">
-        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
+        <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-12">
           <div className="flex items-end justify-between gap-4">
             <div>
               <p className="text-[0.68rem] font-semibold tracking-[0.32em] text-red-400 uppercase">
                 Players
               </p>
-              <h2 className="font-heading mt-2 text-4xl tracking-wide text-white uppercase sm:text-6xl">
+              <h2 className="font-heading mt-1.5 text-4xl tracking-wide text-white uppercase sm:text-5xl">
                 Spotlight
               </h2>
             </div>
@@ -69,7 +67,7 @@ export default function HomePage() {
             </Link>
           </div>
 
-          <div className="mt-10 grid gap-4 lg:grid-cols-3">
+          <div className="mt-8 grid gap-4 lg:grid-cols-3">
             {commits.map((commit) => (
               <Link
                 key={commit.id}

@@ -16,6 +16,7 @@ export function SiteFooter() {
               alt="Yukon Baseball"
             />
           </div>
+          <NikeSwoosh size="lg" className="mt-5 opacity-90" />
           <p className="mt-4 max-w-sm text-sm leading-6 text-zinc-400">
             Yukon High School baseball. Home of the Millers. Miller Field,
             Yukon, Oklahoma.
@@ -67,9 +68,8 @@ export function SiteFooter() {
           </div>
         </div>
       </div>
-      <div className="flex items-center justify-center gap-3 border-t border-white/8 px-4 py-4 text-xs text-zinc-600">
-        <NikeSwoosh size="md" className="opacity-80" />
-        <span>Yukon High School Miller Baseball · {program.city}</span>
+      <div className="border-t border-white/8 px-4 py-4 text-center text-xs text-zinc-600">
+        Yukon High School Miller Baseball · {program.city}
       </div>
     </footer>
   );

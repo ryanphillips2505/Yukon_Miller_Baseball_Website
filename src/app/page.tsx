@@ -1,5 +1,4 @@
 import { BrandLogo } from "@/components/brand-logo";
-import { NikeSwoosh } from "@/components/nike-swoosh";
 import { buttonVariants } from "@/components/ui/button";
 import { commits } from "@/lib/commits";
 import { latestArticles } from "@/lib/news";
@@ -56,10 +55,6 @@ export default function HomePage() {
           <div className="h-16 sm:h-20" aria-hidden />
         </div>
       </section>
-
-      <div className="flex justify-center border-b border-white/8 bg-black py-5">
-        <NikeSwoosh size="lg" className="opacity-90" />
-      </div>
 
       <section className="bg-black">
         <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-12">

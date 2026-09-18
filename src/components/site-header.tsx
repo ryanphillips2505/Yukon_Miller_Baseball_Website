@@ -10,7 +10,6 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { BrandLogo } from "@/components/brand-logo";
-import { NikeSwoosh } from "@/components/nike-swoosh";
 import { allNav, navMore, navPrimary, program } from "@/lib/site";
 import { cn } from "@/lib/utils";
 import { ChevronDown, Menu } from "lucide-react";
@@ -75,7 +74,6 @@ export function SiteHeader() {
               Yukon Baseball
             </span>
           </Link>
-          <NikeSwoosh size="md" className="opacity-90" />
         </div>
 
         <nav className="hidden items-center lg:flex">

@@ -65,7 +65,22 @@ export const coaches: Coach[] = [
         "His favorite thing about Yukon is how much the community cares about Yukon athletics.",
     },
   },
-  { id: "booth", name: "Zac Booth", role: "Assistant Coach", photo: "/images/coaches/zac-booth.jpg" },
+  {
+    id: "booth",
+    name: "Zac Booth",
+    role: "Assistant Coach",
+    photo: "/images/coaches/zac-booth.jpg",
+    bio: {
+      yearsCoaching: "",
+      family: "Madelyn · Ella",
+      familyDetail:
+        "Two daughters, Madelyn (23), working on her doctorate at Oklahoma City University, and Ella (20), studying interior design at Oklahoma State, and two dogs, Vader and Kylo. He is a graduate of Elk City High School and spent five seasons as a pitcher at Southwestern Oklahoma State in Weatherford.",
+      history:
+        "He began his coaching career in 1999 at Duncanville High School in Duncanville, Texas, as the head freshman coach. He became the head baseball coach at Watonga, Oklahoma, in 2005. After time in the oil field, he returned to coaching and joined the Yukon program in 2020.",
+      whyYukon:
+        "He loves being a Miller — one city, one school, one team. Miller Nation. Red Kingdom.",
+    },
+  },
   { id: "knutson", name: "Ryan Knutson", role: "Assistant Coach", photo: "/images/coaches/ryan-knutson.jpg" },
   { id: "ray", name: "Damien Ray", role: "Assistant Coach" },
 ];

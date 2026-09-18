@@ -9,7 +9,6 @@ import Link from "next/link";
 
 export default function HomePage() {
   const [featured, ...moreNews] = latestArticles(3);
-  const [leadCommit, ...otherCommits] = commits;
 
   return (
     <div>
@@ -24,12 +23,12 @@ export default function HomePage() {
             className="h-auto w-full"
           />
         </div>
-        <div className="relative mx-auto flex min-h-[34rem] max-w-6xl flex-col items-center justify-end px-4 pb-14 text-center sm:min-h-[40rem] sm:px-6 sm:pb-16">
-          <p className="text-[0.7rem] font-semibold tracking-[0.36em] text-red-400 uppercase">
-            Yukon High School Baseball
+        <div className="relative mx-auto flex min-h-[32rem] max-w-6xl flex-col items-center justify-end px-4 pb-14 text-center sm:min-h-[38rem] sm:px-6 sm:pb-16">
+          <p className="text-[0.68rem] font-semibold tracking-[0.32em] text-red-400 uppercase">
+            OSSAA Class 6A Baseball Program
           </p>
-          <h1 className="font-heading mt-4 text-7xl leading-[0.82] text-white uppercase sm:text-8xl lg:text-[9.5rem]">
-            Millers
+          <h1 className="font-heading mt-4 text-5xl leading-[0.9] text-white uppercase sm:text-7xl lg:text-8xl">
+            Home of the Millers
           </h1>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <Link
@@ -70,52 +69,12 @@ export default function HomePage() {
             </Link>
           </div>
 
-          {leadCommit ? (
-            <Link
-              href={leadCommit.newsSlug ? `/news/${leadCommit.newsSlug}` : "/recruiting"}
-              className="group relative mt-10 block overflow-hidden rounded-2xl border border-white/12 bg-zinc-950"
-            >
-              <div
-                className="absolute inset-y-0 left-0 w-1.5"
-                style={{
-                  background: `linear-gradient(180deg, ${leadCommit.colors.secondary}, ${leadCommit.colors.primary})`,
-                }}
-              />
-              <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_85%_20%,rgba(200,16,46,0.16),transparent_36%)]" />
-              <div className="relative grid gap-8 px-6 py-8 sm:px-10 sm:py-12 lg:grid-cols-[1fr_auto] lg:items-center">
-                <div>
-                  <p className="inline-flex rounded-full border border-[#c8102e]/50 bg-[#c8102e]/15 px-2.5 py-0.5 text-[0.62rem] font-semibold tracking-[0.18em] text-red-300 uppercase">
-                    Committed
-                  </p>
-                  <h3 className="font-heading mt-4 text-5xl leading-[0.88] tracking-wide text-white uppercase sm:text-7xl">
-                    {leadCommit.player}
-                  </h3>
-                  <p className="mt-5 text-lg text-[#f4f1ea] sm:text-xl">
-                    {leadCommit.school}
-                  </p>
-                  <p className="mt-2 text-sm tracking-wide text-zinc-400 uppercase">
-                    {leadCommit.mascot} · {leadCommit.division}
-                  </p>
-                </div>
-                <div className="flex h-28 w-56 items-center justify-center rounded-xl bg-[#f4f1ea] p-4">
-                  <Image
-                    src={leadCommit.logo.src}
-                    alt={leadCommit.logo.alt}
-                    width={leadCommit.logo.width}
-                    height={leadCommit.logo.height}
-                    className="h-full w-auto max-w-full object-contain"
-                  />
-                </div>
-              </div>
-            </Link>
-          ) : null}
-
-          <div className="mt-4 grid gap-4 lg:grid-cols-2">
-            {otherCommits.map((commit) => (
+          <div className="mt-10 grid gap-4 lg:grid-cols-3">
+            {commits.map((commit) => (
               <Link
                 key={commit.id}
                 href={commit.newsSlug ? `/news/${commit.newsSlug}` : "/recruiting"}
-                className="relative overflow-hidden rounded-2xl border border-white/10 bg-zinc-950 p-6 transition-colors hover:border-red-700/40 sm:p-8"
+                className="relative flex h-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-zinc-950 p-6 transition-colors hover:border-red-700/40 sm:p-7"
               >
                 <div
                   className="absolute inset-y-0 left-0 w-1.5"
@@ -126,16 +85,17 @@ export default function HomePage() {
                 <p className="text-[0.62rem] font-semibold tracking-[0.18em] text-red-400 uppercase">
                   Committed
                 </p>
-                <h3 className="font-heading mt-3 text-3xl tracking-wide text-white uppercase sm:text-4xl">
+                <h3 className="font-heading mt-3 text-3xl leading-none tracking-wide text-white uppercase">
                   {commit.player}
                 </h3>
-                <div className="mt-5 flex items-end justify-between gap-4">
-                  <p className="text-sm leading-6 text-zinc-400">
-                    {commit.school}
-                    <br />
-                    {commit.mascot}
-                  </p>
-                  <div className="flex h-16 w-36 shrink-0 items-center justify-center rounded-lg bg-[#f4f1ea] p-2">
+                <p className="mt-4 text-sm leading-6 text-zinc-300">
+                  {commit.school}
+                </p>
+                <p className="mt-1 text-xs tracking-wide text-zinc-500 uppercase">
+                  {commit.mascot} · {commit.division}
+                </p>
+                <div className="mt-auto pt-6">
+                  <div className="flex h-20 items-center justify-center rounded-lg bg-[#f4f1ea] p-3">
                     <Image
                       src={commit.logo.src}
                       alt={commit.logo.alt}

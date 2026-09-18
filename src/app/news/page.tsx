@@ -9,11 +9,7 @@ export const metadata: Metadata = { title: "News" };
 export default function NewsPage() {
   return (
     <div>
-      <PageHero
-        kicker="Updates"
-        title="News"
-        lede="Commits, weather calls, and program notes. If it is not from the staff, it does not go here."
-      />
+      <PageHero kicker="Updates" title="News" />
       <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
         {articles.length === 0 ? (
           <EmptyState

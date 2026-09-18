@@ -15,12 +15,12 @@ export default function HomePage() {
       <section className="relative -mt-14 overflow-hidden border-b border-white/8 bg-black">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_18%,rgba(200,16,46,0.2),transparent_55%)]" />
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-[#c8102e] to-transparent" />
-        <div className="pointer-events-none relative mx-auto w-[min(90vw,52rem)] pt-12 opacity-[0.22] sm:pt-14">
+        <div className="pointer-events-none relative mx-auto w-[min(90vw,52rem)] pt-12 sm:pt-14">
           <BrandLogo
             variant="state"
             priority
             sizes="(max-width: 768px) 90vw, 832px"
-            className="h-auto w-full"
+            className="h-auto w-full opacity-80 drop-shadow-[0_22px_48px_rgba(0,0,0,0.7)]"
           />
         </div>
         <div className="relative mx-auto flex max-w-6xl flex-col items-center px-4 pt-2 pb-8 text-center sm:px-6 sm:pt-3 sm:pb-10">

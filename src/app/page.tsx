@@ -1,6 +1,7 @@
 import { BrandLogo } from "@/components/brand-logo";
 import { EmptyState } from "@/components/empty-state";
 import { PhotoSlot } from "@/components/photo-slot";
+import { SponsorStrip } from "@/components/sponsor-board";
 import { buttonVariants } from "@/components/ui/button";
 import { coaches } from "@/lib/coaches";
 import { latestArticles } from "@/lib/news";
@@ -23,6 +24,11 @@ const hubs = [
     href: "/news",
     label: "News",
     copy: "Commits, weather calls, and program notes families can actually use.",
+  },
+  {
+    href: "/sponsors",
+    label: "Sponsors",
+    copy: "The 2026 Miller Field wall — every partner on the Home Run Club sign sheet.",
   },
   {
     href: "/support",
@@ -109,6 +115,8 @@ export default function HomePage() {
           ))}
         </div>
       </section>
+
+      <SponsorStrip />
 
       <section className="mx-auto max-w-6xl px-4 py-14 sm:px-6">
         <div className="flex items-end justify-between gap-4">

@@ -1,8 +1,10 @@
 import { PageHero } from "@/components/page-hero";
 import { buttonVariants } from "@/components/ui/button";
+import { sponsorCount } from "@/lib/sponsors";
 import { hrc, officers, sponsorshipTiers, tcaStore } from "@/lib/support";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = { title: "Home Run Club" };
 
@@ -15,6 +17,25 @@ export default function SupportPage() {
         lede={hrc.about}
       />
       <div className="mx-auto max-w-6xl space-y-12 px-4 py-10 sm:px-6">
+        <section className="overflow-hidden rounded-2xl border border-red-700/35 bg-[linear-gradient(135deg,#2a0b12_0%,#0a0a0c_60%)] p-6 sm:p-8">
+          <p className="text-[0.7rem] font-semibold tracking-[0.22em] text-red-400 uppercase">
+            2026 partners
+          </p>
+          <h2 className="font-heading mt-2 text-3xl tracking-wide text-white uppercase sm:text-4xl">
+            {sponsorCount} names on the wall
+          </h2>
+          <p className="mt-3 max-w-xl text-sm leading-6 text-zinc-400">
+            The full 2026 sign sheet is posted — scoreboard, Cycle, Grand Slam,
+            outfield banners, and the rest of the board.
+          </p>
+          <Link
+            href="/sponsors"
+            className={cn(buttonVariants(), "mt-6 h-10 px-4 uppercase")}
+          >
+            See the sponsors
+          </Link>
+        </section>
+
         <section className="grid gap-4 md:grid-cols-2">
           <div className="rounded-2xl border border-white/10 bg-zinc-950 p-6">
             <h2 className="font-heading text-2xl tracking-wide text-white uppercase">

@@ -43,6 +43,7 @@ export const navPrimary = [
 ] as const;
 
 export const navMore = [
+  { href: "/sponsors", label: "Sponsors" },
   { href: "/recruiting", label: "Recruiting" },
   { href: "/camps", label: "Camps" },
   { href: "/alumni", label: "Alumni" },

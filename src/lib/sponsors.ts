@@ -29,6 +29,7 @@ const sponsorLogos: Record<string, SponsorLogo> = {
   "bad-brads": { src: "/images/sponsors/logos/bad-brads.png", width: 181, height: 113 },
   "bancfirst": { src: "/images/sponsors/logos/bancfirst.png", width: 900, height: 185 },
   "bell-carpet": { src: "/images/sponsors/logos/bell-carpet.png", width: 420, height: 420 },
+  "bk-weaver": { src: "/images/sponsors/logos/bk-weaver.png", width: 1221, height: 600 },
   "brady-built": { src: "/images/sponsors/logos/brady-built.png", width: 250, height: 69 },
   "browns-driving-school": { src: "/images/sponsors/logos/browns-driving-school.png", width: 780, height: 231 },
   "clemens-blair": { src: "/images/sponsors/logos/clemens-blair.png", width: 1139, height: 720 },

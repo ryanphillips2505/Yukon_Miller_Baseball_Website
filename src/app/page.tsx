@@ -13,40 +13,46 @@ export default function HomePage() {
   return (
     <div>
       <section className="relative -mt-14 overflow-hidden border-b border-white/8 bg-black">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_18%,rgba(200,16,46,0.2),transparent_55%)]" />
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_18%,rgba(200,16,46,0.16),transparent_55%)]" />
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-[#c8102e] to-transparent" />
-        <div className="pointer-events-none relative mx-auto w-[min(90vw,52rem)] pt-12 sm:pt-14">
-          <BrandLogo
-            variant="state"
-            priority
-            sizes="(max-width: 768px) 90vw, 832px"
-            className="h-auto w-full opacity-80 drop-shadow-[0_22px_48px_rgba(0,0,0,0.7)]"
-          />
-        </div>
-        <div className="relative mx-auto flex max-w-6xl flex-col items-center px-4 pt-2 pb-8 text-center sm:px-6 sm:pt-3 sm:pb-10">
-          <p className="text-[0.65rem] font-semibold tracking-[0.32em] text-red-400 uppercase">
-            OSSAA Class 6A Baseball Program
-          </p>
-          <h1 className="font-heading mt-3 text-5xl leading-[0.9] text-white uppercase sm:text-6xl lg:text-7xl">
-            Home of the Millers
-          </h1>
-          <div className="mt-6 flex flex-wrap justify-center gap-2.5">
-            <Link
-              href="/roster"
-              className={cn(buttonVariants(), "h-9 px-5 text-xs uppercase")}
-            >
-              Players
-            </Link>
-            <Link
-              href="/news"
-              className={cn(
-                buttonVariants({ variant: "outline" }),
-                "h-9 border-white/20 px-5 text-xs uppercase",
-              )}
-            >
-              News
-            </Link>
+        <div className="relative mx-auto w-[min(90vw,52rem)] pt-12 sm:pt-14">
+          <div className="relative">
+            <div className="pointer-events-none">
+              <BrandLogo
+                variant="state"
+                priority
+                sizes="(max-width: 768px) 90vw, 832px"
+                className="h-auto w-full opacity-[0.26]"
+              />
+              <div className="absolute inset-x-0 bottom-0 h-[40%] bg-gradient-to-t from-black via-black/45 to-transparent" />
+            </div>
+            <div className="absolute inset-x-0 top-[58%] flex flex-col items-center px-4 text-center">
+              <p className="text-[0.65rem] font-semibold tracking-[0.32em] text-red-400 uppercase">
+                OSSAA Class 6A Baseball Program
+              </p>
+              <h1 className="font-heading mt-2 text-5xl leading-[0.88] text-white uppercase [text-shadow:0_2px_24px_rgba(0,0,0,0.55)] sm:text-6xl lg:text-7xl">
+                Home of the Millers
+              </h1>
+              <div className="mt-5 flex flex-wrap justify-center gap-2.5">
+                <Link
+                  href="/roster"
+                  className={cn(buttonVariants(), "h-9 px-5 text-xs uppercase")}
+                >
+                  Players
+                </Link>
+                <Link
+                  href="/news"
+                  className={cn(
+                    buttonVariants({ variant: "outline" }),
+                    "h-9 border-white/20 px-5 text-xs uppercase",
+                  )}
+                >
+                  News
+                </Link>
+              </div>
+            </div>
           </div>
+          <div className="h-16 sm:h-20" aria-hidden />
         </div>
       </section>
 

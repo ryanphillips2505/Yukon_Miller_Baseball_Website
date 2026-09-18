@@ -42,6 +42,12 @@ export const articles: Article[] = [
     category: "Commit",
     excerpt:
       "Strange is the latest Miller to keep playing after high school, signing with Hutchinson Community College.",
+    image: {
+      src: "/images/news/clayton-strange-hutchinson.jpg",
+      alt: "Clayton Strange delivering a pitch on the mound in a Yukon Miller uniform",
+      width: 1179,
+      height: 1580,
+    },
     body: [
       "Yukon High School baseball announced that Clayton Strange has committed to Hutchinson Community College.",
       "The Blue Dragons just finished No. 22 in NJCAA Division I at 46-15 after a record 131-homer season — two years after a 51-win Jayhawk West title.",

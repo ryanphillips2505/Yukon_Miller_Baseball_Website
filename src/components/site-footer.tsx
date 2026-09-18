@@ -1,4 +1,5 @@
 import { BrandLogo } from "@/components/brand-logo";
+import { NikeSwoosh } from "@/components/nike-swoosh";
 import { allNav, program } from "@/lib/site";
 import Link from "next/link";
 
@@ -66,8 +67,9 @@ export function SiteFooter() {
           </div>
         </div>
       </div>
-      <div className="border-t border-white/8 px-4 py-4 text-center text-xs text-zinc-600">
-        Yukon High School Miller Baseball · {program.city}
+      <div className="flex items-center justify-center gap-3 border-t border-white/8 px-4 py-4 text-xs text-zinc-600">
+        <NikeSwoosh className="h-2 w-auto text-zinc-500" />
+        <span>Yukon High School Miller Baseball · {program.city}</span>
       </div>
     </footer>
   );

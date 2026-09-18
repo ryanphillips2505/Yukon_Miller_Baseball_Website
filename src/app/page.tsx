@@ -12,23 +12,25 @@ export default function HomePage() {
 
   return (
     <div>
-      <section className="relative overflow-hidden border-b border-white/8 bg-black">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(200,16,46,0.18),transparent_62%)]" />
+      <section className="relative -mt-14 overflow-hidden border-b border-white/8 bg-black">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_12%,rgba(200,16,46,0.2),transparent_52%)]" />
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-[#c8102e] to-transparent" />
-        <div className="relative mx-auto flex max-w-6xl flex-col items-center px-4 py-8 text-center sm:px-6 sm:py-10">
+        <div className="pointer-events-none absolute top-2 left-1/2 w-[min(90vw,52rem)] -translate-x-1/2 opacity-[0.16] sm:top-0">
           <BrandLogo
             variant="state"
             priority
-            sizes="180px"
-            className="h-auto w-28 opacity-90 sm:w-36"
+            sizes="(max-width: 768px) 90vw, 832px"
+            className="h-auto w-full"
           />
-          <p className="mt-4 text-[0.65rem] font-semibold tracking-[0.32em] text-red-400 uppercase">
+        </div>
+        <div className="relative mx-auto flex max-w-6xl flex-col items-center px-4 pt-24 pb-10 text-center sm:px-6 sm:pt-28 sm:pb-12">
+          <p className="text-[0.65rem] font-semibold tracking-[0.32em] text-red-400 uppercase">
             OSSAA Class 6A Baseball Program
           </p>
-          <h1 className="font-heading mt-2 text-4xl leading-none text-white uppercase sm:text-5xl lg:text-6xl">
+          <h1 className="font-heading mt-3 text-5xl leading-[0.9] text-white uppercase sm:text-6xl lg:text-7xl">
             Home of the Millers
           </h1>
-          <div className="mt-5 flex flex-wrap justify-center gap-2.5">
+          <div className="mt-6 flex flex-wrap justify-center gap-2.5">
             <Link
               href="/roster"
               className={cn(buttonVariants(), "h-9 px-5 text-xs uppercase")}

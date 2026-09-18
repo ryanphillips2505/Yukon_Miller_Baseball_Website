@@ -59,7 +59,7 @@ export function SiteHeader() {
   }, [pathname]);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-white/10 bg-black/95 backdrop-blur-md">
+    <header className="sticky top-0 z-40 border-b border-white/10 bg-black/70 backdrop-blur-md">
       <div className="mx-auto flex h-14 max-w-6xl items-center justify-between gap-6 px-4 sm:px-6">
         <Link href="/" className="flex min-w-0 items-center gap-2.5">
           <BrandLogo

@@ -6,7 +6,7 @@ export const brand = {
     alt: "Yukon Baseball — Oklahoma outline with YM mark and Yukon, Oklahoma wordmark",
   },
   state: {
-    src: "/images/yukon-baseball-state.png",
+    src: "/images/yukon-baseball-state-float.png",
     width: 1210,
     height: 532,
     alt: "Yukon Baseball — Oklahoma outline with YM mark",

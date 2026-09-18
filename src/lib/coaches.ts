@@ -33,7 +33,22 @@ export const coaches: Coach[] = [
     },
   },
   { id: "lockett", name: "Clay Lockett", role: "Assistant Coach", photo: "/images/coaches/clay-lockett.jpg" },
-  { id: "haines", name: "Dakota Haines", role: "Assistant Coach", photo: "/images/coaches/dakota-haines.jpg" },
+  {
+    id: "haines",
+    name: "Dakota Haines",
+    role: "Assistant Coach",
+    photo: "/images/coaches/dakota-haines.jpg",
+    bio: {
+      yearsCoaching: "13th year · 9th at Yukon",
+      family: "Kendall · Dax",
+      familyDetail:
+        "Married Kendall in December 2016. They have one son, Dax. He graduated from Harrah High School, then played at Coffeyville Community College, Benedictine College, and Southwestern Oklahoma State.",
+      history:
+        "After his playing career he joined the SWOSU staff as a graduate assistant, then came to Yukon in the spring of 2014. He spent five seasons here as an assistant before becoming the head coach at Southmoore. He returned to Yukon in the summer of 2023 as an assistant coach. This is his 13th year coaching and his ninth at Yukon.",
+      whyYukon:
+        "What he enjoys most is the community support — how welcoming the city and the people are.",
+    },
+  },
   { id: "teel", name: "Caleb Teel", role: "Assistant Coach", photo: "/images/coaches/caleb-teel.jpg" },
   { id: "booth", name: "Zac Booth", role: "Assistant Coach", photo: "/images/coaches/zac-booth.jpg" },
   { id: "knutson", name: "Ryan Knutson", role: "Assistant Coach", photo: "/images/coaches/ryan-knutson.jpg" },

@@ -1,3 +1,4 @@
+import { NewsStory } from "@/components/news-story";
 import { buttonVariants } from "@/components/ui/button";
 import { getArticle, articles } from "@/lib/news";
 import { cn } from "@/lib/utils";
@@ -16,7 +17,10 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const article = getArticle(slug);
-  return { title: article?.title ?? "News" };
+  return {
+    title: article?.title ?? "News",
+    description: article?.excerpt,
+  };
 }
 
 export default async function NewsArticlePage({
@@ -29,18 +33,26 @@ export default async function NewsArticlePage({
   if (!article) notFound();
 
   return (
-    <article className="mx-auto max-w-3xl px-4 py-12 sm:px-6">
+    <article
+      className={`mx-auto px-4 py-12 sm:px-6 ${
+        article.blocks ? "max-w-4xl" : "max-w-3xl"
+      }`}
+    >
       <p className="text-[0.7rem] font-semibold tracking-[0.22em] text-red-400 uppercase">
         {article.category} · {article.date}
       </p>
-      <h1 className="font-heading mt-3 text-4xl tracking-wide text-white uppercase">
+      <h1 className="font-heading mt-3 text-4xl tracking-wide text-white uppercase sm:text-5xl">
         {article.title}
       </h1>
-      <div className="mt-8 space-y-4 text-base leading-7 text-zinc-300">
-        {article.body.map((paragraph) => (
-          <p key={paragraph}>{paragraph}</p>
-        ))}
-      </div>
+      {article.blocks ? (
+        <NewsStory blocks={article.blocks} />
+      ) : (
+        <div className="mt-8 space-y-4 text-base leading-7 text-zinc-300">
+          {article.body.map((paragraph) => (
+            <p key={paragraph}>{paragraph}</p>
+          ))}
+        </div>
+      )}
       <Link
         href="/news"
         className={cn(buttonVariants({ variant: "outline" }), "mt-10 h-10 border-white/15 px-4")}

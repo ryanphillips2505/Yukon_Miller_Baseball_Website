@@ -2,6 +2,7 @@ import { buttonVariants } from "@/components/ui/button";
 import {
   featuredSponsors,
   sponsorCount,
+  sponsorshipForm,
   sponsorsByTier,
   sponsorTiers,
   type Sponsor,
@@ -9,6 +10,7 @@ import {
 } from "@/lib/sponsors";
 import { program } from "@/lib/site";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 import Link from "next/link";
 
 function Mark({
@@ -139,13 +141,23 @@ export function SponsorBoard() {
                 and families on Miller Field this year.
               </p>
             </div>
-            <div>
-              <p className="font-heading text-5xl leading-none text-white">
-                {String(sponsorCount).padStart(2, "0")}
-              </p>
-              <p className="mt-1 text-[0.65rem] tracking-[0.2em] text-zinc-500 uppercase">
-                On the board
-              </p>
+            <div className="flex flex-col items-start gap-4 lg:items-end">
+              <div>
+                <p className="font-heading text-5xl leading-none text-white">
+                  {String(sponsorCount).padStart(2, "0")}
+                </p>
+                <p className="mt-1 text-[0.65rem] tracking-[0.2em] text-zinc-500 uppercase">
+                  On the board
+                </p>
+              </div>
+              <a
+                href={sponsorshipForm.href}
+                target="_blank"
+                rel="noreferrer"
+                className={cn(buttonVariants(), "h-10 px-4 uppercase")}
+              >
+                2026–27 form
+              </a>
             </div>
           </div>
         </header>
@@ -212,23 +224,56 @@ export function SponsorBoard() {
       />
       <TierBlock tierId="triple" columns="md:grid-cols-2" />
 
-      <section className="rounded-2xl border border-white/10 bg-zinc-950 px-6 py-8 text-center sm:px-10">
-        <p className="text-[0.7rem] font-semibold tracking-[0.22em] text-red-400 uppercase">
-          Join the wall
-        </p>
-        <h2 className="font-heading mt-2 text-3xl tracking-wide text-white uppercase">
-          Put your name on Miller Field
-        </h2>
-        <p className="mx-auto mt-3 max-w-xl text-sm leading-6 text-zinc-400">
-          Single through Platinum packages, plus custom deals. Email the Home
-          Run Club and they will build the board around you.
-        </p>
-        <a
-          href={`mailto:${program.email}?subject=${encodeURIComponent("Yukon Baseball sponsorship")}`}
-          className={cn(buttonVariants(), "mt-6 h-11 px-5 uppercase")}
-        >
-          Email {program.email}
-        </a>
+      <section className="overflow-hidden rounded-2xl border border-white/10 bg-zinc-950">
+        <div className="grid lg:grid-cols-[0.82fr_1.18fr]">
+          <a
+            href={sponsorshipForm.href}
+            target="_blank"
+            rel="noreferrer"
+            className="block bg-zinc-900 lg:border-r lg:border-white/10"
+          >
+            <Image
+              src={sponsorshipForm.previewSrc}
+              alt={`${sponsorshipForm.title}, page 1 of ${sponsorshipForm.pages}`}
+              width={sponsorshipForm.previewWidth}
+              height={sponsorshipForm.previewHeight}
+              className="h-auto w-full"
+              sizes="(max-width: 1024px) 100vw, 420px"
+            />
+          </a>
+          <div className="flex flex-col justify-center px-6 py-8 sm:px-10">
+            <p className="text-[0.7rem] font-semibold tracking-[0.22em] text-red-400 uppercase">
+              2026–27 season
+            </p>
+            <h2 className="font-heading mt-2 text-3xl tracking-wide text-white uppercase sm:text-4xl">
+              Put your name on Miller Field
+            </h2>
+            <p className="mt-3 max-w-xl text-sm leading-6 text-zinc-400">
+              Official three-page sheet: packages from Single through
+              Concession, plus the form YHRC uses for artwork and payment.
+              Open it, fill it in, and send it to the club.
+            </p>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <a
+                href={sponsorshipForm.href}
+                target="_blank"
+                rel="noreferrer"
+                className={cn(buttonVariants(), "h-11 px-5 uppercase")}
+              >
+                Open the form
+              </a>
+              <a
+                href={`mailto:${program.email}?subject=${encodeURIComponent("Yukon Baseball sponsorship")}`}
+                className={cn(
+                  buttonVariants({ variant: "outline" }),
+                  "h-11 border-white/15 px-5 uppercase",
+                )}
+              >
+                Email {program.email}
+              </a>
+            </div>
+          </div>
+        </div>
       </section>
     </div>
   );

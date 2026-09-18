@@ -1,6 +1,7 @@
 import type { ArticleBlock } from "@/lib/news-blocks";
 import { carsonBengeStory } from "@/lib/news-carson-benge";
 import { class2aYukonStory } from "@/lib/news-class-2a-yukon";
+import { coltonStrangeStory } from "@/lib/news-colton-strange";
 
 export type ArticleImage = {
   src: string;
@@ -22,6 +23,7 @@ export type Article = {
 
 export const articles: Article[] = [
   carsonBengeStory,
+  coltonStrangeStory,
   class2aYukonStory,
   {
     slug: "drake-pace-oral-roberts",

@@ -51,12 +51,15 @@ export default function HomePage() {
                   News
                 </Link>
               </div>
-              <NikeSwoosh className="mt-6 h-5 w-14 text-white/50" />
             </div>
           </div>
           <div className="h-16 sm:h-20" aria-hidden />
         </div>
       </section>
+
+      <div className="flex justify-center border-b border-white/8 bg-black py-5">
+        <NikeSwoosh className="h-5 w-[3.85rem] opacity-80" />
+      </div>
 
       <section className="bg-black">
         <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-12">

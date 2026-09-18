@@ -73,6 +73,7 @@ export function SiteHeader() {
           <span className="font-heading text-[0.72rem] tracking-[0.2em] text-white uppercase">
             Yukon Baseball
           </span>
+          <NikeSwoosh className="ml-1 h-4 w-12 opacity-90" />
         </Link>
 
         <nav className="hidden items-center lg:flex">
@@ -127,7 +128,6 @@ export function SiteHeader() {
         </nav>
 
         <div className="flex items-center gap-3">
-          <NikeSwoosh className="h-3.5 w-10 text-white/75" />
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger
               className={cn(

@@ -13,9 +13,9 @@ export default function HomePage() {
   return (
     <div>
       <section className="relative -mt-14 overflow-hidden border-b border-white/8 bg-black">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_12%,rgba(200,16,46,0.2),transparent_52%)]" />
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_18%,rgba(200,16,46,0.2),transparent_55%)]" />
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-[#c8102e] to-transparent" />
-        <div className="pointer-events-none absolute top-2 left-1/2 w-[min(90vw,52rem)] -translate-x-1/2 opacity-[0.16] sm:top-0">
+        <div className="pointer-events-none relative mx-auto min-h-[20rem] w-[min(90vw,52rem)] opacity-[0.18] sm:min-h-0">
           <BrandLogo
             variant="state"
             priority
@@ -23,7 +23,7 @@ export default function HomePage() {
             className="h-auto w-full"
           />
         </div>
-        <div className="relative mx-auto flex max-w-6xl flex-col items-center px-4 pt-24 pb-10 text-center sm:px-6 sm:pt-28 sm:pb-12">
+        <div className="absolute inset-0 flex flex-col items-center justify-end px-4 pt-16 pb-8 text-center sm:px-6 sm:pb-10">
           <p className="text-[0.65rem] font-semibold tracking-[0.32em] text-red-400 uppercase">
             OSSAA Class 6A Baseball Program
           </p>

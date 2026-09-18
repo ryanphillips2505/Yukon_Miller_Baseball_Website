@@ -58,11 +58,11 @@ export default function HomePage() {
   return (
     <div>
       <section className="relative overflow-hidden border-b border-white/8 bg-black">
-        <div className="mx-auto max-w-6xl px-4 pt-6 sm:px-6 sm:pt-8">
+        <div className="mx-auto max-w-xl px-4 pt-8 sm:px-6 sm:pt-10">
           <BrandLogo
-            variant="primary"
+            variant="state"
             priority
-            sizes="(max-width: 640px) 94vw, (max-width: 1024px) 90vw, 1152px"
+            sizes="(max-width: 640px) 80vw, 576px"
             className="mx-auto h-auto w-full"
           />
         </div>
@@ -73,11 +73,6 @@ export default function HomePage() {
           <h1 className="font-heading mt-3 text-4xl leading-[0.92] text-white uppercase sm:text-6xl">
             Home of the Millers
           </h1>
-          <p className="mx-auto mt-5 max-w-xl text-base leading-7 text-zinc-300 sm:text-lg">
-            Yukon Miller baseball is the next step for a top-end Class 6A
-            program — players, families, and the Home Run Club on one site
-            that is built to be used, not just looked at.
-          </p>
           <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
             <Link
               href="/schedule"

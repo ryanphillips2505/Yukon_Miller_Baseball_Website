@@ -65,13 +65,13 @@ export function RosterBoard() {
                       <span className="mr-1 text-[0.6rem] tracking-[0.16em] text-zinc-500 uppercase sm:hidden">
                         T
                       </span>
-                      {player.throws}
+                      {player.bats}
                     </p>
                     <p className="text-center font-heading text-lg text-zinc-200">
                       <span className="mr-1 text-[0.6rem] tracking-[0.16em] text-zinc-500 uppercase sm:hidden">
                         B
                       </span>
-                      {player.bats}
+                      {player.throws}
                     </p>
                   </button>
                 </li>

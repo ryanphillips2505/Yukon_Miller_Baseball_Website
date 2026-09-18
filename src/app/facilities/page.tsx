@@ -2,6 +2,7 @@ import { PageHero } from "@/components/page-hero";
 import {
   clubhousePhotos,
   fields,
+  millerFieldHistory,
   parkFacts,
   parkPhotos,
   type FacilityPhoto,
@@ -148,9 +149,16 @@ export default function FacilitiesPage() {
       <section>
         <div className="mx-auto max-w-6xl px-4 pt-10 sm:px-6 sm:pt-14">
           <SectionHeading kicker="Home field" title="Miller Field" />
+          <div className="mt-6 max-w-3xl space-y-4">
+            {millerFieldHistory.map((paragraph) => (
+              <p key={paragraph} className="text-base leading-7 text-zinc-400">
+                {paragraph}
+              </p>
+            ))}
+          </div>
         </div>
 
-        <div className="border-y border-white/8">
+        <div className="mt-10 border-y border-white/8">
           <div className="mx-auto grid max-w-6xl grid-cols-2 gap-px bg-white/8 lg:grid-cols-4">
             {parkFacts.map((fact) => (
               <div key={fact.label} className="bg-black px-4 py-5 sm:px-6 sm:py-6">
@@ -168,19 +176,11 @@ export default function FacilitiesPage() {
         <div className="mx-auto max-w-6xl space-y-10 px-4 py-10 sm:px-6 sm:py-14">
           <PhotoGallery photos={parkPhotos} venue="Miller Field" priorityFirst />
 
-          <article className="grid gap-8 border-t border-white/8 pt-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
-            <div>
-              <p className="text-[0.65rem] tracking-[0.22em] text-red-400 uppercase">
-                {field.usedBy}
-              </p>
-              <h3 className="font-heading mt-2 text-3xl tracking-wide text-white uppercase sm:text-4xl">
-                The park
-              </h3>
-              <p className="mt-4 max-w-2xl text-base leading-7 text-zinc-400">
-                {field.summary}
-              </p>
-            </div>
-            <div className="lg:text-right">
+          <article className="flex flex-col gap-4 border-t border-white/8 pt-10 sm:flex-row sm:items-end sm:justify-between">
+            <p className="text-[0.65rem] tracking-[0.22em] text-red-400 uppercase">
+              {field.usedBy}
+            </p>
+            <div className="sm:text-right">
               <p className="text-sm leading-6 text-zinc-300">
                 {program.street}
                 <br />

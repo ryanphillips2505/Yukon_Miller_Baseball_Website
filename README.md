@@ -25,6 +25,7 @@ npm start
 - Empty states for photos, alumni, records, and media — no fake games or fake player photos
 - Program roster posted A–Z with bats and throws, no numbers
 - Fall baseball camps posted on `/camps` with the flyer, QR, and live registration form
+- 2026 HRC sponsors posted on `/sponsors` from the sign sheet
 
 ## Adding content later
 
@@ -32,10 +33,11 @@ Edit the typed files in `src/lib/`:
 
 - `schedule.ts` — 2027 master, Varsity, JV Red, and JV White games
 - `roster.ts` — program roster names, bats, and throws
-- `coaches.ts` — optional `photo` paths under `/public/images`
+- `coaches.ts` — coaching staff, managers, student staff, and optional `photo` paths under `/public/images`
 - `commits.ts` — commit board names, schools, and baseball logos
 - `news.ts` — articles and commit announcements
-- `support.ts` — HRC and sponsorships
+- `support.ts` — HRC and sponsorship packages
+- `sponsors.ts` — 2026 partner names and tiers from the HRC sign sheet
 - `camps.ts` — fall camp sessions, payment, and the registration form URL
 
 Drop images in `public/images/` and point the `photo` fields at them.

@@ -1,235 +1,172 @@
 import { BrandLogo } from "@/components/brand-logo";
-import { EmptyState } from "@/components/empty-state";
-import { PhotoSlot } from "@/components/photo-slot";
 import { buttonVariants } from "@/components/ui/button";
-import { coaches } from "@/lib/coaches";
+import { commits } from "@/lib/commits";
 import { latestArticles } from "@/lib/news";
-import { program, teams } from "@/lib/site";
+import { players } from "@/lib/roster";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 import Link from "next/link";
 
-const hubs = [
-  {
-    href: "/schedule",
-    label: "Schedule",
-    copy: "2027 master, Varsity, JV Red, and JV White boards from the program sheet.",
-  },
-  {
-    href: "/roster",
-    label: "Roster",
-    copy: "The program roster, A–Z, with bats and throws. No filler photos.",
-  },
-  {
-    href: "/news",
-    label: "News",
-    copy: "Commits, weather calls, and program notes families can actually use.",
-  },
-  {
-    href: "/support",
-    label: "Home Run Club",
-    copy: "Sponsorships, volunteers, and the parent group that keeps Miller Field going.",
-  },
-  {
-    href: "/fans",
-    label: "Fan info",
-    copy: "Where to park, which diamond, and how to find a Friday night game.",
-  },
-  {
-    href: "/recruiting",
-    label: "Recruiting",
-    copy: "College commits and a direct line for coaches who want film or visits.",
-  },
-  {
-    href: "/camps",
-    label: "Camps",
-    copy: "Fall camps for ages 7–12 at Miller Field — dates, prices, and the live registration form.",
-  },
-];
-
 export default function HomePage() {
-  const news = latestArticles(3);
+  const [featured, ...moreNews] = latestArticles(3);
 
   return (
     <div>
       <section className="relative overflow-hidden border-b border-white/8 bg-black">
-        <div className="mx-auto max-w-6xl px-4 pt-6 sm:px-6 sm:pt-8">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(200,16,46,0.22),transparent_48%)]" />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-[#c8102e] to-transparent" />
+        <div className="pointer-events-none absolute top-8 left-1/2 w-[min(90vw,52rem)] -translate-x-1/2 opacity-[0.14]">
           <BrandLogo
-            variant="primary"
+            variant="state"
             priority
-            sizes="(max-width: 640px) 94vw, (max-width: 1024px) 90vw, 1152px"
-            className="mx-auto h-auto w-full"
+            sizes="(max-width: 768px) 90vw, 832px"
+            className="h-auto w-full"
           />
         </div>
-        <div className="relative mx-auto max-w-3xl px-4 pb-12 text-center sm:px-6 sm:pb-16">
-          <p className="text-[0.7rem] font-semibold tracking-[0.28em] text-red-400 uppercase">
-            Yukon High School · {program.classification}
+        <div className="relative mx-auto flex min-h-[32rem] max-w-6xl flex-col items-center justify-end px-4 pb-14 text-center sm:min-h-[38rem] sm:px-6 sm:pb-16">
+          <p className="text-[0.68rem] font-semibold tracking-[0.32em] text-red-400 uppercase">
+            OSSAA Class 6A Baseball Program
           </p>
-          <h1 className="font-heading mt-3 text-4xl leading-[0.92] text-white uppercase sm:text-6xl">
+          <h1 className="font-heading mt-4 text-5xl leading-[0.9] text-white uppercase sm:text-7xl lg:text-8xl">
             Home of the Millers
           </h1>
-          <p className="mx-auto mt-5 max-w-xl text-base leading-7 text-zinc-300 sm:text-lg">
-            Yukon Miller baseball is the next step for a top-end Class 6A
-            program — players, families, and the Home Run Club on one site
-            that is built to be used, not just looked at.
-          </p>
-          <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-            <Link
-              href="/schedule"
-              className={cn(buttonVariants(), "h-11 px-5 text-sm uppercase")}
-            >
-              See the schedule
-            </Link>
+          <div className="mt-8 flex flex-wrap justify-center gap-3">
             <Link
               href="/roster"
+              className={cn(buttonVariants(), "h-11 px-6 text-sm uppercase")}
+            >
+              Players
+            </Link>
+            <Link
+              href="/news"
               className={cn(
                 buttonVariants({ variant: "outline" }),
-                "h-11 border-white/20 px-5 text-sm uppercase",
+                "h-11 border-white/20 px-6 text-sm uppercase",
               )}
             >
-              View the roster
+              News
             </Link>
           </div>
         </div>
       </section>
 
-      <section className="border-b border-white/8 bg-zinc-950">
-        <div className="mx-auto grid max-w-6xl gap-px bg-white/8 sm:grid-cols-3">
-          {teams.map((team) => (
-            <div key={team.id} className="bg-zinc-950 px-6 py-6">
-              <p className="text-[0.65rem] tracking-[0.2em] text-zinc-500 uppercase">
-                {team.label}
+      <section className="bg-black">
+        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
+          <div className="flex items-end justify-between gap-4">
+            <div>
+              <p className="text-[0.68rem] font-semibold tracking-[0.32em] text-red-400 uppercase">
+                Players
               </p>
-              <p className="font-heading mt-2 text-xl tracking-wide text-white uppercase">
-                {team.field}
-              </p>
-              <p className="mt-1 text-sm text-zinc-400">
-                2027 dates are on the schedule board.
-              </p>
+              <h2 className="font-heading mt-2 text-4xl tracking-wide text-white uppercase sm:text-6xl">
+                Spotlight
+              </h2>
             </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-6xl px-4 py-14 sm:px-6">
-        <div className="flex items-end justify-between gap-4">
-          <div>
-            <p className="text-[0.7rem] font-semibold tracking-[0.22em] text-red-400 uppercase">
-              Latest
-            </p>
-            <h2 className="font-heading mt-2 text-3xl tracking-wide text-white uppercase">
-              From the program
-            </h2>
-          </div>
-          <Link href="/news" className="text-sm text-zinc-400 hover:text-white">
-            All news
-          </Link>
-        </div>
-        {news.length === 0 ? (
-          <EmptyState
-            className="mt-8"
-            title="No updates posted"
-            body="Commits, weather calls, and program notes will show here. Nothing is invented to fill the page."
-          />
-        ) : (
-          <div className="mt-8 grid gap-4 md:grid-cols-2">
-            {news.map((article) => (
-              <Link
-                key={article.slug}
-                href={`/news/${article.slug}`}
-                className="rounded-2xl border border-white/10 bg-zinc-950 p-6 transition-colors hover:border-red-700/50"
-              >
-                <p className="text-[0.65rem] tracking-[0.18em] text-red-400 uppercase">
-                  {article.category}
-                </p>
-                <h3 className="font-heading mt-2 text-2xl tracking-wide text-white uppercase">
-                  {article.title}
-                </h3>
-                <p className="mt-3 text-sm leading-6 text-zinc-400">
-                  {article.excerpt}
-                </p>
-              </Link>
-            ))}
-          </div>
-        )}
-      </section>
-
-      <section className="border-y border-white/8 bg-zinc-950">
-        <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6">
-          <p className="text-[0.7rem] font-semibold tracking-[0.22em] text-red-400 uppercase">
-            For families
-          </p>
-          <h2 className="font-heading mt-2 text-3xl tracking-wide text-white uppercase">
-            Everything a Miller week needs
-          </h2>
-          <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {hubs.map((hub) => (
-              <Link
-                key={hub.href}
-                href={hub.href}
-                className="rounded-2xl border border-white/10 bg-black/40 p-5 hover:border-white/25"
-              >
-                <p className="font-heading text-lg tracking-wide text-white uppercase">
-                  {hub.label}
-                </p>
-                <p className="mt-2 text-sm leading-6 text-zinc-400">{hub.copy}</p>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-6xl px-4 py-14 sm:px-6">
-        <div className="flex items-end justify-between gap-4">
-          <div>
-            <p className="text-[0.7rem] font-semibold tracking-[0.22em] text-red-400 uppercase">
-              Staff
-            </p>
-            <h2 className="font-heading mt-2 text-3xl tracking-wide text-white uppercase">
-              The coaches
-            </h2>
-          </div>
-          <Link href="/coaches" className="text-sm text-zinc-400 hover:text-white">
-            Full staff
-          </Link>
-        </div>
-        <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
-          {coaches.slice(0, 5).map((coach) => (
-            <div
-              key={coach.id}
-              className="overflow-hidden rounded-2xl border border-white/10 bg-zinc-950"
+            <Link
+              href="/roster"
+              className="text-sm tracking-wide text-zinc-400 uppercase hover:text-white"
             >
-              <PhotoSlot label="Photo coming" className="aspect-[4/5]" />
-              <div className="p-3">
-                <p className="font-heading text-sm tracking-wide text-white uppercase">
-                  {coach.name}
+              Roster · {players.length}
+            </Link>
+          </div>
+
+          <div className="mt-10 grid gap-4 lg:grid-cols-3">
+            {commits.map((commit) => (
+              <Link
+                key={commit.id}
+                href={commit.newsSlug ? `/news/${commit.newsSlug}` : "/recruiting"}
+                className="relative flex h-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-zinc-950 p-6 transition-colors hover:border-red-700/40 sm:p-7"
+              >
+                <div
+                  className="absolute inset-y-0 left-0 w-1.5"
+                  style={{
+                    background: `linear-gradient(180deg, ${commit.colors.secondary}, ${commit.colors.primary})`,
+                  }}
+                />
+                <p className="text-[0.62rem] font-semibold tracking-[0.18em] text-red-400 uppercase">
+                  Committed
                 </p>
-                <p className="text-xs text-zinc-500">{coach.role}</p>
+                <h3 className="font-heading mt-3 text-3xl leading-none tracking-wide text-white uppercase">
+                  {commit.player}
+                </h3>
+                <p className="mt-4 text-sm leading-6 text-zinc-300">
+                  {commit.school}
+                </p>
+                <p className="mt-1 text-xs tracking-wide text-zinc-500 uppercase">
+                  {commit.mascot} · {commit.division}
+                </p>
+                <div className="mt-auto pt-6">
+                  <div className="flex h-20 items-center justify-center rounded-lg bg-[#f4f1ea] p-3">
+                    <Image
+                      src={commit.logo.src}
+                      alt={commit.logo.alt}
+                      width={commit.logo.width}
+                      height={commit.logo.height}
+                      className="h-full w-auto max-w-full object-contain"
+                    />
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-t border-white/8 bg-zinc-950">
+        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
+          <div className="flex items-end justify-between gap-4">
+            <div>
+              <p className="text-[0.68rem] font-semibold tracking-[0.32em] text-red-400 uppercase">
+                Latest
+              </p>
+              <h2 className="font-heading mt-2 text-4xl tracking-wide text-white uppercase sm:text-6xl">
+                News
+              </h2>
+            </div>
+            <Link
+              href="/news"
+              className="text-sm tracking-wide text-zinc-400 uppercase hover:text-white"
+            >
+              All stories
+            </Link>
+          </div>
+
+          {featured ? (
+            <div className="mt-10 grid gap-4 lg:grid-cols-[1.35fr_0.85fr]">
+              <Link
+                href={`/news/${featured.slug}`}
+                className="rounded-2xl border border-white/12 bg-black p-8 transition-colors hover:border-red-700/40 sm:p-10"
+              >
+                <p className="text-[0.65rem] tracking-[0.2em] text-red-400 uppercase">
+                  {featured.category}
+                </p>
+                <h3 className="font-heading mt-4 text-4xl leading-[0.92] tracking-wide text-white uppercase sm:text-5xl">
+                  {featured.title}
+                </h3>
+                <p className="mt-5 max-w-xl text-base leading-7 text-zinc-400">
+                  {featured.excerpt}
+                </p>
+              </Link>
+              <div className="grid gap-4">
+                {moreNews.map((article) => (
+                  <Link
+                    key={article.slug}
+                    href={`/news/${article.slug}`}
+                    className="rounded-2xl border border-white/10 bg-black/40 p-6 transition-colors hover:border-red-700/40"
+                  >
+                    <p className="text-[0.62rem] tracking-[0.18em] text-red-400 uppercase">
+                      {article.category}
+                    </p>
+                    <h3 className="font-heading mt-2 text-2xl tracking-wide text-white uppercase">
+                      {article.title}
+                    </h3>
+                    <p className="mt-3 text-sm leading-6 text-zinc-400">
+                      {article.excerpt}
+                    </p>
+                  </Link>
+                ))}
               </div>
             </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="border-t border-white/8 bg-black">
-        <div className="mx-auto max-w-3xl px-4 py-16 text-center sm:px-6">
-          <p className="font-heading text-2xl leading-snug tracking-wide text-white uppercase sm:text-3xl">
-            “{program.quote.text}”
-          </p>
-          <p className="mt-4 text-sm tracking-[0.18em] text-zinc-500 uppercase">
-            {program.quote.attribution}
-          </p>
-          <p className="mt-8 text-sm leading-6 text-zinc-400">
-            {program.directions} Please come by and catch a game.
-          </p>
-          <Link
-            href="/facilities"
-            className={cn(
-              buttonVariants({ variant: "outline" }),
-              "mt-6 h-10 border-white/20 px-4",
-            )}
-          >
-            Field guide
-          </Link>
+          ) : null}
         </div>
       </section>
     </div>

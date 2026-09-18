@@ -2,7 +2,6 @@ import { CommitBoard } from "@/components/commit-board";
 import { PageHero } from "@/components/page-hero";
 import { program } from "@/lib/site";
 import type { Metadata } from "next";
-import Link from "next/link";
 
 export const metadata: Metadata = { title: "Recruiting" };
 
@@ -29,12 +28,6 @@ export default function RecruitingPage() {
             </a>{" "}
             and include the player’s name, your school, and what you need.
           </p>
-          <Link
-            href="/contact"
-            className="mt-4 inline-block text-sm text-white underline-offset-4 hover:underline"
-          >
-            Use the contact form
-          </Link>
         </section>
       </div>
     </div>

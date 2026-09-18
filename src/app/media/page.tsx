@@ -1,6 +1,7 @@
 import { EmptyState } from "@/components/empty-state";
 import { PageHero } from "@/components/page-hero";
 import { PhotoSlot } from "@/components/photo-slot";
+import { program } from "@/lib/site";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = { title: "Media" };
@@ -17,7 +18,7 @@ export default function MediaPage() {
         <EmptyState
           title="No media uploaded"
           body="Send team photos, phone wallpapers, or highlight links to the staff. Nothing here is stock and nothing is pulled from another school."
-          action={{ href: "/contact", label: "Send media" }}
+          action={{ href: `mailto:${program.email}`, label: "Email media" }}
         />
         <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
           {["Varsity", "JV Red", "JV White", "Miller Field"].map((label) => (

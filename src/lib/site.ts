@@ -5,6 +5,12 @@ export const brand = {
     height: 887,
     alt: "Yukon Baseball — Oklahoma outline with YM mark and Yukon, Oklahoma wordmark",
   },
+  state: {
+    src: "/images/yukon-baseball-state.png",
+    width: 1210,
+    height: 532,
+    alt: "Yukon Baseball — Oklahoma outline with YM mark",
+  },
   mark: {
     src: "/images/logo-mark.jpg",
     width: 512,
@@ -43,6 +49,7 @@ export const navPrimary = [
 ] as const;
 
 export const navMore = [
+  { href: "/sponsors", label: "Sponsors" },
   { href: "/recruiting", label: "Recruiting" },
   { href: "/camps", label: "Camps" },
   { href: "/alumni", label: "Alumni" },

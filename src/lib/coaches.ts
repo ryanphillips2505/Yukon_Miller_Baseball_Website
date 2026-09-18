@@ -7,12 +7,12 @@ export type Coach = {
 
 export const coaches: Coach[] = [
   { id: "phillips", name: "Ryan Phillips", role: "Head Coach", photo: "/images/coaches/ryan-phillips.jpg" },
-  { id: "furlong", name: "Jason Furlong", role: "Assistant Coach", photo: "/images/coaches/jason-furlong.jpg" },
+  { id: "furlong", name: "Jason Furlong", role: "Assistant Coach", photo: "/images/coaches/jason-furlong-dugout.jpg" },
   { id: "lockett", name: "Clay Lockett", role: "Assistant Coach", photo: "/images/coaches/clay-lockett.jpg" },
   { id: "haines", name: "Dakota Haines", role: "Assistant Coach", photo: "/images/coaches/dakota-haines.jpg" },
   { id: "teel", name: "Caleb Teel", role: "Assistant Coach", photo: "/images/coaches/caleb-teel.jpg" },
   { id: "booth", name: "Zac Booth", role: "Assistant Coach", photo: "/images/coaches/zac-booth.jpg" },
-  { id: "knutson", name: "Ryan Knutson", role: "Assistant Coach" },
+  { id: "knutson", name: "Ryan Knutson", role: "Assistant Coach", photo: "/images/coaches/ryan-knutson.jpg" },
   { id: "ray", name: "Damien Ray", role: "Assistant Coach" },
 ];
 

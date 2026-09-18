@@ -1,13 +1,37 @@
+export type CoachBio = {
+  yearsCoaching: string;
+  family: string;
+  familyDetail?: string;
+  history: string;
+  whyYukon: string;
+};
+
 export type Coach = {
   id: string;
   name: string;
   role: string;
   photo?: string;
+  bio?: CoachBio;
 };
 
 export const coaches: Coach[] = [
   { id: "phillips", name: "Ryan Phillips", role: "Head Coach", photo: "/images/coaches/ryan-phillips.jpg" },
-  { id: "furlong", name: "Jason Furlong", role: "Assistant Coach", photo: "/images/coaches/jason-furlong-dugout.jpg" },
+  {
+    id: "furlong",
+    name: "Jason Furlong",
+    role: "Assistant Coach",
+    photo: "/images/coaches/jason-furlong-dugout.jpg",
+    bio: {
+      yearsCoaching: "Since 2016",
+      family: "Lindsey · Kaylee · Mason",
+      familyDetail:
+        "Married to Lindsey since 2018. They have been together since 2008 — middle school sweethearts. Two children, Kaylee (6) and Mason (2), and two dogs, Pistol and Minnie. He grew up in Tulsa, attended Bixby High School, then moved to Edmond and the University of Central Oklahoma.",
+      history:
+        "He began coaching in the 2016–17 season at Bishop McGuinness as the head freshman coach and head strength and conditioning coach. He came to Yukon in 2018–19 as a freshman assistant and strength and conditioning coordinator, and he has been here ever since. He now serves as the varsity pitching coach.",
+      whyYukon:
+        "He loves the community around the Yukon Millers, the support across town, and the culture this program has built and is still building.",
+    },
+  },
   { id: "lockett", name: "Clay Lockett", role: "Assistant Coach", photo: "/images/coaches/clay-lockett.jpg" },
   { id: "haines", name: "Dakota Haines", role: "Assistant Coach", photo: "/images/coaches/dakota-haines.jpg" },
   { id: "teel", name: "Caleb Teel", role: "Assistant Coach", photo: "/images/coaches/caleb-teel.jpg" },
@@ -22,3 +46,14 @@ export const supportStaff: Coach[] = [
   { id: "jones", name: "Breed Jones", role: "Student Assistant" },
   { id: "hormier", name: "Londyn Hormier", role: "Student Social Media" },
 ];
+
+export function adjacentCoach(id: string, step: -1 | 1) {
+  const index = coaches.findIndex((coach) => coach.id === id);
+  if (index < 0) return undefined;
+  const next = (index + step + coaches.length) % coaches.length;
+  return coaches[next];
+}
+
+export function bioLine(value?: string) {
+  return value?.trim() ? value : "—";
+}

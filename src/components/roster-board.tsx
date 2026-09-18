@@ -1,7 +1,7 @@
 "use client";
 
 import { PlayerBioDialog } from "@/components/player-bio-dialog";
-import { displayName, players, rosterGroups, type Player } from "@/lib/roster";
+import { bioValue, displayName, players, rosterGroups, type Player } from "@/lib/roster";
 import { useState } from "react";
 
 export function RosterBoard() {
@@ -65,13 +65,13 @@ export function RosterBoard() {
                       <span className="mr-1 text-[0.6rem] tracking-[0.16em] text-zinc-500 uppercase sm:hidden">
                         T
                       </span>
-                      {player.bats}
+                      {bioValue(player.bats)}
                     </p>
                     <p className="text-center font-heading text-lg text-zinc-200">
                       <span className="mr-1 text-[0.6rem] tracking-[0.16em] text-zinc-500 uppercase sm:hidden">
                         B
                       </span>
-                      {player.throws}
+                      {bioValue(player.throws)}
                     </p>
                   </button>
                 </li>

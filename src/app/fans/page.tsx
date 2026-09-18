@@ -1,6 +1,7 @@
 import { PageHero } from "@/components/page-hero";
 import { fields } from "@/lib/facilities";
 import { program, teams } from "@/lib/site";
+import { hrc } from "@/lib/support";
 import type { Metadata } from "next";
 import Link from "next/link";
 
@@ -60,30 +61,40 @@ export default function FansPage() {
         </section>
 
         <section className="grid gap-4 md:grid-cols-3">
-          {[
-            {
-              title: "Come watch",
-              copy: "Please come by and catch a game. Miller Field sits on the high school campus behind Yukon High School.",
-            },
-            {
-              title: "Help a night",
-              copy: "Gate, concession, and field work run through the Home Run Club. Volunteer boards post on the support page when the season opens.",
-            },
-            {
-              title: "Rep the Millers",
-              copy: "Preferred gear pricing is at the TCA store with code YUKON. Details live on the Home Run Club page.",
-            },
-          ].map((item) => (
-            <div
-              key={item.title}
-              className="rounded-2xl border border-white/10 bg-zinc-950 p-5"
+          <div className="rounded-2xl border border-white/10 bg-zinc-950 p-5">
+            <h3 className="font-heading text-lg tracking-wide text-white uppercase">
+              Come watch
+            </h3>
+            <p className="mt-2 text-sm leading-6 text-zinc-400">
+              Please come by and catch a game. Miller Field sits on the high
+              school campus behind Yukon High School.
+            </p>
+          </div>
+          <div className="rounded-2xl border border-white/10 bg-zinc-950 p-5">
+            <h3 className="font-heading text-lg tracking-wide text-white uppercase">
+              Help a night
+            </h3>
+            <p className="mt-2 text-sm leading-6 text-zinc-400">
+              Gate, concession, and field work run through the Home Run Club.
+            </p>
+            <a
+              href={hrc.volunteerSignup.href}
+              target="_blank"
+              rel="noreferrer"
+              className="mt-4 inline-block font-heading text-lg tracking-wide text-red-400 uppercase underline decoration-red-400 decoration-2 underline-offset-6 transition-colors hover:text-red-300 hover:decoration-red-300"
             >
-              <h3 className="font-heading text-lg tracking-wide text-white uppercase">
-                {item.title}
-              </h3>
-              <p className="mt-2 text-sm leading-6 text-zinc-400">{item.copy}</p>
-            </div>
-          ))}
+              {hrc.volunteerSignup.label}
+            </a>
+          </div>
+          <div className="rounded-2xl border border-white/10 bg-zinc-950 p-5">
+            <h3 className="font-heading text-lg tracking-wide text-white uppercase">
+              Rep the Millers
+            </h3>
+            <p className="mt-2 text-sm leading-6 text-zinc-400">
+              Preferred gear pricing is at the TCA store with code YUKON.
+              Details live on the Home Run Club page.
+            </p>
+          </div>
         </section>
 
         <p className="text-sm text-zinc-500">

@@ -67,6 +67,24 @@ export default function SupportPage() {
           </div>
         </section>
 
+        <section className="rounded-2xl border border-white/10 bg-zinc-950 p-6 sm:p-8">
+          <h2 className="font-heading text-2xl tracking-wide text-white uppercase sm:text-3xl">
+            Volunteer
+          </h2>
+          <p className="mt-3 max-w-2xl text-sm leading-6 text-zinc-400">
+            Varsity, JV Red, and JV White each need gate, concession, and
+            field help. Pick a shift on the board.
+          </p>
+          <a
+            href={hrc.volunteerSignup.href}
+            target="_blank"
+            rel="noreferrer"
+            className="mt-5 inline-block font-heading text-2xl tracking-wide text-red-400 uppercase underline decoration-red-400 decoration-2 underline-offset-8 transition-colors hover:text-red-300 hover:decoration-red-300 sm:text-3xl"
+          >
+            {hrc.volunteerSignup.label}
+          </a>
+        </section>
+
         <section>
           <div className="flex flex-wrap items-end justify-between gap-3">
             <div>
@@ -110,18 +128,6 @@ export default function SupportPage() {
               </article>
             ))}
           </div>
-        </section>
-
-        <section className="rounded-2xl border border-white/10 bg-zinc-950 p-6">
-          <h2 className="font-heading text-2xl tracking-wide text-white uppercase">
-            Volunteer
-          </h2>
-          <p className="mt-3 max-w-2xl text-sm leading-6 text-zinc-400">
-            Varsity, JV Red, and JV White each need gate, concession, and
-            field help. Signup boards post here when the season list opens —
-            last year’s Signup.com links are retired so parents are not
-            booking the wrong year.
-          </p>
         </section>
 
         <section className="rounded-2xl border border-white/10 bg-zinc-950 p-6">

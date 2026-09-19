@@ -7,6 +7,10 @@ import type { Metadata } from "next";
 export const metadata: Metadata = { title: "Home Run Club" };
 
 export default function SupportPage() {
+  const meetings = hrc.howItRuns[0];
+  const mailing = hrc.howItRuns[1];
+  const venmo = hrc.howItRuns[2];
+
   return (
     <div>
       <PageHero
@@ -15,54 +19,80 @@ export default function SupportPage() {
         lede={hrc.about}
       />
       <div className="mx-auto max-w-6xl space-y-6 px-4 py-10 sm:space-y-8 sm:px-6">
-        <section className="grid items-stretch gap-6 md:grid-cols-2">
-          <div className="flex flex-col rounded-2xl border border-white/10 bg-zinc-950 p-6 sm:p-8">
+        <section className="rounded-2xl border border-white/10 bg-zinc-950 p-6 sm:p-8">
+          <div className="flex flex-wrap items-end justify-between gap-4">
             <h2 className="font-heading text-2xl tracking-wide text-white uppercase sm:text-3xl">
               Officers
             </h2>
-            <ul className="mt-5 flex-1 space-y-3">
-              {officers.map((officer) => (
-                <li
-                  key={officer.name}
-                  className="flex justify-between gap-4 text-sm"
-                >
-                  <span className="text-white">{officer.name}</span>
-                  <span className="text-zinc-500">{officer.role}</span>
-                </li>
-              ))}
-            </ul>
             <a
               href={`mailto:${hrc.email}`}
-              className={cn(buttonVariants(), "mt-8 h-10 w-fit px-4")}
+              className={cn(buttonVariants(), "h-10 w-fit px-4")}
             >
               Email YHRC
             </a>
           </div>
-          <div className="flex flex-col rounded-2xl border border-white/10 bg-zinc-950 p-6 sm:p-8">
-            <h2 className="font-heading text-2xl tracking-wide text-white uppercase sm:text-3xl">
-              How it runs
-            </h2>
-            <div className="mt-5 flex-1 space-y-5">
-              {hrc.howItRuns.map((item) => (
-                <div key={item.title}>
-                  <p className="text-[0.65rem] font-semibold tracking-[0.2em] text-red-400 uppercase">
-                    {item.title}
-                  </p>
-                  <p className="mt-2 whitespace-pre-line text-sm leading-6 text-zinc-400">
-                    {item.body}
-                  </p>
-                </div>
-              ))}
+          <ul className="mt-6 grid gap-x-10 gap-y-4 sm:grid-cols-2 lg:grid-cols-3">
+            {officers.map((officer) => (
+              <li
+                key={officer.name}
+                className="flex items-baseline justify-between gap-4 text-sm"
+              >
+                <span className="text-white">{officer.name}</span>
+                <span className="shrink-0 text-zinc-500">{officer.role}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        <section className="rounded-2xl border border-white/10 bg-zinc-950 p-6 sm:p-8">
+          <h2 className="font-heading text-2xl tracking-wide text-white uppercase sm:text-3xl">
+            How it runs
+          </h2>
+          <div className="mt-6 grid gap-8 md:grid-cols-2">
+            <div>
+              <p className="text-[0.65rem] font-semibold tracking-[0.2em] text-red-400 uppercase">
+                {meetings.title}
+              </p>
+              <p className="mt-2 text-sm leading-6 text-zinc-400">
+                {meetings.body}
+              </p>
             </div>
-            <a
-              href={hrc.venmoHref}
-              target="_blank"
-              rel="noreferrer"
-              className={cn(buttonVariants(), "mt-8 h-10 w-fit px-4")}
-            >
-              Pay HRC Venmo
-            </a>
+            <div className="space-y-6">
+              <div>
+                <p className="text-[0.65rem] font-semibold tracking-[0.2em] text-red-400 uppercase">
+                  {mailing.title}
+                </p>
+                <p className="mt-2 whitespace-pre-line text-sm leading-6 text-zinc-400">
+                  {mailing.body}
+                </p>
+              </div>
+              <div>
+                <p className="text-[0.65rem] font-semibold tracking-[0.2em] text-red-400 uppercase">
+                  {venmo.title}
+                </p>
+                <p className="mt-2 text-sm leading-6 text-zinc-400">
+                  {venmo.body}
+                </p>
+              </div>
+            </div>
           </div>
+        </section>
+
+        <section className="rounded-2xl border border-white/10 bg-zinc-950 p-6 sm:p-8">
+          <h2 className="font-heading text-2xl tracking-wide text-white uppercase sm:text-3xl">
+            {hrc.donations.title}
+          </h2>
+          <p className="mt-4 max-w-2xl text-sm leading-6 text-zinc-400">
+            {hrc.donations.body}
+          </p>
+          <a
+            href={hrc.venmoHref}
+            target="_blank"
+            rel="noreferrer"
+            className={cn(buttonVariants(), "mt-6 h-10 w-fit px-4")}
+          >
+            Pay HRC Venmo
+          </a>
         </section>
 
         <section className="rounded-2xl border border-white/10 bg-zinc-950 p-6 sm:p-8">

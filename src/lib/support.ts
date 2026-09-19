@@ -14,10 +14,6 @@ export const hrc = {
       body: "Meetings are held on the third Wednesday of each month at 6:00 p.m. in the Black Box Theater on the south side of Yukon High School. Dates and times are subject to change due to holidays or scheduling conflicts. Any changes will be posted on social media.",
     },
     {
-      title: "Donations & Payments",
-      body: "Yukon Home Run Club accepts Venmo, check, or credit card. Credit card payments include a 5% service fee. Checks should be made payable to Yukon Home Run Club.",
-    },
-    {
       title: "Mailing Address",
       body: "Yukon Home Run Club\nPO Box 850433\nYukon, OK 73085",
     },
@@ -26,6 +22,10 @@ export const hrc = {
       body: "@Yukon-Millers-YHRC",
     },
   ],
+  donations: {
+    title: "Donations & Payments",
+    body: "Yukon Home Run Club accepts Venmo, check, or credit card. Credit card payments include a 5% service fee. Checks should be made payable to Yukon Home Run Club.",
+  },
   volunteerSignup: {
     href: "https://signup.com/go/BHtuvug",
     label: "Volunteer Sign Up",

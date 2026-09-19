@@ -34,28 +34,83 @@ export function MinutesVault({ initialFiles }: { initialFiles: MinutesFile[] }) 
   const [uploading, setUploading] = useState(false);
   const [removing, setRemoving] = useState<string | null>(null);
 
+  async function refreshFiles() {
+    const response = await fetch("/api/minutes");
+    const data = (await response.json()) as {
+      files?: MinutesFile[];
+      error?: string;
+    };
+    if (!response.ok) {
+      throw new Error(data.error || "Could not refresh the file list.");
+    }
+    setFiles(data.files ?? []);
+  }
+
+  async function uploadDirect(file: File) {
+    const started = await fetch("/api/minutes/upload", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name: file.name, size: file.size }),
+    });
+    const startData = (await started.json()) as {
+      url?: string;
+      contentType?: string;
+      error?: string;
+    };
+    if (started.status === 503) return false;
+    if (!started.ok || !startData.url) {
+      throw new Error(startData.error || "Upload failed.");
+    }
+
+    const stored = await fetch(startData.url, {
+      method: "PUT",
+      headers: {
+        "Content-Type": startData.contentType || file.type || "application/pdf",
+      },
+      body: file,
+    });
+    if (!stored.ok) {
+      const detail = await stored.text().catch(() => "");
+      throw new Error(
+        detail
+          ? `Upload failed (${stored.status}).`
+          : "Upload failed. Try again.",
+      );
+    }
+    await refreshFiles();
+    return true;
+  }
+
+  async function uploadThroughServer(file: File) {
+    const body = new FormData();
+    body.set("file", file);
+    const response = await fetch("/api/minutes", { method: "POST", body });
+    const data = (await response.json()) as {
+      files?: MinutesFile[];
+      error?: string;
+    };
+    if (!response.ok) {
+      throw new Error(data.error || "Upload failed.");
+    }
+    setFiles(data.files ?? []);
+  }
+
   async function onUpload(event: ChangeEvent<HTMLInputElement>) {
     const file = event.target.files?.[0];
     event.target.value = "";
     if (!file) return;
+    if (file.size > 80 * 1024 * 1024) {
+      setError("File must be 80 MB or smaller.");
+      return;
+    }
 
     setUploading(true);
     setError("");
     try {
-      const body = new FormData();
-      body.set("file", file);
-      const response = await fetch("/api/minutes", { method: "POST", body });
-      const data = (await response.json()) as {
-        files?: MinutesFile[];
-        error?: string;
-      };
-      if (!response.ok) {
-        setError(data.error || "Upload failed.");
-        return;
-      }
-      setFiles(data.files ?? []);
-    } catch {
-      setError("Upload failed. Try again.");
+      const usedDirect = await uploadDirect(file);
+      if (!usedDirect) await uploadThroughServer(file);
+    } catch (error) {
+      setError(error instanceof Error ? error.message : "Upload failed. Try again.");
     } finally {
       setUploading(false);
     }
@@ -95,7 +150,8 @@ export function MinutesVault({ initialFiles }: { initialFiles: MinutesFile[] }) 
             Minutes library
           </h2>
           <p className="mt-2 text-sm text-zinc-400">
-            Upload PDF or Word files. Downloads stay behind the password.
+            Upload PDF or Word files up to 80 MB. Downloads stay behind the
+            password.
           </p>
         </div>
         <div className="flex flex-wrap gap-2">

@@ -33,7 +33,7 @@ export async function POST(request: Request) {
   }
   if (file.size > MAX_MINUTES_BYTES) {
     return NextResponse.json(
-      { error: "File must be 4.5 MB or smaller." },
+      { error: "File must be 80 MB or smaller." },
       { status: 400 },
     );
   }

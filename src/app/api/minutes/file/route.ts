@@ -1,5 +1,11 @@
 import { minutesAuthed } from "@/lib/minutes-auth";
-import { deleteMinutes, readMinutes, safeMinutesName } from "@/lib/minutes-store";
+import {
+  createMinutesDownloadUrl,
+  deleteMinutes,
+  minutesUsesBlob,
+  readMinutes,
+  safeMinutesName,
+} from "@/lib/minutes-store";
 import { NextResponse } from "next/server";
 
 export const runtime = "nodejs";
@@ -19,6 +25,15 @@ export async function GET(request: Request) {
   const name = fileNameFrom(request);
   if (!name) {
     return NextResponse.json({ error: "Invalid file name." }, { status: 400 });
+  }
+
+  if (minutesUsesBlob()) {
+    try {
+      const url = await createMinutesDownloadUrl(name);
+      return NextResponse.redirect(url, 302);
+    } catch {
+      // Fall through to a proxied download.
+    }
   }
 
   const bytes = await readMinutes(name);

@@ -26,7 +26,7 @@ export const coaches: Coach[] = [
       familyDetail:
         "Married to Lyndsey. They have three children, Easton, Brooklyn, and Charli. Before coaching he pitched at Barton Community College from 2002–2004, signed a letter of intent with the University of Nebraska, and was selected by the Boston Red Sox in the 11th round of the 2004 MLB Draft.",
       history:
-        "He began his coaching career at Southmoore as an assistant for five years. In 2013 he became the head coach at Edmond Santa Fe and led that program for nine years, winning a Class 6A state championship in 2019 and finishing runner-up in 2022, before coming to Yukon in 2022. This is his 18th year coaching and his fifth season as Yukon’s head coach.",
+        "He began his coaching career at Southmoore as an assistant for five years. In 2013 he became the head coach at Edmond Santa Fe and led that program for nine years, winning a Class 6A state championship in 2019 — the first in school history — and finishing runner-up in 2022, before coming to Yukon in 2022. This is his 18th year coaching and his fifth season as Yukon’s head coach.",
       whyYukon:
         "He and his family have found a home in Yukon. He believes it is a great place to raise a family and values the pride that comes from one high school representing one community. The tradition and history of Yukon, and the support of the administration, players, families, and community, are a major part of what makes coaching the Millers special to him.",
     },

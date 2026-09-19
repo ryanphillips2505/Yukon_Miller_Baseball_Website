@@ -95,7 +95,7 @@ export function MinutesVault({ initialFiles }: { initialFiles: MinutesFile[] }) 
             Minutes library
           </h2>
           <p className="mt-2 text-sm text-zinc-400">
-            Upload PDFs. Downloads stay behind the password.
+            Upload PDF or Word files. Downloads stay behind the password.
           </p>
         </div>
         <div className="flex flex-wrap gap-2">
@@ -106,10 +106,10 @@ export function MinutesVault({ initialFiles }: { initialFiles: MinutesFile[] }) 
               uploading && "pointer-events-none opacity-50",
             )}
           >
-            {uploading ? "Uploading…" : "Upload PDF"}
+            {uploading ? "Uploading…" : "Upload"}
             <input
               type="file"
-              accept="application/pdf,.pdf"
+              accept="application/pdf,.pdf,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
               className="sr-only"
               disabled={uploading}
               onChange={onUpload}
@@ -132,7 +132,7 @@ export function MinutesVault({ initialFiles }: { initialFiles: MinutesFile[] }) 
 
       {files.length === 0 ? (
         <p className="mt-8 text-sm text-zinc-500">
-          No minutes uploaded yet. Use Upload PDF to add the first file.
+          No minutes uploaded yet. Use Upload to add the first file.
         </p>
       ) : (
         <ul className="mt-6 divide-y divide-white/8">

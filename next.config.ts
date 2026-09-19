@@ -11,8 +11,20 @@ const packetHeaders = [
   },
 ];
 
+const minutesTrace = [
+  "./src/lib/minutes-ssh.mjs",
+  "./node_modules/dugite/git/**",
+  "./node_modules/ssh2/**",
+];
+
 const nextConfig: NextConfig = {
   allowedDevOrigins: ["127.0.0.1"],
+  outputFileTracingIncludes: {
+    "/api/minutes": minutesTrace,
+    "/api/minutes/file": minutesTrace,
+    "/api/minutes/auth": minutesTrace,
+    "/minutes": minutesTrace,
+  },
   async headers() {
     return [
       {

@@ -21,7 +21,7 @@ export default async function MinutesPage() {
       <PageHero
         kicker="Home Run Club"
         title="Meeting Minutes"
-        lede="Password-protected PDFs for Home Run Club officers and coaching staff."
+        lede="Password-protected minutes for Home Run Club officers and coaching staff."
       />
       <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 sm:py-10">
         {unlocked ? <MinutesVault initialFiles={files} /> : <MinutesLogin />}

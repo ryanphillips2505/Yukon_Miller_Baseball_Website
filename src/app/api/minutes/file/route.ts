@@ -4,6 +4,7 @@ import { NextResponse } from "next/server";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
+export const maxDuration = 60;
 
 function fileNameFrom(request: Request) {
   const url = new URL(request.url);
@@ -25,9 +26,19 @@ export async function GET(request: Request) {
     return NextResponse.json({ error: "File not found." }, { status: 404 });
   }
 
+  const ext = name.toLowerCase().slice(name.lastIndexOf("."));
+  const type =
+    ext === ".pdf"
+      ? "application/pdf"
+      : ext === ".docx"
+        ? "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+        : ext === ".doc"
+          ? "application/msword"
+          : "application/octet-stream";
+
   return new NextResponse(Buffer.from(bytes), {
     headers: {
-      "Content-Type": "application/pdf",
+      "Content-Type": type,
       "Content-Disposition": `attachment; filename="${name.replace(/"/g, "")}"`,
       "Cache-Control": "private, no-store",
     },

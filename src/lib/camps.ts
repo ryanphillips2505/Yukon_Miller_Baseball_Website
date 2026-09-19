@@ -4,6 +4,8 @@ export const campRegistrationUrl =
 export const fallCamps = {
   title: "Yukon Miller Fall Baseball Camps",
   ages: "Ages 7–12",
+  shareDescription:
+    "Ages 7–12 at Miller Field. Infield/outfield, pitching, and hitting on October 12–13. A spot is not held until payment lands.",
   note: "A spot is not secure until payment is made. Camp capacity is limited.",
   twoCampNote:
     "Registering for two camps? Fill out a second registration. The all-three price is the only package discount. Sessions that stack have a 30-minute gap for lunch — no concession stand.",
@@ -64,3 +66,12 @@ export const fallCamps = {
     },
   ],
 } as const;
+
+export type CampSeason = typeof fallCamps;
+
+/**
+ * Season posted on /camps. The page and the Google/iMessage share image
+ * both read this, so swapping it to winterCamps (or any later season)
+ * updates the flyer on the site and the link preview together.
+ */
+export const liveCamps: CampSeason = fallCamps;

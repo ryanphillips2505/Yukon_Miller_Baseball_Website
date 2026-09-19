@@ -256,17 +256,15 @@ export function SponsorBoard() {
               Email {program.email}
             </a>
           </div>
-          <div className="flex items-center gap-4 border-t border-white/10 pt-6 sm:gap-5 lg:border-t-0 lg:border-l lg:pt-0 lg:pl-8">
-            <span className="flex size-20 shrink-0 items-center justify-center rounded-2xl bg-white p-1.5 shadow-[0_8px_24px_rgba(0,0,0,0.28)] sm:size-24">
-              <Image
-                src="/images/packet-heading-logo.png"
-                alt="Yukon Millers"
-                width={239}
-                height={243}
-                sizes="96px"
-                className="h-full w-auto"
-              />
-            </span>
+          <div className="flex items-center gap-4">
+            <Image
+              src="/images/packet-heading-logo.png"
+              alt="Yukon Millers"
+              width={239}
+              height={243}
+              sizes="56px"
+              className="size-12 shrink-0 sm:size-14"
+            />
             <a
               href={sponsorshipForm.href}
               target="_blank"

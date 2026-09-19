@@ -47,7 +47,15 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Only PDF files are allowed." }, { status: 400 });
   }
 
-  await saveMinutes(name, bytes);
+  try {
+    await saveMinutes(name, bytes);
+  } catch (error) {
+    const message =
+      error instanceof Error ? error.message : "Could not save that PDF.";
+    const status = message.includes("not configured") ? 503 : 500;
+    return NextResponse.json({ error: message }, { status });
+  }
+
   const files = await listMinutes();
   return NextResponse.json({ ok: true, files });
 }

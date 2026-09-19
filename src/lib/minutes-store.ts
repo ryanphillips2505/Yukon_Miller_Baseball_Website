@@ -93,6 +93,10 @@ export async function saveMinutes(name: string, bytes: Uint8Array) {
     return;
   }
 
+  if (process.env.VERCEL) {
+    throw new Error("Minutes storage is not configured.");
+  }
+
   const dir = localDir();
   await mkdir(dir, { recursive: true });
   await writeFile(path.join(dir, name), bytes);

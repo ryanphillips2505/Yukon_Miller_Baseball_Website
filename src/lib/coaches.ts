@@ -118,9 +118,9 @@ export const coaches: Coach[] = [
     role: "Assistant Coach",
     bio: {
       yearsCoaching: "7",
-      family: "Wife · daughter",
+      family: "Jerzey · Everly",
       familyDetail:
-        "He and his wife have been together for seven years and celebrated their first wedding anniversary on July 17. They have a 12-year-old daughter and three dogs — Mini, Gunner, and Goose. Born and raised in Altus, Oklahoma, he attended Altus High School and played three years at Western Oklahoma State College.",
+        "Married to Jerzey. They have been together for seven years and celebrated their first wedding anniversary on July 17. They have a 12-year-old daughter, Everly, and three dogs — Mini, Gunner, and Goose. Born and raised in Altus, Oklahoma, he attended Altus High School and played three years at Western Oklahoma State College.",
       history:
         "Coach Ray enters his first season with the Yukon Millers, bringing seven years of coaching experience at the high school and collegiate levels. He began his coaching career in 2019 at Western Oklahoma State College, spending two years on staff at the program where he had played and helping the Pioneers to a National Runner-Up finish. He then spent one year at Santa Fe South High School and three years at Norman North High School before joining Yukon High School for his first season with the Millers.",
       whyYukon:

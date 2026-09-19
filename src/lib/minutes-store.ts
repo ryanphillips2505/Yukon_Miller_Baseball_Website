@@ -94,7 +94,9 @@ export async function saveMinutes(name: string, bytes: Uint8Array) {
   }
 
   if (process.env.VERCEL) {
-    throw new Error("Minutes storage is not configured.");
+    throw new Error(
+      "Connect a Vercel Blob store to this project so minutes can be saved.",
+    );
   }
 
   const dir = localDir();

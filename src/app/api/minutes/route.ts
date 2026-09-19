@@ -52,7 +52,7 @@ export async function POST(request: Request) {
   } catch (error) {
     const message =
       error instanceof Error ? error.message : "Could not save that PDF.";
-    const status = message.includes("not configured") ? 503 : 500;
+    const status = message.includes("Vercel Blob") ? 503 : 500;
     return NextResponse.json({ error: message }, { status });
   }
 

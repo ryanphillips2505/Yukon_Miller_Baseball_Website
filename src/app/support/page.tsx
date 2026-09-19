@@ -42,12 +42,26 @@ export default function SupportPage() {
             <h2 className="font-heading text-2xl tracking-wide text-white uppercase sm:text-3xl">
               How it runs
             </h2>
-            <div className="mt-5 flex-1 space-y-4">
-              <p className="text-sm leading-6 text-zinc-400">{hrc.meetings}</p>
-              <p className="text-sm leading-6 text-zinc-400">{hrc.payment}</p>
-              <p className="text-sm text-zinc-500">{hrc.poBox}</p>
-              <p className="text-sm text-zinc-500">Venmo {hrc.venmo}</p>
+            <div className="mt-5 flex-1 space-y-5">
+              {hrc.howItRuns.map((item) => (
+                <div key={item.title}>
+                  <p className="text-[0.65rem] font-semibold tracking-[0.2em] text-red-400 uppercase">
+                    {item.title}
+                  </p>
+                  <p className="mt-2 whitespace-pre-line text-sm leading-6 text-zinc-400">
+                    {item.body}
+                  </p>
+                </div>
+              ))}
             </div>
+            <a
+              href={hrc.venmoHref}
+              target="_blank"
+              rel="noreferrer"
+              className={cn(buttonVariants(), "mt-8 h-10 w-fit px-4")}
+            >
+              Pay HRC Venmo
+            </a>
           </div>
         </section>
 

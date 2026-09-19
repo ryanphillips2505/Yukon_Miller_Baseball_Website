@@ -3,14 +3,29 @@ export const hrc = {
   email: "yukonmillerbaseball@gmail.com",
   poBox: "Yukon Home Run Club | PO Box 850433 | Yukon, OK 73085",
   venmo: "@Yukon-Millers-YHRC",
-  payment:
-    "YHRC accepts Venmo, check, or credit card. Credit card payments include a 5% service fee. Checks are payable to Yukon Home Run Club.",
+  venmoHref: "https://venmo.com/u/Yukon-Millers-YHRC",
   about: [
     "The Yukon Miller Baseball Home Run Club is a community-supported nonprofit organization dedicated to supporting Yukon youth baseball through fundraising, sponsorships, and community partnerships. Our goal is to provide additional resources, opportunities, and experiences that help support the players and strengthen the baseball program.",
     "The Home Run Club is a separate organization and is not affiliated with Yukon Public Schools or Yukon High School.",
   ],
-  meetings:
-    "Meetings have been held at 6:00 p.m. in the Blackbox Theater on the south side of Yukon High School. Confirm the next date with the officers — times move for holidays and get posted on social media.",
+  howItRuns: [
+    {
+      title: "Monthly Meetings",
+      body: "Meetings are held on the third Wednesday of each month at 6:00 p.m. in the Black Box Theater on the south side of Yukon High School. Dates and times are subject to change due to holidays or scheduling conflicts. Any changes will be posted on social media.",
+    },
+    {
+      title: "Donations & Payments",
+      body: "Yukon Home Run Club accepts Venmo, check, or credit card. Credit card payments include a 5% service fee. Checks should be made payable to Yukon Home Run Club.",
+    },
+    {
+      title: "Mailing Address",
+      body: "Yukon Home Run Club\nPO Box 850433\nYukon, OK 73085",
+    },
+    {
+      title: "Venmo",
+      body: "@Yukon-Millers-YHRC",
+    },
+  ],
   volunteerSignup: {
     href: "https://signup.com/go/BHtuvug",
     label: "Volunteer Sign Up",

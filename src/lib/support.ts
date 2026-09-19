@@ -71,10 +71,14 @@ export const sponsorshipTiers = [
   },
   {
     name: "The Cycle",
-    price: "$2,000",
+    price: "$2,500",
+    renewal: "$1,500 renewal if the signs are reusable",
     perks: [
-      "Everything in the Grand Slam package",
-      "Four tickets to all home games at the main field, excluding playoffs",
+      "Two 6' × 5' signs on the home and visitor dugouts at Miller Stadium",
+      "Listed as a Cycle sponsor on the website",
+      "Recognition during home games",
+      "Four tickets to every home game",
+      "Table at one home game to promote your business",
     ],
   },
   {
@@ -108,6 +112,13 @@ export const sponsorshipTiers = [
     price: "$3,000",
     renewal: "$2,500 renewal if the sign is in good condition",
     perks: ["Sign displayed above the concession stand at Miller Stadium"],
+  },
+  {
+    name: "Foul Ball",
+    price: "$2,000",
+    perks: [
+      "Announcement during every varsity home game for each foul ball, naming the company as the Foul Ball sponsor",
+    ],
   },
 ];
 

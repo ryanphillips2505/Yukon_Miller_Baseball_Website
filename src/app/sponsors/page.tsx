@@ -6,7 +6,15 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Sponsors",
   description:
-    "2026 Yukon Miller Baseball partners on the Home Run Club sign board at Miller Field.",
+    "2026–27 Yukon Millers sponsorship packet and the partners on the Miller Field board.",
+  openGraph: {
+    title: "2026–27 Yukon Millers Sponsorship Packet",
+    description:
+      "Sponsorship packages from Single through Foul Ball, plus the form for artwork and payment.",
+  },
+  twitter: {
+    card: "summary_large_image",
+  },
 };
 
 export default function SponsorsPage() {

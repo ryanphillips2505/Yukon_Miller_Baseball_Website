@@ -102,7 +102,7 @@ export default function SupportPage() {
               rel="noreferrer"
               className={cn(buttonVariants(), "h-10 px-4 uppercase")}
             >
-              Open the form
+              Open the packet
             </a>
           </div>
           <div className="mt-6 grid gap-3 md:grid-cols-2">

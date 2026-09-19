@@ -28,7 +28,7 @@ export const hrc = {
   },
   volunteerSignup: {
     href: "https://signup.com/go/BHtuvug",
-    label: "Volunteer Sign Up",
+    label: "Volunteer For Fall State",
   },
 };
 

@@ -6,10 +6,24 @@ import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
 import Image from "next/image";
 
+const campShareTitle = "Yukon Miller Fall Baseball Camps";
+const campShareDescription =
+  "Ages 7–12 at Miller Field. Infield/outfield, pitching, and hitting on October 12–13. A spot is not held until payment lands.";
+
 export const metadata: Metadata = {
   title: "Camps",
   description:
     "Yukon Miller Fall Baseball Camps for ages 7–12 at Miller Field. Dates, costs, and the live registration form.",
+  openGraph: {
+    title: campShareTitle,
+    description: campShareDescription,
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: campShareTitle,
+    description: campShareDescription,
+  },
 };
 
 export default function CampsPage() {

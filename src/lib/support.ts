@@ -6,12 +6,14 @@ export const hrc = {
   venmoHref: "https://venmo.com/u/Yukon-Millers-YHRC",
   about: [
     "The Yukon Miller Baseball Home Run Club is a community-supported nonprofit organization dedicated to supporting Yukon youth baseball through fundraising, sponsorships, and community partnerships. Our goal is to provide additional resources, opportunities, and experiences that help support the players and strengthen the baseball program.",
-    "The Home Run Club is a separate organization and is not affiliated with Yukon Public Schools or Yukon High School.",
   ],
+  affiliationNote:
+    "The Home Run Club is a separate organization and is not affiliated with Yukon Public Schools or Yukon High School.",
   howItRuns: [
     {
       title: "Monthly Meetings",
-      body: "Meetings are held on the third Wednesday of each month at 6:00 p.m. in the Black Box Theater on the south side of Yukon High School. Dates and times are subject to change due to holidays or scheduling conflicts. Any changes will be posted on social media.",
+      body: "Meetings are held on the third Wednesday of each month at 6:00 p.m. in the Black Box Theater on the south side of Yukon High School.",
+      note: "Dates and times are subject to change due to holidays or scheduling conflicts. Any changes will be posted on social media.",
     },
     {
       title: "Mailing Address",

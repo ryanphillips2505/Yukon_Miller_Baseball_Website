@@ -30,6 +30,9 @@ export default function SupportPage() {
                 {paragraph}
               </p>
             ))}
+            <p className="mt-4 max-w-2xl text-base leading-7 text-zinc-400 italic">
+              * {hrc.affiliationNote}
+            </p>
           </div>
 
           <section className="rounded-2xl border border-white/10 bg-zinc-950 p-5 sm:p-6">
@@ -73,6 +76,11 @@ export default function SupportPage() {
                 <p className="mt-2 text-sm leading-6 text-zinc-400">
                   {meetings.body}
                 </p>
+                {meetings.note ? (
+                  <p className="mt-2 text-sm leading-6 text-zinc-400 italic">
+                    * {meetings.note}
+                  </p>
+                ) : null}
                 <Link
                   href="/minutes"
                   className={cn(buttonVariants(), "mt-4 h-10 w-fit px-4")}

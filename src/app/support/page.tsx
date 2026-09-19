@@ -31,7 +31,7 @@ export default function SupportPage() {
               </p>
             ))}
             <p className="mt-4 max-w-2xl text-base leading-7 text-zinc-400 italic">
-              * {hrc.affiliationNote}
+              {`* ${hrc.affiliationNote}`}
             </p>
           </div>
 
@@ -78,7 +78,7 @@ export default function SupportPage() {
                 </p>
                 {meetings.note ? (
                   <p className="mt-2 text-sm leading-6 text-zinc-400 italic">
-                    * {meetings.note}
+                    {`* ${meetings.note}`}
                   </p>
                 ) : null}
                 <Link

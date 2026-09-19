@@ -1,39 +1,24 @@
 import { PageHero } from "@/components/page-hero";
 import { buttonVariants } from "@/components/ui/button";
-import { campRegistrationUrl, fallCamps } from "@/lib/camps";
+import { campRegistrationUrl, liveCamps } from "@/lib/camps";
 import { program } from "@/lib/site";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
 import Image from "next/image";
 
-const campShareTitle = "Yukon Miller Fall Baseball Camps";
-const campShareDescription =
-  "Ages 7–12 at Miller Field. Infield/outfield, pitching, and hitting on October 12–13. A spot is not held until payment lands.";
-
 export const metadata: Metadata = {
   title: "Camps",
-  description:
-    "Yukon Miller Fall Baseball Camps for ages 7–12 at Miller Field. Dates, costs, and the live registration form.",
+  description: `${liveCamps.title} for ${liveCamps.ages} at ${liveCamps.location.name}. Dates, costs, and the live registration form.`,
   openGraph: {
-    title: campShareTitle,
-    description: campShareDescription,
+    title: liveCamps.title,
+    description: liveCamps.shareDescription,
     type: "website",
     url: "/camps",
-    images: [
-      {
-        url: "/images/camps/share-card.jpg",
-        width: 1200,
-        height: 630,
-        alt: fallCamps.flyerAlt,
-        type: "image/jpeg",
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: campShareTitle,
-    description: campShareDescription,
-    images: ["/images/camps/share-card.jpg"],
+    title: liveCamps.title,
+    description: liveCamps.shareDescription,
   },
 };
 
@@ -43,7 +28,7 @@ export default function CampsPage() {
       <PageHero
         kicker="Player development"
         title="Camps"
-        lede={`${fallCamps.title} are posted. ${fallCamps.ages} work infield, outfield, pitching, and hitting at Miller Field. Register with the form or the QR code — a spot is not held until payment lands.`}
+        lede={`${liveCamps.title} are posted. ${liveCamps.ages} work infield, outfield, pitching, and hitting at Miller Field. Register with the form or the QR code — a spot is not held until payment lands.`}
       />
       <div className="mx-auto max-w-6xl space-y-12 px-4 py-10 sm:px-6">
         <section>
@@ -53,9 +38,9 @@ export default function CampsPage() {
                 Posted flyer
               </p>
               <h2 className="font-heading mt-2 text-3xl tracking-wide text-white uppercase">
-                {fallCamps.title}
+                {liveCamps.title}
               </h2>
-              <p className="mt-2 text-sm text-zinc-400">{fallCamps.ages}</p>
+              <p className="mt-2 text-sm text-zinc-400">{liveCamps.ages}</p>
             </div>
             <a
               href={campRegistrationUrl}
@@ -68,7 +53,7 @@ export default function CampsPage() {
           </div>
 
           <div className="mt-6 grid gap-3 md:grid-cols-2">
-            {fallCamps.sessions.map((session) => (
+            {liveCamps.sessions.map((session) => (
               <article
                 key={session.id}
                 className="rounded-2xl border border-white/10 bg-zinc-950 p-5"
@@ -87,7 +72,7 @@ export default function CampsPage() {
             ))}
           </div>
           <p className="mt-4 text-sm leading-6 text-zinc-400">
-            {fallCamps.note} {fallCamps.twoCampNote}
+            {liveCamps.note} {liveCamps.twoCampNote}
           </p>
         </section>
 
@@ -109,8 +94,8 @@ export default function CampsPage() {
                 className="shrink-0 rounded-xl bg-white p-3"
               >
                 <Image
-                  src={fallCamps.qrSrc}
-                  alt={fallCamps.qrAlt}
+                  src={liveCamps.qrSrc}
+                  alt={liveCamps.qrAlt}
                   width={196}
                   height={196}
                   className="h-44 w-44"
@@ -146,13 +131,13 @@ export default function CampsPage() {
                 Location
               </h2>
               <p className="mt-3 text-sm leading-6 text-zinc-400">
-                {fallCamps.location.name}
+                {liveCamps.location.name}
                 <br />
-                {fallCamps.location.street}
+                {liveCamps.location.street}
                 <br />
-                {fallCamps.location.cityStateZip}
+                {liveCamps.location.cityStateZip}
                 <br />
-                {fallCamps.location.detail}
+                {liveCamps.location.detail}
               </p>
               <a
                 href={program.mapsUrl}
@@ -168,7 +153,7 @@ export default function CampsPage() {
                 Payment
               </h2>
               <ul className="mt-3 space-y-1.5 text-sm text-zinc-400">
-                {fallCamps.payment.methods.map((method) => (
+                {liveCamps.payment.methods.map((method) => (
                   <li key={method}>{method}</li>
                 ))}
               </ul>
@@ -176,9 +161,9 @@ export default function CampsPage() {
                 Questions go to Head Coach Ryan Phillips at{" "}
                 <a
                   className="text-red-400 hover:text-red-300"
-                  href={`mailto:${fallCamps.coachEmail}`}
+                  href={`mailto:${liveCamps.coachEmail}`}
                 >
-                  {fallCamps.coachEmail}
+                  {liveCamps.coachEmail}
                 </a>
                 .
               </p>
@@ -196,7 +181,7 @@ export default function CampsPage() {
               copy to text or print.
             </p>
             <a
-              href={fallCamps.pdfHref}
+              href={liveCamps.pdfHref}
               target="_blank"
               rel="noreferrer"
               className={cn(
@@ -208,14 +193,14 @@ export default function CampsPage() {
             </a>
           </div>
           <a
-            href={fallCamps.pdfHref}
+            href={liveCamps.pdfHref}
             target="_blank"
             rel="noreferrer"
             className="overflow-hidden rounded-2xl border border-white/10 bg-white"
           >
             <Image
-              src={fallCamps.flyerSrc}
-              alt={fallCamps.flyerAlt}
+              src={liveCamps.flyerSrc}
+              alt={liveCamps.flyerAlt}
               width={1103}
               height={1426}
               className="h-auto w-full"

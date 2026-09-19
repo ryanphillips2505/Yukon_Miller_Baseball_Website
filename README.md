@@ -38,6 +38,6 @@ Edit the typed files in `src/lib/`:
 - `news.ts` — articles and commit announcements
 - `support.ts` — HRC and sponsorship packages
 - `sponsors.ts` — 2026 partner names and tiers from the HRC sign sheet
-- `camps.ts` — fall camp sessions, payment, and the registration form URL
+- `camps.ts` — camp sessions, payment, flyer, and the registration form URL. Point `liveCamps` at the posted season so the page and the Google/iMessage preview stay on the same flyer.
 
 Drop images in `public/images/` and point the `photo` fields at them.

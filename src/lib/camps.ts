@@ -1,9 +1,44 @@
 export const campRegistrationUrl =
   "https://docs.google.com/forms/d/e/1FAIpQLSe0XUBtP7f2KoVQCCuArpfWgZ2QXNKkm77Ifhi8rwu5QAMxEg/viewform?usp=header";
 
+export type CampSeason = {
+  title: string;
+  ages: string;
+  shareDescription: string;
+  note: string;
+  twoCampNote: string;
+  coachEmail: string;
+  flyerSrc: string;
+  flyerAlt: string;
+  qrSrc: string;
+  qrAlt: string;
+  pdfHref: string;
+  location: {
+    name: string;
+    street: string;
+    cityStateZip: string;
+    detail: string;
+  };
+  payment: {
+    venmo: string;
+    checkTo: string;
+    methods: readonly string[];
+  };
+  sessions: readonly {
+    id: string;
+    name: string;
+    dates: string;
+    time: string;
+    price: string;
+    cap: string;
+  }[];
+};
+
 export const fallCamps = {
   title: "Yukon Miller Fall Baseball Camps",
   ages: "Ages 7–12",
+  shareDescription:
+    "Ages 7–12 at Miller Field. Infield/outfield, pitching, and hitting on October 12–13. A spot is not held until payment lands.",
   note: "A spot is not secure until payment is made. Camp capacity is limited.",
   twoCampNote:
     "Registering for two camps? Fill out a second registration. The all-three price is the only package discount. Sessions that stack have a 30-minute gap for lunch — no concession stand.",
@@ -63,4 +98,11 @@ export const fallCamps = {
       cap: "Package price — register once",
     },
   ],
-} as const;
+} as const satisfies CampSeason;
+
+/**
+ * Season posted on /camps. The page and the Google/iMessage share image
+ * both read this, so swapping it to winterCamps (or any later season)
+ * updates the flyer on the site and the link preview together.
+ */
+export const liveCamps: CampSeason = fallCamps;

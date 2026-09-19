@@ -1,4 +1,4 @@
-import { minutesAuthed } from "@/lib/minutes-auth";
+import { minutesAdmin, minutesAuthed } from "@/lib/minutes-auth";
 import {
   isAllowedDocument,
   listMinutes,
@@ -24,6 +24,12 @@ export async function GET() {
 export async function POST(request: Request) {
   if (!(await minutesAuthed())) {
     return NextResponse.json({ error: "Sign in required." }, { status: 401 });
+  }
+  if (!(await minutesAdmin())) {
+    return NextResponse.json(
+      { error: "Admin sign-in required to upload." },
+      { status: 403 },
+    );
   }
 
   const form = await request.formData();

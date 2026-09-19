@@ -27,7 +27,13 @@ function formatDate(value: string) {
   });
 }
 
-export function MinutesVault({ initialFiles }: { initialFiles: MinutesFile[] }) {
+export function MinutesVault({
+  initialFiles,
+  canAdmin,
+}: {
+  initialFiles: MinutesFile[];
+  canAdmin: boolean;
+}) {
   const router = useRouter();
   const [files, setFiles] = useState(initialFiles);
   const [error, setError] = useState("");
@@ -150,27 +156,30 @@ export function MinutesVault({ initialFiles }: { initialFiles: MinutesFile[] }) 
             Minutes library
           </h2>
           <p className="mt-2 text-sm text-zinc-400">
-            Upload PDF or Word files up to 80 MB. Downloads stay behind the
-            password.
+            {canAdmin
+              ? "Upload PDF or Word files up to 80 MB. Downloads stay behind the password."
+              : "View and download minutes. Only an administrator can add or remove files."}
           </p>
         </div>
         <div className="flex flex-wrap gap-2">
-          <label
-            className={cn(
-              buttonVariants(),
-              "h-10 cursor-pointer px-4 uppercase",
-              uploading && "pointer-events-none opacity-50",
-            )}
-          >
-            {uploading ? "Uploading…" : "Upload"}
-            <input
-              type="file"
-              accept="application/pdf,.pdf,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-              className="sr-only"
-              disabled={uploading}
-              onChange={onUpload}
-            />
-          </label>
+          {canAdmin ? (
+            <label
+              className={cn(
+                buttonVariants(),
+                "h-10 cursor-pointer px-4 uppercase",
+                uploading && "pointer-events-none opacity-50",
+              )}
+            >
+              {uploading ? "Uploading…" : "Upload"}
+              <input
+                type="file"
+                accept="application/pdf,.pdf,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                className="sr-only"
+                disabled={uploading}
+                onChange={onUpload}
+              />
+            </label>
+          ) : null}
           <button
             type="button"
             onClick={onLock}
@@ -188,7 +197,9 @@ export function MinutesVault({ initialFiles }: { initialFiles: MinutesFile[] }) 
 
       {files.length === 0 ? (
         <p className="mt-8 text-sm text-zinc-500">
-          No minutes uploaded yet. Use Upload to add the first file.
+          {canAdmin
+            ? "No minutes uploaded yet. Use Upload to add the first file."
+            : "No minutes uploaded yet."}
         </p>
       ) : (
         <ul className="mt-6 divide-y divide-white/8">
@@ -210,17 +221,19 @@ export function MinutesVault({ initialFiles }: { initialFiles: MinutesFile[] }) 
                 >
                   Download
                 </a>
-                <button
-                  type="button"
-                  disabled={removing === file.name}
-                  onClick={() => onRemove(file.name)}
-                  className={cn(
-                    buttonVariants({ variant: "outline" }),
-                    "h-9 border-white/15 px-3 text-xs uppercase",
-                  )}
-                >
-                  {removing === file.name ? "Removing…" : "Remove"}
-                </button>
+                {canAdmin ? (
+                  <button
+                    type="button"
+                    disabled={removing === file.name}
+                    onClick={() => onRemove(file.name)}
+                    className={cn(
+                      buttonVariants({ variant: "outline" }),
+                      "h-9 border-white/15 px-3 text-xs uppercase",
+                    )}
+                  >
+                    {removing === file.name ? "Removing…" : "Remove"}
+                  </button>
+                ) : null}
               </div>
             </li>
           ))}

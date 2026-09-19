@@ -1,4 +1,4 @@
-import { minutesAuthed } from "@/lib/minutes-auth";
+import { minutesAdmin, minutesAuthed } from "@/lib/minutes-auth";
 import {
   createMinutesDownloadUrl,
   deleteMinutes,
@@ -63,6 +63,12 @@ export async function GET(request: Request) {
 export async function DELETE(request: Request) {
   if (!(await minutesAuthed())) {
     return NextResponse.json({ error: "Sign in required." }, { status: 401 });
+  }
+  if (!(await minutesAdmin())) {
+    return NextResponse.json(
+      { error: "Admin sign-in required to remove files." },
+      { status: 403 },
+    );
   }
 
   const name = fileNameFrom(request);

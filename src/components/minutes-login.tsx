@@ -7,12 +7,14 @@ import { useState, type FormEvent } from "react";
 
 export function MinutesLogin() {
   const router = useRouter();
-  const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [pending, setPending] = useState(false);
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    const password = String(
+      new FormData(event.currentTarget).get("password") ?? "",
+    );
     setPending(true);
     setError("");
 
@@ -54,8 +56,6 @@ export function MinutesLogin() {
           type="password"
           name="password"
           autoComplete="current-password"
-          value={password}
-          onChange={(event) => setPassword(event.target.value)}
           className="mt-2 h-11 w-full rounded-lg border border-white/15 bg-black px-3 text-sm text-white outline-none focus:border-red-500"
           required
         />

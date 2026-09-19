@@ -1,6 +1,39 @@
 export const campRegistrationUrl =
   "https://docs.google.com/forms/d/e/1FAIpQLSe0XUBtP7f2KoVQCCuArpfWgZ2QXNKkm77Ifhi8rwu5QAMxEg/viewform?usp=header";
 
+export type CampSeason = {
+  title: string;
+  ages: string;
+  shareDescription: string;
+  note: string;
+  twoCampNote: string;
+  coachEmail: string;
+  flyerSrc: string;
+  flyerAlt: string;
+  qrSrc: string;
+  qrAlt: string;
+  pdfHref: string;
+  location: {
+    name: string;
+    street: string;
+    cityStateZip: string;
+    detail: string;
+  };
+  payment: {
+    venmo: string;
+    checkTo: string;
+    methods: readonly string[];
+  };
+  sessions: readonly {
+    id: string;
+    name: string;
+    dates: string;
+    time: string;
+    price: string;
+    cap: string;
+  }[];
+};
+
 export const fallCamps = {
   title: "Yukon Miller Fall Baseball Camps",
   ages: "Ages 7–12",
@@ -65,9 +98,7 @@ export const fallCamps = {
       cap: "Package price — register once",
     },
   ],
-} as const;
-
-export type CampSeason = typeof fallCamps;
+} as const satisfies CampSeason;
 
 /**
  * Season posted on /camps. The page and the Google/iMessage share image

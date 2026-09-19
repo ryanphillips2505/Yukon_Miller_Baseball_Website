@@ -1,4 +1,3 @@
-import { BrandLogo } from "@/components/brand-logo";
 import { buttonVariants } from "@/components/ui/button";
 import {
   featuredSponsors,
@@ -258,11 +257,13 @@ export function SponsorBoard() {
             </a>
           </div>
           <div className="flex items-center gap-4 border-t border-white/10 pt-6 sm:gap-5 lg:border-t-0 lg:border-l lg:pt-0 lg:pl-8">
-            <BrandLogo
-              variant="primary"
+            <Image
+              src="/images/yukon-baseball-crest.png"
               alt="Yukon Baseball"
-              sizes="240px"
-              className="h-16 w-auto shrink-0 sm:h-20"
+              width={247}
+              height={247}
+              sizes="96px"
+              className="size-20 shrink-0 sm:size-24"
             />
             <a
               href={sponsorshipForm.href}

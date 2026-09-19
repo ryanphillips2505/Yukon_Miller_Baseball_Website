@@ -5,8 +5,10 @@ export const hrc = {
   venmo: "@Yukon-Millers-YHRC",
   payment:
     "YHRC accepts Venmo, check, or credit card. Credit card payments include a 5% service fee. Checks are payable to Yukon Home Run Club.",
-  about:
-    "The Home Run Club is the parent volunteer group behind Yukon Miller baseball. HRC funds much of the care for Miller Field, uniforms, baseballs, bats, practice gear, tournaments, and extra activities during the school year.",
+  about: [
+    "The Yukon Miller Baseball Home Run Club is a community-supported nonprofit organization dedicated to supporting Yukon youth baseball through fundraising, sponsorships, and community partnerships. Our goal is to provide additional resources, opportunities, and experiences that help support the players and strengthen the baseball program.",
+    "The Home Run Club is a separate organization and is not affiliated with Yukon Public Schools or Yukon High School.",
+  ],
   meetings:
     "Meetings have been held at 6:00 p.m. in the Blackbox Theater on the south side of Yukon High School. Confirm the next date with the officers — times move for holidays and get posted on social media.",
   volunteerSignup: {
@@ -20,7 +22,7 @@ export const officers = [
   { name: "Michael Klose", role: "Vice President" },
   { name: "Kim Fletcher", role: "Treasurer" },
   { name: "Lisa Fish", role: "Secretary" },
-  { name: "Kendar Pace", role: "At Large" },
+  { name: "Kendra Pace", role: "At Large" },
 ];
 
 export const sponsorshipTiers = [

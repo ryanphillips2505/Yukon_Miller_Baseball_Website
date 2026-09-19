@@ -170,7 +170,7 @@ export function SponsorBoard() {
                 rel="noreferrer"
                 className={cn(buttonVariants(), "h-10 px-4 uppercase")}
               >
-                2026–27 form
+                2026–27 packet
               </a>
             </div>
           </div>
@@ -234,22 +234,27 @@ export function SponsorBoard() {
 
       <section className="overflow-hidden rounded-2xl border border-white/10 bg-zinc-950">
         <div className="grid lg:grid-cols-[0.82fr_1.18fr]">
-          <a
-            href={sponsorshipForm.href}
-            target="_blank"
-            rel="noreferrer"
-            className="block bg-zinc-900 lg:border-r lg:border-white/10"
-          >
-            <Image
-              src={sponsorshipForm.previewSrc}
-              alt={`${sponsorshipForm.title}, page 1 of ${sponsorshipForm.pages}`}
-              width={sponsorshipForm.previewWidth}
-              height={sponsorshipForm.previewHeight}
-              className="h-auto w-full"
-              sizes="(max-width: 1024px) 100vw, 420px"
-            />
-          </a>
-          <div className="flex flex-col justify-center px-6 py-8 sm:px-10">
+          <div className="bg-zinc-900 lg:border-r lg:border-white/10">
+            {sponsorshipForm.previews.map((preview, index) => (
+              <a
+                key={preview.src}
+                href={sponsorshipForm.href}
+                target="_blank"
+                rel="noreferrer"
+                className="block"
+              >
+                <Image
+                  src={preview.src}
+                  alt={`${sponsorshipForm.title}, page ${index + 1} of ${sponsorshipForm.pages}`}
+                  width={preview.width}
+                  height={preview.height}
+                  className="h-auto w-full"
+                  sizes="(max-width: 1024px) 100vw, 420px"
+                />
+              </a>
+            ))}
+          </div>
+          <div className="flex flex-col justify-start px-6 py-8 sm:px-10 lg:sticky lg:top-6 lg:self-start">
             <p className="text-[0.7rem] font-semibold tracking-[0.22em] text-red-400 uppercase">
               2026–27 season
             </p>
@@ -257,9 +262,9 @@ export function SponsorBoard() {
               Put your name on Miller Field
             </h2>
             <p className="mt-3 max-w-xl text-sm leading-6 text-zinc-400">
-              Official three-page sheet: packages from Single through
-              Concession, plus the form YHRC uses for artwork and payment.
-              Open it, fill it in, and send it to the club.
+              Official four-page packet: packages from Single through Foul
+              Ball, plus the form YHRC uses for artwork and payment. Open it,
+              fill it in, and send it to the club.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
               <a
@@ -268,7 +273,7 @@ export function SponsorBoard() {
                 rel="noreferrer"
                 className={cn(buttonVariants(), "h-11 px-5 uppercase")}
               >
-                Open the form
+                Open the packet
               </a>
               <a
                 href={`mailto:${program.email}?subject=${encodeURIComponent("Yukon Baseball sponsorship")}`}

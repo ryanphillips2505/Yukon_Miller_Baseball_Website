@@ -432,10 +432,29 @@ export const featuredSponsors = [
 export const sponsorCount = sponsors.length;
 
 export const sponsorshipForm = {
-  href: "/2026-2027-sponsorship-form.pdf",
-  title: "2026–27 Sponsorship Form",
-  previewSrc: "/images/sponsors/2026-2027-sponsorship-form.jpg",
-  previewWidth: 1224,
-  previewHeight: 1584,
-  pages: 3,
+  href: "/2026-2027-sponsorship-packet.pdf",
+  title: "2026–27 Sponsorship Packet",
+  pages: 4,
+  previews: [
+    {
+      src: "/images/sponsors/2026-2027-sponsorship-packet-1.jpg",
+      width: 1190,
+      height: 1540,
+    },
+    {
+      src: "/images/sponsors/2026-2027-sponsorship-packet-2.jpg",
+      width: 1190,
+      height: 1540,
+    },
+    {
+      src: "/images/sponsors/2026-2027-sponsorship-packet-3.jpg",
+      width: 1190,
+      height: 1540,
+    },
+    {
+      src: "/images/sponsors/2026-2027-sponsorship-packet-4.jpg",
+      width: 1190,
+      height: 1540,
+    },
+  ],
 } as const;

@@ -1,4 +1,3 @@
-import { PageHero } from "@/components/page-hero";
 import { buttonVariants } from "@/components/ui/button";
 import { hrc, officers, tcaStore } from "@/lib/support";
 import { cn } from "@/lib/utils";
@@ -13,125 +12,145 @@ export default function SupportPage() {
 
   return (
     <div>
-      <PageHero
-        kicker="Boosters"
-        title="Home Run Club"
-        lede={hrc.about}
-      />
-      <div className="mx-auto max-w-6xl space-y-6 px-4 py-10 sm:space-y-8 sm:px-6">
-        <section className="rounded-2xl border border-white/10 bg-zinc-950 p-6 sm:p-8">
-          <div className="flex flex-wrap items-end justify-between gap-4">
-            <h2 className="font-heading text-2xl tracking-wide text-white uppercase sm:text-3xl">
-              Officers
-            </h2>
-            <a
-              href={`mailto:${hrc.email}`}
-              className={cn(buttonVariants(), "h-10 w-fit px-4")}
-            >
-              Email YHRC
-            </a>
-          </div>
-          <ul className="mt-6 grid gap-x-10 gap-y-4 sm:grid-cols-2 lg:grid-cols-3">
-            {officers.map((officer) => (
-              <li
-                key={officer.name}
-                className="flex items-baseline justify-between gap-4 text-sm"
+      <header className="border-b border-white/8 bg-black">
+        <div className="mx-auto grid max-w-6xl items-start gap-8 px-4 py-10 sm:px-6 sm:py-12 lg:grid-cols-[minmax(0,1.15fr)_minmax(20rem,0.85fr)] lg:gap-10">
+          <div>
+            <p className="text-[0.7rem] font-semibold tracking-[0.24em] text-red-400 uppercase">
+              Boosters
+            </p>
+            <h1 className="font-heading mt-2 text-4xl tracking-wide text-white uppercase sm:text-5xl">
+              Home Run Club
+            </h1>
+            {hrc.about.map((paragraph) => (
+              <p
+                key={paragraph}
+                className="mt-4 max-w-2xl text-base leading-7 text-zinc-400"
               >
-                <span className="text-white">{officer.name}</span>
-                <span className="shrink-0 text-zinc-500">{officer.role}</span>
-              </li>
+                {paragraph}
+              </p>
             ))}
-          </ul>
-        </section>
+          </div>
 
-        <section className="rounded-2xl border border-white/10 bg-zinc-950 p-6 sm:p-8">
-          <h2 className="font-heading text-2xl tracking-wide text-white uppercase sm:text-3xl">
-            How it runs
-          </h2>
-          <div className="mt-6 grid gap-8 md:grid-cols-2">
-            <div>
-              <p className="text-[0.65rem] font-semibold tracking-[0.2em] text-red-400 uppercase">
-                {meetings.title}
-              </p>
-              <p className="mt-2 text-sm leading-6 text-zinc-400">
-                {meetings.body}
-              </p>
+          <section className="rounded-2xl border border-white/10 bg-zinc-950 p-5 sm:p-6">
+            <div className="flex items-center justify-between gap-3">
+              <h2 className="font-heading text-2xl tracking-wide text-white uppercase">
+                Officers
+              </h2>
+              <a
+                href={`mailto:${hrc.email}`}
+                className={cn(buttonVariants(), "h-9 shrink-0 px-3 text-xs uppercase")}
+              >
+                Email YHRC
+              </a>
             </div>
-            <div className="space-y-6">
+            <ul className="mt-5 space-y-2.5">
+              {officers.map((officer) => (
+                <li
+                  key={officer.name}
+                  className="flex items-baseline justify-between gap-4 text-sm"
+                >
+                  <span className="text-white">{officer.name}</span>
+                  <span className="shrink-0 text-zinc-500">{officer.role}</span>
+                </li>
+              ))}
+            </ul>
+          </section>
+        </div>
+      </header>
+
+      <div className="mx-auto max-w-6xl space-y-4 px-4 py-8 sm:space-y-5 sm:px-6 sm:py-10">
+        <div className="grid gap-4 lg:grid-cols-2">
+          <section className="rounded-2xl border border-white/10 bg-zinc-950 p-5 sm:p-6">
+            <h2 className="font-heading text-2xl tracking-wide text-white uppercase">
+              How it runs
+            </h2>
+            <div className="mt-5 space-y-5">
               <div>
                 <p className="text-[0.65rem] font-semibold tracking-[0.2em] text-red-400 uppercase">
-                  {mailing.title}
-                </p>
-                <p className="mt-2 whitespace-pre-line text-sm leading-6 text-zinc-400">
-                  {mailing.body}
-                </p>
-              </div>
-              <div>
-                <p className="text-[0.65rem] font-semibold tracking-[0.2em] text-red-400 uppercase">
-                  {venmo.title}
+                  {meetings.title}
                 </p>
                 <p className="mt-2 text-sm leading-6 text-zinc-400">
-                  {venmo.body}
+                  {meetings.body}
                 </p>
               </div>
+              <div className="grid gap-5 sm:grid-cols-2">
+                <div>
+                  <p className="text-[0.65rem] font-semibold tracking-[0.2em] text-red-400 uppercase">
+                    {mailing.title}
+                  </p>
+                  <p className="mt-2 whitespace-pre-line text-sm leading-6 text-zinc-400">
+                    {mailing.body}
+                  </p>
+                </div>
+                <div>
+                  <p className="text-[0.65rem] font-semibold tracking-[0.2em] text-red-400 uppercase">
+                    {venmo.title}
+                  </p>
+                  <p className="mt-2 text-sm leading-6 text-zinc-400">
+                    {venmo.body}
+                  </p>
+                </div>
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        <section className="rounded-2xl border border-white/10 bg-zinc-950 p-6 sm:p-8">
-          <h2 className="font-heading text-2xl tracking-wide text-white uppercase sm:text-3xl">
-            {hrc.donations.title}
-          </h2>
-          <p className="mt-4 max-w-2xl text-sm leading-6 text-zinc-400">
-            {hrc.donations.body}
-          </p>
-          <a
-            href={hrc.venmoHref}
-            target="_blank"
-            rel="noreferrer"
-            className={cn(buttonVariants(), "mt-6 h-10 w-fit px-4")}
-          >
-            Pay HRC Venmo
-          </a>
-        </section>
+          <section className="rounded-2xl border border-white/10 bg-zinc-950 p-5 sm:p-6">
+            <h2 className="font-heading text-2xl tracking-wide text-white uppercase">
+              {hrc.donations.title}
+            </h2>
+            <p className="mt-5 text-sm leading-6 text-zinc-400">
+              {hrc.donations.body}
+            </p>
+            <a
+              href={hrc.venmoHref}
+              target="_blank"
+              rel="noreferrer"
+              className={cn(buttonVariants(), "mt-6 h-10 w-fit px-4")}
+            >
+              Pay HRC Venmo
+            </a>
+          </section>
+        </div>
 
-        <section className="rounded-2xl border border-white/10 bg-zinc-950 p-6 sm:p-8">
-          <h2 className="font-heading text-2xl tracking-wide text-white uppercase sm:text-3xl">
-            Volunteer
-          </h2>
-          <p className="mt-4 max-w-2xl text-sm leading-6 text-zinc-400">
-            Varsity, JV Red, and JV White each need gate, concession, and
-            field help. Pick a shift on the board.
-          </p>
-          <a
-            href={hrc.volunteerSignup.href}
-            target="_blank"
-            rel="noreferrer"
-            className="mt-6 inline-block font-heading text-2xl tracking-wide text-red-400 uppercase underline decoration-red-400 decoration-2 underline-offset-8 transition-colors hover:text-red-300 hover:decoration-red-300 sm:text-3xl"
-          >
-            {hrc.volunteerSignup.label}
-          </a>
-        </section>
+        <div className="grid gap-4 lg:grid-cols-2">
+          <section className="rounded-2xl border border-white/10 bg-zinc-950 p-5 sm:p-6">
+            <h2 className="font-heading text-2xl tracking-wide text-white uppercase">
+              Volunteer
+            </h2>
+            <p className="mt-4 text-sm leading-6 text-zinc-400">
+              Varsity, JV Red, and JV White each need gate, concession, and
+              field help. Pick a shift on the board.
+            </p>
+            <a
+              href={hrc.volunteerSignup.href}
+              target="_blank"
+              rel="noreferrer"
+              className="mt-5 inline-block font-heading text-xl tracking-wide text-red-400 uppercase underline decoration-red-400 decoration-2 underline-offset-8 transition-colors hover:text-red-300 hover:decoration-red-300"
+            >
+              {hrc.volunteerSignup.label}
+            </a>
+          </section>
 
-        <section className="rounded-2xl border border-white/10 bg-zinc-950 p-6 sm:p-8">
-          <h2 className="font-heading text-2xl tracking-wide text-white uppercase sm:text-3xl">
-            {tcaStore.name}
-          </h2>
-          <p className="mt-4 max-w-2xl text-sm leading-6 text-zinc-400">
-            {tcaStore.blurb}
-          </p>
-          <a
-            href={tcaStore.url}
-            target="_blank"
-            rel="noreferrer"
-            className={cn(
-              buttonVariants({ variant: "outline" }),
-              "mt-6 h-10 border-white/15 px-4",
-            )}
-          >
-            Open TCA · code {tcaStore.code}
-          </a>
-        </section>
+          <section className="rounded-2xl border border-white/10 bg-zinc-950 p-5 sm:p-6">
+            <h2 className="font-heading text-2xl tracking-wide text-white uppercase">
+              {tcaStore.name}
+            </h2>
+            <p className="mt-4 text-sm leading-6 text-zinc-400">
+              {tcaStore.blurb}
+            </p>
+            <a
+              href={tcaStore.url}
+              target="_blank"
+              rel="noreferrer"
+              className={cn(
+                buttonVariants({ variant: "outline" }),
+                "mt-5 h-10 border-white/15 px-4",
+              )}
+            >
+              Open TCA · code {tcaStore.code}
+            </a>
+          </section>
+        </div>
       </div>
     </div>
   );

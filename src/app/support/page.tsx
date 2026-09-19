@@ -2,6 +2,7 @@ import { buttonVariants } from "@/components/ui/button";
 import { hrc, officers, tcaStore } from "@/lib/support";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = { title: "Home Run Club" };
 
@@ -72,6 +73,12 @@ export default function SupportPage() {
                 <p className="mt-2 text-sm leading-6 text-zinc-400">
                   {meetings.body}
                 </p>
+                <Link
+                  href="/minutes"
+                  className={cn(buttonVariants(), "mt-4 h-10 w-fit px-4")}
+                >
+                  Meeting Minutes
+                </Link>
               </div>
               <div className="grid gap-5 sm:grid-cols-2">
                 <div>

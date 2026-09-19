@@ -23,6 +23,18 @@ const nextConfig: NextConfig = {
         source: "/2026-2027-sponsorship-form.pdf",
         headers: packetHeaders,
       },
+      {
+        source: "/minutes",
+        headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }],
+      },
+      {
+        source: "/api/minutes",
+        headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }],
+      },
+      {
+        source: "/api/minutes/:path*",
+        headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }],
+      },
     ];
   },
 };

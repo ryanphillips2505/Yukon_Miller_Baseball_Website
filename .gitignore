@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local minutes vault (never serve from public/)
+/data/minutes/*
+!/data/minutes/.gitkeep

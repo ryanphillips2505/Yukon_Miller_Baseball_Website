@@ -5,6 +5,22 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Oswald } from "next/font/google";
 import "./globals.css";
 
+function resolveSiteUrl(): URL {
+  const explicit = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "");
+  if (explicit) return new URL(explicit);
+
+  const vercelProduction = process.env.VERCEL_PROJECT_PRODUCTION_URL?.replace(
+    /\/$/,
+    "",
+  );
+  if (vercelProduction) return new URL(`https://${vercelProduction}`);
+
+  const vercelDeployment = process.env.VERCEL_URL?.replace(/\/$/, "");
+  if (vercelDeployment) return new URL(`https://${vercelDeployment}`);
+
+  return new URL("http://127.0.0.1:43217");
+}
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -22,6 +38,7 @@ const oswald = Oswald({
 });
 
 export const metadata: Metadata = {
+  metadataBase: resolveSiteUrl(),
   title: {
     default: "Yukon Miller Baseball",
     template: "%s | Yukon Miller Baseball",

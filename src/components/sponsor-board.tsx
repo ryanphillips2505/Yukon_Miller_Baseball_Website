@@ -71,7 +71,7 @@ function SponsorTile({
       )}
     >
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-red-600/70 to-transparent" />
-      <div className="flex items-start gap-4">
+      <div className="flex items-center gap-4">
         <Mark sponsor={sponsor} size={featured ? "lg" : "md"} />
         <div className="min-w-0">
           {sponsor.newThisYear ? (
@@ -87,9 +87,6 @@ function SponsorTile({
           >
             {sponsor.name}
           </h3>
-          <p className="mt-2 text-sm leading-6 text-zinc-400">
-            {sponsor.placement}
-          </p>
         </div>
       </div>
     </article>
@@ -194,9 +191,6 @@ export function SponsorBoard() {
                   <h3 className="font-heading text-4xl leading-none tracking-wide text-white uppercase sm:text-6xl">
                     {sponsor.name}
                   </h3>
-                  <p className="mt-3 text-base text-zinc-300">
-                    {sponsor.placement}
-                  </p>
                 </div>
               </div>
             </article>
@@ -216,9 +210,6 @@ export function SponsorBoard() {
                   <h3 className="font-heading text-4xl leading-none tracking-wide text-white uppercase sm:text-5xl">
                     {sponsor.name}
                   </h3>
-                  <p className="mt-3 text-base text-zinc-300">
-                    {sponsor.placement}
-                  </p>
                 </div>
               </div>
             </article>

@@ -15,7 +15,7 @@ export type Coach = {
 };
 
 export const coaches: Coach[] = [
-  { id: "phillips", name: "Ryan Phillips", role: "Head Coach", photo: "/images/coaches/ryan-phillips.jpg" },
+  { id: "phillips", name: "Ryan Phillips", role: "Head Coach", photo: "/images/coaches/ryan-phillips-field.jpg" },
   {
     id: "furlong",
     name: "Jason Furlong",

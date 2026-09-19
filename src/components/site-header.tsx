@@ -9,11 +9,11 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { BrandLogo } from "@/components/brand-logo";
 import { NikeSwoosh } from "@/components/nike-swoosh";
 import { allNav, navMore, navPrimary, program } from "@/lib/site";
 import { cn } from "@/lib/utils";
 import { ChevronDown, Menu } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -64,12 +64,14 @@ export function SiteHeader() {
       <div className="mx-auto flex h-14 max-w-6xl items-center justify-between gap-6 px-4 sm:px-6">
         <div className="flex min-w-0 items-center gap-3 overflow-visible">
           <Link href="/" className="flex min-w-0 items-center gap-2.5">
-            <BrandLogo
-              variant="mark"
+            <Image
+              src="/images/packet-heading-logo.png"
+              alt="Yukon Millers"
+              width={239}
+              height={243}
               priority
               sizes="28px"
-              className="size-7 w-7 shrink-0 rounded-sm object-cover"
-              alt="Yukon Baseball"
+              className="size-7 shrink-0"
             />
             <span className="font-heading truncate text-[0.72rem] tracking-[0.2em] text-white uppercase">
               Yukon Baseball

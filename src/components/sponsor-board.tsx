@@ -1,3 +1,4 @@
+import { BrandLogo } from "@/components/brand-logo";
 import { buttonVariants } from "@/components/ui/button";
 import {
   featuredSponsors,
@@ -232,59 +233,45 @@ export function SponsorBoard() {
       />
       <TierBlock tierId="triple" columns="md:grid-cols-2" />
 
-      <section className="overflow-hidden rounded-2xl border border-white/10 bg-zinc-950">
-        <div className="grid lg:grid-cols-[0.82fr_1.18fr]">
-          <div className="bg-zinc-900 lg:border-r lg:border-white/10">
-            {sponsorshipForm.previews.map((preview, index) => (
-              <a
-                key={preview.src}
-                href={sponsorshipForm.href}
-                target="_blank"
-                rel="noreferrer"
-                className="block"
-              >
-                <Image
-                  src={preview.src}
-                  alt={`${sponsorshipForm.title}, page ${index + 1} of ${sponsorshipForm.pages}`}
-                  width={preview.width}
-                  height={preview.height}
-                  className="h-auto w-full"
-                  sizes="(max-width: 1024px) 100vw, 420px"
-                />
-              </a>
-            ))}
-          </div>
-          <div className="flex flex-col justify-start px-6 py-8 sm:px-10 lg:sticky lg:top-6 lg:self-start">
+      <section
+        id="sponsorship-packet"
+        className="overflow-hidden rounded-2xl border border-white/10 bg-black"
+      >
+        <div className="flex flex-col gap-8 px-6 py-8 sm:px-10 sm:py-10 lg:flex-row lg:items-center lg:justify-between">
+          <div className="max-w-xl">
             <p className="text-[0.7rem] font-semibold tracking-[0.22em] text-red-400 uppercase">
               2026–27 season
             </p>
             <h2 className="font-heading mt-2 text-3xl tracking-wide text-white uppercase sm:text-4xl">
               Put your name on Miller Field
             </h2>
-            <p className="mt-3 max-w-xl text-sm leading-6 text-zinc-400">
-              Official four-page packet: packages from Single through Foul
-              Ball, plus the form YHRC uses for artwork and payment. Open it,
-              fill it in, and send it to the club.
+            <p className="mt-3 text-sm leading-6 text-zinc-400">
+              Packages from Single through Foul Ball, plus the form YHRC uses
+              for artwork and payment. Open the packet, fill it in, and send
+              it to the club.
             </p>
-            <div className="mt-6 flex flex-wrap gap-3">
-              <a
-                href={sponsorshipForm.href}
-                target="_blank"
-                rel="noreferrer"
-                className={cn(buttonVariants(), "h-11 px-5 uppercase")}
-              >
-                Open the packet
-              </a>
-              <a
-                href={`mailto:${program.email}?subject=${encodeURIComponent("Yukon Baseball sponsorship")}`}
-                className={cn(
-                  buttonVariants({ variant: "outline" }),
-                  "h-11 border-white/15 px-5 uppercase",
-                )}
-              >
-                Email {program.email}
-              </a>
-            </div>
+            <a
+              href={`mailto:${program.email}?subject=${encodeURIComponent("Yukon Baseball sponsorship")}`}
+              className="mt-4 inline-block text-sm text-zinc-400 underline decoration-white/20 underline-offset-4 transition-colors hover:text-white"
+            >
+              Email {program.email}
+            </a>
+          </div>
+          <div className="flex items-center gap-4 border-t border-white/10 pt-6 sm:gap-5 lg:border-t-0 lg:border-l lg:pt-0 lg:pl-8">
+            <BrandLogo
+              variant="primary"
+              alt="Yukon Baseball"
+              sizes="240px"
+              className="h-16 w-auto shrink-0 sm:h-20"
+            />
+            <a
+              href={sponsorshipForm.href}
+              target="_blank"
+              rel="noreferrer"
+              className={cn(buttonVariants(), "h-11 px-5 uppercase")}
+            >
+              Open the packet
+            </a>
           </div>
         </div>
       </section>

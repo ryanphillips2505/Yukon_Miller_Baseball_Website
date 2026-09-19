@@ -21,14 +21,7 @@ export const metadata: Metadata = {
     url: "/camps",
     images: [
       {
-        url: "/images/camps/share-flyer.jpg",
-        width: 1103,
-        height: 1426,
-        alt: fallCamps.flyerAlt,
-        type: "image/jpeg",
-      },
-      {
-        url: "/images/camps/share-flyer-wide.jpg",
+        url: "/images/camps/share-card.jpg",
         width: 1200,
         height: 630,
         alt: fallCamps.flyerAlt,
@@ -40,10 +33,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: campShareTitle,
     description: campShareDescription,
-    images: ["/images/camps/share-flyer.jpg"],
-  },
-  other: {
-    "og:image:secure_url": "https://www.yukonbaseball.com/images/camps/share-flyer.jpg",
+    images: ["/images/camps/share-card.jpg"],
   },
 };
 

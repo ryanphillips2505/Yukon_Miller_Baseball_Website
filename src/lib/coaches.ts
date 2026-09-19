@@ -32,7 +32,22 @@ export const coaches: Coach[] = [
         "He loves the community around the Yukon Millers, the support across town, and the culture this program has built and is still building.",
     },
   },
-  { id: "lockett", name: "Clay Lockett", role: "Assistant Coach", photo: "/images/coaches/clay-lockett.jpg" },
+  {
+    id: "lockett",
+    name: "Clay Lockett",
+    role: "Assistant Coach · Strength and Conditioning Coach",
+    photo: "/images/coaches/clay-lockett.jpg",
+    bio: {
+      yearsCoaching: "4",
+      family: "Karsyn",
+      familyDetail:
+        "Married Karsyn in 2025. They have two dogs, Kobe and Luna. He graduated from Putnam City North High School, began his college career at Barton Community College, then continued at Northern Oklahoma College–Enid, where he was part of the 2019 national championship team. He later attended Southern Nazarene University and graduated from the University of Arkansas at Monticello with a bachelor’s in Business Management and a master’s in Physical Education and Coaching.",
+      history:
+        "He has been coaching at Yukon since 2023 and is entering his fourth year. He primarily works with the infielders and hitters.",
+      whyYukon:
+        "His favorite part of Yukon is the support from the community, the players’ parents, and the buy-in from the boys year in and year out.",
+    },
+  },
   {
     id: "haines",
     name: "Dakota Haines",

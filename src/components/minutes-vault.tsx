@@ -3,7 +3,7 @@
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
-import { useCallback, useEffect, useState, type ChangeEvent } from "react";
+import { useState, type ChangeEvent } from "react";
 
 type MinutesFile = {
   name: string;
@@ -27,37 +27,12 @@ function formatDate(value: string) {
   });
 }
 
-export function MinutesVault() {
+export function MinutesVault({ initialFiles }: { initialFiles: MinutesFile[] }) {
   const router = useRouter();
-  const [files, setFiles] = useState<MinutesFile[]>([]);
+  const [files, setFiles] = useState(initialFiles);
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(true);
   const [uploading, setUploading] = useState(false);
   const [removing, setRemoving] = useState<string | null>(null);
-
-  const load = useCallback(async () => {
-    const response = await fetch("/api/minutes");
-    if (response.status === 401) {
-      router.refresh();
-      return;
-    }
-    const data = (await response.json()) as {
-      files?: MinutesFile[];
-      error?: string;
-    };
-    if (!response.ok) {
-      throw new Error(data.error || "Could not load minutes.");
-    }
-    setFiles(data.files ?? []);
-  }, [router]);
-
-  useEffect(() => {
-    load()
-      .catch((err: unknown) => {
-        setError(err instanceof Error ? err.message : "Could not load minutes.");
-      })
-      .finally(() => setLoading(false));
-  }, [load]);
 
   async function onUpload(event: ChangeEvent<HTMLInputElement>) {
     const file = event.target.files?.[0];
@@ -155,9 +130,7 @@ export function MinutesVault() {
 
       {error ? <p className="mt-4 text-sm text-red-400">{error}</p> : null}
 
-      {loading ? (
-        <p className="mt-8 text-sm text-zinc-500">Loading minutes…</p>
-      ) : files.length === 0 ? (
+      {files.length === 0 ? (
         <p className="mt-8 text-sm text-zinc-500">
           No minutes uploaded yet. Use Upload PDF to add the first file.
         </p>

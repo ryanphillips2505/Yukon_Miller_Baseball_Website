@@ -2,6 +2,7 @@ import { MinutesLogin } from "@/components/minutes-login";
 import { MinutesVault } from "@/components/minutes-vault";
 import { PageHero } from "@/components/page-hero";
 import { minutesAuthed } from "@/lib/minutes-auth";
+import { listMinutes } from "@/lib/minutes-store";
 import type { Metadata } from "next";
 
 export const dynamic = "force-dynamic";
@@ -13,6 +14,7 @@ export const metadata: Metadata = {
 
 export default async function MinutesPage() {
   const unlocked = await minutesAuthed();
+  const files = unlocked ? await listMinutes() : [];
 
   return (
     <div>
@@ -22,7 +24,7 @@ export default async function MinutesPage() {
         lede="Password-protected PDFs for Home Run Club officers and coaching staff."
       />
       <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 sm:py-10">
-        {unlocked ? <MinutesVault /> : <MinutesLogin />}
+        {unlocked ? <MinutesVault initialFiles={files} /> : <MinutesLogin />}
       </div>
     </div>
   );

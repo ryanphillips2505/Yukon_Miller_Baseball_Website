@@ -18,6 +18,7 @@ export const metadata: Metadata = {
     title: campShareTitle,
     description: campShareDescription,
     type: "website",
+    url: "/camps",
   },
   twitter: {
     card: "summary_large_image",

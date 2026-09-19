@@ -9,6 +9,11 @@ function resolveSiteUrl(): URL {
   const explicit = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "");
   if (explicit) return new URL(explicit);
 
+  // Production shares should use the public domain, not a Vercel preview host.
+  if (process.env.VERCEL_ENV === "production") {
+    return new URL("https://www.yukonbaseball.com");
+  }
+
   const vercelProduction = process.env.VERCEL_PROJECT_PRODUCTION_URL?.replace(
     /\/$/,
     "",

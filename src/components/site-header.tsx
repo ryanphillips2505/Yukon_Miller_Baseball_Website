@@ -10,6 +10,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { BrandLogo } from "@/components/brand-logo";
+import { NikeSwoosh } from "@/components/nike-swoosh";
 import { allNav, navMore, navPrimary, program } from "@/lib/site";
 import { cn } from "@/lib/utils";
 import { ChevronDown, Menu } from "lucide-react";
@@ -61,7 +62,7 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 border-b border-white/10 bg-black/70 backdrop-blur-md">
       <div className="mx-auto flex h-14 max-w-6xl items-center justify-between gap-6 px-4 sm:px-6">
-        <div className="flex min-w-0 items-center gap-2.5">
+        <div className="flex min-w-0 items-center gap-3 overflow-visible">
           <Link href="/" className="flex min-w-0 items-center gap-2.5">
             <BrandLogo
               variant="mark"
@@ -74,6 +75,7 @@ export function SiteHeader() {
               Yukon Baseball
             </span>
           </Link>
+          <NikeSwoosh size="header" />
         </div>
 
         <nav className="hidden items-center lg:flex">
@@ -143,6 +145,7 @@ export function SiteHeader() {
               className="w-[min(22rem,100%)] border-white/10 bg-zinc-950 text-white"
             >
             <SheetHeader>
+              <NikeSwoosh size="md" className="mb-3" />
               <SheetTitle className="font-heading tracking-wide text-white uppercase">
                 {program.name}
               </SheetTitle>

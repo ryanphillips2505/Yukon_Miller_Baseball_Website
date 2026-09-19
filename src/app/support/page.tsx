@@ -1,10 +1,8 @@
 import { PageHero } from "@/components/page-hero";
 import { buttonVariants } from "@/components/ui/button";
-import { sponsorCount, sponsorshipForm } from "@/lib/sponsors";
-import { hrc, officers, sponsorshipTiers, tcaStore } from "@/lib/support";
+import { hrc, officers, tcaStore } from "@/lib/support";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
-import Link from "next/link";
 
 export const metadata: Metadata = { title: "Home Run Club" };
 
@@ -16,34 +14,18 @@ export default function SupportPage() {
         title="Home Run Club"
         lede={hrc.about}
       />
-      <div className="mx-auto max-w-6xl space-y-12 px-4 py-10 sm:px-6">
-        <section className="overflow-hidden rounded-2xl border border-red-700/35 bg-[linear-gradient(135deg,#2a0b12_0%,#0a0a0c_60%)] p-6 sm:p-8">
-          <p className="text-[0.7rem] font-semibold tracking-[0.22em] text-red-400 uppercase">
-            2026 partners
-          </p>
-          <h2 className="font-heading mt-2 text-3xl tracking-wide text-white uppercase sm:text-4xl">
-            {sponsorCount} names on the wall
-          </h2>
-          <p className="mt-3 max-w-xl text-sm leading-6 text-zinc-400">
-            The full 2026 sign sheet is posted — scoreboard, Cycle, Grand Slam,
-            outfield banners, and the rest of the board.
-          </p>
-          <Link
-            href="/sponsors"
-            className={cn(buttonVariants(), "mt-6 h-10 px-4 uppercase")}
-          >
-            See the sponsors
-          </Link>
-        </section>
-
-        <section className="grid gap-4 md:grid-cols-2">
-          <div className="rounded-2xl border border-white/10 bg-zinc-950 p-6">
-            <h2 className="font-heading text-2xl tracking-wide text-white uppercase">
+      <div className="mx-auto max-w-6xl space-y-6 px-4 py-10 sm:space-y-8 sm:px-6">
+        <section className="grid items-stretch gap-6 md:grid-cols-2">
+          <div className="flex flex-col rounded-2xl border border-white/10 bg-zinc-950 p-6 sm:p-8">
+            <h2 className="font-heading text-2xl tracking-wide text-white uppercase sm:text-3xl">
               Officers
             </h2>
-            <ul className="mt-4 space-y-3">
+            <ul className="mt-5 flex-1 space-y-3">
               {officers.map((officer) => (
-                <li key={officer.name} className="flex justify-between gap-4 text-sm">
+                <li
+                  key={officer.name}
+                  className="flex justify-between gap-4 text-sm"
+                >
                   <span className="text-white">{officer.name}</span>
                   <span className="text-zinc-500">{officer.role}</span>
                 </li>
@@ -51,19 +33,21 @@ export default function SupportPage() {
             </ul>
             <a
               href={`mailto:${hrc.email}`}
-              className={cn(buttonVariants(), "mt-6 h-10 px-4")}
+              className={cn(buttonVariants(), "mt-8 h-10 w-fit px-4")}
             >
               Email YHRC
             </a>
           </div>
-          <div className="rounded-2xl border border-white/10 bg-zinc-950 p-6">
-            <h2 className="font-heading text-2xl tracking-wide text-white uppercase">
+          <div className="flex flex-col rounded-2xl border border-white/10 bg-zinc-950 p-6 sm:p-8">
+            <h2 className="font-heading text-2xl tracking-wide text-white uppercase sm:text-3xl">
               How it runs
             </h2>
-            <p className="mt-3 text-sm leading-6 text-zinc-400">{hrc.meetings}</p>
-            <p className="mt-4 text-sm leading-6 text-zinc-400">{hrc.payment}</p>
-            <p className="mt-4 text-sm text-zinc-500">{hrc.poBox}</p>
-            <p className="mt-2 text-sm text-zinc-500">Venmo {hrc.venmo}</p>
+            <div className="mt-5 flex-1 space-y-4">
+              <p className="text-sm leading-6 text-zinc-400">{hrc.meetings}</p>
+              <p className="text-sm leading-6 text-zinc-400">{hrc.payment}</p>
+              <p className="text-sm text-zinc-500">{hrc.poBox}</p>
+              <p className="text-sm text-zinc-500">Venmo {hrc.venmo}</p>
+            </div>
           </div>
         </section>
 
@@ -71,7 +55,7 @@ export default function SupportPage() {
           <h2 className="font-heading text-2xl tracking-wide text-white uppercase sm:text-3xl">
             Volunteer
           </h2>
-          <p className="mt-3 max-w-2xl text-sm leading-6 text-zinc-400">
+          <p className="mt-4 max-w-2xl text-sm leading-6 text-zinc-400">
             Varsity, JV Red, and JV White each need gate, concession, and
             field help. Pick a shift on the board.
           </p>
@@ -79,62 +63,17 @@ export default function SupportPage() {
             href={hrc.volunteerSignup.href}
             target="_blank"
             rel="noreferrer"
-            className="mt-5 inline-block font-heading text-2xl tracking-wide text-red-400 uppercase underline decoration-red-400 decoration-2 underline-offset-8 transition-colors hover:text-red-300 hover:decoration-red-300 sm:text-3xl"
+            className="mt-6 inline-block font-heading text-2xl tracking-wide text-red-400 uppercase underline decoration-red-400 decoration-2 underline-offset-8 transition-colors hover:text-red-300 hover:decoration-red-300 sm:text-3xl"
           >
             {hrc.volunteerSignup.label}
           </a>
         </section>
 
-        <section>
-          <div className="flex flex-wrap items-end justify-between gap-3">
-            <div>
-              <h2 className="font-heading text-2xl tracking-wide text-white uppercase">
-                2026–27 sponsorships
-              </h2>
-              <p className="mt-2 max-w-2xl text-sm leading-6 text-zinc-400">
-                Yukon Baseball will build a custom package if these tiers do not
-                fit. Artwork and design follow after you email the club.
-              </p>
-            </div>
-            <a
-              href={sponsorshipForm.href}
-              target="_blank"
-              rel="noreferrer"
-              className={cn(buttonVariants(), "h-10 px-4 uppercase")}
-            >
-              Open the packet
-            </a>
-          </div>
-          <div className="mt-6 grid gap-3 md:grid-cols-2">
-            {sponsorshipTiers.map((tier) => (
-              <article
-                key={tier.name}
-                className="rounded-2xl border border-white/10 bg-zinc-950 p-5"
-              >
-                <div className="flex items-baseline justify-between gap-3">
-                  <h3 className="font-heading text-xl tracking-wide text-white uppercase">
-                    {tier.name}
-                  </h3>
-                  <p className="text-sm text-red-400">{tier.price}</p>
-                </div>
-                <ul className="mt-3 space-y-1.5 text-sm text-zinc-400">
-                  {tier.perks.map((perk) => (
-                    <li key={perk}>{perk}</li>
-                  ))}
-                </ul>
-                {tier.renewal ? (
-                  <p className="mt-3 text-xs text-zinc-600">{tier.renewal}</p>
-                ) : null}
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section className="rounded-2xl border border-white/10 bg-zinc-950 p-6">
-          <h2 className="font-heading text-2xl tracking-wide text-white uppercase">
+        <section className="rounded-2xl border border-white/10 bg-zinc-950 p-6 sm:p-8">
+          <h2 className="font-heading text-2xl tracking-wide text-white uppercase sm:text-3xl">
             {tcaStore.name}
           </h2>
-          <p className="mt-3 max-w-2xl text-sm leading-6 text-zinc-400">
+          <p className="mt-4 max-w-2xl text-sm leading-6 text-zinc-400">
             {tcaStore.blurb}
           </p>
           <a
@@ -143,7 +82,7 @@ export default function SupportPage() {
             rel="noreferrer"
             className={cn(
               buttonVariants({ variant: "outline" }),
-              "mt-4 h-10 border-white/15 px-4",
+              "mt-6 h-10 border-white/15 px-4",
             )}
           >
             Open TCA · code {tcaStore.code}

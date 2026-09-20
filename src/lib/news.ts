@@ -9,6 +9,7 @@ export type ArticleImage = {
   alt: string;
   width: number;
   height: number;
+  focus?: string;
 };
 
 export type Article = {
@@ -39,6 +40,7 @@ export const articles: Article[] = [
       alt: "Drake Pace swinging through a pitch in a Yukon Miller uniform",
       width: 1169,
       height: 741,
+      focus: "42% 28%",
     },
     body: [
       "Yukon High School baseball announced that Drake Pace has committed to Oral Roberts University.",
@@ -57,6 +59,7 @@ export const articles: Article[] = [
       alt: "Clayton Strange delivering a pitch on the mound in a Yukon Miller uniform",
       width: 1179,
       height: 1580,
+      focus: "48% 34%",
     },
     body: [
       "Yukon High School baseball announced that Clayton Strange has committed to Hutchinson Community College.",

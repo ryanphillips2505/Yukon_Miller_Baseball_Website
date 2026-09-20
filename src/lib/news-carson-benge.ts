@@ -12,6 +12,7 @@ export const carsonBengeStory = {
     alt: "Carson Benge batting in a New York Mets home uniform at Citi Field",
     width: 2400,
     height: 800,
+    focus: "72% 16%",
   },
   body: [
     "Before he wore a New York Mets uniform at Citi Field, Carson Benge wore Yukon.",

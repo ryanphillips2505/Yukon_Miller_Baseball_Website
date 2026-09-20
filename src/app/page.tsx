@@ -1,3 +1,4 @@
+import { ArticleCardImage } from "@/components/article-card-image";
 import { BrandLogo } from "@/components/brand-logo";
 import { buttonVariants } from "@/components/ui/button";
 import { commits } from "@/lib/commits";
@@ -142,12 +143,9 @@ export default function HomePage() {
                 className="overflow-hidden rounded-2xl border border-white/12 bg-black transition-colors hover:border-red-700/40"
               >
                 {featured.image ? (
-                  <Image
-                    src={featured.image.src}
-                    alt={featured.image.alt}
-                    width={featured.image.width}
-                    height={featured.image.height}
-                    className="h-56 w-full object-cover object-center sm:h-72"
+                  <ArticleCardImage
+                    image={featured.image}
+                    className="h-56 w-full sm:h-72"
                   />
                 ) : null}
                 <div className="p-8 sm:p-10">

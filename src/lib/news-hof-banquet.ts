@@ -10,6 +10,7 @@ export const hofBanquetStory = {
     alt: "Scotlyn Woodruff, Charles Copus, Pryce McClure, Jayden Henderson, Drake Pace, Preston Klose, and Caleb Schneider at the 2026 Yukon Athletics Hall of Fame Banquet",
     width: 1800,
     height: 1350,
+    focus: "center 26%",
   },
   body: [
     "Once a Miller, always a Miller.",

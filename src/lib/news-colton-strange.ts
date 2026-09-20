@@ -12,6 +12,7 @@ export const coltonStrangeStory = {
     alt: "Colton Strange holding the 2026 NJCAA Division II national championship plaque in Enid",
     width: 768,
     height: 1024,
+    focus: "38% 16%",
   },
   body: [
     "Another former Yukon Miller has added a championship to his baseball journey.",

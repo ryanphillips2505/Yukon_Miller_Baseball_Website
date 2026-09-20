@@ -1,8 +1,8 @@
+import { ArticleCardImage } from "@/components/article-card-image";
 import { EmptyState } from "@/components/empty-state";
 import { PageHero } from "@/components/page-hero";
 import { articles } from "@/lib/news";
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 
 const latestPhoto = articles.find((article) => article.image)?.image;
@@ -62,12 +62,9 @@ export default function NewsPage() {
                     </p>
                   </div>
                   {article.image ? (
-                    <Image
-                      src={article.image.src}
-                      alt={article.image.alt}
-                      width={article.image.width}
-                      height={article.image.height}
-                      className="mt-4 h-36 w-full rounded-xl object-cover object-center sm:mt-0 sm:h-24 sm:w-44 sm:shrink-0"
+                    <ArticleCardImage
+                      image={article.image}
+                      className="mt-4 h-44 w-full rounded-xl sm:mt-0 sm:h-32 sm:w-40 sm:shrink-0"
                     />
                   ) : null}
                 </Link>

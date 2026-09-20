@@ -57,12 +57,10 @@ export function calendarSubscribeLinks(
   origin = "https://www.yukonbaseball.com",
 ) {
   const httpsUrl = calendarHttpsUrl(team, origin);
-  const webcal = httpsUrl.replace(/^https?:/, "webcal:");
   return {
     httpsUrl,
-    apple: webcal,
+    webcal: httpsUrl.replace(/^https?:/, "webcal:"),
     google: `https://calendar.google.com/calendar/render?cid=${encodeURIComponent(httpsUrl)}`,
-    outlook: webcal,
   };
 }
 

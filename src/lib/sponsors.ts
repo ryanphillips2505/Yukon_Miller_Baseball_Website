@@ -211,7 +211,7 @@ const sponsorList: Sponsor[] = [
   },
   {
     id: "lowes",
-    name: "Lowe's",
+    name: "Lowe's of Yukon",
     mark: "LO",
     tier: "home-run",
     placement: "Home Run Club · outfield banner",

@@ -49,7 +49,7 @@ export const metadata: Metadata = {
     template: "%s | Yukon Miller Baseball",
   },
   description:
-    "Yukon High School baseball. Home of the Millers. Schedule, roster, coaches, news, and Home Run Club.",
+    "Yukon High School Baseball. Home of the Millers. Schedule, roster, coaches, news, and Home Run Club.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

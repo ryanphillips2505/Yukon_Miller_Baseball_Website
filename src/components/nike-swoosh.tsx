@@ -4,6 +4,7 @@ const sizes = {
   header: { width: 48, height: 17 },
   sm: { width: 56, height: 20 },
   md: { width: 80, height: 28 },
+  footer: { width: 68, height: 24 },
   lg: { width: 108, height: 38 },
 } as const;
 

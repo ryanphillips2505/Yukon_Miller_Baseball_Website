@@ -41,11 +41,6 @@ export default function AlumniPage() {
           <h1 className="font-heading mt-3 text-center text-5xl leading-[0.84] tracking-wide text-white uppercase sm:text-6xl lg:text-7xl">
             Hall of Honor
           </h1>
-          <div className="mx-auto mt-5 h-px w-28 bg-gradient-to-r from-transparent via-[#d4b56a] to-transparent" />
-          <p className="mx-auto mt-5 max-w-2xl text-center text-sm leading-7 text-zinc-400 sm:text-base">
-            The names that built this program. Yukon Athletics Hall of Fame
-            first — then the All-State wall, class by class.
-          </p>
         </div>
       </header>
 

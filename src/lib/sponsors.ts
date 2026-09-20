@@ -4,7 +4,6 @@ export type SponsorTierId =
   | "cycle"
   | "grand-slam"
   | "signature"
-  | "special"
   | "home-run"
   | "triple";
 
@@ -95,12 +94,6 @@ export const sponsorTiers: {
     blurb: "In-game partners — foul balls, starting lineups, and the moments between pitches.",
   },
   {
-    id: "special",
-    label: "Special banners",
-    kicker: "Program boards",
-    blurb: "Roster and schedule banners posted with the 2026 sign list.",
-  },
-  {
     id: "home-run",
     label: "Home Run Club",
     kicker: "Outfield wall",
@@ -171,20 +164,6 @@ const sponsorList: Sponsor[] = [
     mark: "N7",
     tier: "signature",
     placement: "Sign plus starting lineups",
-  },
-  {
-    id: "kris-avant",
-    name: "Kris Avant",
-    mark: "KA",
-    tier: "special",
-    placement: "Roster banner",
-  },
-  {
-    id: "preferred-health",
-    name: "Preferred Health Partners",
-    mark: "PH",
-    tier: "special",
-    placement: "Schedule banner",
   },
   {
     id: "five-iron-golf",

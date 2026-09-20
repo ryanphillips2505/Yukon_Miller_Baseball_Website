@@ -222,7 +222,6 @@ export function SponsorBoard() {
             columns="md:grid-cols-3"
           />
           <TierBlock tierId="signature" featured columns="md:grid-cols-2" />
-          <TierBlock tierId="special" columns="md:grid-cols-2" />
         </div>
       </section>
 

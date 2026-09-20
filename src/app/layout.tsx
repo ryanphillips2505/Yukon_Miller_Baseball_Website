@@ -50,27 +50,6 @@ export const metadata: Metadata = {
   },
   description:
     "Yukon High School baseball. Home of the Millers. Schedule, roster, coaches, news, and Home Run Club.",
-  icons: {
-    icon: [
-      {
-        url: "/favicon-16x16.png?v=ym-interlock",
-        sizes: "16x16",
-        type: "image/png",
-      },
-      {
-        url: "/favicon-32x32.png?v=ym-interlock",
-        sizes: "32x32",
-        type: "image/png",
-      },
-    ],
-    apple: [
-      {
-        url: "/apple-touch-icon.png?v=ym-interlock",
-        sizes: "180x180",
-        type: "image/png",
-      },
-    ],
-  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

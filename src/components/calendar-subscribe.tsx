@@ -37,8 +37,8 @@ function SubscribeButtons({ team }: { team: TeamId }) {
   );
 
   async function copyFeed(which: "apple" | "outlook" | "copy") {
-    await writeClipboard(links.httpsUrl);
     setCopied(which);
+    await writeClipboard(links.httpsUrl);
     window.setTimeout(() => setCopied(null), 2000);
   }
 

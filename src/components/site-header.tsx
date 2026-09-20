@@ -109,7 +109,7 @@ export function SiteHeader() {
             {moreOpen ? (
               <div
                 role="menu"
-                className="absolute top-full right-0 mt-0 min-w-52 border border-white/10 bg-zinc-950 py-2 shadow-2xl"
+                className="absolute top-full right-0 mt-0 max-h-[min(24rem,calc(100dvh-3.5rem))] min-w-52 overflow-y-auto overscroll-contain border border-white/10 bg-zinc-950 py-2 shadow-2xl"
               >
                 {navMore.map((item) => (
                   <Link
@@ -144,9 +144,9 @@ export function SiteHeader() {
             </SheetTrigger>
             <SheetContent
               side="right"
-              className="w-[min(22rem,100%)] border-white/10 bg-zinc-950 text-white"
+              className="h-dvh max-h-dvh w-[min(22rem,100%)] overflow-hidden border-white/10 bg-zinc-950 text-white"
             >
-            <SheetHeader>
+            <SheetHeader className="shrink-0">
               <NikeSwoosh size="md" className="mb-3" />
               <SheetTitle className="font-heading tracking-wide text-white uppercase">
                 {program.name}
@@ -155,7 +155,7 @@ export function SiteHeader() {
                 {program.classification} baseball
               </SheetDescription>
             </SheetHeader>
-            <nav className="flex flex-col gap-1 px-4 pb-6">
+            <nav className="flex min-h-0 flex-1 flex-col gap-1 overflow-y-auto overscroll-contain px-4 pb-[max(1.5rem,env(safe-area-inset-bottom))]">
               {allNav.map((item) => (
                 <Link
                   key={item.href}

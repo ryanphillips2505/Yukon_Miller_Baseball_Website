@@ -8,25 +8,21 @@ import {
 
 function InductionPlaque({ member }: { member: HallOfFameMember }) {
   return (
-    <article className="relative flex min-h-[22rem] flex-col overflow-hidden rounded-2xl border border-[#d4b56a]/40 bg-[linear-gradient(180deg,#2a2216_0%,#0c0b09_42%,#070708_100%)] shadow-[0_24px_60px_rgba(0,0,0,0.55),inset_0_1px_0_rgba(232,213,163,0.18)] sm:min-h-[24rem]">
+    <article className="relative flex min-h-[23rem] flex-col overflow-hidden rounded-2xl border-2 border-[#d4b56a]/70 bg-[linear-gradient(180deg,#3a2c18_0%,#14110c_38%,#070708_100%)] shadow-[0_24px_60px_rgba(0,0,0,0.55),inset_0_1px_0_rgba(232,213,163,0.28)] sm:min-h-[26rem]">
       <div
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(212,181,106,0.22),transparent_55%)]"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(212,181,106,0.28),transparent_52%)]"
         aria-hidden
       />
       <div
-        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#e8d5a3] to-transparent"
+        className="pointer-events-none absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r from-[#8a0f22] via-[#c8102e] to-[#8a0f22]"
         aria-hidden
       />
       <div
-        className="pointer-events-none absolute inset-y-8 left-0 w-px bg-gradient-to-b from-transparent via-[#d4b56a]/50 to-transparent"
+        className="pointer-events-none absolute inset-2 rounded-xl border border-[#d4b56a]/25"
         aria-hidden
       />
       <div
-        className="pointer-events-none absolute inset-y-8 right-0 w-px bg-gradient-to-b from-transparent via-[#d4b56a]/50 to-transparent"
-        aria-hidden
-      />
-      <div
-        className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-[0.07]"
+        className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-[0.08]"
         aria-hidden
       >
         <BrandLogo
@@ -37,21 +33,21 @@ function InductionPlaque({ member }: { member: HallOfFameMember }) {
         />
       </div>
 
-      <div className="relative flex flex-1 flex-col items-center px-6 py-8 text-center sm:px-8 sm:py-10">
-        <p className="text-[0.62rem] font-semibold tracking-[0.32em] text-[#d4b56a] uppercase">
+      <div className="relative flex flex-1 flex-col items-center px-6 py-9 text-center sm:px-8 sm:py-11">
+        <p className="text-[0.62rem] font-semibold tracking-[0.32em] text-[#e8d5a3] uppercase">
           Inducted
         </p>
-        <p className="font-heading mt-3 text-6xl leading-none tracking-wide text-[#e8d5a3] sm:text-7xl">
+        <p className="font-heading mt-3 text-7xl leading-none tracking-wide text-[#f3e6b8] sm:text-8xl">
           {member.classYear}
         </p>
-        <div className="mt-5 h-px w-16 bg-gradient-to-r from-transparent via-[#d4b56a] to-transparent" />
+        <div className="mt-5 h-px w-20 bg-gradient-to-r from-transparent via-[#e8d5a3] to-transparent" />
         <h3 className="font-heading mt-6 text-4xl leading-[0.9] tracking-wide text-white uppercase sm:text-5xl">
           {hallMemberName(member)}
         </h3>
-        <p className="mt-4 text-[0.68rem] font-semibold tracking-[0.22em] text-[#d4b56a] uppercase">
+        <p className="mt-4 text-[0.68rem] font-semibold tracking-[0.22em] text-[#e8d5a3] uppercase">
           Class of {member.classYear}
         </p>
-        <p className="mt-3 text-sm leading-6 text-zinc-400">
+        <p className="mt-3 text-sm leading-6 text-zinc-300">
           {member.sport}
           {member.allStateYear
             ? ` · Miller All-State ${member.allStateYear}`

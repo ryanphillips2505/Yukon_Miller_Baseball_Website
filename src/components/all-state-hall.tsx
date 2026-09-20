@@ -4,16 +4,19 @@ import {
   allStateByDecade,
   allStateHall,
   honoreeName,
+  isAthleticsHallOfFame,
   type AllStateHonoree,
 } from "@/lib/all-state";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 
 function Nameplate({ honoree }: { honoree: AllStateHonoree }) {
+  const hallOfFame = isAthleticsHallOfFame(honoree);
   const plate = (
     <div
       className={cn(
         "group relative flex min-h-16 items-center justify-between gap-4 overflow-hidden rounded-xl border border-[#d4b56a]/22 bg-[linear-gradient(180deg,#1c1812_0%,#0c0b09_100%)] px-4 py-3.5 shadow-[inset_0_1px_0_rgba(232,213,163,0.1)] sm:min-h-[4.25rem] sm:px-5",
+        hallOfFame && "border-[#d4b56a]/55",
         honoree.newsSlug &&
           "transition-colors hover:border-[#d4b56a]/60 hover:bg-[#221c14]",
       )}
@@ -22,9 +25,16 @@ function Nameplate({ honoree }: { honoree: AllStateHonoree }) {
         className="pointer-events-none absolute inset-y-3 left-0 w-0.5 bg-[#d4b56a]/75"
         aria-hidden
       />
-      <p className="min-w-0 font-heading text-xl leading-tight tracking-[0.08em] text-[#f7f1e4] uppercase sm:text-2xl">
-        {honoreeName(honoree)}
-      </p>
+      <div className="min-w-0">
+        <p className="font-heading text-xl leading-tight tracking-[0.08em] text-[#f7f1e4] uppercase sm:text-2xl">
+          {honoreeName(honoree)}
+        </p>
+        {hallOfFame ? (
+          <p className="mt-1 text-[0.58rem] font-semibold tracking-[0.18em] text-[#d4b56a] uppercase">
+            Athletics Hall of Fame
+          </p>
+        ) : null}
+      </div>
       <p className="shrink-0 rounded-md border border-[#d4b56a]/40 bg-black/50 px-2.5 py-1.5 font-heading text-lg leading-none tracking-[0.12em] text-[#e8d5a3] tabular-nums sm:text-xl">
         {honoree.year}
       </p>

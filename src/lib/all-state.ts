@@ -65,8 +65,14 @@ export const allStateHonorees: AllStateHonoree[] = [
   { id: "gentry-hoke", firstName: "Gentry", lastName: "Hoke", year: 2026 },
 ];
 
+const hallOfFameAllStateIds = new Set(["joe-cooper", "juston-sullivan"]);
+
 export function honoreeName(honoree: AllStateHonoree) {
   return `${honoree.firstName} ${honoree.lastName}`;
+}
+
+export function isAthleticsHallOfFame(honoree: AllStateHonoree) {
+  return hallOfFameAllStateIds.has(honoree.id);
 }
 
 export function decadeLabel(year: number) {

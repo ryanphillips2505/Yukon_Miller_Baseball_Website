@@ -58,6 +58,30 @@ function Mark({
   );
 }
 
+function BannerPartner({
+  sponsor,
+  kicker,
+}: {
+  sponsor: Sponsor;
+  kicker: string;
+}) {
+  return (
+    <article className="relative overflow-hidden rounded-2xl border border-white/15 bg-[linear-gradient(135deg,#1a1014_0%,#0a0a0c_55%)] p-6 sm:p-10">
+      <p className="text-[0.68rem] font-semibold tracking-[0.28em] text-red-400 uppercase">
+        {kicker}
+      </p>
+      <div className="mt-5 flex flex-col gap-6 sm:flex-row sm:items-center">
+        <Mark sponsor={sponsor} size="lg" />
+        <div>
+          <h3 className="font-heading text-4xl leading-none tracking-wide text-white uppercase sm:text-5xl">
+            {sponsor.name}
+          </h3>
+        </div>
+      </div>
+    </article>
+  );
+}
+
 function SponsorTile({
   sponsor,
   featured = false,
@@ -173,6 +197,7 @@ function TierBlock({
 export function SponsorBoard() {
   const presenting = sponsorsByTier("presenting");
   const scoreboard = sponsorsByTier("scoreboard");
+  const cycle = sponsorsByTier("cycle");
 
   return (
     <div className="space-y-14">
@@ -231,30 +256,20 @@ export function SponsorBoard() {
           ))}
 
           {scoreboard.map((sponsor) => (
-            <article
+            <BannerPartner
               key={sponsor.id}
-              className="relative overflow-hidden rounded-2xl border border-white/15 bg-[linear-gradient(135deg,#1a1014_0%,#0a0a0c_55%)] p-6 sm:p-10"
-            >
-              <p className="text-[0.68rem] font-semibold tracking-[0.28em] text-red-400 uppercase">
-                Scoreboard · title partner
-              </p>
-              <div className="mt-5 flex flex-col gap-6 sm:flex-row sm:items-center">
-                <Mark sponsor={sponsor} size="lg" />
-                <div>
-                  <h3 className="font-heading text-4xl leading-none tracking-wide text-white uppercase sm:text-5xl">
-                    {sponsor.name}
-                  </h3>
-                </div>
-              </div>
-            </article>
+              sponsor={sponsor}
+              kicker="Scoreboard · title partner"
+            />
           ))}
 
-          <TierBlock
-            tierId="cycle"
-            featured
-            showCopy={false}
-            columns="md:grid-cols-3"
-          />
+          {cycle.map((sponsor) => (
+            <BannerPartner
+              key={sponsor.id}
+              sponsor={sponsor}
+              kicker="The Cycle"
+            />
+          ))}
           <TierBlock
             tierId="grand-slam"
             featured

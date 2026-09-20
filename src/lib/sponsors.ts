@@ -20,7 +20,6 @@ export type Sponsor = {
   tier: SponsorTierId;
   placement: string;
   kicker?: string;
-  newThisYear?: boolean;
   logo?: SponsorLogo;
 };
 
@@ -121,7 +120,6 @@ const sponsorList: Sponsor[] = [
     mark: "CA",
     tier: "presenting",
     placement: "Presenting partner · 2026 program sponsorship",
-    newThisYear: true,
   },
   {
     id: "browns-driving-school",
@@ -202,7 +200,6 @@ const sponsorList: Sponsor[] = [
     mark: "H2",
     tier: "home-run",
     placement: "Home Run Club · outfield banner",
-    newThisYear: true,
   },
   {
     id: "senior-care",
@@ -245,7 +242,6 @@ const sponsorList: Sponsor[] = [
     mark: "BF",
     tier: "home-run",
     placement: "Home Run Club · outfield banner",
-    newThisYear: true,
   },
   {
     id: "notable-roofing",
@@ -351,7 +347,6 @@ const sponsorList: Sponsor[] = [
     mark: "RK",
     tier: "home-run",
     placement: "Home Run Club · outfield banner",
-    newThisYear: true,
   },
   {
     id: "gatlin",
@@ -359,7 +354,6 @@ const sponsorList: Sponsor[] = [
     mark: "GH",
     tier: "home-run",
     placement: "Home Run Club · outfield banner",
-    newThisYear: true,
   },
   {
     id: "brady-built",

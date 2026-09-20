@@ -109,10 +109,6 @@ function SponsorTile({
             <p className="text-[0.62rem] font-semibold tracking-[0.2em] text-red-400 uppercase">
               {sponsor.kicker}
             </p>
-          ) : sponsor.newThisYear ? (
-            <p className="text-[0.62rem] font-semibold tracking-[0.2em] text-red-400 uppercase">
-              New for 2026
-            </p>
           ) : null}
           <h3
             className={cn(
@@ -287,9 +283,14 @@ export function SponsorBoard() {
 
       <TierBlock
         tierId="home-run"
+        showCopy={false}
         columns="sm:grid-cols-2 lg:grid-cols-3"
       />
-      <TierBlock tierId="triple" columns="md:grid-cols-2" />
+      <TierBlock
+        tierId="triple"
+        showCopy={false}
+        columns="md:grid-cols-2"
+      />
 
       <section
         id="sponsorship-packet"

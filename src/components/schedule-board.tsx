@@ -1,5 +1,6 @@
 "use client";
 
+import { CalendarSubscribe } from "@/components/calendar-subscribe";
 import {
   formatGameDate,
   gameCount,
@@ -85,6 +86,9 @@ export function ScheduleBoard() {
         </div>
         <div className="mx-auto max-w-6xl px-4 pt-4 sm:px-6">
           <HomeAwayKey />
+          <div className="mt-5">
+            <CalendarSubscribe highlight={view} />
+          </div>
         </div>
         <div className="mx-auto mt-6 flex max-w-6xl gap-1 overflow-x-auto px-4 sm:px-6">
           {views.map((item) => (

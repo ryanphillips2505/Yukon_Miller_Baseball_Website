@@ -18,16 +18,17 @@ function Mark({
   size = "md",
 }: {
   sponsor: Sponsor;
-  size?: "sm" | "md" | "lg";
+  size?: "sm" | "md" | "lg" | "xl";
 }) {
   if (sponsor.logo) {
     return (
       <div
         className={cn(
-          "flex shrink-0 items-center justify-center overflow-hidden rounded-xl bg-[#f4f1ea] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.06),0_0_0_1px_rgba(0,0,0,0.18)]",
-          size === "sm" && "h-12 w-[5.5rem] p-1.5",
-          size === "md" && "h-14 w-[6.75rem] p-2",
-          size === "lg" && "h-[4.5rem] w-[9.5rem] p-2.5",
+          "flex items-center justify-center overflow-hidden rounded-xl bg-[#f4f1ea] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.06),0_0_0_1px_rgba(0,0,0,0.18)]",
+          size === "sm" && "h-12 w-[5.5rem] shrink-0 p-1.5",
+          size === "md" && "h-14 w-[6.75rem] shrink-0 p-2",
+          size === "lg" && "h-[4.5rem] w-[9.5rem] shrink-0 p-2.5",
+          size === "xl" && "h-32 w-full p-5 sm:h-36",
         )}
       >
         <Image
@@ -44,10 +45,11 @@ function Mark({
   return (
     <div
       className={cn(
-        "flex shrink-0 items-center justify-center rounded-xl border border-white/10 bg-gradient-to-br from-red-950/80 via-zinc-950 to-black font-heading tracking-wide text-white uppercase shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]",
-        size === "sm" && "h-12 w-12 text-sm",
-        size === "md" && "h-14 w-14 text-lg",
-        size === "lg" && "h-[4.5rem] w-[4.5rem] text-2xl",
+        "flex items-center justify-center rounded-xl border border-white/10 bg-gradient-to-br from-red-950/80 via-zinc-950 to-black font-heading tracking-wide text-white uppercase shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]",
+        size === "sm" && "h-12 w-12 shrink-0 text-sm",
+        size === "md" && "h-14 w-14 shrink-0 text-lg",
+        size === "lg" && "h-[4.5rem] w-[4.5rem] shrink-0 text-2xl",
+        size === "xl" && "h-32 w-full text-3xl sm:h-36",
       )}
       aria-hidden
     >
@@ -59,30 +61,25 @@ function Mark({
 function SponsorTile({
   sponsor,
   featured = false,
-  compact = false,
 }: {
   sponsor: Sponsor;
   featured?: boolean;
-  compact?: boolean;
 }) {
   return (
     <article
       className={cn(
-        "group relative overflow-hidden rounded-2xl border border-white/10 bg-zinc-950 p-5 transition-colors hover:border-red-700/40",
-        featured && "p-6 sm:p-7",
+        "group relative overflow-hidden rounded-2xl border border-white/10 bg-zinc-950 transition-colors hover:border-red-700/40",
+        featured ? "p-7 sm:p-8" : "p-5",
       )}
     >
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-red-600/70 to-transparent" />
       <div
         className={cn(
-          "flex gap-4",
-          compact ? "flex-col items-start" : "items-center",
+          "flex",
+          featured ? "flex-col items-stretch gap-5" : "items-center gap-4",
         )}
       >
-        <Mark
-          sponsor={sponsor}
-          size={featured && !compact ? "lg" : "md"}
-        />
+        <Mark sponsor={sponsor} size={featured ? "xl" : "md"} />
         <div className="min-w-0 w-full">
           {sponsor.kicker ? (
             <p className="text-[0.62rem] font-semibold tracking-[0.2em] text-red-400 uppercase">
@@ -96,11 +93,9 @@ function SponsorTile({
           <h3
             className={cn(
               "font-heading text-white uppercase",
-              compact
-                ? "mt-1 text-xl leading-none tracking-[0.08em] sm:text-2xl"
-                : featured
-                  ? "mt-1 text-3xl tracking-wide sm:text-4xl"
-                  : "mt-1 text-xl tracking-wide",
+              featured
+                ? "mt-1 text-2xl leading-none tracking-wide sm:text-3xl"
+                : "mt-1 text-xl tracking-wide",
             )}
           >
             {sponsor.name}
@@ -148,13 +143,11 @@ function TierHead({
 function TierBlock({
   tierId,
   featured = false,
-  compact = false,
   showCopy = true,
   columns,
 }: {
   tierId: SponsorTierId;
   featured?: boolean;
-  compact?: boolean;
   showCopy?: boolean;
   columns: string;
 }) {
@@ -164,13 +157,12 @@ function TierBlock({
   return (
     <div>
       <TierHead tierId={tierId} showCopy={showCopy} />
-      <div className={cn("mt-4 grid gap-3", columns)}>
+      <div className={cn("mt-4 grid", featured ? "gap-4" : "gap-3", columns)}>
         {list.map((sponsor) => (
           <SponsorTile
             key={sponsor.id}
             sponsor={sponsor}
             featured={featured}
-            compact={compact}
           />
         ))}
       </div>
@@ -266,13 +258,13 @@ export function SponsorBoard() {
           <TierBlock
             tierId="grand-slam"
             featured
-            compact
             showCopy={false}
             columns="md:grid-cols-3"
           />
           <TierBlock
             tierId="signature"
             featured
+            showCopy={false}
             columns="md:grid-cols-3"
           />
         </div>

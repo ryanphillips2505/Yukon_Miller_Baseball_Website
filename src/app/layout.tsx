@@ -52,12 +52,12 @@ export const metadata: Metadata = {
     "Yukon High School baseball. Home of the Millers. Schedule, roster, coaches, news, and Home Run Club.",
   icons: {
     icon: [
+      { url: "/favicon.ico", sizes: "any", type: "image/x-icon" },
       { url: "/icons/ym-32.png", sizes: "32x32", type: "image/png" },
       { url: "/icons/ym-16.png", sizes: "16x16", type: "image/png" },
       { url: "/icons/ym-64.png", sizes: "64x64", type: "image/png" },
-      { url: "/icons/ym.ico", sizes: "48x48", type: "image/x-icon" },
     ],
-    shortcut: "/icons/ym.ico",
+    shortcut: "/favicon.ico",
     apple: [{ url: "/icons/ym-180.png", sizes: "180x180", type: "image/png" }],
   },
 };
@@ -69,10 +69,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${geistSans.variable} ${geistMono.variable} ${oswald.variable} dark h-full antialiased`}
     >
       <head>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="shortcut icon" href="/favicon.ico" />
         <link rel="icon" href="/icons/ym-32.png" type="image/png" sizes="32x32" />
         <link rel="icon" href="/icons/ym-16.png" type="image/png" sizes="16x16" />
         <link rel="icon" href="/icons/ym-64.png" type="image/png" sizes="64x64" />
-        <link rel="shortcut icon" href="/icons/ym.ico" />
         <link
           rel="apple-touch-icon"
           href="/icons/ym-180.png"

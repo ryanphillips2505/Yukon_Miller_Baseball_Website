@@ -7,19 +7,22 @@ export function SiteFooter() {
   return (
     <footer className="mt-auto border-t border-white/10 bg-black">
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-12 sm:px-6 md:grid-cols-[1.2fr_1fr_1fr]">
-        <div>
-          <div className="max-w-[20rem]">
-            <BrandLogo
-              variant="state"
-              sizes="(max-width: 768px) 70vw, 320px"
-              className="h-auto w-full"
-              alt="Yukon Baseball"
-            />
-          </div>
-          <NikeSwoosh size="lg" className="mt-5 opacity-90" />
-          <p className="mt-4 max-w-sm text-sm leading-6 text-zinc-400">
-            Yukon High School baseball. Home of the Millers. Miller Field,
-            Yukon, Oklahoma.
+        <div className="flex max-w-[22rem] flex-col items-center text-center">
+          <BrandLogo
+            variant="state"
+            sizes="(max-width: 768px) 70vw, 352px"
+            className="h-auto w-full"
+            alt="Yukon Baseball"
+          />
+          <NikeSwoosh size="lg" className="mt-6 opacity-90" />
+          <p className="mt-6 text-sm leading-6 text-zinc-300">
+            Yukon High School baseball.
+          </p>
+          <p className="text-sm leading-6 text-zinc-300">
+            Home of the Millers.
+          </p>
+          <p className="mt-3 text-[0.62rem] font-semibold tracking-[0.22em] text-zinc-500 uppercase">
+            Miller Field, Yukon, Oklahoma.
           </p>
         </div>
         <div>

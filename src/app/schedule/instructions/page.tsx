@@ -1,4 +1,3 @@
-import { PageHero } from "@/components/page-hero";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
@@ -40,13 +39,21 @@ const steps = [
 export default function CalendarInstructionsPage() {
   return (
     <div>
-      <PageHero kicker="Parent calendars" title="Instructions" />
+      <header className="border-b border-white/8 bg-black">
+        <div className="mx-auto max-w-3xl px-4 py-10 sm:px-6 sm:py-14">
+          <p className="text-[0.7rem] font-semibold tracking-[0.24em] text-red-400 uppercase">
+            Parent calendars
+          </p>
+          <h1 className="font-heading mt-2 text-4xl tracking-wide text-white uppercase sm:text-5xl">
+            Instructions
+          </h1>
+          <p className="mt-5 text-base leading-7 text-zinc-300 italic">
+            Each device you sync this calendar to has its own refresh settings.
+            Please check them to ensure you get the latest updates.
+          </p>
+        </div>
+      </header>
       <div className="mx-auto max-w-3xl space-y-8 px-4 py-10 sm:px-6">
-        <p className="text-base leading-7 text-zinc-300 italic">
-          Each device you sync this calendar to has its own refresh settings.
-          Please check them to ensure you get the latest updates.
-        </p>
-
         <section>
           <h2 className="font-heading text-2xl tracking-wide text-white uppercase">
             Subscribe from the schedule
@@ -54,7 +61,7 @@ export default function CalendarInstructionsPage() {
           <p className="mt-3 text-sm leading-6 text-zinc-400">
             On the Schedule page, each team has Apple, Google, Outlook, and
             Copy. Subscribe separately to Varsity, JV Red, and JV White if you
-            follow more than one club.
+            follow more than one team.
           </p>
         </section>
 

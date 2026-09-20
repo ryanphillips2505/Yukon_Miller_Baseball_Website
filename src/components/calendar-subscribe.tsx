@@ -54,8 +54,10 @@ export function CalendarSubscribe({
       </p>
       <p className="mt-2 max-w-2xl text-sm leading-6 text-zinc-400">
         Subscribe to a team and the games stay on your phone. Each event
-        reminds you 30 minutes before first pitch. Works with Apple Calendar,
-        Google Calendar, and Outlook.
+        reminds you 30 minutes before first pitch. If we change a date or
+        time on the website, the subscribed calendar updates too. Games
+        without a listed time show 8:00 AM–5:00 PM as a placeholder. Works
+        with Apple Calendar, Google Calendar, and Outlook.
       </p>
       <div className="mt-4 grid gap-3 sm:grid-cols-3">
         {teams.map((team) => {

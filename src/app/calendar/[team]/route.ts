@@ -5,18 +5,8 @@ import {
 } from "@/lib/calendar";
 import { NextResponse } from "next/server";
 
-export const dynamic = "force-static";
-
-export function generateStaticParams() {
-  return [
-    { team: "varsity.ics" },
-    { team: "jv-red.ics" },
-    { team: "jv-white.ics" },
-    { team: "varsity" },
-    { team: "jv-red" },
-    { team: "jv-white" },
-  ];
-}
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 export async function GET(
   _request: Request,
@@ -35,7 +25,8 @@ export async function GET(
     headers: {
       "Content-Type": "text/calendar; charset=utf-8",
       "Content-Disposition": `inline; filename="${filename}"`,
-      "Cache-Control": "public, max-age=3600, s-maxage=3600",
+        "Cache-Control":
+          "public, max-age=300, s-maxage=300, stale-while-revalidate=60",
     },
   });
 }

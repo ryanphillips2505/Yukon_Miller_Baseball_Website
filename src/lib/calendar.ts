@@ -179,11 +179,10 @@ function gameDescription(game: Game, startLabel?: string) {
     `${versusLabel(game.location)} ${game.opponent}`,
     startLabel
       ? `First pitch ${startLabel}`
-      : game.time
-        ? `Time ${game.time}`
-        : "First pitch TBA — confirm on yukonbaseball.com/schedule",
+      : "Time TBA — placeholder 8:00 AM–5:00 PM. Confirm on yukonbaseball.com/schedule",
     game.venue ? `Venue: ${game.venue}` : undefined,
     "Reminder: 30 minutes before first pitch.",
+    "This subscribed calendar updates when the website schedule changes.",
     "https://www.yukonbaseball.com/schedule",
   ];
   return lines.filter(Boolean).join("\n");
@@ -197,7 +196,19 @@ type CalendarEvent = {
   start: string;
   end: string;
   stamp: string;
+  sequence: number;
 };
+
+function contentStamp(parts: string[]) {
+  let hash = 2166136261;
+  const input = parts.join("|");
+  for (let i = 0; i < input.length; i += 1) {
+    hash ^= input.charCodeAt(i);
+    hash = Math.imul(hash, 16777619);
+  }
+  const seconds = 1_767_225_600 + ((hash >>> 0) % 126_230_400);
+  return formatStamp(new Date(seconds * 1000));
+}
 
 function eventLines(event: CalendarEvent) {
   return [
@@ -205,6 +216,7 @@ function eventLines(event: CalendarEvent) {
     `UID:${event.uid}`,
     `DTSTAMP:${event.stamp}`,
     `LAST-MODIFIED:${event.stamp}`,
+    `SEQUENCE:${event.sequence}`,
     `DTSTART;TZID=America/Chicago:${event.start}`,
     `DTEND;TZID=America/Chicago:${event.end}`,
     `SUMMARY:${escapeText(event.summary)}`,
@@ -225,28 +237,43 @@ function eventLines(event: CalendarEvent) {
 }
 
 function eventsForGame(game: Game): CalendarEvent[] {
-  const stamp = formatStamp(new Date("2026-09-20T13:00:00Z"));
   const clocks = gameStartClocks(game.time);
-  const starts =
-    clocks.length > 0 ? clocks : [{ hours: 16, minutes: 0 }];
+  const placeholder = clocks.length === 0;
+  const starts = placeholder ? [{ hours: 8, minutes: 0 }] : clocks;
   const location = gameLocation(game);
-  const duration = starts.length > 1 ? 110 : clocks.length === 0 ? 180 : 120;
+  const duration = placeholder ? 9 * 60 : starts.length > 1 ? 110 : 120;
 
   return starts.map((clock, index) => {
-    const startLabel = game.time
-      ?.split("/")
-      .map((part) => part.trim())
-      .filter(Boolean)[index];
+    const startLabel = placeholder
+      ? undefined
+      : game.time
+          ?.split("/")
+          .map((part) => part.trim())
+          .filter(Boolean)[index];
     const end = addMinutes(clock.hours, clock.minutes, duration);
     const endDate = shiftDate(game.date, end.dayOffset);
+    const start = localDateTime(game.date, clock.hours, clock.minutes);
+    const endStamp = localDateTime(endDate, end.hours, end.minutes);
+    const summary = gameSummary(game, startLabel);
+    const description = gameDescription(game, startLabel);
+    const stamp = contentStamp([
+      game.id,
+      game.date,
+      game.time ?? "",
+      start,
+      endStamp,
+      summary,
+      location,
+    ]);
     return {
       uid: `${game.id}-${index + 1}@yukonbaseball.com`,
-      summary: gameSummary(game, startLabel),
-      description: gameDescription(game, startLabel),
+      summary,
+      description,
       location,
-      start: localDateTime(game.date, clock.hours, clock.minutes),
-      end: localDateTime(endDate, end.hours, end.minutes),
+      start,
+      end: endStamp,
       stamp,
+      sequence: Number(start.replace(/\D/g, "").slice(0, 12)),
     };
   });
 }
@@ -284,9 +311,9 @@ export function teamCalendarIcs(team: TeamId) {
     "METHOD:PUBLISH",
     `X-WR-CALNAME:${escapeText(name)}`,
     "X-WR-TIMEZONE:America/Chicago",
-    `X-WR-CALDESC:${escapeText(`${name}. Reminder 30 minutes before first pitch.`)}`,
-    "REFRESH-INTERVAL;VALUE=DURATION:PT6H",
-    "X-PUBLISHED-TTL:PT6H",
+    `X-WR-CALDESC:${escapeText(`${name}. Reminder 30 minutes before first pitch. This feed updates when the website schedule changes.`)}`,
+    "REFRESH-INTERVAL;VALUE=DURATION:PT1H",
+    "X-PUBLISHED-TTL:PT1H",
     ...chicagoZone,
     ...events.flatMap(eventLines),
     "END:VCALENDAR",

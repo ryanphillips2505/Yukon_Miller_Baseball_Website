@@ -121,10 +121,28 @@ const drafts: GameDraft[] = [
   { date: "2027-04-30", weekday: "Friday", team: "varsity", opponent: "Jenks", location: "home", time: "6:00", phase: "regular" },
 ];
 
-export const games: Game[] = drafts.map((game, index) => ({
-  ...game,
-  id: `${game.date}-${game.team}-${index}`,
-}));
+function calendarSlug(value: string) {
+  return value
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+}
+
+export const games: Game[] = (() => {
+  const seen = new Map<string, number>();
+  return drafts.map((game) => {
+    const base = [
+      game.team,
+      game.location,
+      game.phase,
+      calendarSlug(game.opponent),
+      game.venue ? calendarSlug(game.venue) : "na",
+    ].join("-");
+    const next = (seen.get(base) ?? 0) + 1;
+    seen.set(base, next);
+    return { ...game, id: `${base}-${next}` };
+  });
+})();
 
 export const scheduleNotes = [
   "Monday, February 15 — scrimmages can start",

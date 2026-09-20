@@ -22,6 +22,7 @@ type PlayerBioDialogProps = {
   player: Player | null;
   onClose: () => void;
   onSelect: (player: Player) => void;
+  list?: Player[];
 };
 
 function BioStat({ label, value }: { label: string; value: string }) {
@@ -41,11 +42,12 @@ export function PlayerBioDialog({
   player,
   onClose,
   onSelect,
+  list = players,
 }: PlayerBioDialogProps) {
-  const previous = player ? adjacentPlayer(player.id, -1) : undefined;
-  const next = player ? adjacentPlayer(player.id, 1) : undefined;
+  const previous = player ? adjacentPlayer(player.id, -1, list) : undefined;
+  const next = player ? adjacentPlayer(player.id, 1, list) : undefined;
   const slot = player
-    ? players.findIndex((entry) => entry.id === player.id) + 1
+    ? list.findIndex((entry) => entry.id === player.id) + 1
     : 0;
 
   return (
@@ -92,7 +94,7 @@ export function PlayerBioDialog({
                     {fullName(player)}
                   </DialogTitle>
                   <DialogDescription className="mt-3 text-sm text-zinc-400">
-                    {displayName(player)} · {slot} of {players.length}
+                    {displayName(player)} · {slot} of {list.length}
                   </DialogDescription>
                 </div>
               </div>

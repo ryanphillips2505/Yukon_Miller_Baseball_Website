@@ -123,3 +123,21 @@ export function rosterGroups(list: Player[] = players) {
   }
   return [...groups.entries()].sort(([a], [b]) => a.localeCompare(b));
 }
+
+export function rosterClassYears(list: Player[] = players) {
+  return [
+    ...new Set(
+      list
+        .map((player) => player.gradYear)
+        .filter((year): year is number => year !== undefined),
+    ),
+  ].sort((a, b) => a - b);
+}
+
+export function playersForClass(
+  year: number | "all",
+  list: Player[] = players,
+) {
+  if (year === "all") return list;
+  return list.filter((player) => player.gradYear === year);
+}

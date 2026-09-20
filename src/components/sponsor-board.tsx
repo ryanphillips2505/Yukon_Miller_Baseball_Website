@@ -211,9 +211,9 @@ export function SponsorBoard() {
                 Put your name on Miller Field
               </h2>
               <p className="mt-3 text-sm leading-6 text-zinc-400">
-                Packages from Single through Foul Ball, plus the form YHRC uses
-                for artwork and payment. Open the packet, fill it in, and send
-                it to the club.
+                Support Yukon Baseball and put your name on Miller Field.
+                Explore sponsorship packages, choose your level, and help make
+                a difference for our players and program.
               </p>
               <a
                 href={`mailto:${program.email}?subject=${encodeURIComponent("Yukon Baseball sponsorship")}`}
@@ -237,7 +237,7 @@ export function SponsorBoard() {
                 rel="noreferrer"
                 className={cn(buttonVariants(), "h-11 px-5 uppercase")}
               >
-                Open the packet
+                Sponsorship Form
               </a>
             </div>
           </div>

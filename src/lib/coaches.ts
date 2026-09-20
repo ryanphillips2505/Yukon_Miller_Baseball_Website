@@ -133,7 +133,12 @@ export const supportStaff: Coach[] = [
   { id: "woodruff", name: "Scotlyn Woodruff", role: "Manager" },
   { id: "matadamas", name: "Yoslin Matadamas", role: "Manager" },
   { id: "jones", name: "Breed Jones", role: "Student Assistant" },
-  { id: "hormier", name: "Londyn Hormier", role: "Student Social Media" },
+  {
+    id: "hormier",
+    name: "Londyn Hormier",
+    role: "Student Social Media",
+    photo: "/images/coaches/londyn-hormier.jpg",
+  },
 ];
 
 export function adjacentCoach(id: string, step: -1 | 1) {

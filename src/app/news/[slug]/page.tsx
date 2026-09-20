@@ -18,9 +18,35 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const article = getArticle(slug);
+  if (!article) {
+    return { title: "News" };
+  }
+
+  const image = article.image
+    ? {
+        url: article.image.src,
+        width: article.image.width,
+        height: article.image.height,
+        alt: article.image.alt,
+      }
+    : undefined;
+
   return {
-    title: article?.title ?? "News",
-    description: article?.excerpt,
+    title: article.title,
+    description: article.excerpt,
+    openGraph: {
+      title: article.title,
+      description: article.excerpt,
+      type: "article",
+      siteName: "Yukon Miller Baseball",
+      images: image ? [image] : undefined,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: article.title,
+      description: article.excerpt,
+      images: image ? [image.url] : undefined,
+    },
   };
 }
 

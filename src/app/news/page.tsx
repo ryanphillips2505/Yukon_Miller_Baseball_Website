@@ -5,7 +5,32 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
-export const metadata: Metadata = { title: "News" };
+const latestPhoto = articles.find((article) => article.image)?.image;
+
+export const metadata: Metadata = {
+  title: "News",
+  description:
+    "Yukon Miller Baseball news, commits, and program updates.",
+  openGraph: {
+    title: "News",
+    description:
+      "Yukon Miller Baseball news, commits, and program updates.",
+    images: latestPhoto
+      ? [
+          {
+            url: latestPhoto.src,
+            width: latestPhoto.width,
+            height: latestPhoto.height,
+            alt: latestPhoto.alt,
+          },
+        ]
+      : undefined,
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: latestPhoto ? [latestPhoto.src] : undefined,
+  },
+};
 
 export default function NewsPage() {
   return (

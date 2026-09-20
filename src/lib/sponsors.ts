@@ -164,6 +164,7 @@ const sponsorList: Sponsor[] = [
     mark: "LK",
     tier: "signature",
     placement: "Home Run Club banner · first foul ball of every inning",
+    kicker: "Foul Ball Sponsor",
   },
   {
     id: "noahs-7-heaven",
@@ -171,6 +172,7 @@ const sponsorList: Sponsor[] = [
     mark: "N7",
     tier: "signature",
     placement: "Sign plus starting lineups",
+    kicker: "Starting Lineups and Ingame Sponsor",
   },
   {
     id: "liberty-tax",

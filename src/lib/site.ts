@@ -53,7 +53,7 @@ export const navMore = [
   { href: "/contact", label: "Contact" },
   { href: "/recruiting", label: "Recruiting" },
   { href: "/camps", label: "Camps" },
-  { href: "/alumni", label: "Alumni" },
+  { href: "/alumni", label: "Hall of Honor" },
   { href: "/fans", label: "Fan info" },
   { href: "/records", label: "Records" },
   { href: "/media", label: "Media" },

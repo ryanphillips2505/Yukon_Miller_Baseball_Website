@@ -22,7 +22,7 @@ async function writeClipboard(value: string) {
 }
 
 const cellClass =
-  "inline-flex h-9 items-center justify-center px-1 text-[0.62rem] font-medium tracking-[0.16em] text-zinc-300 uppercase transition-colors hover:bg-white/6 hover:text-white";
+  "inline-flex h-7 items-center justify-center px-1 text-[0.52rem] font-medium tracking-[0.08em] text-zinc-300 uppercase transition-colors hover:bg-white/6 hover:text-white sm:h-9 sm:text-[0.62rem] sm:tracking-[0.16em]";
 
 function SubscribeButtons({ team }: { team: TeamId }) {
   const links = useMemo(() => calendarSubscribeLinks(team), [team]);
@@ -35,7 +35,7 @@ function SubscribeButtons({ team }: { team: TeamId }) {
   }
 
   return (
-    <div className="mt-4 grid grid-cols-4 overflow-hidden rounded-lg border border-white/12 bg-black/40">
+    <div className="grid w-[11.75rem] shrink-0 grid-cols-4 overflow-hidden rounded-md border border-white/12 bg-black/40 sm:mt-4 sm:w-full sm:rounded-lg">
       <a href={links.httpsUrl} className={cellClass}>
         Apple
       </a>
@@ -81,29 +81,31 @@ export function CalendarSubscribe({
             and the calendar updates when the website schedule changes.
           </p>
         </div>
-        <p className="pt-2 text-[0.62rem] tracking-[0.16em] text-zinc-600 uppercase sm:pt-0 sm:text-right">
+        <p className="hidden text-[0.62rem] tracking-[0.16em] text-zinc-600 uppercase sm:block sm:text-right">
           Copy, then paste in Apple or Outlook
         </p>
       </div>
-      <div className="mt-4 grid gap-3 sm:grid-cols-3">
+      <div className="mt-3 space-y-2 sm:mt-4 sm:grid sm:grid-cols-3 sm:gap-3 sm:space-y-0">
         {teams.map((team) => {
           const active = highlight === team.id;
           return (
             <div
               key={team.id}
               className={cn(
-                "rounded-xl border px-4 py-4",
+                "flex items-center justify-between gap-3 rounded-xl border px-3 py-2.5 sm:flex-col sm:items-stretch sm:px-4 sm:py-4",
                 active
                   ? "border-white/20 bg-white/[0.04]"
                   : "border-white/10 bg-black/25",
               )}
             >
-              <p className="font-heading text-2xl leading-none tracking-wide text-white uppercase">
-                {team.label}
-              </p>
-              <p className="mt-1.5 text-[0.62rem] tracking-[0.18em] text-zinc-500 uppercase">
-                30-min reminder
-              </p>
+              <div className="min-w-0">
+                <p className="font-heading text-lg leading-none tracking-wide text-white uppercase sm:text-2xl">
+                  {team.label}
+                </p>
+                <p className="mt-1.5 hidden text-[0.62rem] tracking-[0.18em] text-zinc-500 uppercase sm:block">
+                  30-min reminder
+                </p>
+              </div>
               <SubscribeButtons team={team.id} />
             </div>
           );

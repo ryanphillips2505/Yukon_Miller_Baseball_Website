@@ -59,9 +59,11 @@ function Mark({
 function SponsorTile({
   sponsor,
   featured = false,
+  compact = false,
 }: {
   sponsor: Sponsor;
   featured?: boolean;
+  compact?: boolean;
 }) {
   return (
     <article
@@ -71,9 +73,17 @@ function SponsorTile({
       )}
     >
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-red-600/70 to-transparent" />
-      <div className="flex items-center gap-4">
-        <Mark sponsor={sponsor} size={featured ? "lg" : "md"} />
-        <div className="min-w-0">
+      <div
+        className={cn(
+          "flex gap-4",
+          compact ? "flex-col items-start" : "items-center",
+        )}
+      >
+        <Mark
+          sponsor={sponsor}
+          size={featured && !compact ? "lg" : "md"}
+        />
+        <div className="min-w-0 w-full">
           {sponsor.newThisYear ? (
             <p className="text-[0.62rem] font-semibold tracking-[0.2em] text-red-400 uppercase">
               New for 2026
@@ -81,8 +91,12 @@ function SponsorTile({
           ) : null}
           <h3
             className={cn(
-              "font-heading tracking-wide text-white uppercase",
-              featured ? "mt-1 text-3xl sm:text-4xl" : "mt-1 text-xl",
+              "font-heading text-white uppercase",
+              compact
+                ? "mt-1 text-xl leading-none tracking-[0.08em] sm:text-2xl"
+                : featured
+                  ? "mt-1 text-3xl tracking-wide sm:text-4xl"
+                  : "mt-1 text-xl tracking-wide",
             )}
           >
             {sponsor.name}
@@ -93,21 +107,36 @@ function SponsorTile({
   );
 }
 
-function TierHead({ tierId }: { tierId: SponsorTierId }) {
+function TierHead({
+  tierId,
+  showCopy = true,
+}: {
+  tierId: SponsorTierId;
+  showCopy?: boolean;
+}) {
   const tier = sponsorTiers.find((item) => item.id === tierId);
   if (!tier) return null;
 
   return (
     <div>
-      <p className="text-[0.65rem] font-semibold tracking-[0.22em] text-red-400 uppercase">
-        {tier.kicker}
-      </p>
-      <h3 className="font-heading mt-1 text-2xl tracking-wide text-white uppercase sm:text-3xl">
+      {showCopy ? (
+        <p className="text-[0.65rem] font-semibold tracking-[0.22em] text-red-400 uppercase">
+          {tier.kicker}
+        </p>
+      ) : null}
+      <h3
+        className={cn(
+          "font-heading tracking-wide text-white uppercase sm:text-3xl",
+          showCopy ? "mt-1 text-2xl" : "text-2xl",
+        )}
+      >
         {tier.label}
       </h3>
-      <p className="mt-2 max-w-2xl text-sm leading-6 text-zinc-500">
-        {tier.blurb}
-      </p>
+      {showCopy ? (
+        <p className="mt-2 max-w-2xl text-sm leading-6 text-zinc-500">
+          {tier.blurb}
+        </p>
+      ) : null}
     </div>
   );
 }
@@ -115,10 +144,14 @@ function TierHead({ tierId }: { tierId: SponsorTierId }) {
 function TierBlock({
   tierId,
   featured = false,
+  compact = false,
+  showCopy = true,
   columns,
 }: {
   tierId: SponsorTierId;
   featured?: boolean;
+  compact?: boolean;
+  showCopy?: boolean;
   columns: string;
 }) {
   const list = sponsorsByTier(tierId);
@@ -126,10 +159,15 @@ function TierBlock({
 
   return (
     <div>
-      <TierHead tierId={tierId} />
+      <TierHead tierId={tierId} showCopy={showCopy} />
       <div className={cn("mt-4 grid gap-3", columns)}>
         {list.map((sponsor) => (
-          <SponsorTile key={sponsor.id} sponsor={sponsor} featured={featured} />
+          <SponsorTile
+            key={sponsor.id}
+            sponsor={sponsor}
+            featured={featured}
+            compact={compact}
+          />
         ))}
       </div>
     </div>
@@ -215,10 +253,17 @@ export function SponsorBoard() {
             </article>
           ))}
 
-          <TierBlock tierId="cycle" featured columns="grid-cols-1" />
+          <TierBlock
+            tierId="cycle"
+            featured
+            showCopy={false}
+            columns="grid-cols-1"
+          />
           <TierBlock
             tierId="grand-slam"
             featured
+            compact
+            showCopy={false}
             columns="md:grid-cols-3"
           />
           <TierBlock tierId="signature" featured columns="md:grid-cols-2" />

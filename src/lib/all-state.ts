@@ -65,7 +65,11 @@ export const allStateHonorees: AllStateHonoree[] = [
   { id: "gentry-hoke", firstName: "Gentry", lastName: "Hoke", year: 2026 },
 ];
 
-const hallOfFameAllStateIds = new Set(["joe-cooper", "juston-sullivan"]);
+const hallOfFameAllStateIds = new Set([
+  "joe-cooper",
+  "denver-kitch",
+  "juston-sullivan",
+]);
 
 export function honoreeName(honoree: AllStateHonoree) {
   return `${honoree.firstName} ${honoree.lastName}`;

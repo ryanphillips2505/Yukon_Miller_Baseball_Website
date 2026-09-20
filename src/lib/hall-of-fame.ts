@@ -17,6 +17,14 @@ export const athleticsHallOfFame: HallOfFameMember[] = [
     allStateYear: 1980,
   },
   {
+    id: "denver-kitch",
+    firstName: "Denver",
+    lastName: "Kitch",
+    classYear: 2024,
+    sport: "Baseball",
+    allStateYear: 2000,
+  },
+  {
     id: "justin-sullivan",
     firstName: "Justin",
     lastName: "Sullivan",

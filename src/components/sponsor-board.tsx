@@ -253,7 +253,7 @@ export function SponsorBoard() {
             tierId="cycle"
             featured
             showCopy={false}
-            columns="grid-cols-1"
+            columns="md:grid-cols-3"
           />
           <TierBlock
             tierId="grand-slam"

@@ -19,6 +19,7 @@ export type Sponsor = {
   mark: string;
   tier: SponsorTierId;
   placement: string;
+  kicker?: string;
   newThisYear?: boolean;
   logo?: SponsorLogo;
 };
@@ -46,8 +47,10 @@ const sponsorLogos: Record<string, SponsorLogo> = {
   "harris-ellis": { src: "/images/sponsors/logos/harris-ellis.png", width: 300, height: 161 },
   "interbank": { src: "/images/sponsors/logos/interbank.png", width: 900, height: 164 },
   "justin-sullivan": { src: "/images/sponsors/logos/justin-sullivan.png", width: 900, height: 787 },
+  "liberty-tax": { src: "/images/sponsors/logos/liberty-tax.png", width: 900, height: 521 },
   "livewell": { src: "/images/sponsors/logos/livewell.png", width: 269, height: 270 },
   "lowes": { src: "/images/sponsors/logos/lowes.png", width: 900, height: 424 },
+  "noahs-7-heaven": { src: "/images/sponsors/logos/noahs-7-heaven.png", width: 600, height: 600 },
   "notable-roofing": { src: "/images/sponsors/logos/notable-roofing.png", width: 900, height: 238 },
   "platinum-heat-air": { src: "/images/sponsors/logos/platinum-heat-air.png", width: 420, height: 420 },
   "rkpb": { src: "/images/sponsors/logos/rkpb.png", width: 373, height: 420 },
@@ -168,6 +171,14 @@ const sponsorList: Sponsor[] = [
     mark: "N7",
     tier: "signature",
     placement: "Sign plus starting lineups",
+  },
+  {
+    id: "liberty-tax",
+    name: "Liberty Tax",
+    mark: "LT",
+    tier: "signature",
+    placement: "Signature · Grandstand Sponsor",
+    kicker: "Grandstand Sponsor",
   },
   {
     id: "five-iron-golf",

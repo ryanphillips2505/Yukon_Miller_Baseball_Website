@@ -84,7 +84,11 @@ function SponsorTile({
           size={featured && !compact ? "lg" : "md"}
         />
         <div className="min-w-0 w-full">
-          {sponsor.newThisYear ? (
+          {sponsor.kicker ? (
+            <p className="text-[0.62rem] font-semibold tracking-[0.2em] text-red-400 uppercase">
+              {sponsor.kicker}
+            </p>
+          ) : sponsor.newThisYear ? (
             <p className="text-[0.62rem] font-semibold tracking-[0.2em] text-red-400 uppercase">
               New for 2026
             </p>
@@ -266,7 +270,11 @@ export function SponsorBoard() {
             showCopy={false}
             columns="md:grid-cols-3"
           />
-          <TierBlock tierId="signature" featured columns="md:grid-cols-2" />
+          <TierBlock
+            tierId="signature"
+            featured
+            columns="md:grid-cols-3"
+          />
         </div>
       </section>
 
@@ -349,9 +357,16 @@ export function SponsorStrip() {
               className="flex flex-col items-center gap-3 rounded-2xl border border-white/10 bg-zinc-950 px-3 py-5 text-center transition-colors hover:border-red-700/40"
             >
               <Mark sponsor={sponsor} size="md" />
-              <p className="font-heading text-sm leading-tight tracking-wide text-white uppercase">
-                {sponsor.name}
-              </p>
+              <div>
+                {sponsor.kicker ? (
+                  <p className="text-[0.58rem] font-semibold tracking-[0.18em] text-red-400 uppercase">
+                    {sponsor.kicker}
+                  </p>
+                ) : null}
+                <p className="font-heading text-sm leading-tight tracking-wide text-white uppercase">
+                  {sponsor.name}
+                </p>
+              </div>
             </Link>
           ))}
         </div>

@@ -37,7 +37,6 @@ const sponsorLogos: Record<string, SponsorLogo> = {
   "crabtree": { src: "/images/sponsors/logos/crabtree.png", width: 900, height: 207 },
   "cso-orthodontics": { src: "/images/sponsors/logos/cso-orthodontics.png", width: 900, height: 298 },
   "earls-rib-palace": { src: "/images/sponsors/logos/earls-rib-palace.png", width: 622, height: 420 },
-  "fire-by-trade": { src: "/images/sponsors/logos/fire-by-trade.png", width: 900, height: 301 },
   "five-iron-golf": { src: "/images/sponsors/logos/five-iron-golf.png", width: 303, height: 40 },
   "fm-bank": { src: "/images/sponsors/logos/fm-bank.png", width: 683, height: 132 },
   "gatlin": { src: "/images/sponsors/logos/gatlin.png", width: 385, height: 130 },
@@ -54,7 +53,6 @@ const sponsorLogos: Record<string, SponsorLogo> = {
   "the-lokal": { src: "/images/sponsors/logos/the-lokal.png", width: 695, height: 420 },
   "together-we-church": { src: "/images/sponsors/logos/together-we-church.png", width: 381, height: 420 },
   "trane": { src: "/images/sponsors/logos/trane.png", width: 900, height: 299 },
-  "warriors-for-freedom": { src: "/images/sponsors/logos/warriors-for-freedom.png", width: 455, height: 420 },
   "yukon-national-bank": { src: "/images/sponsors/logos/yukon-national-bank.png", width: 567, height: 106 },
 };
 
@@ -246,13 +244,6 @@ const sponsorList: Sponsor[] = [
     placement: "Home Run Club · outfield banner",
   },
   {
-    id: "warriors-for-freedom",
-    name: "Warriors for Freedom",
-    mark: "WF",
-    tier: "home-run",
-    placement: "Home Run Club · outfield banner",
-  },
-  {
     id: "flat-top",
     name: "Flat Top Lawn & Landscape",
     mark: "FT",
@@ -291,13 +282,6 @@ const sponsorList: Sponsor[] = [
     id: "trane",
     name: "Trane",
     mark: "TR",
-    tier: "home-run",
-    placement: "Home Run Club · outfield banner",
-  },
-  {
-    id: "rosete",
-    name: "Rosete Construction",
-    mark: "RC",
     tier: "home-run",
     placement: "Home Run Club · outfield banner",
   },
@@ -358,13 +342,6 @@ const sponsorList: Sponsor[] = [
     tier: "home-run",
     placement: "Home Run Club · outfield banner",
     newThisYear: true,
-  },
-  {
-    id: "fire-by-trade",
-    name: "Fire by Trade",
-    mark: "FT",
-    tier: "home-run",
-    placement: "Home Run Club · outfield banner",
   },
   {
     id: "brady-built",

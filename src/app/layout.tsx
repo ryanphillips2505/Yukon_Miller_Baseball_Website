@@ -50,13 +50,6 @@ export const metadata: Metadata = {
   },
   description:
     "Yukon High School baseball. Home of the Millers. Schedule, roster, coaches, news, and Home Run Club.",
-  icons: {
-    icon: {
-      url: "https://yukonbaseball.com/favicon.ico",
-      sizes: "any",
-      type: "image/x-icon",
-    },
-  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -65,6 +58,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} ${oswald.variable} dark h-full antialiased`}
     >
+      <head>
+        <link rel="icon" href="/yukon-baseball-favicon.ico" sizes="any" />
+      </head>
       <body className="flex min-h-full flex-col bg-background text-foreground">
         <a
           href="#main"

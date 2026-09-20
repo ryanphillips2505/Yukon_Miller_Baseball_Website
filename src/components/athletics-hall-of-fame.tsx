@@ -74,10 +74,7 @@ export function AthleticsHallOfFame() {
           aria-hidden
         />
         <div className="relative px-5 py-10 sm:px-8 sm:py-12">
-          <p className="text-center text-[0.68rem] font-semibold tracking-[0.42em] text-[#d4b56a] uppercase">
-            {hallOfFame.kicker}
-          </p>
-          <h2 className="font-heading mt-3 text-center text-4xl leading-[0.88] tracking-wide text-white uppercase sm:text-5xl lg:text-6xl">
+          <h2 className="font-heading text-center text-4xl leading-[0.88] tracking-wide text-white uppercase sm:text-5xl lg:text-6xl">
             Yukon Athletics
             <span className="mt-2 block text-[#e8d5a3]">Hall of Fame</span>
           </h2>

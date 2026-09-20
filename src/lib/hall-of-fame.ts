@@ -32,7 +32,6 @@ export function hallMemberName(member: HallOfFameMember) {
 
 export const hallOfFame = {
   title: "Yukon Athletics Hall of Fame",
-  kicker: "Highest honor",
   count: athleticsHallOfFame.length,
   firstClass: athleticsHallOfFame[0]?.classYear,
   latestClass: athleticsHallOfFame[athleticsHallOfFame.length - 1]?.classYear,

@@ -24,20 +24,21 @@ export type Sponsor = {
 };
 
 const sponsorLogos: Record<string, SponsorLogo> = {
-  "army-national-guard": { src: "/images/sponsors/logos/army-national-guard.png", width: 420, height: 420 },
+  "army-national-guard": { src: "/images/sponsors/logos/army-national-guard.png", width: 217, height: 232 },
   "bad-brads": { src: "/images/sponsors/logos/bad-brads.png", width: 181, height: 113 },
   "bancfirst": { src: "/images/sponsors/logos/bancfirst.png", width: 900, height: 185 },
   "bell-carpet": { src: "/images/sponsors/logos/bell-carpet.png", width: 420, height: 420 },
-  "bk-weaver": { src: "/images/sponsors/logos/bk-weaver.png", width: 1221, height: 600 },
+  "bk-weaver": { src: "/images/sponsors/logos/bk-weaver.png", width: 220, height: 100 },
   "brady-built": { src: "/images/sponsors/logos/brady-built.png", width: 250, height: 69 },
   "browns-driving-school": { src: "/images/sponsors/logos/browns-driving-school.png", width: 780, height: 231 },
-  "clemens-blair": { src: "/images/sponsors/logos/clemens-blair.png", width: 1139, height: 720 },
+  "clemens-blair": { src: "/images/sponsors/logos/clemens-blair.png", width: 900, height: 900 },
   "coles-garden": { src: "/images/sponsors/logos/coles-garden.png", width: 800, height: 212 },
   "cooper-autogroup": { src: "/images/sponsors/logos/cooper-autogroup.png", width: 900, height: 251 },
   "crabtree": { src: "/images/sponsors/logos/crabtree.png", width: 900, height: 207 },
   "cso-orthodontics": { src: "/images/sponsors/logos/cso-orthodontics.png", width: 900, height: 298 },
   "earls-rib-palace": { src: "/images/sponsors/logos/earls-rib-palace.png", width: 622, height: 420 },
   "five-iron-golf": { src: "/images/sponsors/logos/five-iron-golf.png", width: 303, height: 40 },
+  "flat-top": { src: "/images/sponsors/logos/flat-top.png", width: 306, height: 134 },
   "fm-bank": { src: "/images/sponsors/logos/fm-bank.png", width: 683, height: 132 },
   "gatlin": { src: "/images/sponsors/logos/gatlin.png", width: 385, height: 130 },
   "h-spraying": { src: "/images/sponsors/logos/h-spraying.png", width: 900, height: 273 },
@@ -49,10 +50,11 @@ const sponsorLogos: Record<string, SponsorLogo> = {
   "notable-roofing": { src: "/images/sponsors/logos/notable-roofing.png", width: 900, height: 238 },
   "platinum-heat-air": { src: "/images/sponsors/logos/platinum-heat-air.png", width: 420, height: 420 },
   "rkpb": { src: "/images/sponsors/logos/rkpb.png", width: 373, height: 420 },
+  "sod-by-sherry": { src: "/images/sponsors/logos/sod-by-sherry.png", width: 540, height: 260 },
   "tfcu": { src: "/images/sponsors/logos/tfcu.png", width: 398, height: 134 },
-  "the-lokal": { src: "/images/sponsors/logos/the-lokal.png", width: 695, height: 420 },
+  "the-lokal": { src: "/images/sponsors/logos/the-lokal.png", width: 237, height: 213 },
   "together-we-church": { src: "/images/sponsors/logos/together-we-church.png", width: 381, height: 420 },
-  "trane": { src: "/images/sponsors/logos/trane.png", width: 900, height: 299 },
+  "trane": { src: "/images/sponsors/logos/trane.png", width: 389, height: 129 },
   "yukon-national-bank": { src: "/images/sponsors/logos/yukon-national-bank.png", width: 567, height: 106 },
 };
 

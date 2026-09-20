@@ -59,7 +59,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${geistSans.variable} ${geistMono.variable} ${oswald.variable} dark h-full antialiased`}
     >
       <head>
-        <link rel="icon" href="/yukon-baseball-favicon.ico" sizes="any" />
+        <link rel="icon" href="/yukon-ym-mark.ico" sizes="any" />
       </head>
       <body className="flex min-h-full flex-col bg-background text-foreground">
         <a

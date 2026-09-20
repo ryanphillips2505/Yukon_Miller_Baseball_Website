@@ -5,15 +5,6 @@ import { teams, type TeamId } from "@/lib/site";
 import { cn } from "@/lib/utils";
 import { useMemo, useState } from "react";
 
-function isAppleSafari() {
-  if (typeof navigator === "undefined") return false;
-  const ua = navigator.userAgent;
-  const appleDevice = /iPhone|iPad|Macintosh/.test(ua);
-  const safari = /Safari/.test(ua);
-  const other = /CriOS|FxiOS|EdgiOS|Chrome|Android|Edg\//.test(ua);
-  return appleDevice && safari && !other;
-}
-
 async function writeClipboard(value: string) {
   try {
     await navigator.clipboard.writeText(value);
@@ -32,36 +23,29 @@ async function writeClipboard(value: string) {
 
 function SubscribeButtons({ team }: { team: TeamId }) {
   const links = useMemo(() => calendarSubscribeLinks(team), [team]);
-  const [copied, setCopied] = useState<"apple" | "outlook" | "copy" | null>(
-    null,
-  );
+  const [copied, setCopied] = useState(false);
 
-  async function copyFeed(which: "apple" | "outlook" | "copy") {
-    setCopied(which);
+  async function copyFeed() {
+    setCopied(true);
     await writeClipboard(links.httpsUrl);
-    window.setTimeout(() => setCopied(null), 2000);
-  }
-
-  async function addApple() {
-    await copyFeed("apple");
-    if (isAppleSafari()) {
-      window.location.href = links.webcal;
-    }
+    window.setTimeout(() => setCopied(false), 2000);
   }
 
   return (
     <div>
-      <p className="mb-3 break-all font-mono text-[0.68rem] leading-5 text-zinc-500">
+      <a
+        href={links.httpsUrl}
+        className="mb-3 block break-all font-mono text-[0.68rem] leading-5 text-zinc-400 underline-offset-2 hover:text-white hover:underline"
+      >
         {links.httpsUrl}
-      </p>
+      </a>
       <div className="flex flex-wrap gap-2">
-        <button
-          type="button"
-          onClick={addApple}
+        <a
+          href={links.httpsUrl}
           className="inline-flex h-8 items-center rounded-md border border-white/15 px-2.5 text-[0.68rem] tracking-[0.16em] text-zinc-200 uppercase transition-colors hover:border-white/35 hover:bg-white/5 hover:text-white"
         >
-          {copied === "apple" ? "Copied" : "Apple"}
-        </button>
+          Apple
+        </a>
         <a
           href={links.google}
           target="_blank"
@@ -70,19 +54,18 @@ function SubscribeButtons({ team }: { team: TeamId }) {
         >
           Google
         </a>
-        <button
-          type="button"
-          onClick={() => copyFeed("outlook")}
+        <a
+          href={links.httpsUrl}
           className="inline-flex h-8 items-center rounded-md border border-white/15 px-2.5 text-[0.68rem] tracking-[0.16em] text-zinc-200 uppercase transition-colors hover:border-white/35 hover:bg-white/5 hover:text-white"
         >
-          {copied === "outlook" ? "Copied" : "Outlook"}
-        </button>
+          Outlook
+        </a>
         <button
           type="button"
-          onClick={() => copyFeed("copy")}
+          onClick={copyFeed}
           className="inline-flex h-8 items-center rounded-md border border-white/15 px-2.5 text-[0.68rem] tracking-[0.16em] text-zinc-200 uppercase transition-colors hover:border-white/35 hover:bg-white/5 hover:text-white"
         >
-          {copied === "copy" ? "Copied" : "Copy link"}
+          {copied ? "Copied" : "Copy link"}
         </button>
       </div>
     </div>
@@ -100,17 +83,17 @@ export function CalendarSubscribe({
         Parent calendars
       </p>
       <p className="mt-2 max-w-2xl text-sm leading-6 text-zinc-400">
-        Subscribe with the https link on each card. That address is valid in
-        Apple Calendar, Outlook, and Google. Each event reminds you 30 minutes
-        before first pitch, and the calendar updates when we change a date or
-        time on the website. Games without a listed time show 8:00 AM–5:00 PM
-        as a placeholder.
+        Each team uses a regular https address, like
+        https://www.yukonbaseball.com/calendar/varsity.ics. Paste that into
+        Apple Calendar or Outlook. Google can use the Google button. Each
+        event reminds you 30 minutes before first pitch, and the calendar
+        updates when we change a date or time. Games without a listed time
+        show 8:00 AM–5:00 PM as a placeholder.
       </p>
       <p className="mt-2 max-w-2xl text-sm leading-6 text-zinc-400">
-        Apple: Calendar → Add Calendar → Add Subscription Calendar, then paste
-        the link. Outlook: Add calendar → Subscribe from web, then paste the
-        same https link — do not use a webcal address. Google: use the Google
-        button.
+        Outlook: Add calendar → Subscribe from web, then paste the https
+        link. Apple: Calendar → Add Calendar → Add Subscription Calendar,
+        then paste the same link.
       </p>
       <div className="mt-4 grid gap-3 sm:grid-cols-3">
         {teams.map((team) => {

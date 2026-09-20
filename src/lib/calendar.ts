@@ -31,35 +31,10 @@ export function teamCalendarName(team: TeamId) {
   return `Yukon ${label} Baseball`;
 }
 
-export function calendarPublicOrigin(origin?: string) {
-  const resolved =
-    origin ??
-    (typeof window !== "undefined"
-      ? window.location.origin
-      : "https://www.yukonbaseball.com");
-  try {
-    const url = new URL(resolved);
-    if (url.hostname === "yukonbaseball.com") {
-      url.hostname = "www.yukonbaseball.com";
-    }
-    return url.origin;
-  } catch {
-    return "https://www.yukonbaseball.com";
-  }
-}
-
-export function calendarHttpsUrl(team: TeamId, origin?: string) {
-  return `${calendarPublicOrigin(origin)}${calendarPath(team)}`;
-}
-
-export function calendarSubscribeLinks(
-  team: TeamId,
-  origin = "https://www.yukonbaseball.com",
-) {
-  const httpsUrl = calendarHttpsUrl(team, origin);
+export function calendarSubscribeLinks(team: TeamId) {
+  const httpsUrl = `https://www.yukonbaseball.com${calendarPath(team)}`;
   return {
     httpsUrl,
-    webcal: httpsUrl.replace(/^https?:/, "webcal:"),
     google: `https://calendar.google.com/calendar/render?cid=${encodeURIComponent(httpsUrl)}`,
   };
 }

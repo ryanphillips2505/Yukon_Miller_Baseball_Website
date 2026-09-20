@@ -1,10 +1,10 @@
 import { cn } from "@/lib/utils";
 
 const sizes = {
-  header: { width: 62, height: 22 },
-  sm: { width: 72, height: 26 },
-  md: { width: 104, height: 37 },
-  lg: { width: 140, height: 50 },
+  header: { width: 48, height: 17 },
+  sm: { width: 56, height: 20 },
+  md: { width: 80, height: 28 },
+  lg: { width: 108, height: 38 },
 } as const;
 
 type NikeSwooshProps = {

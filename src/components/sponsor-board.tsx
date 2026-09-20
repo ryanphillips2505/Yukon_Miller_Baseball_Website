@@ -198,34 +198,46 @@ export function SponsorBoard() {
   return (
     <div className="space-y-14">
       <section className="overflow-hidden rounded-2xl border border-white/12 bg-black">
-        <header className="relative overflow-hidden border-b border-white/10 bg-[linear-gradient(180deg,#1a0a0d_0%,#0a0a0c_100%)] px-5 py-8 sm:px-8 sm:py-10">
-          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_12%_0%,rgba(200,16,46,0.28),transparent_42%)]" />
-          <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#c8102e] to-transparent" />
-          <div className="relative flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-            <div>
-              <p className="text-[0.68rem] font-semibold tracking-[0.32em] text-red-400 uppercase">
-                2026 partners
+        <header
+          id="sponsorship-packet"
+          className="relative overflow-hidden border-b border-white/10 px-5 py-8 sm:px-8 sm:py-10"
+        >
+          <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
+            <div className="max-w-xl">
+              <p className="text-[0.7rem] font-semibold tracking-[0.22em] text-red-400 uppercase">
+                2026–27 season
               </p>
-              <h2 className="font-heading mt-2 text-4xl leading-none tracking-wide text-white uppercase sm:text-6xl">
-                The wall
+              <h2 className="font-heading mt-2 text-3xl tracking-wide text-white uppercase sm:text-4xl">
+                Put your name on Miller Field
               </h2>
+              <p className="mt-3 text-sm leading-6 text-zinc-400">
+                Packages from Single through Foul Ball, plus the form YHRC uses
+                for artwork and payment. Open the packet, fill it in, and send
+                it to the club.
+              </p>
+              <a
+                href={`mailto:${program.email}?subject=${encodeURIComponent("Yukon Baseball sponsorship")}`}
+                className="mt-4 inline-block text-sm text-zinc-400 underline decoration-white/20 underline-offset-4 transition-colors hover:text-white"
+              >
+                Email {program.email}
+              </a>
             </div>
-            <div className="flex flex-col items-start gap-4 lg:items-end">
-              <div>
-                <p className="font-heading text-5xl leading-none text-white">
-                  {String(sponsorCount).padStart(2, "0")}
-                </p>
-                <p className="mt-1 text-[0.65rem] tracking-[0.2em] text-zinc-500 uppercase">
-                  On the board
-                </p>
-              </div>
+            <div className="flex items-center gap-4">
+              <Image
+                src="/images/packet-heading-logo.png"
+                alt="Yukon Millers"
+                width={239}
+                height={243}
+                sizes="56px"
+                className="size-12 shrink-0 sm:size-14"
+              />
               <a
                 href={sponsorshipForm.href}
                 target="_blank"
                 rel="noreferrer"
-                className={cn(buttonVariants(), "h-10 px-4 uppercase")}
+                className={cn(buttonVariants(), "h-11 px-5 uppercase")}
               >
-                2026–27 packet
+                Open the packet
               </a>
             </div>
           </div>
@@ -291,51 +303,6 @@ export function SponsorBoard() {
         showCopy={false}
         columns="md:grid-cols-2"
       />
-
-      <section
-        id="sponsorship-packet"
-        className="overflow-hidden rounded-2xl border border-white/10 bg-black"
-      >
-        <div className="flex flex-col gap-8 px-6 py-8 sm:px-10 sm:py-10 lg:flex-row lg:items-center lg:justify-between">
-          <div className="max-w-xl">
-            <p className="text-[0.7rem] font-semibold tracking-[0.22em] text-red-400 uppercase">
-              2026–27 season
-            </p>
-            <h2 className="font-heading mt-2 text-3xl tracking-wide text-white uppercase sm:text-4xl">
-              Put your name on Miller Field
-            </h2>
-            <p className="mt-3 text-sm leading-6 text-zinc-400">
-              Packages from Single through Foul Ball, plus the form YHRC uses
-              for artwork and payment. Open the packet, fill it in, and send
-              it to the club.
-            </p>
-            <a
-              href={`mailto:${program.email}?subject=${encodeURIComponent("Yukon Baseball sponsorship")}`}
-              className="mt-4 inline-block text-sm text-zinc-400 underline decoration-white/20 underline-offset-4 transition-colors hover:text-white"
-            >
-              Email {program.email}
-            </a>
-          </div>
-          <div className="flex items-center gap-4">
-            <Image
-              src="/images/packet-heading-logo.png"
-              alt="Yukon Millers"
-              width={239}
-              height={243}
-              sizes="56px"
-              className="size-12 shrink-0 sm:size-14"
-            />
-            <a
-              href={sponsorshipForm.href}
-              target="_blank"
-              rel="noreferrer"
-              className={cn(buttonVariants(), "h-11 px-5 uppercase")}
-            >
-              Open the packet
-            </a>
-          </div>
-        </div>
-      </section>
     </div>
   );
 }

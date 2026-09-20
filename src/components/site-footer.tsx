@@ -10,7 +10,7 @@ export function SiteFooter() {
         <div>
           <div className="max-w-[20rem]">
             <BrandLogo
-              variant="primary"
+              variant="state"
               sizes="(max-width: 768px) 70vw, 320px"
               className="h-auto w-full"
               alt="Yukon Baseball"

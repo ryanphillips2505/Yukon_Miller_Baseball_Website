@@ -7,8 +7,8 @@ export const brand = {
   },
   state: {
     src: "/images/yukon-baseball-state-float.png",
-    width: 1210,
-    height: 532,
+    width: 1200,
+    height: 572,
     alt: "Yukon Baseball — Oklahoma outline with YM mark",
   },
   mark: {

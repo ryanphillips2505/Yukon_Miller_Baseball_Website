@@ -25,8 +25,21 @@ export async function GET(
     headers: {
       "Content-Type": "text/calendar; charset=utf-8",
       "Content-Disposition": `inline; filename="${filename}"`,
-        "Cache-Control":
-          "public, max-age=300, s-maxage=300, stale-while-revalidate=60",
+      "Cache-Control":
+        "public, max-age=300, s-maxage=300, stale-while-revalidate=60",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET, HEAD, OPTIONS",
+    },
+  });
+}
+
+export function OPTIONS() {
+  return new NextResponse(null, {
+    status: 204,
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET, HEAD, OPTIONS",
+      "Access-Control-Max-Age": "86400",
     },
   });
 }

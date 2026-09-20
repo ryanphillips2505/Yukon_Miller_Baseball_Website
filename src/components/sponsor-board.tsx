@@ -208,12 +208,11 @@ export function SponsorBoard() {
                 2026–27 season
               </p>
               <h2 className="font-heading mt-2 text-3xl tracking-wide text-white uppercase sm:text-4xl">
-                Put your name on Miller Field
+                Partner with Yukon Baseball
               </h2>
               <p className="mt-3 text-sm leading-6 text-zinc-400">
-                Support Yukon Baseball and put your name on Miller Field.
-                Explore sponsorship packages, choose your level, and help make
-                a difference for our players and program.
+                Partner with Yukon Baseball to support our players while
+                putting your business in front of the Yukon community.
               </p>
               <a
                 href={`mailto:${program.email}?subject=${encodeURIComponent("Yukon Baseball sponsorship")}`}

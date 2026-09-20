@@ -22,7 +22,7 @@ async function writeClipboard(value: string) {
 }
 
 const cellClass =
-  "inline-flex h-6 flex-1 items-center justify-center px-0.5 text-[0.5rem] font-medium tracking-[0.06em] text-zinc-300 uppercase transition-colors hover:bg-white/6 hover:text-white md:h-9 md:text-[0.62rem] md:tracking-[0.16em]";
+  "inline-flex h-7 flex-1 items-center justify-center px-1 text-[0.52rem] font-medium tracking-[0.08em] text-zinc-300 uppercase transition-colors hover:bg-white/6 hover:text-white";
 
 function SubscribeButtons({ team }: { team: TeamId }) {
   const links = useMemo(() => calendarSubscribeLinks(team), [team]);
@@ -35,7 +35,7 @@ function SubscribeButtons({ team }: { team: TeamId }) {
   }
 
   return (
-    <div className="flex min-w-0 flex-1 overflow-hidden rounded-md border border-white/12 bg-black/40 md:mt-4 md:flex-none md:w-full md:rounded-lg">
+    <div className="flex min-w-0 flex-1 overflow-hidden rounded-md border border-white/12 bg-black/40">
       <a href={links.httpsUrl} className={cellClass}>
         Apple
       </a>
@@ -70,32 +70,29 @@ export function CalendarSubscribe({
   highlight?: TeamId | "master";
 }) {
   return (
-    <div className="border-t border-white/8 pt-4 md:pt-5">
+    <div className="border-t border-white/8 pt-4">
       <p className="text-[0.62rem] font-semibold tracking-[0.22em] text-zinc-500 uppercase">
         Parent calendars
       </p>
-      <p className="mt-1.5 text-xs leading-5 text-zinc-500 md:mt-2 md:max-w-xl md:text-sm md:leading-6 md:text-zinc-400">
+      <p className="mt-1.5 max-w-xl text-xs leading-5 text-zinc-500 sm:text-sm sm:leading-6 sm:text-zinc-400">
         30-minute reminder before first pitch. Updates when the schedule
         changes.
       </p>
-      <div className="mt-3 divide-y divide-white/8 overflow-hidden rounded-xl border border-white/10 md:mt-4 md:grid md:grid-cols-3 md:gap-3 md:divide-y-0 md:overflow-visible md:rounded-none md:border-0">
+      <div className="mt-3 grid gap-2 sm:grid-cols-3">
         {teams.map((team) => {
           const active = highlight === team.id;
           return (
             <div
               key={team.id}
               className={cn(
-                "flex items-center gap-3 px-3 py-2 md:flex-col md:items-stretch md:rounded-xl md:border md:px-4 md:py-4",
+                "flex items-center gap-3 rounded-xl border px-3 py-2.5",
                 active
-                  ? "bg-white/[0.04] md:border-white/20"
-                  : "bg-black/25 md:border-white/10",
+                  ? "border-white/20 bg-white/[0.04]"
+                  : "border-white/10 bg-black/25",
               )}
             >
-              <p className="font-heading w-[5.25rem] shrink-0 text-base leading-none tracking-wide text-white uppercase md:w-auto md:text-2xl">
+              <p className="font-heading w-[5.5rem] shrink-0 text-lg leading-none tracking-wide text-white uppercase">
                 {team.label}
-              </p>
-              <p className="mt-1.5 hidden text-[0.62rem] tracking-[0.18em] text-zinc-500 uppercase md:block">
-                30-min reminder
               </p>
               <SubscribeButtons team={team.id} />
             </div>

@@ -200,23 +200,20 @@ export function SponsorBoard() {
       <section className="overflow-hidden rounded-2xl border border-white/12 bg-black">
         <header
           id="sponsorship-packet"
-          className="relative overflow-hidden border-b border-white/10 px-5 py-8 sm:px-8 sm:py-10"
+          className="relative overflow-hidden border-b border-white/10 px-5 py-5 sm:px-8 sm:py-6"
         >
-          <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
+          <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
             <div className="max-w-xl">
-              <p className="text-[0.7rem] font-semibold tracking-[0.22em] text-red-400 uppercase">
-                2026–27 season
-              </p>
-              <h2 className="font-heading mt-2 text-3xl tracking-wide text-white uppercase sm:text-4xl">
+              <h2 className="font-heading text-3xl tracking-wide text-white uppercase sm:text-4xl">
                 Partner with Yukon Baseball
               </h2>
-              <p className="mt-3 text-sm leading-6 text-zinc-400">
+              <p className="mt-2 text-sm leading-6 text-zinc-400">
                 Partner with Yukon Baseball to support our players while
                 putting your business in front of the Yukon community.
               </p>
               <a
                 href={`mailto:${program.email}?subject=${encodeURIComponent("Yukon Baseball sponsorship")}`}
-                className="mt-4 inline-block text-sm text-zinc-400 underline decoration-white/20 underline-offset-4 transition-colors hover:text-white"
+                className="mt-2.5 inline-block text-sm text-zinc-400 underline decoration-white/20 underline-offset-4 transition-colors hover:text-white"
               >
                 Email {program.email}
               </a>

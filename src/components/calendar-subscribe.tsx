@@ -1,8 +1,10 @@
 "use client";
 
+import { buttonVariants } from "@/components/ui/button";
 import { calendarSubscribeLinks } from "@/lib/calendar";
 import { teams, type TeamId } from "@/lib/site";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 import { useMemo, useState } from "react";
 
 async function writeClipboard(value: string) {
@@ -71,9 +73,20 @@ export function CalendarSubscribe({
 }) {
   return (
     <div className="border-t border-white/8 pt-4">
-      <p className="text-[0.62rem] font-semibold tracking-[0.22em] text-zinc-500 uppercase">
-        Parent calendars
-      </p>
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <p className="text-[0.62rem] font-semibold tracking-[0.22em] text-zinc-500 uppercase">
+          Parent calendars
+        </p>
+        <Link
+          href="/schedule/instructions"
+          className={cn(
+            buttonVariants(),
+            "h-7 px-3 text-[0.62rem] tracking-[0.12em] uppercase",
+          )}
+        >
+          Instructions
+        </Link>
+      </div>
       <p className="mt-1.5 max-w-xl text-xs leading-5 text-zinc-500 sm:text-sm sm:leading-6 sm:text-zinc-400">
         30-minute reminder before first pitch. Updates when the schedule
         changes.

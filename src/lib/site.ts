@@ -49,7 +49,7 @@ export const navPrimary = [
 ] as const;
 
 export const navMore = [
-  { href: "/support", label: "Support" },
+  { href: "/support", label: "Booster" },
   { href: "/contact", label: "Contact" },
   { href: "/recruiting", label: "Recruiting" },
   { href: "/camps", label: "Camps" },

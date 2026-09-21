@@ -6,18 +6,18 @@ export const seniors2026Story = {
   date: "Class of 2026",
   category: "News" as const,
   excerpt:
-    "The next chapter is underway for four more Yukon Millers: Eddie Fish, Brayden Trogdon, Devon Butler and Gentry Hoke.",
+    "The next chapter is underway for five more Yukon Millers: Eddie Fish, Brayden Trogdon, Devon Butler, Cayden Thomas and Gentry Hoke.",
   body: [
-    "The next chapter is underway for four more Yukon Millers.",
+    "The next chapter is underway for five more Yukon Millers: Eddie Fish, Brayden Trogdon, Devon Butler, Cayden Thomas and Gentry Hoke.",
   ],
   blocks: [
     {
       type: "p",
-      text: "The next chapter is underway for four more Yukon Millers.",
+      text: "The next chapter is underway for five more Yukon Millers: Eddie Fish, Brayden Trogdon, Devon Butler, Cayden Thomas and Gentry Hoke.",
     },
     {
       type: "p",
-      text: "Eddie Fish, Brayden Trogdon, Devon Butler and Gentry Hoke are taking the next step in their baseball careers, continuing their journeys at the collegiate level.",
+      text: "These former Millers are taking the next step in their baseball journeys, continuing their careers at the collegiate level.",
     },
     {
       type: "h2",
@@ -57,15 +57,31 @@ export const seniors2026Story = {
     },
     {
       type: "h2",
+      text: "Cayden Thomas — USAO",
+    },
+    {
+      type: "p",
+      text: "Thomas is also continuing his baseball career at the University of Science and Arts of Oklahoma, joining Butler with the Drovers.",
+    },
+    {
+      type: "p",
+      text: "After his time with the Yukon Millers, Thomas will continue developing his game and competing at the collegiate level.",
+    },
+    {
+      type: "h2",
       text: "Gentry Hoke — Cowley",
     },
     {
       type: "p",
-      text: "Hoke is continuing his baseball career at Cowley College, where he will join the Tigers.",
+      text: "Hoke will continue his baseball career at Cowley College, where he will join the Tigers.",
     },
     {
       type: "p",
-      text: "A standout player for Yukon, Hoke now gets the opportunity to continue developing his game and compete at the collegiate level.",
+      text: "A standout player for Yukon, Hoke earned the opportunity to continue developing his game and compete at the collegiate level.",
+    },
+    {
+      type: "note",
+      text: "Hoke is taking a gap year due to injury and plans to continue his baseball career at Cowley College.",
     },
     {
       type: "h2",
@@ -73,15 +89,11 @@ export const seniors2026Story = {
     },
     {
       type: "p",
-      text: "Four more Millers are now beginning the next chapter of their baseball journeys. Yukon Baseball is proud of the work Eddie, Brayden, Devon and Gentry put in wearing the Yukon uniform and looks forward to following their careers at the next level.",
+      text: "Five more Millers are now beginning the next chapter of their baseball journeys. Yukon Baseball is proud of the work Eddie, Brayden, Devon, Cayden and Gentry put in wearing the Yukon uniform and looks forward to following their journeys at the next level.",
     },
     {
       type: "p",
-      text: "Congratulations, Eddie, Brayden, Devon and Gentry! Go make your mark.",
-    },
-    {
-      type: "note",
-      text: "Once a Miller, Always a Miller!",
+      text: "Congratulations, Eddie, Brayden, Devon, Cayden and Gentry! Go make your mark.",
     },
   ] satisfies ArticleBlock[],
 };

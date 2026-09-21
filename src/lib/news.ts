@@ -1,5 +1,6 @@
 import type { ArticleBlock } from "@/lib/news-blocks";
 import { seniors2026Story } from "@/lib/news-2026-seniors";
+import { threeMoreMillersStory } from "@/lib/news-three-more-millers";
 import { carsonBengeStory } from "@/lib/news-carson-benge";
 import { class2aYukonStory } from "@/lib/news-class-2a-yukon";
 import { coltonStrangeStory } from "@/lib/news-colton-strange";
@@ -80,6 +81,7 @@ export const articles: Article[] = [
     ],
   },
   seniors2026Story,
+  threeMoreMillersStory,
 ];
 
 export function getArticle(slug: string) {

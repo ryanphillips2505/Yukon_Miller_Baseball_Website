@@ -17,7 +17,7 @@ export function PhotoSlot({ label, className, src, alt }: PhotoSlotProps) {
           src={src}
           alt={alt ?? label}
           fill
-          className="object-contain object-top"
+          className="object-contain object-center"
         />
       </div>
     );

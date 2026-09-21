@@ -79,7 +79,7 @@ export function PlayerBioDialog({
               >
                 <XIcon className="size-4" />
               </DialogClose>
-              <div className="relative grid gap-5 px-5 py-6 sm:grid-cols-[11rem_minmax(0,1fr)] sm:items-end sm:px-6 sm:pt-7 sm:pb-6">
+              <div className="relative grid gap-5 px-5 py-6 sm:grid-cols-[11rem_minmax(0,1fr)] sm:items-center sm:px-6 sm:pt-7 sm:pb-6">
                 <PhotoSlot
                   label="Player photo"
                   src={player.photo}

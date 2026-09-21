@@ -1,3 +1,4 @@
+import { PublicTrackers } from "@/components/public-trackers";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { program } from "@/lib/site";
@@ -73,6 +74,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           {children}
         </main>
         <SiteFooter />
+        <PublicTrackers />
       </body>
     </html>
   );

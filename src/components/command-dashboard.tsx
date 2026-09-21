@@ -287,10 +287,10 @@ export function CommandDashboard() {
           ) : null}
         </div>
       ) : null}
-      {data?.status === "ok" && !data.connections.ga4 ? (
+      {data?.status === "ok" && data.connections.vercelAnalytics ? (
         <p className="mt-4 text-sm text-zinc-500">
           {data.message ||
-            "Numbers are from Vercel Web Analytics. Sessions, new/returning visitors, and live traffic need Google Analytics 4."}
+            "Numbers are from Vercel Web Analytics. Sessions, new/returning visitors, and live traffic are not provided by this source."}
         </p>
       ) : null}
 
@@ -362,7 +362,7 @@ export function CommandDashboard() {
                     ))}
                   </ul>
                   <p className="mt-3 text-xs text-zinc-500">
-                    GA4 real-time reports do not include traffic source.
+                    Live traffic is not available from Vercel Web Analytics.
                   </p>
                 </div>
               </div>
@@ -540,7 +540,7 @@ export function CommandDashboard() {
             ) : (
               <p className="text-sm leading-6 text-zinc-400">
                 {data.search.message ||
-                  "Google Search Console is not connected. Add GSC_SITE_URL and give the same service account access to Search Console."}
+                  "Search queries are not available from Vercel Web Analytics."}
               </p>
             )}
           </Panel>
@@ -562,7 +562,9 @@ export function CommandDashboard() {
                       className="flex justify-between gap-3"
                     >
                       <span className="text-zinc-300">
-                        {row.city}, {row.region}, {row.country}
+                        {[row.city, row.region, row.country]
+                          .filter(Boolean)
+                          .join(", ")}
                       </span>
                       <span className="text-white">{formatNumber(row.visitors)}</span>
                     </li>
@@ -614,7 +616,7 @@ export function CommandDashboard() {
           <Panel title="Quick Insights">
             {data.insights.length === 0 ? (
               <p className="text-sm text-zinc-500">
-                Insights appear when Google Analytics returns enough data.
+                Insights appear when enough traffic has been recorded.
               </p>
             ) : (
               <ul className="space-y-2 text-sm leading-6 text-zinc-300">

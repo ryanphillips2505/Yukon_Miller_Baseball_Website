@@ -9,10 +9,8 @@ import type {
   PageRow,
   RangeKey,
   RealtimeSnapshot,
-  SearchRow,
   SeriesPoint,
   SourceRow,
-  TechRow,
 } from "@/lib/admin-analytics-types";
 import {
   isPublicContentPath,
@@ -28,8 +26,6 @@ import {
   vercelVisitCount,
   vercelVisitRows,
 } from "@/lib/admin-vercel-analytics";
-import { BetaAnalyticsDataClient } from "@google-analytics/data";
-import { GoogleAuth } from "google-auth-library";
 
 export type {
   AnalyticsPayload,
@@ -78,6 +74,15 @@ const SOCIAL_LABELS: Record<(typeof SOCIAL_KEYS)[number], string> = {
   "other-social": "Other social networks",
 };
 
+const SEARCH_UNAVAILABLE =
+  "Search queries are not available from Vercel Web Analytics.";
+const LIVE_UNAVAILABLE =
+  "Live traffic is not available from Vercel Web Analytics.";
+const VERCEL_NOTE =
+  "Numbers are from Vercel Web Analytics. Sessions, new/returning visitors, live traffic, and city/state are not provided by this source.";
+const UNCONFIGURED_MESSAGE =
+  "Enable Web Analytics on this Vercel project, add VERCEL_TOKEN if the dashboard cannot read numbers, redeploy, then visit public pages so traffic can be counted.";
+
 function pad(value: number) {
   return String(value).padStart(2, "0");
 }
@@ -108,7 +113,6 @@ function diffDays(start: string, end: string) {
   const b = Date.UTC(ye, me - 1, de);
   return Math.round((b - a) / 86_400_000);
 }
-
 
 const RANGE_LABELS: Record<RangeKey, string> = {
   today: "Today",
@@ -201,169 +205,16 @@ function emptyMetric(): MetricValue {
   return { value: null, previous: null, changePct: null };
 }
 
-function parseNumber(value: string | null | undefined) {
-  if (value == null || value === "") return null;
-  const n = Number(value);
-  return Number.isFinite(n) ? n : null;
-}
-
-function serviceAccount() {
-  const raw = process.env.GA_SERVICE_ACCOUNT_JSON;
-  if (raw) {
-    try {
-      return JSON.parse(raw) as { client_email?: string; private_key?: string };
-    } catch {
-      return null;
-    }
-  }
-  const email = process.env.GA_CLIENT_EMAIL;
-  const key = process.env.GA_PRIVATE_KEY?.replace(/\\n/g, "\n");
-  if (email && key) return { client_email: email, private_key: key };
-  return null;
-}
-
-function gaPropertyId() {
-  return (process.env.GA_PROPERTY_ID || "").replace(/^properties\//, "").trim();
-}
-
-function gscSiteUrl() {
-  return (process.env.GSC_SITE_URL || "").trim();
-}
-
-function vercelCollectorEnabled() {
-  return Boolean(
-    process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || process.env.VERCEL,
-  );
-}
-
 function connections() {
-  const account = serviceAccount();
-  const property = gaPropertyId();
-  const site = gscSiteUrl();
-  const ga4 = Boolean(account?.client_email && account.private_key && property);
-  const gsc = Boolean(account?.client_email && account.private_key && site);
+  const vercelAnalytics = vercelAnalyticsReady();
   return {
-    ga4,
-    gsc,
-    vercelCollector: vercelCollectorEnabled(),
-    vercelAnalytics: vercelAnalyticsReady(),
-    ga4Reason: ga4
-      ? undefined
-      : "Google Analytics 4 is not connected. Add GA_PROPERTY_ID and a service account to unlock sessions, new/returning visitors, live traffic, and city-level location.",
-    gscReason: gsc
-      ? undefined
-      : "Set GSC_SITE_URL (example: https://www.yukonbaseball.com/) and add the same service account as a user on that Search Console property.",
-    vercelReason: vercelAnalyticsReady() ? undefined : vercelAnalyticsReason(),
-    account,
-    property,
-    site,
+    ga4: false,
+    gsc: false,
+    vercelCollector: Boolean(process.env.VERCEL),
+    vercelAnalytics,
+    vercelReason: vercelAnalytics ? undefined : vercelAnalyticsReason(),
+    gscReason: SEARCH_UNAVAILABLE,
   };
-}
-
-function gaClient(account: { client_email?: string; private_key?: string }) {
-  return new BetaAnalyticsDataClient({
-    credentials: {
-      client_email: account.client_email,
-      private_key: account.private_key,
-    },
-  });
-}
-
-type GaRow = Record<string, string>;
-
-function rowsFromReport(
-  response: {
-    rows?:
-      | {
-          dimensionValues?: { value?: string | null }[] | null;
-          metricValues?: { value?: string | null }[] | null;
-        }[]
-      | null;
-  } | null,
-  dimensions: string[],
-  metrics: string[],
-): GaRow[] {
-  return (response?.rows ?? []).map((row) => {
-    const item: GaRow = {};
-    dimensions.forEach((name, index) => {
-      item[name] = row.dimensionValues?.[index]?.value ?? "";
-    });
-    metrics.forEach((name, index) => {
-      item[name] = row.metricValues?.[index]?.value ?? "";
-    });
-    return item;
-  });
-}
-
-async function runReport(
-  client: BetaAnalyticsDataClient,
-  property: string,
-  options: {
-    start: string;
-    end: string;
-    metrics: string[];
-    dimensions?: string[];
-    limit?: number;
-    orderByMetric?: string;
-  },
-) {
-  const [response] = await client.runReport({
-    property: `properties/${property}`,
-    dateRanges: [{ startDate: options.start, endDate: options.end }],
-    metrics: options.metrics.map((name) => ({ name })),
-    dimensions: options.dimensions?.map((name) => ({ name })),
-    limit: options.limit,
-    orderBys: options.orderByMetric
-      ? [{ metric: { metricName: options.orderByMetric }, desc: true }]
-      : undefined,
-  });
-  return rowsFromReport(response, options.dimensions ?? [], options.metrics);
-}
-
-function classifySource(channel: string, source: string, medium: string) {
-  const s = source.toLowerCase();
-  const m = medium.toLowerCase();
-  const c = channel.toLowerCase();
-  if (s.includes("facebook") || s.includes("fb.com") || s === "fb") return "facebook";
-  if (s.includes("instagram") || s.includes("ig.")) return "instagram";
-  if (s.includes("twitter") || s === "x" || s.includes("t.co") || s.includes("x.com")) {
-    return "x";
-  }
-  if (c.includes("organic search") || (m === "organic" && !c.includes("social"))) {
-    return "organic";
-  }
-  if (c === "direct" || s === "(direct)") return "direct";
-  if (c.includes("social") || m.includes("social")) return "other-social";
-  if (c.includes("referral") || m === "referral") return "referral";
-  return "other";
-}
-
-function sumRows(
-  rows: GaRow[],
-  classify: (row: GaRow) => string,
-  keys: readonly string[],
-) {
-  const totals = new Map<string, { visitors: number; sessions: number; pageViews: number }>();
-  for (const key of keys) totals.set(key, { visitors: 0, sessions: 0, pageViews: 0 });
-  for (const row of rows) {
-    const key = classify(row);
-    const bucket = totals.get(key) ?? { visitors: 0, sessions: 0, pageViews: 0 };
-    bucket.visitors += parseNumber(row.activeUsers) ?? 0;
-    bucket.sessions += parseNumber(row.sessions) ?? 0;
-    bucket.pageViews += parseNumber(row.screenPageViews) ?? 0;
-    totals.set(key, bucket);
-  }
-  const visitorTotal = [...totals.values()].reduce((sum, item) => sum + item.visitors, 0);
-  return keys.map((key) => {
-    const item = totals.get(key) ?? { visitors: 0, sessions: 0, pageViews: 0 };
-    return {
-      key,
-      visitors: item.visitors,
-      sessions: item.sessions,
-      pageViews: item.pageViews,
-      percent: visitorTotal > 0 ? (item.visitors / visitorTotal) * 100 : null,
-    };
-  });
 }
 
 function emptyPayload(
@@ -380,12 +231,11 @@ function emptyPayload(
     range,
     previousRange: previous,
     connections: {
-      ga4: linked.ga4,
-      gsc: linked.gsc,
+      ga4: false,
+      gsc: false,
       vercelCollector: linked.vercelCollector,
       vercelAnalytics: linked.vercelAnalytics,
-      ga4Reason: linked.ga4Reason,
-      gscReason: linked.gscReason,
+      gscReason: SEARCH_UNAVAILABLE,
       vercelReason: linked.vercelReason,
     },
     cards: {
@@ -418,8 +268,8 @@ function emptyPayload(
       percent: null,
     })),
     search: {
-      configured: linked.gsc,
-      message: linked.gscReason,
+      configured: false,
+      message: SEARCH_UNAVAILABLE,
       totals: { clicks: null, impressions: null, ctr: null, position: null },
       queries: [],
       pages: [],
@@ -430,113 +280,6 @@ function emptyPayload(
     browsers: [],
     operatingSystems: [],
     insights: [],
-  };
-}
-
-async function metricPair(
-  client: BetaAnalyticsDataClient,
-  property: string,
-  start: string,
-  end: string,
-  prevStart: string,
-  prevEnd: string,
-  metricName: string,
-) {
-  const [currentRows, previousRows] = await Promise.all([
-    runReport(client, property, {
-      start,
-      end,
-      metrics: [metricName],
-    }),
-    runReport(client, property, {
-      start: prevStart,
-      end: prevEnd,
-      metrics: [metricName],
-    }),
-  ]);
-  return metric(
-    parseNumber(currentRows[0]?.[metricName]),
-    parseNumber(previousRows[0]?.[metricName]),
-  );
-}
-
-async function fetchSearchConsole(
-  account: { client_email?: string; private_key?: string },
-  site: string,
-  start: string,
-  end: string,
-) {
-  const auth = new GoogleAuth({
-    credentials: {
-      client_email: account.client_email,
-      private_key: account.private_key,
-    },
-    scopes: ["https://www.googleapis.com/auth/webmasters.readonly"],
-  });
-  const client = await auth.getClient();
-  const token = await client.getAccessToken();
-  if (!token.token) {
-    throw new Error("Search Console token unavailable.");
-  }
-
-  async function query(dimension?: "query" | "page") {
-    const response = await fetch(
-      `https://searchconsole.googleapis.com/webmasters/v3/sites/${encodeURIComponent(site)}/searchAnalytics/query`,
-      {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token.token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          startDate: start,
-          endDate: end,
-          dimensions: dimension ? [dimension] : undefined,
-          rowLimit: dimension ? 10 : 1,
-        }),
-      },
-    );
-    if (!response.ok) {
-      throw new Error(`Search Console ${response.status}`);
-    }
-    const data = (await response.json()) as {
-      rows?: {
-        keys?: string[];
-        clicks?: number;
-        impressions?: number;
-        ctr?: number;
-        position?: number;
-      }[];
-    };
-    return data.rows ?? [];
-  }
-
-  const [totals, queries, pages] = await Promise.all([
-    query(),
-    query("query"),
-    query("page"),
-  ]);
-
-  const total = totals[0] ?? { clicks: 0, impressions: 0, ctr: 0, position: 0 };
-
-  const mapRows = (rows: Awaited<ReturnType<typeof query>>): SearchRow[] =>
-    rows.slice(0, 10).map((row) => ({
-      label: row.keys?.[0] || "",
-      clicks: row.clicks ?? null,
-      impressions: row.impressions ?? null,
-      ctr: row.ctr ?? null,
-      position: row.position ?? null,
-    }));
-
-  return {
-    totals: {
-      clicks: total.clicks ?? null,
-      impressions: total.impressions ?? null,
-      ctr: total.ctr ?? (total.impressions ? total.clicks! / total.impressions : null),
-      position: total.position ?? null,
-    },
-    queries: mapRows(queries),
-    pages: mapRows(pages),
   };
 }
 
@@ -560,12 +303,8 @@ function buildInsights(payload: AnalyticsPayload) {
     );
   }
   const facebook = payload.social.find((item) => item.key === "facebook");
-  if (facebook?.visitors != null) {
+  if (facebook?.visitors != null && facebook.visitors > 0) {
     lines.push(`Facebook generated ${facebook.visitors} visits in this date range.`);
-  }
-  const oklahoma = payload.oklahomaVisitors;
-  if (oklahoma != null && payload.cards.pageViews.value != null) {
-    lines.push(`${oklahoma} visits came from Oklahoma in this date range.`);
   }
   return lines;
 }
@@ -723,8 +462,8 @@ async function loadFromVercel(
 
   const locations: LocationRow[] = locationRows.map((row) => ({
     country: countryLabel(row.country || ""),
-    region: "Data unavailable",
-    city: "Data unavailable",
+    region: "",
+    city: "",
     visitors: row.visitors,
   }));
 
@@ -743,8 +482,7 @@ async function loadFromVercel(
 
   const payload: AnalyticsPayload = {
     status: "ok",
-    message:
-      "Numbers are from Vercel Web Analytics. Sessions, new/returning visitors, live traffic, city/state, and Search Console need Google Analytics 4.",
+    message: VERCEL_NOTE,
     timezone: TIMEZONE,
     range: selected,
     previousRange: compared.previous,
@@ -753,8 +491,7 @@ async function loadFromVercel(
       gsc: false,
       vercelCollector: linked.vercelCollector,
       vercelAnalytics: true,
-      ga4Reason: linked.ga4Reason,
-      gscReason: linked.gscReason,
+      gscReason: SEARCH_UNAVAILABLE,
     },
     cards: {
       visitorsToday: metric(visitorsToday.visitors, prevToday.visitors),
@@ -773,7 +510,7 @@ async function loadFromVercel(
     social,
     search: {
       configured: false,
-      message: linked.gscReason,
+      message: SEARCH_UNAVAILABLE,
       totals: { clicks: null, impressions: null, ctr: null, position: null },
       queries: [],
       pages: [],
@@ -795,9 +532,6 @@ async function loadFromVercel(
   return payload;
 }
 
-const UNCONFIGURED_MESSAGE =
-  "The Command Center is working, but no traffic source is connected yet. Enable Web Analytics in this Vercel project, add a VERCEL_TOKEN, redeploy, then open public pages so visits can be counted. Sessions, live traffic, and Search Console still need Google Analytics 4.";
-
 export async function loadAnalytics(options: {
   range: RangeKey;
   compare: CompareKey;
@@ -813,26 +547,7 @@ export async function loadAnalytics(options: {
   const hit = cache.get(key);
   if (hit && Date.now() - hit.at < CACHE_MS) return hit.value;
 
-  const linked = connections();
-  if (!linked.ga4 || !linked.account || !linked.property) {
-    if (linked.vercelAnalytics) {
-      try {
-        const payload = await loadFromVercel(selected, compared);
-        cache.set(key, { at: Date.now(), value: payload });
-        return payload;
-      } catch (error) {
-        const payload = emptyPayload(
-          "error",
-          selected,
-          compared.previous,
-          error instanceof Error
-            ? `${UNCONFIGURED_MESSAGE} ${error.message}`
-            : UNCONFIGURED_MESSAGE,
-        );
-        cache.set(key, { at: Date.now(), value: payload });
-        return payload;
-      }
-    }
+  if (!vercelAnalyticsReady()) {
     const payload = emptyPayload(
       "unconfigured",
       selected,
@@ -844,429 +559,32 @@ export async function loadAnalytics(options: {
   }
 
   try {
-    const client = gaClient(linked.account);
-    const property = linked.property;
-    const today = formatYmd(new Date());
-    const yesterday = addDays(today, -1);
-    const weekStart = addDays(today, -6);
-    const monthStart = addDays(today, -29);
-
-    const [
-      visitorsToday,
-      visitorsYesterday,
-      visitorsWeek,
-      visitorsMonth,
-      pageViews,
-      sessions,
-      newVisitors,
-      returningRows,
-      returningPrev,
-      seriesRows,
-      pageRows,
-      sourceRows,
-      locationRows,
-      deviceRows,
-      browserRows,
-      osRows,
-    ] = await Promise.all([
-      metricPair(client, property, today, today, yesterday, yesterday, "activeUsers"),
-      metricPair(
-        client,
-        property,
-        yesterday,
-        yesterday,
-        addDays(yesterday, -1),
-        addDays(yesterday, -1),
-        "activeUsers",
-      ),
-      metricPair(
-        client,
-        property,
-        weekStart,
-        today,
-        addDays(weekStart, -7),
-        addDays(today, -7),
-        "activeUsers",
-      ),
-      metricPair(
-        client,
-        property,
-        monthStart,
-        today,
-        addDays(monthStart, -30),
-        addDays(today, -30),
-        "activeUsers",
-      ),
-      metricPair(
-        client,
-        property,
-        compared.current.start,
-        compared.current.end,
-        compared.previous.start,
-        compared.previous.end,
-        "screenPageViews",
-      ),
-      metricPair(
-        client,
-        property,
-        compared.current.start,
-        compared.current.end,
-        compared.previous.start,
-        compared.previous.end,
-        "sessions",
-      ),
-      metricPair(
-        client,
-        property,
-        compared.current.start,
-        compared.current.end,
-        compared.previous.start,
-        compared.previous.end,
-        "newUsers",
-      ),
-      runReport(client, property, {
-        start: compared.current.start,
-        end: compared.current.end,
-        metrics: ["activeUsers"],
-        dimensions: ["newVsReturning"],
-      }),
-      runReport(client, property, {
-        start: compared.previous.start,
-        end: compared.previous.end,
-        metrics: ["activeUsers"],
-        dimensions: ["newVsReturning"],
-      }),
-      runReport(client, property, {
-        start: selected.start,
-        end: selected.end,
-        metrics: ["activeUsers", "sessions", "screenPageViews"],
-        dimensions: ["date"],
-      }),
-      runReport(client, property, {
-        start: selected.start,
-        end: selected.end,
-        metrics: ["screenPageViews", "activeUsers", "averageSessionDuration"],
-        dimensions: ["pagePath", "pageTitle"],
-        orderByMetric: "screenPageViews",
-        limit: 25,
-      }),
-      runReport(client, property, {
-        start: selected.start,
-        end: selected.end,
-        metrics: ["activeUsers", "sessions", "screenPageViews"],
-        dimensions: ["sessionDefaultChannelGroup", "sessionSource", "sessionMedium"],
-      }),
-      runReport(client, property, {
-        start: selected.start,
-        end: selected.end,
-        metrics: ["activeUsers"],
-        dimensions: ["country", "region", "city"],
-        orderByMetric: "activeUsers",
-        limit: 25,
-      }),
-      runReport(client, property, {
-        start: selected.start,
-        end: selected.end,
-        metrics: ["activeUsers"],
-        dimensions: ["deviceCategory"],
-      }),
-      runReport(client, property, {
-        start: selected.start,
-        end: selected.end,
-        metrics: ["activeUsers"],
-        dimensions: ["browser"],
-        orderByMetric: "activeUsers",
-        limit: 8,
-      }),
-      runReport(client, property, {
-        start: selected.start,
-        end: selected.end,
-        metrics: ["activeUsers"],
-        dimensions: ["operatingSystem"],
-        orderByMetric: "activeUsers",
-        limit: 8,
-      }),
-    ]);
-
-    const returningNow = returningRows.find((row) =>
-      row.newVsReturning?.toLowerCase().includes("return"),
-    );
-    const returningBefore = returningPrev.find((row) =>
-      row.newVsReturning?.toLowerCase().includes("return"),
-    );
-
-    const series = seriesRows
-      .map((row) => {
-        const raw = row.date || "";
-        const date =
-          raw.length === 8
-            ? `${raw.slice(0, 4)}-${raw.slice(4, 6)}-${raw.slice(6, 8)}`
-            : raw;
-        return {
-          date,
-          visitors: parseNumber(row.activeUsers),
-          sessions: parseNumber(row.sessions),
-          pageViews: parseNumber(row.screenPageViews),
-        };
-      })
-      .sort((a, b) => a.date.localeCompare(b.date));
-
-    const topPages: PageRow[] = pageRows
-      .map((row) => {
-        const path = normalizePath(row.pagePath || "/");
-        return {
-          path,
-          title: row.pageTitle || labelForPath(path),
-          views: parseNumber(row.screenPageViews),
-          visitors: parseNumber(row.activeUsers),
-          engagementSeconds: parseNumber(row.averageSessionDuration),
-        };
-      })
-      .filter((row) => isPublicContentPath(row.path));
-
-    const grouped = new Map<string, number>();
-    for (const page of topPages) {
-      const root = page.path === "/" ? "/" : `/${page.path.split("/")[1]}`;
-      const label = labelForPath(root);
-      grouped.set(label, (grouped.get(label) ?? 0) + (page.views ?? 0));
-    }
-    const popularContent = [...grouped.entries()]
-      .map(([label, views]) => ({
-        label,
-        path: Object.keys(pageLabels).find((path) => pageLabels[path] === label) || "/",
-        views,
-      }))
-      .sort((a, b) => (b.views ?? 0) - (a.views ?? 0));
-
-    const classified = sumRows(
-      sourceRows,
-      (row) =>
-        classifySource(
-          row.sessionDefaultChannelGroup || "",
-          row.sessionSource || "",
-          row.sessionMedium || "",
-        ),
-      SOURCE_ORDER,
-    );
-    const sources: SourceRow[] = classified.map((item) => ({
-      ...item,
-      label: SOURCE_LABELS[item.key as (typeof SOURCE_ORDER)[number]] ?? item.key,
-    }));
-
-    const socialClassified = sumRows(
-      sourceRows,
-      (row) => {
-        const key = classifySource(
-          row.sessionDefaultChannelGroup || "",
-          row.sessionSource || "",
-          row.sessionMedium || "",
-        );
-        if (key === "facebook" || key === "instagram" || key === "x") return key;
-        if (key === "other-social") return "other-social";
-        return "";
-      },
-      SOCIAL_KEYS,
-    );
-    const social: SourceRow[] = socialClassified.map((item) => ({
-      ...item,
-      label: SOCIAL_LABELS[item.key as (typeof SOCIAL_KEYS)[number]] ?? item.key,
-    }));
-
-    const locations: LocationRow[] = locationRows.map((row) => ({
-      country: row.country || "Unknown",
-      region: row.region || "Unknown",
-      city: row.city || "Unknown",
-      visitors: parseNumber(row.activeUsers),
-    }));
-    const oklahomaVisitors = locations
-      .filter((row) => /oklahoma/i.test(row.region) || /oklahoma/i.test(row.city))
-      .reduce((sum, row) => sum + (row.visitors ?? 0), 0);
-
-    const deviceTotal = deviceRows.reduce(
-      (sum, row) => sum + (parseNumber(row.activeUsers) ?? 0),
-      0,
-    );
-    const devices: DeviceRow[] = ["mobile", "desktop", "tablet"].map((category) => {
-      const row = deviceRows.find(
-        (item) => item.deviceCategory?.toLowerCase() === category,
-      );
-      const visitors = parseNumber(row?.activeUsers) ?? 0;
-      return {
-        category: category[0].toUpperCase() + category.slice(1),
-        visitors,
-        percent: deviceTotal > 0 ? (visitors / deviceTotal) * 100 : null,
-      };
-    });
-
-    const browsers: TechRow[] = browserRows.map((row) => ({
-      name: row.browser || "Unknown",
-      visitors: parseNumber(row.activeUsers),
-    }));
-    const operatingSystems: TechRow[] = osRows.map((row) => ({
-      name: row.operatingSystem || "Unknown",
-      visitors: parseNumber(row.activeUsers),
-    }));
-
-    let search: AnalyticsPayload["search"] = {
-      configured: linked.gsc,
-      message: linked.gscReason,
-      totals: { clicks: null, impressions: null, ctr: null, position: null },
-      queries: [],
-      pages: [],
-    };
-    if (linked.gsc && linked.account && linked.site) {
-      try {
-        const gsc = await fetchSearchConsole(
-          linked.account,
-          linked.site,
-          selected.start,
-          selected.end,
-        );
-        search = { configured: true, totals: gsc.totals, queries: gsc.queries, pages: gsc.pages };
-      } catch (error) {
-        search = {
-          configured: false,
-          message:
-            error instanceof Error
-              ? `Search Console is not returning data yet. ${linked.gscReason}`
-              : linked.gscReason,
-          totals: { clicks: null, impressions: null, ctr: null, position: null },
-          queries: [],
-          pages: [],
-        };
-      }
-    }
-
-    const payload: AnalyticsPayload = {
-      status: "ok",
-      timezone: TIMEZONE,
-      range: selected,
-      previousRange: compared.previous,
-      connections: {
-        ga4: true,
-        gsc: search.configured,
-        vercelCollector: linked.vercelCollector,
-        vercelAnalytics: linked.vercelAnalytics,
-        gscReason: search.configured ? undefined : search.message,
-        vercelReason: linked.vercelReason,
-      },
-      cards: {
-        visitorsToday,
-        visitorsYesterday,
-        visitorsWeek,
-        visitorsMonth,
-        pageViews,
-        sessions,
-        newVisitors,
-        returningVisitors: metric(
-          parseNumber(returningNow?.activeUsers),
-          parseNumber(returningBefore?.activeUsers),
-        ),
-      },
-      series,
-      topPages,
-      popularContent,
-      sources,
-      social,
-      search,
-      locations,
-      oklahomaVisitors,
-      devices,
-      browsers,
-      operatingSystems,
-      insights: [],
-    };
-    payload.insights = buildInsights(payload);
+    const payload = await loadFromVercel(selected, compared);
     cache.set(key, { at: Date.now(), value: payload });
     return payload;
   } catch (error) {
-    return emptyPayload(
+    const payload = emptyPayload(
       "error",
       selected,
       compared.previous,
       error instanceof Error
-        ? error.message
-        : "Google Analytics could not be read.",
+        ? `${UNCONFIGURED_MESSAGE} ${error.message}`
+        : UNCONFIGURED_MESSAGE,
     );
+    cache.set(key, { at: Date.now(), value: payload });
+    return payload;
   }
 }
 
 export async function loadRealtime(): Promise<RealtimeSnapshot> {
-  const linked = connections();
-  if (!linked.ga4 || !linked.account || !linked.property) {
-    return {
-      available: false,
-      reason:
-        "Live traffic is not available from Vercel Web Analytics. Connect Google Analytics 4 to show active users.",
-      activeUsers: null,
-      topPages: [],
-      devices: [],
-      locations: [],
-    };
-  }
-
-  try {
-    const client = gaClient(linked.account);
-    const [response] = await client.runRealtimeReport({
-      property: `properties/${linked.property}`,
-      metrics: [{ name: "activeUsers" }],
-      dimensions: [
-        { name: "unifiedScreenName" },
-        { name: "deviceCategory" },
-        { name: "country" },
-        { name: "city" },
-      ],
-    });
-    const rows = rowsFromReport(
-      response,
-      ["unifiedScreenName", "deviceCategory", "country", "city"],
-      ["activeUsers"],
-    );
-    const activeUsers = rows.reduce(
-      (sum, row) => sum + (parseNumber(row.activeUsers) ?? 0),
-      0,
-    );
-    const pages = new Map<string, number>();
-    const devices = new Map<string, number>();
-    const locations = new Map<string, number>();
-    for (const row of rows) {
-      const users = parseNumber(row.activeUsers) ?? 0;
-      const page = row.unifiedScreenName || "Unknown";
-      pages.set(page, (pages.get(page) ?? 0) + users);
-      const device = row.deviceCategory || "Unknown";
-      devices.set(device, (devices.get(device) ?? 0) + users);
-      const location = [row.city, row.country].filter(Boolean).join(", ") || "Unknown";
-      locations.set(location, (locations.get(location) ?? 0) + users);
-    }
-    const sortMap = (map: Map<string, number>) =>
-      [...map.entries()]
-        .sort((a, b) => b[1] - a[1])
-        .slice(0, 6)
-        .map(([label, users]) => ({ label, users }));
-
-    return {
-      available: true,
-      activeUsers,
-      topPages: sortMap(pages).map((item) => ({ path: item.label, users: item.users })),
-      devices: sortMap(devices).map((item) => ({
-        category: item.label,
-        users: item.users,
-      })),
-      locations: sortMap(locations),
-    };
-  } catch (error) {
-    return {
-      available: false,
-      reason:
-        error instanceof Error
-          ? error.message
-          : "GA4 real-time data is not available.",
-      activeUsers: null,
-      topPages: [],
-      devices: [],
-      locations: [],
-    };
-  }
+  return {
+    available: false,
+    reason: LIVE_UNAVAILABLE,
+    activeUsers: null,
+    topPages: [],
+    devices: [],
+    locations: [],
+  };
 }
 
 export function analyticsToCsv(payload: AnalyticsPayload) {
@@ -1311,7 +629,11 @@ export function analyticsToCsv(payload: AnalyticsPayload) {
     push("Social", source.label, source.visitors, source.sessions),
   );
   payload.locations.forEach((row) =>
-    push("Location", `${row.city}, ${row.region}, ${row.country}`, row.visitors),
+    push(
+      "Location",
+      [row.city, row.region, row.country].filter(Boolean).join(", "),
+      row.visitors,
+    ),
   );
   payload.devices.forEach((row) =>
     push("Devices", row.category, row.visitors, null, row.percent),

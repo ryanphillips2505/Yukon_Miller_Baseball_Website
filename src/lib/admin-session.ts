@@ -5,11 +5,7 @@ export { ADMIN_COOKIE };
 const SESSION_MS = 7 * 24 * 60 * 60 * 1000;
 
 export function adminPassword() {
-  return (
-    process.env.ADMIN_PASSWORD ||
-    process.env.MINUTES_ADMIN_PASSWORD ||
-    (process.env.NODE_ENV === "production" ? "" : "yukonadmin")
-  );
+  return process.env.ADMIN_PASSWORD || process.env.MINUTES_ADMIN_PASSWORD || "";
 }
 
 export function adminSecret() {

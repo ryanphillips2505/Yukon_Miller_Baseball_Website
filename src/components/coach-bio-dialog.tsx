@@ -92,7 +92,7 @@ export function CoachBioDialog({
                   label="Staff photo coming"
                   src={coach.photo}
                   alt={coach.name}
-                  className="aspect-[4/5] w-full rounded-xl ring-1 ring-white/10"
+                  className="aspect-[4/5] w-full self-start rounded-xl ring-1 ring-white/10"
                 />
                 <div className="min-w-0 pr-8">
                   <p className="text-[0.68rem] font-semibold tracking-[0.32em] text-red-400 uppercase">

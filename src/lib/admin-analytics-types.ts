@@ -73,8 +73,10 @@ export type AnalyticsPayload = {
     ga4: boolean;
     gsc: boolean;
     vercelCollector: boolean;
+    vercelAnalytics: boolean;
     ga4Reason?: string;
     gscReason?: string;
+    vercelReason?: string;
   };
   cards: {
     visitorsToday: MetricValue;

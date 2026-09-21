@@ -272,8 +272,25 @@ export function CommandDashboard() {
 
       {error ? <p className="mt-4 text-sm text-red-400">{error}</p> : null}
       {data?.status === "unconfigured" || data?.status === "error" ? (
-        <p className="mt-4 rounded-xl border border-white/10 bg-zinc-950 p-4 text-sm leading-6 text-zinc-400">
-          {data.message || "Data unavailable"}
+        <div className="mt-4 rounded-xl border border-white/10 bg-zinc-950 p-4 text-sm leading-6 text-zinc-300">
+          <p className="font-medium text-white">Traffic is not connected yet.</p>
+          <ol className="mt-2 list-decimal space-y-1 pl-5 text-zinc-400">
+            <li>In Vercel, open this project → Analytics → Enable Web Analytics.</li>
+            <li>
+              Add <span className="text-zinc-200">VERCEL_TOKEN</span> (Account
+              Settings → Tokens) for Production, then Redeploy.
+            </li>
+            <li>Visit public pages on yukonbaseball.com so new traffic can be counted.</li>
+          </ol>
+          {data.message ? (
+            <p className="mt-3 text-xs leading-5 text-zinc-500">{data.message}</p>
+          ) : null}
+        </div>
+      ) : null}
+      {data?.status === "ok" && !data.connections.ga4 ? (
+        <p className="mt-4 text-sm text-zinc-500">
+          {data.message ||
+            "Numbers are from Vercel Web Analytics. Sessions, new/returning visitors, and live traffic need Google Analytics 4."}
         </p>
       ) : null}
 

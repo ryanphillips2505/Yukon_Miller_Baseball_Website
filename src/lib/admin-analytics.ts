@@ -20,6 +20,14 @@ import {
   normalizePath,
   pageLabels,
 } from "@/lib/admin-pages";
+import {
+  classifyReferrer,
+  countryLabel,
+  vercelAnalyticsReady,
+  vercelAnalyticsReason,
+  vercelVisitCount,
+  vercelVisitRows,
+} from "@/lib/admin-vercel-analytics";
 import { BetaAnalyticsDataClient } from "@google-analytics/data";
 import { GoogleAuth } from "google-auth-library";
 
@@ -238,12 +246,14 @@ function connections() {
     ga4,
     gsc,
     vercelCollector: vercelCollectorEnabled(),
+    vercelAnalytics: vercelAnalyticsReady(),
     ga4Reason: ga4
       ? undefined
-      : "Set GA_PROPERTY_ID and a Google service account (GA_SERVICE_ACCOUNT_JSON or GA_CLIENT_EMAIL + GA_PRIVATE_KEY), then add the service account as a Viewer on the GA4 property.",
+      : "Google Analytics 4 is not connected. Add GA_PROPERTY_ID and a service account to unlock sessions, new/returning visitors, live traffic, and city-level location.",
     gscReason: gsc
       ? undefined
       : "Set GSC_SITE_URL (example: https://www.yukonbaseball.com/) and add the same service account as a user on that Search Console property.",
+    vercelReason: vercelAnalyticsReady() ? undefined : vercelAnalyticsReason(),
     account,
     property,
     site,
@@ -373,8 +383,10 @@ function emptyPayload(
       ga4: linked.ga4,
       gsc: linked.gsc,
       vercelCollector: linked.vercelCollector,
+      vercelAnalytics: linked.vercelAnalytics,
       ga4Reason: linked.ga4Reason,
       gscReason: linked.gscReason,
+      vercelReason: linked.vercelReason,
     },
     cards: {
       visitorsToday: emptyMetric(),
@@ -558,6 +570,234 @@ function buildInsights(payload: AnalyticsPayload) {
   return lines;
 }
 
+function fillSeries(
+  start: string,
+  end: string,
+  rows: { date?: string; visitors: number; pageviews: number }[],
+): SeriesPoint[] {
+  const byDate = new Map(
+    rows.filter((row) => row.date).map((row) => [row.date as string, row]),
+  );
+  const series: SeriesPoint[] = [];
+  for (let cursor = start; cursor <= end; cursor = addDays(cursor, 1)) {
+    const row = byDate.get(cursor);
+    series.push({
+      date: cursor,
+      visitors: row?.visitors ?? 0,
+      sessions: null,
+      pageViews: row?.pageviews ?? 0,
+    });
+  }
+  return series;
+}
+
+async function loadFromVercel(
+  selected: { start: string; end: string; label: string },
+  compared: {
+    current: { start: string; end: string };
+    previous: { start: string; end: string };
+  },
+): Promise<AnalyticsPayload> {
+  const linked = connections();
+  const today = formatYmd(new Date());
+  const yesterday = addDays(today, -1);
+  const weekStart = addDays(today, -6);
+  const monthStart = addDays(today, -29);
+
+  const [
+    visitorsToday,
+    visitorsYesterday,
+    visitorsWeek,
+    visitorsMonth,
+    pageViews,
+    previousPageViews,
+    seriesRows,
+    pageRows,
+    referrerRows,
+    locationRows,
+    deviceRows,
+    browserRows,
+    osRows,
+  ] = await Promise.all([
+    vercelVisitCount(today, today),
+    vercelVisitCount(yesterday, yesterday),
+    vercelVisitCount(weekStart, today),
+    vercelVisitCount(monthStart, today),
+    vercelVisitCount(compared.current.start, compared.current.end),
+    vercelVisitCount(compared.previous.start, compared.previous.end),
+    vercelVisitRows(selected.start, selected.end, "day", 100),
+    vercelVisitRows(selected.start, selected.end, "requestPath", 25),
+    vercelVisitRows(selected.start, selected.end, "referrerHostname", 40),
+    vercelVisitRows(selected.start, selected.end, "country", 25),
+    vercelVisitRows(selected.start, selected.end, "deviceType", 10),
+    vercelVisitRows(selected.start, selected.end, "browserName", 8),
+    vercelVisitRows(selected.start, selected.end, "osName", 8),
+  ]);
+
+  const [prevToday, prevYesterday, prevWeek, prevMonth] = await Promise.all([
+    vercelVisitCount(yesterday, yesterday),
+    vercelVisitCount(addDays(yesterday, -1), addDays(yesterday, -1)),
+    vercelVisitCount(addDays(weekStart, -7), addDays(today, -7)),
+    vercelVisitCount(addDays(monthStart, -30), addDays(today, -30)),
+  ]);
+
+  const topPages: PageRow[] = pageRows
+    .map((row) => {
+      const path = normalizePath(row.requestPath || "/");
+      return {
+        path,
+        title: labelForPath(path),
+        views: row.pageviews,
+        visitors: row.visitors,
+        engagementSeconds: null,
+      };
+    })
+    .filter((row) => isPublicContentPath(row.path));
+
+  const grouped = new Map<string, number>();
+  for (const page of topPages) {
+    const root = page.path === "/" ? "/" : `/${page.path.split("/")[1]}`;
+    const label = labelForPath(root);
+    grouped.set(label, (grouped.get(label) ?? 0) + (page.views ?? 0));
+  }
+  const popularContent = [...grouped.entries()]
+    .map(([label, views]) => ({
+      label,
+      path: Object.keys(pageLabels).find((path) => pageLabels[path] === label) || "/",
+      views,
+    }))
+    .sort((a, b) => (b.views ?? 0) - (a.views ?? 0));
+
+  const sourceTotals = new Map<
+    string,
+    { visitors: number; sessions: number; pageViews: number }
+  >();
+  for (const key of SOURCE_ORDER) {
+    sourceTotals.set(key, { visitors: 0, sessions: 0, pageViews: 0 });
+  }
+  for (const row of referrerRows) {
+    const key = classifyReferrer(row.referrerHostname || "");
+    const bucket = sourceTotals.get(key) ?? {
+      visitors: 0,
+      sessions: 0,
+      pageViews: 0,
+    };
+    bucket.visitors += row.visitors;
+    bucket.pageViews += row.pageviews;
+    sourceTotals.set(key, bucket);
+  }
+  const visitorTotal = [...sourceTotals.values()].reduce(
+    (sum, item) => sum + item.visitors,
+    0,
+  );
+  const sources: SourceRow[] = SOURCE_ORDER.map((key) => {
+    const item = sourceTotals.get(key) ?? {
+      visitors: 0,
+      sessions: 0,
+      pageViews: 0,
+    };
+    return {
+      key,
+      label: SOURCE_LABELS[key],
+      visitors: item.visitors,
+      sessions: null,
+      pageViews: item.pageViews,
+      percent: visitorTotal > 0 ? (item.visitors / visitorTotal) * 100 : null,
+    };
+  });
+  const social: SourceRow[] = SOCIAL_KEYS.map((key) => {
+    const item = sourceTotals.get(key) ?? {
+      visitors: 0,
+      sessions: 0,
+      pageViews: 0,
+    };
+    return {
+      key,
+      label: SOCIAL_LABELS[key],
+      visitors: item.visitors,
+      sessions: null,
+      pageViews: item.pageViews,
+      percent: visitorTotal > 0 ? (item.visitors / visitorTotal) * 100 : null,
+    };
+  });
+
+  const locations: LocationRow[] = locationRows.map((row) => ({
+    country: countryLabel(row.country || ""),
+    region: "Data unavailable",
+    city: "Data unavailable",
+    visitors: row.visitors,
+  }));
+
+  const deviceTotal = deviceRows.reduce((sum, row) => sum + row.visitors, 0);
+  const devices: DeviceRow[] = ["mobile", "desktop", "tablet"].map((category) => {
+    const row = deviceRows.find(
+      (item) => item.deviceType?.toLowerCase() === category,
+    );
+    const visitors = row?.visitors ?? 0;
+    return {
+      category: category[0].toUpperCase() + category.slice(1),
+      visitors,
+      percent: deviceTotal > 0 ? (visitors / deviceTotal) * 100 : null,
+    };
+  });
+
+  const payload: AnalyticsPayload = {
+    status: "ok",
+    message:
+      "Numbers are from Vercel Web Analytics. Sessions, new/returning visitors, live traffic, city/state, and Search Console need Google Analytics 4.",
+    timezone: TIMEZONE,
+    range: selected,
+    previousRange: compared.previous,
+    connections: {
+      ga4: false,
+      gsc: false,
+      vercelCollector: linked.vercelCollector,
+      vercelAnalytics: true,
+      ga4Reason: linked.ga4Reason,
+      gscReason: linked.gscReason,
+    },
+    cards: {
+      visitorsToday: metric(visitorsToday.visitors, prevToday.visitors),
+      visitorsYesterday: metric(visitorsYesterday.visitors, prevYesterday.visitors),
+      visitorsWeek: metric(visitorsWeek.visitors, prevWeek.visitors),
+      visitorsMonth: metric(visitorsMonth.visitors, prevMonth.visitors),
+      pageViews: metric(pageViews.pageviews, previousPageViews.pageviews),
+      sessions: emptyMetric(),
+      newVisitors: emptyMetric(),
+      returningVisitors: emptyMetric(),
+    },
+    series: fillSeries(selected.start, selected.end, seriesRows),
+    topPages,
+    popularContent,
+    sources,
+    social,
+    search: {
+      configured: false,
+      message: linked.gscReason,
+      totals: { clicks: null, impressions: null, ctr: null, position: null },
+      queries: [],
+      pages: [],
+    },
+    locations,
+    oklahomaVisitors: null,
+    devices,
+    browsers: browserRows.map((row) => ({
+      name: row.browserName || "Unknown",
+      visitors: row.visitors,
+    })),
+    operatingSystems: osRows.map((row) => ({
+      name: row.osName || "Unknown",
+      visitors: row.visitors,
+    })),
+    insights: [],
+  };
+  payload.insights = buildInsights(payload);
+  return payload;
+}
+
+const UNCONFIGURED_MESSAGE =
+  "The Command Center is working, but no traffic source is connected yet. Enable Web Analytics in this Vercel project, add a VERCEL_TOKEN, redeploy, then open public pages so visits can be counted. Sessions, live traffic, and Search Console still need Google Analytics 4.";
+
 export async function loadAnalytics(options: {
   range: RangeKey;
   compare: CompareKey;
@@ -575,11 +815,29 @@ export async function loadAnalytics(options: {
 
   const linked = connections();
   if (!linked.ga4 || !linked.account || !linked.property) {
+    if (linked.vercelAnalytics) {
+      try {
+        const payload = await loadFromVercel(selected, compared);
+        cache.set(key, { at: Date.now(), value: payload });
+        return payload;
+      } catch (error) {
+        const payload = emptyPayload(
+          "error",
+          selected,
+          compared.previous,
+          error instanceof Error
+            ? `${UNCONFIGURED_MESSAGE} ${error.message}`
+            : UNCONFIGURED_MESSAGE,
+        );
+        cache.set(key, { at: Date.now(), value: payload });
+        return payload;
+      }
+    }
     const payload = emptyPayload(
       "unconfigured",
       selected,
       compared.previous,
-      linked.ga4Reason,
+      UNCONFIGURED_MESSAGE,
     );
     cache.set(key, { at: Date.now(), value: payload });
     return payload;
@@ -888,7 +1146,9 @@ export async function loadAnalytics(options: {
         ga4: true,
         gsc: search.configured,
         vercelCollector: linked.vercelCollector,
+        vercelAnalytics: linked.vercelAnalytics,
         gscReason: search.configured ? undefined : search.message,
+        vercelReason: linked.vercelReason,
       },
       cards: {
         visitorsToday,
@@ -937,7 +1197,7 @@ export async function loadRealtime(): Promise<RealtimeSnapshot> {
     return {
       available: false,
       reason:
-        "Real-time traffic requires the same GA4 service account and property used for reports.",
+        "Live traffic is not available from Vercel Web Analytics. Connect Google Analytics 4 to show active users.",
       activeUsers: null,
       topPages: [],
       devices: [],

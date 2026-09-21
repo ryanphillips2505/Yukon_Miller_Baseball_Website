@@ -101,7 +101,7 @@ export const coaches: Coach[] = [
     role: "Assistant Coach",
     photo: "/images/coaches/zac-booth.jpg",
     bio: {
-      yearsCoaching: "",
+      yearsCoaching: "18",
       family: "Madelyn · Ella",
       familyDetail:
         "Two daughters, Madelyn (23), working on her doctorate at Oklahoma City University, and Ella (20), studying interior design at Oklahoma State, and two dogs, Vader and Kylo. He is a graduate of Elk City High School and spent five seasons as a pitcher at Southwestern Oklahoma State in Weatherford.",

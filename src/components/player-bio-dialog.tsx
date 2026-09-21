@@ -84,7 +84,7 @@ export function PlayerBioDialog({
                   label="Player photo"
                   src={player.photo}
                   alt={fullName(player)}
-                  className="aspect-[3/4] w-full self-start rounded-xl ring-1 ring-white/10"
+                  className="aspect-[3/4] w-full shrink-0 self-start justify-self-start rounded-xl ring-1 ring-white/10"
                 />
                 <div className="min-w-0 pr-8">
                   <p className="text-[0.68rem] font-semibold tracking-[0.32em] text-red-400 uppercase">

@@ -58,6 +58,20 @@ function Mark({
   );
 }
 
+function SponsorHref({ sponsor }: { sponsor: Sponsor }) {
+  if (!sponsor.href) return null;
+
+  return (
+    <a
+      href={sponsor.href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="absolute inset-0"
+      aria-label={`${sponsor.name} (opens in a new tab)`}
+    />
+  );
+}
+
 function BannerPartner({
   sponsor,
   kicker,
@@ -78,6 +92,7 @@ function BannerPartner({
           </h3>
         </div>
       </div>
+      <SponsorHref sponsor={sponsor} />
     </article>
   );
 }
@@ -122,15 +137,7 @@ function SponsorTile({
           </h3>
         </div>
       </div>
-      {sponsor.href ? (
-        <a
-          href={sponsor.href}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="absolute inset-0"
-          aria-label={`${sponsor.name} (opens in a new tab)`}
-        />
-      ) : null}
+      <SponsorHref sponsor={sponsor} />
     </article>
   );
 }
@@ -265,6 +272,7 @@ export function SponsorBoard() {
                   </h3>
                 </div>
               </div>
+              <SponsorHref sponsor={sponsor} />
             </article>
           ))}
 

@@ -2,10 +2,17 @@ import { ArticleCardImage } from "@/components/article-card-image";
 import { EmptyState } from "@/components/empty-state";
 import { PageHero } from "@/components/page-hero";
 import { articles } from "@/lib/news";
+import { newsIndexOgImage, ogImageSize } from "@/lib/og-cover";
 import type { Metadata } from "next";
 import Link from "next/link";
 
 const latestPhoto = articles.find((article) => article.image)?.image;
+const newsShareImage = {
+  url: newsIndexOgImage,
+  width: ogImageSize.width,
+  height: ogImageSize.height,
+  alt: latestPhoto?.alt ?? "Yukon Miller Baseball news",
+};
 
 export const metadata: Metadata = {
   title: "News",
@@ -15,20 +22,11 @@ export const metadata: Metadata = {
     title: "News",
     description:
       "Yukon Miller Baseball news, commits, and program updates.",
-    images: latestPhoto
-      ? [
-          {
-            url: latestPhoto.src,
-            width: latestPhoto.width,
-            height: latestPhoto.height,
-            alt: latestPhoto.alt,
-          },
-        ]
-      : undefined,
+    images: [newsShareImage],
   },
   twitter: {
     card: "summary_large_image",
-    images: latestPhoto ? [latestPhoto.src] : undefined,
+    images: [newsShareImage.url],
   },
 };
 

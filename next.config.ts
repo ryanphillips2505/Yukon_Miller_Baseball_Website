@@ -13,6 +13,12 @@ const packetHeaders = [
 
 const nextConfig: NextConfig = {
   allowedDevOrigins: ["127.0.0.1"],
+  outputFileTracingExcludes: {
+    "*": [
+      "./node_modules/@img/**/*",
+      "./node_modules/sharp/**/*",
+    ],
+  },
   async headers() {
     return [
       {

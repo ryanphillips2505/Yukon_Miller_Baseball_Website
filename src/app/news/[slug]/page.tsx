@@ -1,6 +1,7 @@
 import { NewsStory } from "@/components/news-story";
 import { buttonVariants } from "@/components/ui/button";
 import { getArticle, articles } from "@/lib/news";
+import { ogShareImage } from "@/lib/og-cover";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
 import Image from "next/image";
@@ -22,14 +23,7 @@ export async function generateMetadata({
     return { title: "News" };
   }
 
-  const image = article.image
-    ? {
-        url: article.image.src,
-        width: article.image.width,
-        height: article.image.height,
-        alt: article.image.alt,
-      }
-    : undefined;
+  const image = ogShareImage(article.slug, article.image?.alt ?? article.title);
 
   return {
     title: article.title,
@@ -39,13 +33,13 @@ export async function generateMetadata({
       description: article.excerpt,
       type: "article",
       siteName: "Yukon Miller Baseball",
-      images: image ? [image] : undefined,
+      images: [image],
     },
     twitter: {
       card: "summary_large_image",
       title: article.title,
       description: article.excerpt,
-      images: image ? [image.url] : undefined,
+      images: [image.url],
     },
   };
 }

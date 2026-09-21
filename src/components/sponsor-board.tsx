@@ -122,6 +122,15 @@ function SponsorTile({
           </h3>
         </div>
       </div>
+      {sponsor.href ? (
+        <a
+          href={sponsor.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="absolute inset-0"
+          aria-label={`${sponsor.name} (opens in a new tab)`}
+        />
+      ) : null}
     </article>
   );
 }

@@ -120,6 +120,7 @@ const sponsorList: Sponsor[] = [
     mark: "CA",
     tier: "presenting",
     placement: "Presenting partner · 2026 program sponsorship",
+    href: "https://cooperautogroup.com",
   },
   {
     id: "browns-driving-school",
@@ -127,6 +128,7 @@ const sponsorList: Sponsor[] = [
     mark: "BD",
     tier: "scoreboard",
     placement: "Scoreboard · two-year partner through 2027",
+    href: "https://brownsdrivingschools.com",
   },
   {
     id: "fm-bank",
@@ -134,6 +136,7 @@ const sponsorList: Sponsor[] = [
     mark: "F&M",
     tier: "cycle",
     placement: "The Cycle · Miller Field",
+    href: "https://www.fmbankok.com",
   },
   {
     id: "tfcu",
@@ -141,6 +144,7 @@ const sponsorList: Sponsor[] = [
     mark: "TF",
     tier: "grand-slam",
     placement: "Grand Slam · outfield banner",
+    href: "https://www.tinkerfcu.org",
   },
   {
     id: "together-we-church",
@@ -148,6 +152,7 @@ const sponsorList: Sponsor[] = [
     mark: "TW",
     tier: "grand-slam",
     placement: "Grand Slam · outfield banner",
+    href: "https://togetherwechurch.com",
   },
   {
     id: "clemens-blair",
@@ -155,6 +160,7 @@ const sponsorList: Sponsor[] = [
     mark: "CB",
     tier: "grand-slam",
     placement: "Grand Slam · outfield banner",
+    href: "https://www.cbklawfirm.com",
   },
   {
     id: "the-lokal",
@@ -163,6 +169,7 @@ const sponsorList: Sponsor[] = [
     tier: "signature",
     placement: "Home Run Club banner · first foul ball of every inning",
     kicker: "Foul Ball Sponsor",
+    href: "https://thelokalrestaurant.com",
   },
   {
     id: "noahs-7-heaven",
@@ -171,6 +178,7 @@ const sponsorList: Sponsor[] = [
     tier: "signature",
     placement: "Sign plus starting lineups",
     kicker: "Starting Lineups and Ingame Sponsor",
+    href: "https://www.noahsheaven7.org",
   },
   {
     id: "liberty-tax",
@@ -179,6 +187,7 @@ const sponsorList: Sponsor[] = [
     tier: "signature",
     placement: "Signature · Grandstand Sponsor",
     kicker: "Grandstand Sponsor",
+    href: "https://www.libertytax.com/income-tax-preparation-locations/oklahoma/yukon/16314",
   },
   {
     id: "five-iron-golf",
@@ -186,6 +195,7 @@ const sponsorList: Sponsor[] = [
     mark: "FI",
     tier: "home-run",
     placement: "Home Run Club · outfield banner",
+    href: "https://fiveirongolf.com/locations/oklahoma-city-yukon",
   },
   {
     id: "earls-rib-palace",
@@ -193,6 +203,7 @@ const sponsorList: Sponsor[] = [
     mark: "ER",
     tier: "home-run",
     placement: "Home Run Club · outfield banner",
+    href: "https://earlsribpalace.com/locations/yukon/",
   },
   {
     id: "h2-health",
@@ -200,6 +211,7 @@ const sponsorList: Sponsor[] = [
     mark: "H2",
     tier: "home-run",
     placement: "Home Run Club · outfield banner",
+    href: "https://www.h2health.com/locations/valir-physical-therapy/yukon-ok/",
   },
   {
     id: "senior-care",
@@ -207,6 +219,7 @@ const sponsorList: Sponsor[] = [
     mark: "SC",
     tier: "home-run",
     placement: "Home Run Club · outfield banner",
+    href: "https://www.seniorlivingok.com",
   },
   {
     id: "yukon-national-bank",
@@ -214,6 +227,7 @@ const sponsorList: Sponsor[] = [
     mark: "YN",
     tier: "home-run",
     placement: "Home Run Club · outfield banner",
+    href: "https://www.ynbok.com",
   },
   {
     id: "livewell",
@@ -221,6 +235,7 @@ const sponsorList: Sponsor[] = [
     mark: "LW",
     tier: "home-run",
     placement: "Home Run Club · outfield banner",
+    href: "https://www.livewellpcp.com",
   },
   {
     id: "lowes",
@@ -228,6 +243,7 @@ const sponsorList: Sponsor[] = [
     mark: "LO",
     tier: "home-run",
     placement: "Home Run Club · outfield banner",
+    href: "https://www.lowes.com/store/OK-Yukon/1134",
   },
   {
     id: "security-benefit",
@@ -242,6 +258,7 @@ const sponsorList: Sponsor[] = [
     mark: "BF",
     tier: "home-run",
     placement: "Home Run Club · outfield banner",
+    href: "https://www.bancfirst.bank",
   },
   {
     id: "notable-roofing",
@@ -249,6 +266,7 @@ const sponsorList: Sponsor[] = [
     mark: "NR",
     tier: "home-run",
     placement: "Home Run Club · outfield banner",
+    href: "https://www.notableroofing.com",
   },
   {
     id: "h-spraying",
@@ -256,6 +274,7 @@ const sponsorList: Sponsor[] = [
     mark: "HS",
     tier: "home-run",
     placement: "Home Run Club · outfield banner",
+    href: "https://hspraying.com",
   },
   {
     id: "flat-top",
@@ -270,6 +289,7 @@ const sponsorList: Sponsor[] = [
     mark: "BC",
     tier: "home-run",
     placement: "Home Run Club · outfield banner",
+    href: "https://bellccs.com",
   },
   {
     id: "interbank",
@@ -277,6 +297,7 @@ const sponsorList: Sponsor[] = [
     mark: "IB",
     tier: "home-run",
     placement: "Home Run Club · outfield banner",
+    href: "https://www.interbank.com/branch/yukon/",
   },
   {
     id: "bad-brads",
@@ -284,6 +305,7 @@ const sponsorList: Sponsor[] = [
     mark: "BB",
     tier: "home-run",
     placement: "Home Run Club · outfield banner",
+    href: "https://yukon.badbrads.com",
   },
   {
     id: "sod-by-sherry",
@@ -291,6 +313,7 @@ const sponsorList: Sponsor[] = [
     mark: "SS",
     tier: "home-run",
     placement: "Home Run Club · outfield banner",
+    href: "https://www.sodbysherry.com",
   },
   {
     id: "trane",
@@ -312,6 +335,7 @@ const sponsorList: Sponsor[] = [
     mark: "CSO",
     tier: "home-run",
     placement: "Home Run Club · outfield banner",
+    href: "https://osobraces.com/locations/yukon/",
   },
   {
     id: "crabtree",
@@ -319,6 +343,7 @@ const sponsorList: Sponsor[] = [
     mark: "CC",
     tier: "home-run",
     placement: "Home Run Club · outfield banner",
+    href: "https://www.homesbycrabtree.com",
   },
   {
     id: "army-national-guard",
@@ -326,6 +351,7 @@ const sponsorList: Sponsor[] = [
     mark: "NG",
     tier: "home-run",
     placement: "Home Run Club · outfield banner",
+    href: "https://goguardok.com",
   },
   {
     id: "harris-ellis",
@@ -333,6 +359,7 @@ const sponsorList: Sponsor[] = [
     mark: "HE",
     tier: "home-run",
     placement: "Home Run Club · outfield banner",
+    href: "https://harrisellisequipment.com",
   },
   {
     id: "justin-sullivan",
@@ -347,6 +374,7 @@ const sponsorList: Sponsor[] = [
     mark: "RK",
     tier: "home-run",
     placement: "Home Run Club · outfield banner",
+    href: "https://www.oktriallawyers.com",
   },
   {
     id: "gatlin",
@@ -354,6 +382,7 @@ const sponsorList: Sponsor[] = [
     mark: "GH",
     tier: "home-run",
     placement: "Home Run Club · outfield banner",
+    href: "https://gatlinheatandair.com",
   },
   {
     id: "opponent-iq",
@@ -369,6 +398,7 @@ const sponsorList: Sponsor[] = [
     mark: "BB",
     tier: "triple",
     placement: "Triple Club · entry-gate sign",
+    href: "https://bradybuilt.com",
   },
 ];
 

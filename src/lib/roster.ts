@@ -18,7 +18,7 @@ const programPlayers: Omit<Player, "id">[] = [
   { firstName: "Graham", lastName: "Blair", bats: "R", throws: "R", gradYear: 2029, position: "OF" },
   { firstName: "Owen", lastName: "Blair", bats: "R", throws: "R", gradYear: 2027, position: "Util/P" },
   { firstName: "Boston", lastName: "Campeotto", bats: "R", throws: "R", gradYear: 2028, position: "OF/P" },
-  { firstName: "Nathan", lastName: "Clark", bats: "L", throws: "L", gradYear: 2027, position: "1B" },
+  { firstName: "Nathan", lastName: "Clark", bats: "L", throws: "L", gradYear: 2027, position: "1B", photo: "/images/roster/nathan-clark.jpg" },
   { firstName: "Charles", lastName: "Copus", bats: "R", throws: "R", gradYear: 2027, position: "C" },
   { firstName: "Kamron", lastName: "Cox", bats: "R", throws: "R", gradYear: 2029, position: "1B" },
   { firstName: "Canon", lastName: "Dekinder", bats: "R", throws: "R", gradYear: 2030, position: "OF" },

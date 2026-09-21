@@ -1,4 +1,5 @@
 import type { ArticleBlock } from "@/lib/news-blocks";
+import { seniors2026Story } from "@/lib/news-2026-seniors";
 import { carsonBengeStory } from "@/lib/news-carson-benge";
 import { class2aYukonStory } from "@/lib/news-class-2a-yukon";
 import { coltonStrangeStory } from "@/lib/news-colton-strange";
@@ -78,6 +79,7 @@ export const articles: Article[] = [
       "The Cougars just knocked off No. 2 Cloud County and reached the Plains District final four — NJCAA Division I baseball in Great Bend.",
     ],
   },
+  seniors2026Story,
 ];
 
 export function getArticle(slug: string) {

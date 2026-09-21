@@ -111,7 +111,22 @@ export const coaches: Coach[] = [
         "He loves being a Miller — one city, one school, one team. Miller Nation. Red Kingdom.",
     },
   },
-  { id: "knutson", name: "Ryan Knutson", role: "Assistant Coach", photo: "/images/coaches/ryan-knutson.jpg" },
+  {
+    id: "knutson",
+    name: "Ryan Knutson",
+    role: "Assistant Coach",
+    photo: "/images/coaches/ryan-knutson.jpg",
+    bio: {
+      yearsCoaching: "4",
+      family: "Isabella",
+      familyDetail:
+        "His girlfriend is Isabella. They do not have any pets. They enjoy working out, cooking, and spending time with friends and family. He holds a bachelor’s degree in History Education with a minor in Educational Research from UCO. He is working on a Master of Science in Athletic Administration — Educational Leadership at Southeastern Oklahoma State University.",
+      history:
+        "He started at Yukon in the 2022–23 season and has been here ever since. This is his fourth year of coaching.",
+      whyYukon:
+        "He is very thankful for Yukon because it provided a lot of firsts in his professional career. All he knows is Yukon, both as an educator and a coach. He loves Yukon because it is a place where he can continue to grow as a professional on and off the field.",
+    },
+  },
   {
     id: "ray",
     name: "Damien Ray",

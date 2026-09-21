@@ -20,6 +20,7 @@ export type Sponsor = {
   tier: SponsorTierId;
   placement: string;
   kicker?: string;
+  href?: string;
   logo?: SponsorLogo;
 };
 
@@ -360,6 +361,7 @@ const sponsorList: Sponsor[] = [
     mark: "OI",
     tier: "home-run",
     placement: "Home Run Club · outfield banner",
+    href: "https://app.opponentiq.com",
   },
   {
     id: "brady-built",

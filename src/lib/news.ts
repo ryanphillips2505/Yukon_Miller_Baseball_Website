@@ -80,8 +80,8 @@ export const articles: Article[] = [
       "The Cougars just knocked off No. 2 Cloud County and reached the Plains District final four — NJCAA Division I baseball in Great Bend.",
     ],
   },
-  seniors2026Story,
   threeMoreMillersStory,
+  seniors2026Story,
 ];
 
 export function getArticle(slug: string) {

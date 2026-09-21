@@ -89,13 +89,13 @@ function SponsorTile({
   sponsor: Sponsor;
   featured?: boolean;
 }) {
-  const className = cn(
-    "group relative overflow-hidden rounded-2xl border border-white/10 bg-zinc-950 transition-colors hover:border-red-700/40",
-    featured ? "p-7 sm:p-8" : "p-5",
-    sponsor.href && "block cursor-pointer",
-  );
-  const inner = (
-    <>
+  return (
+    <article
+      className={cn(
+        "group relative overflow-hidden rounded-2xl border border-white/10 bg-zinc-950 transition-colors hover:border-red-700/40",
+        featured ? "p-7 sm:p-8" : "p-5",
+      )}
+    >
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-red-600/70 to-transparent" />
       <div
         className={cn(
@@ -122,24 +122,17 @@ function SponsorTile({
           </h3>
         </div>
       </div>
-    </>
+      {sponsor.href ? (
+        <a
+          href={sponsor.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="absolute inset-0"
+          aria-label={`${sponsor.name} (opens in a new tab)`}
+        />
+      ) : null}
+    </article>
   );
-
-  if (sponsor.href) {
-    return (
-      <a
-        href={sponsor.href}
-        target="_blank"
-        rel="noopener noreferrer"
-        className={className}
-        aria-label={`${sponsor.name} (opens in a new tab)`}
-      >
-        {inner}
-      </a>
-    );
-  }
-
-  return <article className={className}>{inner}</article>;
 }
 
 function TierHead({

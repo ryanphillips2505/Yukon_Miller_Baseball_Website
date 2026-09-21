@@ -13,7 +13,12 @@ export function PhotoSlot({ label, className, src, alt }: PhotoSlotProps) {
   if (src) {
     return (
       <div className={cn("relative overflow-hidden bg-zinc-900", className)}>
-        <Image src={src} alt={alt ?? label} fill className="object-cover" />
+        <Image
+          src={src}
+          alt={alt ?? label}
+          fill
+          className="object-cover object-top"
+        />
       </div>
     );
   }

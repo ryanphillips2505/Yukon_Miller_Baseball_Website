@@ -150,7 +150,7 @@ export const supportStaff: Coach[] = [
   { id: "jones", name: "Breed Jones", role: "Student Assistant" },
   {
     id: "hormier",
-    name: "Londyn Hormier",
+    name: "Londyn Carter",
     role: "Student Social Media",
     photo: "/images/coaches/londyn-hormier.jpg",
   },

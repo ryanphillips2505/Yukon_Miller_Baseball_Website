@@ -301,6 +301,19 @@ export function draftPickLabel(line: DraftLine) {
   return round;
 }
 
+export function compactPick(line: DraftLine) {
+  if (line.overall) {
+    return `${line.year} · ${ordinal(line.round)} / ${ordinal(line.overall)}`;
+  }
+  return `${line.year} · ${ordinal(line.round)}`;
+}
+
+export function adjacentDrafted(id: string, step: -1 | 1) {
+  const index = draftedMillers.findIndex((player) => player.id === id);
+  if (index < 0) return undefined;
+  return draftedMillers[index + step];
+}
+
 const firstSigned = signedLine(draftedMillers[0]);
 const latestSigned = signedLine(draftedMillers[draftedMillers.length - 1]);
 

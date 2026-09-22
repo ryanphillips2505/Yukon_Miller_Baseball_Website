@@ -5,6 +5,7 @@ import { carsonBengeStory } from "@/lib/news-carson-benge";
 import { class2aYukonStory } from "@/lib/news-class-2a-yukon";
 import { coltonStrangeStory } from "@/lib/news-colton-strange";
 import { hofBanquetStory } from "@/lib/news-hof-banquet";
+import { joeLytleStory } from "@/lib/news-joe-lytle";
 
 export type ArticleImage = {
   src: string;
@@ -28,6 +29,7 @@ export type Article = {
 };
 
 export const articles: Article[] = [
+  joeLytleStory,
   hofBanquetStory,
   carsonBengeStory,
   coltonStrangeStory,

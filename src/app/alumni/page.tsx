@@ -3,12 +3,13 @@ import { AthleticsHallOfFame } from "@/components/athletics-hall-of-fame";
 import { BrandLogo } from "@/components/brand-logo";
 import { MillersDrafted } from "@/components/millers-drafted";
 import { allStateHall } from "@/lib/all-state";
+import { draftedBoard } from "@/lib/drafted";
 import { hallOfFame } from "@/lib/hall-of-fame";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Hall of Honor",
-  description: `${hallOfFame.title} and the Yukon Millers All-State wall. ${allStateHall.count} All-State names, ${allStateHall.span}.`,
+  description: `${hallOfFame.title}, ${draftedBoard.title}, and the Yukon Millers All-State wall. ${draftedBoard.count} signed MLB draft picks, ${allStateHall.count} All-State names.`,
 };
 
 export default function AlumniPage() {
@@ -46,8 +47,8 @@ export default function AlumniPage() {
 
       <div className="mx-auto max-w-6xl space-y-8 px-4 py-8 sm:space-y-10 sm:px-6 sm:py-12">
         <AthleticsHallOfFame />
-        <AllStateHall />
         <MillersDrafted />
+        <AllStateHall />
       </div>
     </div>
   );

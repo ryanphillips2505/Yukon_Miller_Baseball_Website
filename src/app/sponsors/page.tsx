@@ -1,5 +1,6 @@
 import { SponsorBoard } from "@/components/sponsor-board";
 import { PageHero } from "@/components/page-hero";
+import { shareSiteName } from "@/lib/site";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -10,6 +11,7 @@ export const metadata: Metadata = {
     title: "2026–27 Yukon Millers Sponsorship Packet",
     description:
       "Sponsorship packages from Single through Foul Ball, plus the form for artwork and payment.",
+    siteName: shareSiteName,
   },
   twitter: {
     card: "summary_large_image",

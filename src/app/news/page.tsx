@@ -2,6 +2,7 @@ import { ArticleCardImage } from "@/components/article-card-image";
 import { EmptyState } from "@/components/empty-state";
 import { PageHero } from "@/components/page-hero";
 import { articles } from "@/lib/news";
+import { shareSiteName } from "@/lib/site";
 import { newsIndexOgImage, ogImageSize } from "@/lib/og-cover";
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -22,6 +23,7 @@ export const metadata: Metadata = {
     title: "News",
     description:
       "Yukon Miller Baseball news, commits, and program updates.",
+    siteName: shareSiteName,
     images: [newsShareImage],
   },
   twitter: {

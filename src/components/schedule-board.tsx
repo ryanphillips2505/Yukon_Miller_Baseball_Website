@@ -22,8 +22,6 @@ const views: { id: ScheduleView; label: string }[] = [
   ...teams.map((team) => ({ id: team.id, label: team.label })),
 ];
 
-const teamOrder: TeamId[] = ["varsity", "jv-red", "jv-white"];
-
 function teamLabel(id: TeamId) {
   return teams.find((team) => team.id === id)?.label ?? id;
 }
@@ -34,12 +32,6 @@ function gameMeta(game: Game) {
 
 function matchupClass(game: Game) {
   return isAwayGame(game.location) ? "text-red-400" : "text-white";
-}
-
-function gamesOnDay(games: Game[]) {
-  return [...games].sort(
-    (a, b) => teamOrder.indexOf(a.team) - teamOrder.indexOf(b.team),
-  );
 }
 
 function GameMatchup({ game, className }: { game: Game; className?: string }) {
@@ -88,31 +80,13 @@ function DateStamp({ weekday, date }: { weekday: string; date: string }) {
   );
 }
 
-function GameRow({
-  game,
-  showTeam,
-}: {
-  game: Game;
-  showTeam?: boolean;
-}) {
+function GameCopy({ game }: { game: Game }) {
   return (
-    <div
-      className={cn(
-        "grid gap-1 py-3.5 sm:items-center",
-        showTeam
-          ? "sm:grid-cols-[6.5rem_minmax(0,1fr)_auto]"
-          : "sm:grid-cols-[minmax(0,1fr)_auto]",
-      )}
-    >
-      {showTeam ? (
-        <p className="text-[0.62rem] font-semibold tracking-[0.18em] text-[#e8d5a3] uppercase">
-          {teamLabel(game.team)}
-        </p>
-      ) : null}
-      <p className="font-heading min-w-0 text-xl tracking-wide uppercase">
+    <div className="min-w-0">
+      <p className="font-heading text-xl leading-none tracking-wide uppercase">
         <GameMatchup game={game} />
       </p>
-      <p className="text-sm tracking-wide text-zinc-400 uppercase sm:text-right">
+      <p className="mt-1.5 text-sm tracking-wide text-zinc-400 uppercase">
         {gameMeta(game)}
       </p>
     </div>
@@ -123,8 +97,7 @@ export function ScheduleBoard() {
   const [view, setView] = useState<ScheduleView>("master");
   const visible = useMemo(() => gamesForView(view), [view]);
   const days = useMemo(() => masterDays(visible), [visible]);
-  const listedGames = useMemo(() => gameCount(visible), [view, visible]);
-  const showTeam = view === "master";
+  const listedGames = useMemo(() => gameCount(visible), [visible]);
 
   return (
     <section>
@@ -173,32 +146,7 @@ export function ScheduleBoard() {
       </header>
 
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <ol>
-          {days.map((day, index) => {
-            const showPhase = index === 0 || day.phase !== days[index - 1]?.phase;
-            const listed = gamesOnDay(day.games);
-            return (
-              <li key={day.date}>
-                {showPhase ? <PhaseHeader phase={day.phase} /> : null}
-                <div
-                  className={cn(
-                    "border-b border-white/8 py-1 sm:grid sm:grid-cols-[7.5rem_minmax(0,1fr)] sm:items-start sm:gap-4 sm:py-0",
-                    index % 2 === 1 && "bg-white/[0.015]",
-                  )}
-                >
-                  <div className="pt-3.5">
-                    <DateStamp weekday={day.weekday} date={day.date} />
-                  </div>
-                  <div className={cn(listed.length > 1 && "sm:divide-y sm:divide-white/8")}>
-                    {listed.map((game) => (
-                      <GameRow key={game.id} game={game} showTeam={showTeam} />
-                    ))}
-                  </div>
-                </div>
-              </li>
-            );
-          })}
-        </ol>
+        {view === "master" ? <MasterTable days={days} /> : <TeamList days={days} />}
 
         <footer className="space-y-1 border-t border-white/8 py-5">
           {scheduleNotes.map((note) => (
@@ -209,5 +157,103 @@ export function ScheduleBoard() {
         </footer>
       </div>
     </section>
+  );
+}
+
+function MasterTable({
+  days,
+}: {
+  days: ReturnType<typeof masterDays>;
+}) {
+  return (
+    <div>
+      <div className="hidden grid-cols-[7.5rem_1fr_1fr_1fr] gap-4 border-b border-white/8 py-3 text-[0.62rem] tracking-[0.2em] text-zinc-500 uppercase lg:grid">
+        <span>Date</span>
+        <span>Varsity</span>
+        <span>JV Red</span>
+        <span>JV White</span>
+      </div>
+      {days.map((day, index) => {
+        const showPhase = index === 0 || day.phase !== days[index - 1]?.phase;
+        const byTeam = {
+          varsity: day.games.filter((game) => game.team === "varsity"),
+          "jv-red": day.games.filter((game) => game.team === "jv-red"),
+          "jv-white": day.games.filter((game) => game.team === "jv-white"),
+        };
+        return (
+          <div key={day.date}>
+            {showPhase ? <PhaseHeader phase={day.phase} /> : null}
+            <div
+              className={cn(
+                "grid gap-4 border-b border-white/8 py-3.5 lg:grid-cols-[7.5rem_1fr_1fr_1fr] lg:items-start",
+                index % 2 === 1 && "bg-white/[0.015]",
+              )}
+            >
+              <DateStamp weekday={day.weekday} date={day.date} />
+              <MasterCell label="Varsity" games={byTeam.varsity} />
+              <MasterCell label="JV Red" games={byTeam["jv-red"]} />
+              <MasterCell label="JV White" games={byTeam["jv-white"]} />
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+function MasterCell({
+  label,
+  games: cellGames,
+}: {
+  label: string;
+  games: Game[];
+}) {
+  return (
+    <div className="min-w-0">
+      <p className="mb-1.5 text-[0.62rem] tracking-[0.16em] text-zinc-500 uppercase lg:hidden">
+        {label}
+      </p>
+      {cellGames.length === 0 ? (
+        <p className="text-sm text-zinc-600">—</p>
+      ) : (
+        <div className="space-y-3">
+          {cellGames.map((game) => (
+            <GameCopy key={game.id} game={game} />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function TeamList({ days }: { days: ReturnType<typeof masterDays> }) {
+  return (
+    <ol>
+      {days.map((day, index) => {
+        const showPhase = index === 0 || day.phase !== days[index - 1]?.phase;
+        return (
+          <li key={day.date}>
+            {showPhase ? <PhaseHeader phase={day.phase} /> : null}
+            {day.games.map((game) => (
+              <div
+                key={game.id}
+                className={cn(
+                  "grid gap-1 border-b border-white/8 py-3.5 sm:grid-cols-[7.5rem_minmax(0,1fr)_auto] sm:items-center",
+                  index % 2 === 1 && "bg-white/[0.015]",
+                )}
+              >
+                <DateStamp weekday={day.weekday} date={day.date} />
+                <p className="font-heading text-xl tracking-wide uppercase">
+                  <GameMatchup game={game} />
+                </p>
+                <p className="text-sm tracking-wide text-zinc-400 uppercase sm:text-right">
+                  {gameMeta(game)}
+                </p>
+              </div>
+            ))}
+          </li>
+        );
+      })}
+    </ol>
   );
 }

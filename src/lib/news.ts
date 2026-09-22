@@ -12,6 +12,7 @@ export type ArticleImage = {
   width: number;
   height: number;
   focus?: string;
+  size?: "half";
 };
 
 export type Article = {

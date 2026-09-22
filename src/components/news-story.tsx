@@ -174,6 +174,50 @@ export function NewsStory({ blocks }: { blocks: ArticleBlock[] }) {
           );
         }
 
+        if (block.type === "people") {
+          return (
+            <div key={key} className="grid gap-4 sm:grid-cols-2">
+              {block.items.map((person) => (
+                <section
+                  key={person.title}
+                  className="rounded-2xl border border-white/10 bg-zinc-950 px-4 py-4"
+                >
+                  {person.image ? (
+                    <figure className="mb-3 flex h-60 items-center justify-center overflow-hidden rounded-xl bg-black">
+                      <Image
+                        src={person.image.src}
+                        alt={person.image.alt}
+                        width={person.image.width}
+                        height={person.image.height}
+                        className="max-h-60 w-auto object-contain"
+                        sizes="240px"
+                      />
+                    </figure>
+                  ) : null}
+                  <h2 className="font-heading text-xl tracking-wide text-white uppercase sm:text-2xl">
+                    {person.title}
+                  </h2>
+                  <div className="mt-2 space-y-2">
+                    {person.paragraphs.map((paragraph) => (
+                      <p
+                        key={paragraph}
+                        className="text-sm leading-6 text-zinc-300"
+                      >
+                        {paragraph}
+                      </p>
+                    ))}
+                  </div>
+                  {person.note ? (
+                    <p className="mt-3 rounded-xl border border-white/8 bg-black px-3 py-2 text-sm leading-6 text-zinc-500">
+                      {person.note}
+                    </p>
+                  ) : null}
+                </section>
+              ))}
+            </div>
+          );
+        }
+
         if (block.type === "gallery") {
           return (
             <div

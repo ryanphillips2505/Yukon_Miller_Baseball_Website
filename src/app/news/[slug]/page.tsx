@@ -71,7 +71,13 @@ export default async function NewsArticlePage({
         </p>
       ) : null}
       {article.image ? (
-        <figure className="mt-8 overflow-hidden rounded-2xl border border-white/10 bg-zinc-950">
+        <figure
+          className={
+            article.image.size === "half"
+              ? "mx-auto mt-8 w-full max-w-sm overflow-hidden rounded-2xl border border-white/10 bg-zinc-950"
+              : "mt-8 overflow-hidden rounded-2xl border border-white/10 bg-zinc-950"
+          }
+        >
           <Image
             src={article.image.src}
             alt={article.image.alt}
@@ -79,7 +85,11 @@ export default async function NewsArticlePage({
             height={article.image.height}
             priority
             className="h-auto w-full"
-            sizes="(max-width: 896px) 100vw, 896px"
+            sizes={
+              article.image.size === "half"
+                ? "(max-width: 384px) 100vw, 384px"
+                : "(max-width: 896px) 100vw, 896px"
+            }
           />
         </figure>
       ) : null}

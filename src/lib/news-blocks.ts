@@ -40,4 +40,18 @@ export type ArticleBlock =
         width: number;
         height: number;
       }[];
+    }
+  | {
+      type: "people";
+      items: {
+        title: string;
+        paragraphs: string[];
+        note?: string;
+        image?: {
+          src: string;
+          alt: string;
+          width: number;
+          height: number;
+        };
+      }[];
     };

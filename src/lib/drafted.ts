@@ -36,7 +36,7 @@ const redSox: ClubMark = {
   alt: "Boston Red Sox",
 };
 
-export const draftedMillers: DraftedMiller[] = [
+const draftedMillersOldestFirst: DraftedMiller[] = [
   {
     id: "terry-horn",
     firstName: "Terry",
@@ -269,6 +269,8 @@ export const draftedMillers: DraftedMiller[] = [
   },
 ];
 
+export const draftedMillers = [...draftedMillersOldestFirst].reverse();
+
 export function draftedName(player: DraftedMiller) {
   return `${player.firstName} ${player.lastName}`;
 }
@@ -326,15 +328,14 @@ export function adjacentDrafted(id: string, step: -1 | 1) {
   return draftedMillers[index + step];
 }
 
-const firstSigned = signedLine(draftedMillers[0]);
-const latestSigned = signedLine(draftedMillers[draftedMillers.length - 1]);
+const signedYears = draftedMillers.map((player) => signedLine(player).year);
 
 export const draftedBoard = {
   title: "Yukon High School MLB Draft Picks Who Signed",
   count: draftedMillers.length,
   firstRound: draftedMillers.filter(isFirstRound).length,
   majors: draftedMillers.filter(reachedMajors).length,
-  firstYear: firstSigned.year,
-  latestYear: latestSigned.year,
-  span: `${firstSigned.year}–${latestSigned.year}`,
+  firstYear: Math.min(...signedYears),
+  latestYear: Math.max(...signedYears),
+  span: `${Math.min(...signedYears)}–${Math.max(...signedYears)}`,
 } as const;

@@ -36,6 +36,7 @@ export function calendarSubscribeLinks(team: TeamId) {
   const httpsUrl = `https://www.yukonbaseball.com${calendarPath(team)}`;
   return {
     httpsUrl,
+    apple: httpsUrl.replace("https://", "webcal://"),
     google: `https://calendar.google.com/calendar/render?cid=${encodeURIComponent(httpsUrl)}`,
   };
 }

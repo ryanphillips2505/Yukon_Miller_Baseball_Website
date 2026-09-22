@@ -50,7 +50,7 @@ function SubscribeButtons({ team }: { team: TeamId }) {
   return (
     <div className="flex min-w-0 flex-1 overflow-hidden rounded-md border border-white/12 bg-black/40">
       <a
-        href={links.httpsUrl}
+        href={links.apple}
         className={cellClass}
         onClick={() =>
           trackCalendarClick(gaCalendarEvents.apple, gaCalendarEvents.ics)

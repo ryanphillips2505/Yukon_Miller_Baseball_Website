@@ -2,10 +2,19 @@
 
 import { buttonVariants } from "@/components/ui/button";
 import { calendarSubscribeLinks } from "@/lib/calendar";
+import { gaCalendarEvents, gaEvent } from "@/lib/ga";
 import { teams, type TeamId } from "@/lib/site";
 import { cn } from "@/lib/utils";
+import { track } from "@vercel/analytics";
 import Link from "next/link";
 import { useMemo, useState } from "react";
+
+function trackCalendarClick(
+  event: (typeof gaCalendarEvents)[keyof typeof gaCalendarEvents],
+) {
+  track(event);
+  gaEvent(event);
+}
 
 async function writeClipboard(value: string) {
   try {
@@ -38,7 +47,11 @@ function SubscribeButtons({ team }: { team: TeamId }) {
 
   return (
     <div className="flex min-w-0 flex-1 overflow-hidden rounded-md border border-white/12 bg-black/40">
-      <a href={links.httpsUrl} className={cellClass}>
+      <a
+        href={links.httpsUrl}
+        className={cellClass}
+        onClick={() => trackCalendarClick(gaCalendarEvents.apple)}
+      >
         Apple
       </a>
       <a
@@ -46,12 +59,14 @@ function SubscribeButtons({ team }: { team: TeamId }) {
         target="_blank"
         rel="noreferrer"
         className={cn(cellClass, "border-l border-white/10")}
+        onClick={() => trackCalendarClick(gaCalendarEvents.google)}
       >
         Google
       </a>
       <a
         href={links.httpsUrl}
         className={cn(cellClass, "border-l border-white/10")}
+        onClick={() => trackCalendarClick(gaCalendarEvents.outlook)}
       >
         Outlook
       </a>

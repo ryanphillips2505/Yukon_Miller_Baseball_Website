@@ -14,6 +14,7 @@ const articleOgSlugs = new Set([
   "drake-pace-oral-roberts",
   "clayton-strange-hutchinson",
   "2026-seniors-next-level",
+  "three-more-millers-next-level",
 ]);
 
 export function ogShareImage(

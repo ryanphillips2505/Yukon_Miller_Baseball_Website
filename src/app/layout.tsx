@@ -1,7 +1,7 @@
 import { PublicTrackers } from "@/components/public-trackers";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
-import { program, shareSiteName } from "@/lib/site";
+import { program } from "@/lib/site";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Oswald } from "next/font/google";
 import "./globals.css";
@@ -51,11 +51,6 @@ export const metadata: Metadata = {
   },
   description:
     "Yukon High School Baseball. Home of the Millers. Schedule, roster, coaches, news, and Home Run Club.",
-  applicationName: shareSiteName,
-  openGraph: {
-    siteName: shareSiteName,
-    type: "website",
-  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

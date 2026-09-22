@@ -1,7 +1,7 @@
 import { PageHero } from "@/components/page-hero";
 import { buttonVariants } from "@/components/ui/button";
 import { campRegistrationUrl, liveCamps } from "@/lib/camps";
-import { program, shareSiteName } from "@/lib/site";
+import { program } from "@/lib/site";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
 import Image from "next/image";
@@ -13,7 +13,6 @@ export const metadata: Metadata = {
     title: liveCamps.title,
     description: liveCamps.shareDescription,
     type: "website",
-    siteName: shareSiteName,
     url: "/camps",
   },
   twitter: {

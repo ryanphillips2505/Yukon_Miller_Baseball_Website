@@ -38,8 +38,6 @@ export const program = {
   },
 } as const;
 
-export const shareSiteName = "Go Millers!";
-
 export const navPrimary = [
   { href: "/", label: "Home" },
   { href: "/news", label: "News" },

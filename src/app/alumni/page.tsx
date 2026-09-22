@@ -5,7 +5,6 @@ import { MillersDrafted } from "@/components/millers-drafted";
 import { allStateHall } from "@/lib/all-state";
 import { draftedBoard } from "@/lib/drafted";
 import { hallOfFame } from "@/lib/hall-of-fame";
-import { shareSiteName } from "@/lib/site";
 import type { Metadata } from "next";
 
 const shareTitle = "Hall of Honor";
@@ -18,7 +17,6 @@ export const metadata: Metadata = {
     title: shareTitle,
     description: shareDescription,
     type: "website",
-    siteName: shareSiteName,
     url: "/alumni",
   },
   twitter: {

@@ -75,9 +75,39 @@ const fields: Record<string, Field> = {
     cityStateZip: "Oklahoma City, OK 73162",
   },
   pco: {
-    name: "Putnam City High School",
+    name: "PCO High School",
     street: "5300 NW 50th Street",
     cityStateZip: "Warr Acres, OK 73122",
+  },
+  memorial: {
+    name: "Central Middle School",
+    street: "500 E 9th Street",
+    cityStateZip: "Edmond, OK 73034",
+  },
+  "edmond-memorial": {
+    name: "Central Middle School",
+    street: "500 E 9th Street",
+    cityStateZip: "Edmond, OK 73034",
+  },
+  bixby: {
+    name: "Bixby High School",
+    street: "601 S Riverview Drive",
+    cityStateZip: "Bixby, OK 74008",
+  },
+  "piedmont-jv-festival": {
+    name: "Piedmont High School",
+    street: "1055 Edmond Road NW",
+    cityStateZip: "Piedmont, OK 73078",
+  },
+  "union-festival": {
+    name: "Union High School Freshman Academy",
+    street: "7616 S Garnett Road",
+    cityStateZip: "Broken Arrow, OK 74012",
+  },
+  "kingfisher-jv-festival": {
+    name: "Kingfisher High School",
+    street: "1500 S 13th Street",
+    cityStateZip: "Kingfisher, OK 73750",
   },
   "carl-albert-tournament": {
     name: "Carl Albert High School",

@@ -7,6 +7,13 @@ export const seniors2026Story = {
   category: "News" as const,
   excerpt:
     "The next chapter is underway for five more Yukon Millers: Eddie Fish, Brayden Trogdon, Devon Butler, Cayden Thomas and Gentry Hoke.",
+  image: {
+    src: "/images/news/brayden-trogdon-youngstown.jpg",
+    alt: "Brayden Trogdon in a Youngstown State uniform, holding a glove in front of his face",
+    width: 1320,
+    height: 1173,
+    focus: "50% 22%",
+  },
   body: [
     "The next chapter is underway for five more Yukon Millers: Eddie Fish, Brayden Trogdon, Devon Butler, Cayden Thomas and Gentry Hoke.",
   ],
@@ -24,6 +31,13 @@ export const seniors2026Story = {
       text: "Eddie Fish — Louisiana Tech",
     },
     {
+      type: "image",
+      src: "/images/news/eddie-fish-louisiana-tech.jpg",
+      alt: "Eddie Fish in a Louisiana Tech uniform, holding a glove",
+      width: 1600,
+      height: 1119,
+    },
+    {
       type: "p",
       text: "Fish is beginning his career at Louisiana Tech University, where he will continue as an infielder for the Bulldogs.",
     },
@@ -36,6 +50,13 @@ export const seniors2026Story = {
       text: "Brayden Trogdon — Youngstown State",
     },
     {
+      type: "image",
+      src: "/images/news/brayden-trogdon-youngstown.jpg",
+      alt: "Brayden Trogdon in a Youngstown State uniform, holding a glove in front of his face",
+      width: 1320,
+      height: 1173,
+    },
+    {
       type: "p",
       text: "Trogdon is beginning his college career at Youngstown State University, joining the Penguins pitching staff.",
     },
@@ -46,6 +67,13 @@ export const seniors2026Story = {
     {
       type: "h2",
       text: "Devon Butler — USAO",
+    },
+    {
+      type: "image",
+      src: "/images/news/devon-butler-usao.jpg",
+      alt: "Devon Butler commitment graphic for the University of Science and Arts of Oklahoma",
+      width: 1206,
+      height: 1404,
     },
     {
       type: "p",
@@ -70,6 +98,13 @@ export const seniors2026Story = {
     {
       type: "h2",
       text: "Gentry Hoke — Cowley",
+    },
+    {
+      type: "image",
+      src: "/images/news/gentry-hoke-cowley.jpg",
+      alt: "Gentry Hoke commitment graphic for Cowley College",
+      width: 768,
+      height: 1024,
     },
     {
       type: "p",

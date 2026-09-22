@@ -13,6 +13,7 @@ const articleOgSlugs = new Set([
   "from-yukon-to-a-national-championship",
   "drake-pace-oral-roberts",
   "clayton-strange-hutchinson",
+  "2026-seniors-next-level",
 ]);
 
 export function ogShareImage(

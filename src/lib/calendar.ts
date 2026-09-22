@@ -6,6 +6,7 @@ import {
   type Game,
 } from "@/lib/schedule";
 import { program, teams, type TeamId } from "@/lib/site";
+import { fieldForGame, fieldLabel } from "@/lib/venues";
 
 export const calendarTeamIds = teams.map((team) => team.id);
 
@@ -131,6 +132,8 @@ export function gameStartClocks(time?: string) {
 }
 
 function gameLocation(game: Game) {
+  const field = fieldForGame(game);
+  if (field) return fieldLabel(field);
   if (game.venue) return game.venue;
   if (!isAwayGame(game.location)) {
     return `Miller Field, ${program.street}, ${program.cityStateZip}`;

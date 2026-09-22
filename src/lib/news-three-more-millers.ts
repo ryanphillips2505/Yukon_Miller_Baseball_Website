@@ -14,6 +14,7 @@ export const threeMoreMillersStory = {
     height: 534,
     focus: "52% 28%",
     size: "half" as const,
+    hero: false,
   },
   body: [
     "Three former Yukon Millers took the next step in their baseball careers this summer, with Grady Hoke, Luke Graham and Caden Janvrin continuing their journeys at four-year universities.",

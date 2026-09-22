@@ -45,7 +45,7 @@ export default function AlumniPage() {
         </div>
       </header>
 
-      <div className="mx-auto grid max-w-[90rem] gap-4 px-4 py-6 sm:px-6 sm:py-8 lg:grid-cols-3 lg:items-stretch">
+      <div className="mx-auto grid max-w-[90rem] gap-4 px-4 py-6 sm:px-6 sm:py-8 lg:grid-cols-[1.15fr_1fr_1fr] lg:items-stretch">
         <AthleticsHallOfFame />
         <MillersDrafted />
         <AllStateHall />

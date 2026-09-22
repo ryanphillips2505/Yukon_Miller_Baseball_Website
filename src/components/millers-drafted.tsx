@@ -65,7 +65,7 @@ function ClubMark({
     <div
       className={cn(
         "flex items-center justify-center rounded-xl bg-[#f4f1ea] shadow-[inset_0_0_0_1px_rgba(0,0,0,0.08)]",
-        size === "tile" && "size-12 shrink-0 p-1.5",
+        size === "tile" && "size-10 shrink-0 p-1",
         size === "detail" && "size-28 p-3 sm:size-32",
       )}
     >
@@ -103,7 +103,7 @@ function DraftTile({
       onClick={() => onOpen(player)}
       aria-pressed={selected}
       className={cn(
-        "group relative flex w-full items-center gap-3 overflow-hidden rounded-xl border px-3 py-2.5 text-left transition-colors",
+        "group relative flex w-full items-center gap-3 overflow-hidden rounded-xl border px-3 py-2 text-left transition-colors",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4b56a]/70",
         firstRound ? "border-[#d4b56a]/55" : "border-[#d4b56a]/18",
         selected
@@ -120,31 +120,27 @@ function DraftTile({
       />
       <ClubMark player={player} size="tile" />
       <div className="min-w-0 flex-1">
-        <div className="flex flex-wrap items-center gap-1.5">
+        <div className="flex items-center gap-2">
+          <h3 className="font-heading min-w-0 truncate text-lg leading-none tracking-wide text-white uppercase">
+            {draftedName(player)}
+          </h3>
           {firstRound ? (
-            <span className="rounded-full border border-[#d4b56a]/55 bg-[#d4b56a]/12 px-2 py-0.5 text-[0.52rem] font-semibold tracking-[0.16em] text-[#e8d5a3] uppercase">
+            <span className="shrink-0 text-[0.52rem] font-semibold tracking-[0.14em] text-[#e8d5a3] uppercase">
               1st
             </span>
           ) : null}
           {majors ? (
-            <span className="rounded-full border border-white/16 bg-white/6 px-2 py-0.5 text-[0.52rem] font-semibold tracking-[0.16em] text-zinc-300 uppercase">
+            <span className="shrink-0 text-[0.52rem] font-semibold tracking-[0.14em] text-zinc-400 uppercase">
               MLB
             </span>
           ) : null}
-          {extraDrafts > 0 ? (
-            <span className="text-[0.52rem] font-semibold tracking-[0.16em] text-zinc-500 uppercase">
-              {player.lines.length} drafts
-            </span>
-          ) : null}
         </div>
-        <h3 className="font-heading mt-1 text-lg leading-none tracking-wide text-white uppercase">
-          {draftedName(player)}
-        </h3>
-        <p className="mt-1.5 text-xs tabular-nums text-[#f4f1ea] sm:text-sm">
+        <p className="mt-1 truncate text-[0.7rem] tabular-nums text-[#f4f1ea]">
           {compactPick(signed)}
-        </p>
-        <p className="mt-1 text-[0.62rem] font-semibold tracking-[0.14em] text-[#e8d5a3] uppercase">
-          {player.signedClub}
+          <span className="text-[#e8d5a3]"> · {player.signedClub}</span>
+          {extraDrafts > 0 ? (
+            <span className="text-zinc-500"> · {player.lines.length} drafts</span>
+          ) : null}
         </p>
       </div>
     </button>

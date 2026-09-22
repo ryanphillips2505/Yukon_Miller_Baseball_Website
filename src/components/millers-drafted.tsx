@@ -1,5 +1,6 @@
 "use client";
 
+import { HonorPanel } from "@/components/honor-panel";
 import {
   Dialog,
   DialogClose,
@@ -24,19 +25,6 @@ import { cn } from "@/lib/utils";
 import { ChevronLeft, ChevronRight, XIcon } from "lucide-react";
 import Image from "next/image";
 import { useSyncExternalStore } from "react";
-
-function Stat({ value, label }: { value: string; label: string }) {
-  return (
-    <div className="px-2 py-2 text-center sm:px-3 sm:py-2.5">
-      <p className="font-heading text-2xl leading-none tracking-wide text-[#e8d5a3] sm:text-3xl">
-        {value}
-      </p>
-      <p className="mt-1 text-[0.58rem] font-semibold tracking-[0.18em] text-zinc-500 uppercase">
-        {label}
-      </p>
-    </div>
-  );
-}
 
 function DraftHistory({ line }: { line: DraftLine }) {
   const signed = line.outcome === "signed";
@@ -77,7 +65,7 @@ function ClubMark({
     <div
       className={cn(
         "flex items-center justify-center rounded-xl bg-[#f4f1ea] shadow-[inset_0_0_0_1px_rgba(0,0,0,0.08)]",
-        size === "tile" && "size-14 shrink-0 p-1.5 sm:size-16",
+        size === "tile" && "size-12 shrink-0 p-1.5",
         size === "detail" && "size-28 p-3 sm:size-32",
       )}
     >
@@ -115,8 +103,7 @@ function DraftTile({
       onClick={() => onOpen(player)}
       aria-pressed={selected}
       className={cn(
-        "group relative flex w-full items-center gap-3 overflow-hidden rounded-xl border px-3 py-3 text-left transition-colors sm:gap-4 sm:px-4",
-        "lg:flex-col lg:items-center lg:px-4 lg:py-5 lg:text-center",
+        "group relative flex w-full items-center gap-3 overflow-hidden rounded-xl border px-3 py-2.5 text-left transition-colors",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4b56a]/70",
         firstRound ? "border-[#d4b56a]/55" : "border-[#d4b56a]/18",
         selected
@@ -150,7 +137,7 @@ function DraftTile({
             </span>
           ) : null}
         </div>
-        <h3 className="font-heading mt-1 text-xl leading-none tracking-wide text-white uppercase sm:text-2xl">
+        <h3 className="font-heading mt-1 text-lg leading-none tracking-wide text-white uppercase">
           {draftedName(player)}
         </h3>
         <p className="mt-1.5 text-xs tabular-nums text-[#f4f1ea] sm:text-sm">
@@ -324,68 +311,29 @@ export function MillersDrafted() {
   }
 
   return (
-    <section
-      id="drafted"
-      className="overflow-hidden rounded-2xl border border-[#d4b56a]/28 bg-black shadow-[0_30px_80px_rgba(0,0,0,0.55)]"
-    >
-      <header className="relative overflow-hidden border-b border-[#d4b56a]/18 bg-[linear-gradient(180deg,#22180e_0%,#070708_100%)]">
-        <div
-          className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(200,16,46,0.12),transparent_42%),radial-gradient(circle_at_50%_20%,rgba(212,181,106,0.16),transparent_58%)]"
-          aria-hidden
-        />
-        <div
-          className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#e8d5a3] to-transparent"
-          aria-hidden
-        />
-        <div className="relative px-4 py-6 sm:px-6 sm:py-7">
-          <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
-            <div>
-              <p className="text-[0.62rem] font-semibold tracking-[0.36em] text-[#d4b56a] uppercase">
-                Yukon High School
-              </p>
-              <h2 className="font-heading mt-2 text-4xl leading-[0.88] tracking-wide text-white uppercase sm:text-5xl">
-                Drafted &amp; Signed
-              </h2>
-              <p className="mt-2 max-w-xl text-sm leading-6 text-zinc-400">
-                All nine signed picks on one board. Open a Miller for the full
-                draft path.
-              </p>
-            </div>
-            <div className="grid grid-cols-4 gap-px overflow-hidden rounded-lg border border-[#d4b56a]/16 bg-[#d4b56a]/16">
-              <Stat
-                value={String(draftedBoard.count).padStart(2, "0")}
-                label="Signed"
-              />
-              <Stat
-                value={String(draftedBoard.firstRound).padStart(2, "0")}
-                label="1st rd"
-              />
-              <Stat
-                value={String(draftedBoard.majors).padStart(2, "0")}
-                label="MLB"
-              />
-              <Stat value={draftedBoard.span} label="Years" />
-            </div>
-          </div>
+    <div className="min-h-0">
+      <HonorPanel
+        id="drafted"
+        kicker="MLB Draft"
+        title="Drafted & Signed"
+        meta={`${String(draftedBoard.count).padStart(2, "0")} signed · ${String(draftedBoard.firstRound).padStart(2, "0")} first-round · ${draftedBoard.span}`}
+      >
+        <div className="space-y-1.5 p-3">
+          {draftedMillers.map((player) => (
+            <DraftTile
+              key={player.id}
+              player={player}
+              selected={selected?.id === player.id}
+              onOpen={openPlayer}
+            />
+          ))}
         </div>
-      </header>
-
-      <div className="grid gap-2 p-3 sm:grid-cols-2 sm:gap-3 sm:p-4 lg:grid-cols-3 lg:p-5">
-        {draftedMillers.map((player) => (
-          <DraftTile
-            key={player.id}
-            player={player}
-            selected={selected?.id === player.id}
-            onOpen={openPlayer}
-          />
-        ))}
-      </div>
-
+      </HonorPanel>
       <DraftInspector
         player={selected}
         onClose={closePlayer}
         onSelect={openPlayer}
       />
-    </section>
+    </div>
   );
 }

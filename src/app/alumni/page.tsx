@@ -35,17 +35,17 @@ export default function AlumniPage() {
             className="h-auto w-[min(80vw,40rem)]"
           />
         </div>
-        <div className="relative mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
-          <p className="text-center text-[0.7rem] font-semibold tracking-[0.42em] text-[#d4b56a] uppercase">
+        <div className="relative mx-auto max-w-[90rem] px-4 py-8 sm:px-6 sm:py-10">
+          <p className="text-center text-[0.68rem] font-semibold tracking-[0.42em] text-[#d4b56a] uppercase">
             Yukon Miller Baseball
           </p>
-          <h1 className="font-heading mt-3 text-center text-5xl leading-[0.84] tracking-wide text-white uppercase sm:text-6xl lg:text-7xl">
+          <h1 className="font-heading mt-3 text-center text-5xl leading-[0.84] tracking-wide text-white uppercase sm:text-6xl">
             Hall of Honor
           </h1>
         </div>
       </header>
 
-      <div className="mx-auto max-w-6xl space-y-8 px-4 py-8 sm:space-y-10 sm:px-6 sm:py-12">
+      <div className="mx-auto grid max-w-[90rem] gap-4 px-4 py-6 sm:px-6 sm:py-8 lg:grid-cols-3 lg:items-stretch">
         <AthleticsHallOfFame />
         <MillersDrafted />
         <AllStateHall />

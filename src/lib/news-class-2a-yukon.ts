@@ -7,6 +7,14 @@ export const class2aYukonStory = {
   category: "News" as const,
   excerpt:
     "For the third straight year, Yukon High School hosts the quarterfinals and semifinals of the OSSAA Class 2A Fall Baseball State Tournament.",
+  image: {
+    src: "/images/news/ossaa-logo.png",
+    alt: "Oklahoma Secondary School Activities Association baseball logo",
+    width: 250,
+    height: 250,
+    focus: "50% 50%",
+    size: "half" as const,
+  },
   body: [
     "Yukon High School will host the opening rounds of the 2026 OSSAA Class 2A Fall Baseball State Tournament on October 8–9.",
   ],

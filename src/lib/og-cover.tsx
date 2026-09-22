@@ -15,6 +15,7 @@ const articleOgSlugs = new Set([
   "clayton-strange-hutchinson",
   "2026-seniors-next-level",
   "three-more-millers-next-level",
+  "road-to-state-runs-through-yukon",
 ]);
 
 export function ogShareImage(

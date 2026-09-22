@@ -15,6 +15,7 @@ import {
 } from "@/lib/schedule";
 import { teams, type TeamId } from "@/lib/site";
 import { cn } from "@/lib/utils";
+import { fieldForGame, mapsUrlForField } from "@/lib/venues";
 import { useMemo, useState } from "react";
 
 const views: { id: ScheduleView; label: string }[] = [
@@ -35,10 +36,25 @@ function matchupClass(game: Game) {
 }
 
 function GameMatchup({ game, className }: { game: Game; className?: string }) {
+  const field = fieldForGame(game);
+  const href = field ? mapsUrlForField(field) : undefined;
+  const label = `${versusLabel(game.location)} ${game.opponent}`;
+  const color = cn(matchupClass(game), className);
+
+  if (!href || !field) {
+    return <span className={color}>{label}</span>;
+  }
+
   return (
-    <span className={cn(matchupClass(game), className)}>
-      {versusLabel(game.location)} {game.opponent}
-    </span>
+    <a
+      href={href}
+      target="_blank"
+      rel="noreferrer"
+      className={cn(color, "underline-offset-4 hover:underline")}
+      aria-label={`Directions to ${field.name}`}
+    >
+      {label}
+    </a>
   );
 }
 

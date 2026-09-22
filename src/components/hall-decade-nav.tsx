@@ -15,7 +15,7 @@ export function HallDecadeNav({
 
   return (
     <nav aria-label="All-State decades" className="border-t border-[#d4b56a]/14">
-      <div className="flex gap-1.5 overflow-x-auto px-3 py-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+      <div className="flex flex-wrap gap-1.5 px-3 py-2">
         {items.map((decade) => {
           const selected = decade === active;
 

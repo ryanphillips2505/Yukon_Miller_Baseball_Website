@@ -26,6 +26,7 @@ export type DraftedMiller = {
   lines: DraftLine[];
   note: string;
   mlbDebut?: string;
+  mlbNotes?: string[];
 };
 
 const redSox: ClubMark = {
@@ -138,7 +139,16 @@ export const draftedMillers: DraftedMiller[] = [
         outcome: "signed",
       },
     ],
-    note: "Reached Major League Baseball with the Oakland Athletics in 2010",
+    note: "Reached Major League Baseball with the Oakland Athletics.",
+    mlbDebut: "September 2, 2010 · Oakland Athletics",
+    mlbNotes: [
+      "Appeared in 5 MLB games",
+      "Pitched 4 innings",
+      "Recorded 5 strikeouts",
+      "Finished with a 4.50 ERA",
+      "His first MLB strikeout was Robinson Canó",
+      "He later joined the Milwaukee Brewers organization but did not appear in the majors for Milwaukee.",
+    ],
   },
   {
     id: "chad-james",

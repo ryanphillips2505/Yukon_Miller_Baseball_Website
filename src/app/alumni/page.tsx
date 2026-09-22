@@ -7,9 +7,23 @@ import { draftedBoard } from "@/lib/drafted";
 import { hallOfFame } from "@/lib/hall-of-fame";
 import type { Metadata } from "next";
 
+const shareTitle = "Hall of Honor";
+const shareDescription = `${hallOfFame.title}, ${draftedBoard.title}, and the Yukon Millers All-State wall. ${draftedBoard.count} signed MLB draft picks, ${allStateHall.count} All-State names.`;
+
 export const metadata: Metadata = {
-  title: "Hall of Honor",
-  description: `${hallOfFame.title}, ${draftedBoard.title}, and the Yukon Millers All-State wall. ${draftedBoard.count} signed MLB draft picks, ${allStateHall.count} All-State names.`,
+  title: shareTitle,
+  description: shareDescription,
+  openGraph: {
+    title: shareTitle,
+    description: shareDescription,
+    type: "website",
+    url: "/alumni",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: shareTitle,
+    description: shareDescription,
+  },
 };
 
 export default function AlumniPage() {

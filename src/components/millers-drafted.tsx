@@ -248,6 +248,13 @@ function DraftInspector({
               {player.note ? (
                 <p className="text-sm leading-6 text-zinc-400">{player.note}</p>
               ) : null}
+              {player.mlbNotes?.length ? (
+                <ul className="space-y-1.5 text-sm leading-6 text-[#f4f1ea]">
+                  {player.mlbNotes.map((line) => (
+                    <li key={line}>{line}</li>
+                  ))}
+                </ul>
+              ) : null}
             </div>
 
             <div className="flex items-center justify-between gap-3 border-t border-white/10 px-4 py-3 sm:px-5">

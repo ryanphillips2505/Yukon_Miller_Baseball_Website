@@ -13,7 +13,7 @@ export type ArticleImage = {
   width: number;
   height: number;
   focus?: string;
-  size?: "half";
+  size?: "half" | "feature";
   hero?: boolean;
 };
 

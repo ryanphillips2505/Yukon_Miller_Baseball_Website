@@ -13,7 +13,7 @@ export const joeLytleStory = {
     width: 800,
     height: 1000,
     focus: "50% 22%",
-    size: "half" as const,
+    size: "feature" as const,
   },
   body: [
     "From Yukon to professional baseball, Joe Lytle continues to find new ways to make his mark on the game.",

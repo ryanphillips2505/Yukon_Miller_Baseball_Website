@@ -143,10 +143,15 @@ export function NewsStory({ blocks }: { blocks: ArticleBlock[] }) {
         }
 
         if (block.type === "image") {
+          const compact = block.size === "card";
           return (
             <figure
               key={key}
-              className="overflow-hidden rounded-2xl border border-white/10 bg-zinc-950"
+              className={
+                compact
+                  ? "mx-auto max-w-[16rem] overflow-hidden rounded-2xl border border-white/10 bg-zinc-950 sm:max-w-[18rem]"
+                  : "overflow-hidden rounded-2xl border border-white/10 bg-zinc-950"
+              }
             >
               <Image
                 src={block.src}
@@ -154,7 +159,11 @@ export function NewsStory({ blocks }: { blocks: ArticleBlock[] }) {
                 width={block.width}
                 height={block.height}
                 className="h-auto w-full"
-                sizes="(max-width: 896px) 100vw, 896px"
+                sizes={
+                  compact
+                    ? "(max-width: 640px) 16rem, 18rem"
+                    : "(max-width: 896px) 100vw, 896px"
+                }
               />
               {block.caption ? (
                 <figcaption className="border-t border-white/8 px-4 py-3 text-sm text-zinc-400">

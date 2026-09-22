@@ -10,8 +10,8 @@ export const seniors2026Story = {
   image: {
     src: "/images/news/brayden-trogdon-youngstown.jpg",
     alt: "Brayden Trogdon in a Youngstown State uniform, holding a glove in front of his face",
-    width: 1320,
-    height: 1173,
+    width: 720,
+    height: 640,
     focus: "50% 22%",
   },
   body: [
@@ -34,8 +34,9 @@ export const seniors2026Story = {
       type: "image",
       src: "/images/news/eddie-fish-louisiana-tech.jpg",
       alt: "Eddie Fish in a Louisiana Tech uniform, holding a glove",
-      width: 1600,
-      height: 1119,
+      width: 382,
+      height: 720,
+      size: "card",
     },
     {
       type: "p",
@@ -53,8 +54,9 @@ export const seniors2026Story = {
       type: "image",
       src: "/images/news/brayden-trogdon-youngstown.jpg",
       alt: "Brayden Trogdon in a Youngstown State uniform, holding a glove in front of his face",
-      width: 1320,
-      height: 1173,
+      width: 720,
+      height: 640,
+      size: "card",
     },
     {
       type: "p",
@@ -72,8 +74,9 @@ export const seniors2026Story = {
       type: "image",
       src: "/images/news/devon-butler-usao.jpg",
       alt: "Devon Butler commitment graphic for the University of Science and Arts of Oklahoma",
-      width: 1206,
-      height: 1404,
+      width: 550,
+      height: 640,
+      size: "card",
     },
     {
       type: "p",
@@ -103,8 +106,9 @@ export const seniors2026Story = {
       type: "image",
       src: "/images/news/gentry-hoke-cowley.jpg",
       alt: "Gentry Hoke commitment graphic for Cowley College",
-      width: 768,
-      height: 1024,
+      width: 480,
+      height: 640,
+      size: "card",
     },
     {
       type: "p",

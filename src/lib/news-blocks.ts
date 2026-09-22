@@ -29,6 +29,7 @@ export type ArticleBlock =
       caption?: string;
       width: number;
       height: number;
+      size?: "card";
     }
   | {
       type: "gallery";

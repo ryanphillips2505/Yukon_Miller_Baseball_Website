@@ -116,7 +116,7 @@ function DraftTile({
       aria-pressed={selected}
       className={cn(
         "group relative flex w-full items-center gap-3 overflow-hidden rounded-xl border px-3 py-3 text-left transition-colors sm:gap-4 sm:px-4",
-        "lg:flex-col lg:items-start lg:px-4 lg:py-4",
+        "lg:flex-col lg:items-center lg:px-4 lg:py-5 lg:text-center",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4b56a]/70",
         firstRound ? "border-[#d4b56a]/55" : "border-[#d4b56a]/18",
         selected

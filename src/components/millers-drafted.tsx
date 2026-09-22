@@ -95,6 +95,7 @@ function DraftTile({
   const firstRound = isFirstRound(player);
   const majors = reachedMajors(player);
   const extraDrafts = player.lines.length - 1;
+  const featured = Boolean(player.mlbDebut);
 
   return (
     <button
@@ -105,10 +106,16 @@ function DraftTile({
       className={cn(
         "group relative flex w-full items-center gap-3 overflow-hidden rounded-xl border px-3 py-2 text-left transition-colors",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4b56a]/70",
-        firstRound ? "border-[#d4b56a]/55" : "border-[#d4b56a]/18",
-        selected
-          ? "bg-[#221c14]"
-          : "bg-[linear-gradient(180deg,#1c1812_0%,#0c0b09_100%)] hover:border-[#d4b56a]/50 hover:bg-[#1c1812]",
+        featured
+          ? "border-[#d4b56a]/80 bg-[linear-gradient(180deg,#2a2114_0%,#120f0b_100%)] shadow-[inset_0_1px_0_rgba(232,213,163,0.2)]"
+          : firstRound
+            ? "border-[#d4b56a]/55"
+            : "border-[#d4b56a]/18",
+        !featured &&
+          (selected
+            ? "bg-[#221c14]"
+            : "bg-[linear-gradient(180deg,#1c1812_0%,#0c0b09_100%)] hover:border-[#d4b56a]/50 hover:bg-[#1c1812]"),
+        featured && selected && "bg-[#2f2618]",
       )}
     >
       <div
@@ -129,7 +136,7 @@ function DraftTile({
               1st
             </span>
           ) : null}
-          {majors ? (
+          {majors && !featured ? (
             <span className="shrink-0 text-[0.52rem] font-semibold tracking-[0.14em] text-zinc-400 uppercase">
               MLB
             </span>
@@ -142,6 +149,11 @@ function DraftTile({
             <span className="text-zinc-500"> · {player.lines.length} drafts</span>
           ) : null}
         </p>
+        {player.mlbDebut ? (
+          <p className="mt-1 text-[0.62rem] font-semibold tracking-[0.12em] text-[#e8d5a3] uppercase">
+            MLB debut · {player.mlbDebut}
+          </p>
+        ) : null}
       </div>
     </button>
   );
@@ -217,6 +229,11 @@ function DraftInspector({
                   <DialogDescription className="mt-2 text-sm text-zinc-400">
                     {player.signedClub} · {slot} of {draftedBoard.count}
                   </DialogDescription>
+                  {player.mlbDebut ? (
+                    <p className="mt-3 text-[0.68rem] font-semibold tracking-[0.16em] text-[#e8d5a3] uppercase">
+                      MLB debut · {player.mlbDebut}
+                    </p>
+                  ) : null}
                 </div>
               </div>
             </div>

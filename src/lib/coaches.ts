@@ -118,7 +118,7 @@ export const coaches: Coach[] = [
     photo: "/images/coaches/ryan-knutson.jpg",
     bio: {
       yearsCoaching: "4",
-      family: "Isabella",
+      family: "",
       familyDetail:
         "His girlfriend is Isabella. They do not have any pets. They enjoy working out, cooking, and spending time with friends and family. He holds a bachelor’s degree in History Education with a minor in Educational Research from UCO. He is working on a Master of Science in Athletic Administration — Educational Leadership at Southeastern Oklahoma State University.",
       history:

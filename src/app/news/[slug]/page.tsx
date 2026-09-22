@@ -71,41 +71,68 @@ export default async function NewsArticlePage({
           {article.excerpt}
         </p>
       ) : null}
-      {article.image && article.image.hero !== false ? (
-        <figure
-          className={
-            article.image.size === "feature"
-              ? "mx-auto mt-8 w-full overflow-hidden rounded-2xl border border-white/10 bg-zinc-950 md:w-[65%]"
-              : article.image.size === "half"
-              ? "mx-auto mt-8 w-full max-w-sm overflow-hidden rounded-2xl border border-white/10 bg-zinc-950"
-              : "mt-8 overflow-hidden rounded-2xl border border-white/10 bg-zinc-950"
-          }
-        >
-          <Image
-            src={article.image.src}
-            alt={article.image.alt}
-            width={article.image.width}
-            height={article.image.height}
-            priority
-            className="h-auto w-full"
-            sizes={
-              article.image.size === "feature"
-                ? "(max-width: 768px) calc(100vw - 2rem), 582px"
-                : article.image.size === "half"
-                ? "(max-width: 384px) 100vw, 384px"
-                : "(max-width: 896px) 100vw, 896px"
-            }
-          />
-        </figure>
-      ) : null}
-      {article.blocks ? (
-        <NewsStory blocks={article.blocks} />
-      ) : (
-        <div className="mt-8 space-y-4 text-base leading-7 text-zinc-300">
-          {article.body.map((paragraph) => (
-            <p key={paragraph}>{paragraph}</p>
-          ))}
+      {article.image &&
+      article.image.hero !== false &&
+      article.image.size === "feature" ? (
+        <div className="mt-8 md:grid md:grid-cols-[minmax(0,1fr)_minmax(14rem,38%)] md:items-start md:gap-8">
+          <figure className="mx-auto w-full overflow-hidden rounded-2xl border border-white/10 bg-zinc-950 md:order-2 md:mx-0">
+            <Image
+              src={article.image.src}
+              alt={article.image.alt}
+              width={article.image.width}
+              height={article.image.height}
+              priority
+              className="h-auto w-full"
+              sizes="(max-width: 768px) calc(100vw - 2rem), 340px"
+            />
+          </figure>
+          <div className="max-md:mt-8 md:order-1 [&>div]:mt-0">
+            {article.blocks ? (
+              <NewsStory blocks={article.blocks} />
+            ) : (
+              <div className="space-y-4 text-base leading-7 text-zinc-300">
+                {article.body.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
+      ) : (
+        <>
+          {article.image && article.image.hero !== false ? (
+            <figure
+              className={
+                article.image.size === "half"
+                  ? "mx-auto mt-8 w-full max-w-sm overflow-hidden rounded-2xl border border-white/10 bg-zinc-950"
+                  : "mt-8 overflow-hidden rounded-2xl border border-white/10 bg-zinc-950"
+              }
+            >
+              <Image
+                src={article.image.src}
+                alt={article.image.alt}
+                width={article.image.width}
+                height={article.image.height}
+                priority
+                className="h-auto w-full"
+                sizes={
+                  article.image.size === "half"
+                    ? "(max-width: 384px) 100vw, 384px"
+                    : "(max-width: 896px) 100vw, 896px"
+                }
+              />
+            </figure>
+          ) : null}
+          {article.blocks ? (
+            <NewsStory blocks={article.blocks} />
+          ) : (
+            <div className="mt-8 space-y-4 text-base leading-7 text-zinc-300">
+              {article.body.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
+            </div>
+          )}
+        </>
       )}
       <Link
         href="/news"

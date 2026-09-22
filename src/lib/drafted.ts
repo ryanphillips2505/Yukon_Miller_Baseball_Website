@@ -266,6 +266,12 @@ const draftedMillersOldestFirst: DraftedMiller[] = [
     ],
     note: "Signed with the Mets",
     mlbDebut: "March 26, 2026 · Citi Field",
+    mlbNotes: [
+      "First Major League hit was a home run",
+      "Holds the Mets single-season rookie hits record",
+      "Broke Pete Alonso’s 155-hit mark from 2019 with his 156th hit",
+      "Set the record September 19, 2026 against the Phillies at Citi Field",
+    ],
   },
 ];
 

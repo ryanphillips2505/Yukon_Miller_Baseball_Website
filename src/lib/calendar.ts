@@ -34,10 +34,12 @@ export function teamCalendarName(team: TeamId) {
 
 export function calendarSubscribeLinks(team: TeamId) {
   const httpsUrl = `https://www.yukonbaseball.com${calendarPath(team)}`;
+  const name = teamCalendarName(team);
   return {
     httpsUrl,
     apple: httpsUrl.replace("https://", "webcal://"),
     google: `https://calendar.google.com/calendar/render?cid=${encodeURIComponent(httpsUrl)}`,
+    outlook: `https://outlook.live.com/calendar/0/addfromweb?url=${encodeURIComponent(httpsUrl)}&name=${encodeURIComponent(name)}`,
   };
 }
 

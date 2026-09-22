@@ -68,7 +68,9 @@ function SubscribeButtons({ team }: { team: TeamId }) {
         Google
       </a>
       <a
-        href={links.httpsUrl}
+        href={links.outlook}
+        target="_blank"
+        rel="noreferrer"
         className={cn(cellClass, "border-l border-white/10")}
         onClick={() =>
           trackCalendarClick(gaCalendarEvents.outlook, gaCalendarEvents.ics)

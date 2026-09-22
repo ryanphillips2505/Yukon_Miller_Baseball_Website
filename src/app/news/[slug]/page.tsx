@@ -2,7 +2,6 @@ import { NewsStory } from "@/components/news-story";
 import { buttonVariants } from "@/components/ui/button";
 import { getArticle, articles } from "@/lib/news";
 import { ogShareImage } from "@/lib/og-cover";
-import { shareSiteName } from "@/lib/site";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
 import Image from "next/image";
@@ -33,7 +32,6 @@ export async function generateMetadata({
       title: article.title,
       description: article.excerpt,
       type: "article",
-      siteName: shareSiteName,
       images: [image],
     },
     twitter: {

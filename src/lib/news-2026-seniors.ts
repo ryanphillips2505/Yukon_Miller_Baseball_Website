@@ -14,6 +14,7 @@ export const seniors2026Story = {
     height: 533,
     focus: "48% 22%",
     size: "half" as const,
+    hero: false,
   },
   body: [
     "The next chapter is underway for five more Yukon Millers: Eddie Fish, Brayden Trogdon, Devon Butler, Cayden Thomas and Gentry Hoke.",

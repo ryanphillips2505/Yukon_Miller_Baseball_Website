@@ -70,7 +70,7 @@ export default async function NewsArticlePage({
           {article.excerpt}
         </p>
       ) : null}
-      {article.image ? (
+      {article.image && article.image.hero !== false ? (
         <figure
           className={
             article.image.size === "half"

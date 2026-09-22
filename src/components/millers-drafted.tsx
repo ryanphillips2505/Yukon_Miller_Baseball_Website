@@ -85,6 +85,8 @@ function DraftPlaque({ player }: { player: DraftedMiller }) {
             alt={player.signedLogo.alt}
             width={player.signedLogo.width}
             height={player.signedLogo.height}
+            sizes="112px"
+            loading="eager"
             className="h-full w-full object-contain"
           />
         </div>

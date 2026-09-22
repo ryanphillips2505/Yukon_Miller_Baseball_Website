@@ -10,10 +10,12 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 
 function trackCalendarClick(
-  event: (typeof gaCalendarEvents)[keyof typeof gaCalendarEvents],
+  ...events: Array<(typeof gaCalendarEvents)[keyof typeof gaCalendarEvents]>
 ) {
-  track(event);
-  gaEvent(event);
+  for (const event of events) {
+    track(event);
+    gaEvent(event);
+  }
 }
 
 async function writeClipboard(value: string) {
@@ -50,7 +52,9 @@ function SubscribeButtons({ team }: { team: TeamId }) {
       <a
         href={links.httpsUrl}
         className={cellClass}
-        onClick={() => trackCalendarClick(gaCalendarEvents.apple)}
+        onClick={() =>
+          trackCalendarClick(gaCalendarEvents.apple, gaCalendarEvents.ics)
+        }
       >
         Apple
       </a>
@@ -66,7 +70,9 @@ function SubscribeButtons({ team }: { team: TeamId }) {
       <a
         href={links.httpsUrl}
         className={cn(cellClass, "border-l border-white/10")}
-        onClick={() => trackCalendarClick(gaCalendarEvents.outlook)}
+        onClick={() =>
+          trackCalendarClick(gaCalendarEvents.outlook, gaCalendarEvents.ics)
+        }
       >
         Outlook
       </a>

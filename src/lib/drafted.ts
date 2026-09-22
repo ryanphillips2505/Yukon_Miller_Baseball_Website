@@ -140,7 +140,7 @@ const draftedMillersOldestFirst: DraftedMiller[] = [
       },
     ],
     note: "Reached Major League Baseball with the Oakland Athletics.",
-    mlbDebut: "September 2, 2010 · Oakland Athletics",
+    mlbDebut: "September 2, 2010 · Yankee Stadium",
     mlbNotes: [
       "Appeared in 5 MLB games",
       "Pitched 4 innings",

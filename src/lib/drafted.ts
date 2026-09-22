@@ -25,6 +25,7 @@ export type DraftedMiller = {
   };
   lines: DraftLine[];
   note: string;
+  mlbDebut?: string;
 };
 
 const redSox: ClubMark = {
@@ -254,6 +255,7 @@ export const draftedMillers: DraftedMiller[] = [
       },
     ],
     note: "Signed with the Mets",
+    mlbDebut: "March 26, 2026 · Citi Field",
   },
 ];
 
@@ -274,7 +276,7 @@ export function isFirstRound(player: DraftedMiller) {
 }
 
 export function reachedMajors(player: DraftedMiller) {
-  return player.note.includes("Major League Baseball");
+  return Boolean(player.mlbDebut) || player.note.includes("Major League Baseball");
 }
 
 export function ordinal(value: number) {

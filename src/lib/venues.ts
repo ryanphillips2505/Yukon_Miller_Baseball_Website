@@ -132,6 +132,11 @@ const venues: Record<string, Field> = {
     street: "7777 S Lewis Avenue",
     cityStateZip: "Tulsa, OK 74171",
   },
+  "bricktown-ballpark": {
+    name: "Bricktown Ballpark",
+    street: "2 S Mickey Mantle Drive",
+    cityStateZip: "Oklahoma City, OK 73104",
+  },
 };
 
 function slug(value: string) {

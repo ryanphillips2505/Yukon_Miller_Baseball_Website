@@ -50,6 +50,7 @@ const drafts: GameDraft[] = [
   { date: "2027-03-04", weekday: "Thursday", team: "varsity", opponent: "Bethany", location: "home", time: "6:00", phase: "regular" },
   { date: "2027-03-04", weekday: "Thursday", team: "jv-red", opponent: "Memorial", location: "away", time: "5:00 / 7:00", phase: "regular" },
   { date: "2027-03-04", weekday: "Thursday", team: "jv-white", opponent: "Santa Fe Festival", location: "away", phase: "regular" },
+  { date: "2027-03-05", weekday: "Friday", team: "varsity", opponent: "Carl Albert", location: "neutral", phase: "regular", venue: "Bricktown Ballpark" },
   { date: "2027-03-05", weekday: "Friday", team: "jv-white", opponent: "Santa Fe Festival", location: "away", phase: "regular" },
   { date: "2027-03-06", weekday: "Saturday", team: "varsity", opponent: "Edmond North", location: "away", time: "1:00", phase: "regular" },
   { date: "2027-03-06", weekday: "Saturday", team: "jv-red", opponent: "Choctaw", location: "home", time: "12:00 / 2:00", phase: "regular" },

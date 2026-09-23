@@ -1,11 +1,12 @@
 import { OrganizationInfo } from "@/components/organization-info";
 import { buttonVariants } from "@/components/ui/button";
 import { hrc, officers, tcaStore } from "@/lib/support";
+import { publicPageSeo } from "@/lib/seo";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
 import Link from "next/link";
 
-export const metadata: Metadata = { title: "Home Run Club" };
+export const metadata: Metadata = { title: "Home Run Club", ...publicPageSeo("/support") };
 
 export default function SupportPage() {
   const meetings = hrc.howItRuns[0];

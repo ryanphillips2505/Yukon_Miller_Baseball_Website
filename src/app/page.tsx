@@ -4,9 +4,15 @@ import { buttonVariants } from "@/components/ui/button";
 import { commits } from "@/lib/commits";
 import { latestArticles } from "@/lib/news";
 import { players } from "@/lib/roster";
+import { publicPageSeo } from "@/lib/seo";
 import { cn } from "@/lib/utils";
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  ...publicPageSeo("/"),
+};
 
 export default function HomePage() {
   const [featured, ...moreNews] = latestArticles(3);

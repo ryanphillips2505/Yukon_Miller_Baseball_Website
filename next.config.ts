@@ -19,6 +19,45 @@ const nextConfig: NextConfig = {
       "./node_modules/sharp/**/*",
     ],
   },
+  async redirects() {
+    return [
+      {
+        source: "/schedule-fields",
+        destination: "/schedule",
+        permanent: true,
+      },
+      {
+        source: "/players-coaches",
+        destination: "/roster",
+        permanent: true,
+      },
+      {
+        source: "/players",
+        destination: "/roster",
+        permanent: true,
+      },
+      {
+        source: "/fields",
+        destination: "/facilities",
+        permanent: true,
+      },
+      {
+        source: "/about",
+        destination: "/coaches",
+        permanent: true,
+      },
+      {
+        source: "/info",
+        destination: "/support",
+        permanent: true,
+      },
+      {
+        source: "/wallpapers",
+        destination: "/media",
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     return [
       {

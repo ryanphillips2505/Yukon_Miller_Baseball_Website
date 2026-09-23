@@ -1,8 +1,9 @@
 import { RosterBoard } from "@/components/roster-board";
 import { PageHero } from "@/components/page-hero";
+import { publicPageSeo } from "@/lib/seo";
 import type { Metadata } from "next";
 
-export const metadata: Metadata = { title: "Roster" };
+export const metadata: Metadata = { title: "Roster", ...publicPageSeo("/roster") };
 
 export default function RosterPage() {
   return (

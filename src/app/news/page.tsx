@@ -3,6 +3,7 @@ import { EmptyState } from "@/components/empty-state";
 import { PageHero } from "@/components/page-hero";
 import { articles } from "@/lib/news";
 import { newsIndexOgImage, ogImageSize } from "@/lib/og-cover";
+import { publicPageSeo } from "@/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
 
@@ -18,7 +19,9 @@ export const metadata: Metadata = {
   title: "News",
   description:
     "Yukon Miller Baseball news, commits, and program updates.",
+  ...publicPageSeo("/news"),
   openGraph: {
+    ...publicPageSeo("/news").openGraph,
     title: "News",
     description:
       "Yukon Miller Baseball news, commits, and program updates.",

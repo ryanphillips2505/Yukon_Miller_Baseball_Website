@@ -1,8 +1,9 @@
 import { CommitBoard } from "@/components/commit-board";
 import { PageHero } from "@/components/page-hero";
+import { publicPageSeo } from "@/lib/seo";
 import type { Metadata } from "next";
 
-export const metadata: Metadata = { title: "Recruiting" };
+export const metadata: Metadata = { title: "Recruiting", ...publicPageSeo("/recruiting") };
 
 export default function RecruitingPage() {
   return (

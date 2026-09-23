@@ -1,8 +1,9 @@
 import { EmptyState } from "@/components/empty-state";
 import { PageHero } from "@/components/page-hero";
+import { publicPageSeo } from "@/lib/seo";
 import type { Metadata } from "next";
 
-export const metadata: Metadata = { title: "Records" };
+export const metadata: Metadata = { title: "Records", ...publicPageSeo("/records") };
 
 const tables = [
   {

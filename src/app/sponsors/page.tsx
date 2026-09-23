@@ -1,12 +1,15 @@
 import { SponsorBoard } from "@/components/sponsor-board";
 import { PageHero } from "@/components/page-hero";
+import { publicPageSeo } from "@/lib/seo";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Sponsors",
   description:
     "2026–27 Yukon Millers sponsorship packet and the partners on the Miller Field board.",
+  ...publicPageSeo("/sponsors"),
   openGraph: {
+    ...publicPageSeo("/sponsors").openGraph,
     title: "2026–27 Yukon Millers Sponsorship Packet",
     description:
       "Sponsorship packages from Single through Foul Ball, plus the form for artwork and payment.",

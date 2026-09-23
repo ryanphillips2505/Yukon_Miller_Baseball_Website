@@ -6,6 +6,7 @@ import {
   parkPhotos,
   type FacilityPhoto,
 } from "@/lib/facilities";
+import { publicPageSeo } from "@/lib/seo";
 import { program } from "@/lib/site";
 import type { Metadata } from "next";
 import Image from "next/image";
@@ -14,6 +15,7 @@ export const metadata: Metadata = {
   title: "Facilities",
   description:
     "Miller Field and the Yukon Miller Baseball clubhouse behind Yukon High School.",
+  ...publicPageSeo("/facilities"),
 };
 
 function PhotoCard({

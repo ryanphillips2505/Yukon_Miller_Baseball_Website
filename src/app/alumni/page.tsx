@@ -5,6 +5,7 @@ import { MillersDrafted } from "@/components/millers-drafted";
 import { allStateHall } from "@/lib/all-state";
 import { draftedBoard } from "@/lib/drafted";
 import { hallOfFame } from "@/lib/hall-of-fame";
+import { publicPageSeo } from "@/lib/seo";
 import type { Metadata } from "next";
 
 const shareTitle = "Hall of Honor";
@@ -13,11 +14,12 @@ const shareDescription = `${hallOfFame.title}, ${draftedBoard.title}, and the Yu
 export const metadata: Metadata = {
   title: shareTitle,
   description: shareDescription,
+  ...publicPageSeo("/alumni"),
   openGraph: {
+    ...publicPageSeo("/alumni").openGraph,
     title: shareTitle,
     description: shareDescription,
     type: "website",
-    url: "/alumni",
   },
   twitter: {
     card: "summary_large_image",

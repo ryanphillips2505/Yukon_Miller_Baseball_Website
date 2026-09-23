@@ -1,10 +1,11 @@
 import { OrganizationInfo } from "@/components/organization-info";
 import { PageHero } from "@/components/page-hero";
 import { officers } from "@/lib/support";
+import { publicPageSeo } from "@/lib/seo";
 import { program } from "@/lib/site";
 import type { Metadata } from "next";
 
-export const metadata: Metadata = { title: "Contact" };
+export const metadata: Metadata = { title: "Contact", ...publicPageSeo("/contact") };
 
 export default function ContactPage() {
   return (

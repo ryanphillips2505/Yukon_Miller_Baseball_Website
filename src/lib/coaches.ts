@@ -157,7 +157,12 @@ export const supportStaff: Coach[] = [
     role: "Manager",
     photo: "/images/coaches/yoslin-matadamas.jpg",
   },
-  { id: "jones", name: "Breed Jones", role: "Student Assistant" },
+  {
+    id: "jones",
+    name: "Breed Jones",
+    role: "Student Assistant",
+    photo: "/images/coaches/breed-jones.jpg",
+  },
   {
     id: "hormier",
     name: "Londyn Carter",

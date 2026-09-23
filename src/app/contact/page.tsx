@@ -1,9 +1,7 @@
 import { OrganizationInfo } from "@/components/organization-info";
 import { PageHero } from "@/components/page-hero";
-import { buttonVariants } from "@/components/ui/button";
 import { officers } from "@/lib/support";
 import { program } from "@/lib/site";
-import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = { title: "Contact" };
@@ -51,23 +49,6 @@ export default function ContactPage() {
                 </li>
               ))}
             </ul>
-          </div>
-          <div className="rounded-2xl border border-white/10 bg-zinc-950 p-6 sm:p-8">
-            <h2 className="font-heading text-3xl tracking-wide text-white uppercase sm:text-4xl">
-              Email
-            </h2>
-            <a
-              href={`mailto:${program.email}`}
-              className="mt-6 block break-all text-xl text-red-400 hover:text-red-300 sm:text-2xl"
-            >
-              {program.email}
-            </a>
-            <a
-              href={`mailto:${program.email}`}
-              className={cn(buttonVariants(), "mt-6 h-11 px-5 uppercase")}
-            >
-              Open email
-            </a>
           </div>
         </aside>
       </div>

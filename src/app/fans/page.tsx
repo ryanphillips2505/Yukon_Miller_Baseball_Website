@@ -75,7 +75,7 @@ export default function FansPage() {
               Help a night
             </h3>
             <p className="mt-2 text-sm leading-6 text-zinc-400">
-              Gate, concession, and field work run through the Home Run Club.
+              Gate, concession, and field work run through YUKON HS HOME RUN CLUB.
             </p>
             <a
               href={hrc.volunteerSignup.href}

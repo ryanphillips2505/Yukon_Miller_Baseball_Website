@@ -46,7 +46,7 @@ export function MinutesLogin() {
         Enter password
       </h2>
       <p className="mt-3 text-sm leading-6 text-zinc-400">
-        Meeting minutes are for Home Run Club officers and coaching staff.
+        Meeting minutes are for YUKON HS HOME RUN CLUB officers and coaching staff.
       </p>
       <label className="mt-6 block">
         <span className="text-[0.65rem] font-semibold tracking-[0.2em] text-red-400 uppercase">

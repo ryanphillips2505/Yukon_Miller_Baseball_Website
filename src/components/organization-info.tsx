@@ -40,26 +40,18 @@ export function OrganizationInfo({
         <h2 className="font-heading text-xl tracking-wide text-white uppercase">
           Organization information
         </h2>
-        <p className="font-heading mt-4 text-2xl tracking-wide text-white uppercase">
-          {nonprofit.legalName}
-        </p>
-        <p className="mt-2 text-[0.65rem] font-semibold tracking-[0.2em] text-zinc-500 uppercase">
-          {nonprofit.statusLine}
-        </p>
         <div className="mt-5 grid gap-5">
+          <Fact label="Legal name">
+            <span className="text-white">{nonprofit.legalName}</span>
+            <span className="mt-1 block text-[0.65rem] font-semibold tracking-[0.2em] text-zinc-500 uppercase">
+              {nonprofit.statusLine}
+            </span>
+          </Fact>
           <Fact label="EIN">{nonprofit.ein}</Fact>
           <Fact label="Mailing address">
-            {`${nonprofit.mailingBox}\n${nonprofit.mailingCity}`}
+            {nonprofit.mailingLines.join("\n")}
           </Fact>
           <Fact label="Official website">{website}</Fact>
-          <Fact label="Email">
-            <a
-              href={`mailto:${nonprofit.email}`}
-              className="break-all text-red-400 hover:text-red-300"
-            >
-              {nonprofit.email}
-            </a>
-          </Fact>
         </div>
         <p className="mt-5 text-sm leading-6 text-zinc-400">
           {nonprofit.contactBlurb}

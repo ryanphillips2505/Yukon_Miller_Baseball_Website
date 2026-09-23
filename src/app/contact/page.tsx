@@ -38,7 +38,7 @@ export default function ContactPage() {
           </div>
           <div className="rounded-2xl border border-white/10 bg-zinc-950 p-6">
             <h2 className="font-heading text-xl tracking-wide text-white uppercase">
-              Home Run Club officers
+              YUKON HS HOME RUN CLUB officers
             </h2>
             <p className="mt-2 text-sm text-zinc-500">
               Reach HRC through {program.email}.

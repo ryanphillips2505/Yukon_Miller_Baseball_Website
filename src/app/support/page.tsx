@@ -1,6 +1,5 @@
 import { OrganizationInfo } from "@/components/organization-info";
 import { buttonVariants } from "@/components/ui/button";
-import { nonprofit } from "@/lib/nonprofit";
 import { hrc, officers, tcaStore } from "@/lib/support";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
@@ -32,18 +31,12 @@ export default function SupportPage() {
                 {paragraph}
               </p>
             ))}
-            <p className="mt-4 max-w-2xl text-base leading-7 text-zinc-400">
-              {nonprofit.independence}
-            </p>
-            <p className="mt-4 max-w-2xl text-base leading-7 text-zinc-400 italic">
-              {`* ${hrc.affiliationNote}`}
-            </p>
           </div>
 
           <section className="rounded-2xl border border-white/10 bg-zinc-950 p-5 sm:p-6">
             <div className="flex items-center justify-between gap-3">
               <h2 className="font-heading text-2xl tracking-wide text-white uppercase">
-                Officers
+                YUKON HS HOME RUN CLUB Officers
               </h2>
               <a
                 href={`mailto:${hrc.email}`}

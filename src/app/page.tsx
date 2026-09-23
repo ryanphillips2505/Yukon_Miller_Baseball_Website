@@ -165,17 +165,27 @@ export default function HomePage() {
                   <Link
                     key={article.slug}
                     href={`/news/${article.slug}`}
-                    className="rounded-2xl border border-white/10 bg-black/40 p-6 transition-colors hover:border-red-700/40"
+                    className="overflow-hidden rounded-2xl border border-white/10 bg-black/40 transition-colors hover:border-red-700/40 lg:flex"
                   >
-                    <p className="text-[0.62rem] tracking-[0.18em] text-red-400 uppercase">
-                      {article.category}
-                    </p>
-                    <h3 className="font-heading mt-2 text-2xl tracking-wide text-white uppercase">
-                      {article.title}
-                    </h3>
-                    <p className="mt-3 text-sm leading-6 text-zinc-400">
-                      {article.excerpt}
-                    </p>
+                    {article.image ? (
+                      <div className="relative h-32 w-full shrink-0 lg:h-auto lg:w-36">
+                        <ArticleCardImage
+                          image={article.image}
+                          className="absolute inset-0 h-full w-full"
+                        />
+                      </div>
+                    ) : null}
+                    <div className="min-w-0 p-5 sm:p-6">
+                      <p className="text-[0.62rem] tracking-[0.18em] text-red-400 uppercase">
+                        {article.category}
+                      </p>
+                      <h3 className="font-heading mt-2 text-2xl tracking-wide text-white uppercase">
+                        {article.title}
+                      </h3>
+                      <p className="mt-3 text-sm leading-6 text-zinc-400">
+                        {article.excerpt}
+                      </p>
+                    </div>
                   </Link>
                 ))}
               </div>

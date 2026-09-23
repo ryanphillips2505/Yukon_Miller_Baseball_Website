@@ -13,28 +13,15 @@ export default function ContactPage() {
     <div>
       <PageHero kicker="Staff & HRC" title="Contact" />
       <div className="mx-auto grid max-w-6xl items-start gap-8 px-4 py-10 sm:px-6 lg:grid-cols-[1.1fr_0.9fr]">
-        <div className="rounded-2xl border border-white/10 bg-zinc-950 p-6 sm:p-8">
-          <h2 className="font-heading text-3xl tracking-wide text-white uppercase sm:text-4xl">
-            Email
-          </h2>
-          <a
-            href={`mailto:${program.email}`}
-            className="mt-6 block break-all text-xl text-red-400 hover:text-red-300 sm:text-2xl"
-          >
-            {program.email}
-          </a>
-          <a
-            href={`mailto:${program.email}`}
-            className={cn(buttonVariants(), "mt-6 h-11 px-5 uppercase")}
-          >
-            Open email
-          </a>
-        </div>
+        <OrganizationInfo variant="contact" />
         <aside className="space-y-4">
           <div className="rounded-2xl border border-white/10 bg-zinc-950 p-6">
             <h2 className="font-heading text-xl tracking-wide text-white uppercase">
               Miller Field
             </h2>
+            <p className="mt-2 text-sm text-zinc-500">
+              Baseball field / game location
+            </p>
             <p className="mt-3 text-sm leading-6 text-zinc-400">
               {program.street}
               <br />
@@ -65,7 +52,23 @@ export default function ContactPage() {
               ))}
             </ul>
           </div>
-          <OrganizationInfo variant="contact" />
+          <div className="rounded-2xl border border-white/10 bg-zinc-950 p-6 sm:p-8">
+            <h2 className="font-heading text-3xl tracking-wide text-white uppercase sm:text-4xl">
+              Email
+            </h2>
+            <a
+              href={`mailto:${program.email}`}
+              className="mt-6 block break-all text-xl text-red-400 hover:text-red-300 sm:text-2xl"
+            >
+              {program.email}
+            </a>
+            <a
+              href={`mailto:${program.email}`}
+              className={cn(buttonVariants(), "mt-6 h-11 px-5 uppercase")}
+            >
+              Open email
+            </a>
+          </div>
         </aside>
       </div>
     </div>

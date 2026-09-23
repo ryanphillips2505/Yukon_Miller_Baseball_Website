@@ -1,5 +1,6 @@
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { publicPageSeo } from "@/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
 
@@ -7,6 +8,7 @@ export const metadata: Metadata = {
   title: "Calendar instructions",
   description:
     "How to subscribe to Yukon High School Baseball team calendars on Apple, Google, and Outlook.",
+  ...publicPageSeo("/schedule/instructions"),
 };
 
 const steps = [

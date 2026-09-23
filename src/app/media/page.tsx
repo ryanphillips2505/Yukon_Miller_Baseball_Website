@@ -1,10 +1,11 @@
 import { EmptyState } from "@/components/empty-state";
 import { PageHero } from "@/components/page-hero";
 import { PhotoSlot } from "@/components/photo-slot";
+import { publicPageSeo } from "@/lib/seo";
 import { program } from "@/lib/site";
 import type { Metadata } from "next";
 
-export const metadata: Metadata = { title: "Media" };
+export const metadata: Metadata = { title: "Media", ...publicPageSeo("/media") };
 
 export default function MediaPage() {
   return (

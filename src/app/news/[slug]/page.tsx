@@ -2,6 +2,7 @@ import { NewsStory } from "@/components/news-story";
 import { buttonVariants } from "@/components/ui/button";
 import { getArticle, articles } from "@/lib/news";
 import { ogShareImage } from "@/lib/og-cover";
+import { publicPageSeo } from "@/lib/seo";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
 import Image from "next/image";
@@ -24,11 +25,14 @@ export async function generateMetadata({
   }
 
   const image = ogShareImage(article.slug, article.image?.alt ?? article.title);
+  const path = `/news/${article.slug}`;
 
   return {
     title: article.title,
     description: article.excerpt,
+    ...publicPageSeo(path),
     openGraph: {
+      ...publicPageSeo(path).openGraph,
       title: article.title,
       description: article.excerpt,
       type: "article",

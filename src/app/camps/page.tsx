@@ -1,6 +1,7 @@
 import { PageHero } from "@/components/page-hero";
 import { buttonVariants } from "@/components/ui/button";
 import { campRegistrationUrl, liveCamps } from "@/lib/camps";
+import { publicPageSeo } from "@/lib/seo";
 import { program } from "@/lib/site";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
@@ -9,11 +10,12 @@ import Image from "next/image";
 export const metadata: Metadata = {
   title: "Camps",
   description: `${liveCamps.title} for ${liveCamps.ages} at ${liveCamps.location.name}. Dates, costs, and the live registration form.`,
+  ...publicPageSeo("/camps"),
   openGraph: {
+    ...publicPageSeo("/camps").openGraph,
     title: liveCamps.title,
     description: liveCamps.shareDescription,
     type: "website",
-    url: "/camps",
   },
   twitter: {
     card: "summary_large_image",

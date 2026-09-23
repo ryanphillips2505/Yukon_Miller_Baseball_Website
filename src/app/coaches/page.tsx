@@ -1,9 +1,10 @@
 import { CoachesBoard } from "@/components/coaches-board";
 import { PageHero } from "@/components/page-hero";
+import { publicPageSeo } from "@/lib/seo";
 import { program } from "@/lib/site";
 import type { Metadata } from "next";
 
-export const metadata: Metadata = { title: "Coaches" };
+export const metadata: Metadata = { title: "Coaches", ...publicPageSeo("/coaches") };
 
 export default function CoachesPage() {
   return (

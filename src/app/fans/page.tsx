@@ -1,11 +1,12 @@
 import { PageHero } from "@/components/page-hero";
 import { fields } from "@/lib/facilities";
+import { publicPageSeo } from "@/lib/seo";
 import { program, teams } from "@/lib/site";
 import { hrc } from "@/lib/support";
 import type { Metadata } from "next";
 import Link from "next/link";
 
-export const metadata: Metadata = { title: "Fan info" };
+export const metadata: Metadata = { title: "Fan info", ...publicPageSeo("/fans") };
 
 export default function FansPage() {
   return (

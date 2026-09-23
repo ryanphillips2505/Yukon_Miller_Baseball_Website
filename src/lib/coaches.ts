@@ -145,7 +145,12 @@ export const coaches: Coach[] = [
 ];
 
 export const supportStaff: Coach[] = [
-  { id: "woodruff", name: "Scotlyn Woodruff", role: "Manager" },
+  {
+    id: "woodruff",
+    name: "Scotlyn Woodruff",
+    role: "Manager",
+    photo: "/images/coaches/scotlyn-woodruff.jpg",
+  },
   {
     id: "matadamas",
     name: "Yoslin Matadamas",

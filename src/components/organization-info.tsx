@@ -1,4 +1,6 @@
+import { buttonVariants } from "@/components/ui/button";
 import { nonprofit } from "@/lib/nonprofit";
+import { cn } from "@/lib/utils";
 import type { ReactNode } from "react";
 
 function Fact({
@@ -52,6 +54,22 @@ export function OrganizationInfo({
             {nonprofit.mailingLines.join("\n")}
           </Fact>
           <Fact label="Official website">{website}</Fact>
+          <Fact label="Email">
+            <div className="flex flex-col items-start gap-3">
+              <a
+                href={`mailto:${nonprofit.email}`}
+                className="break-all text-red-400 hover:text-red-300"
+              >
+                {nonprofit.email}
+              </a>
+              <a
+                href={`mailto:${nonprofit.email}`}
+                className={cn(buttonVariants(), "h-9 px-4 text-xs uppercase")}
+              >
+                Open email
+              </a>
+            </div>
+          </Fact>
         </div>
         <p className="mt-5 text-sm leading-6 text-zinc-400">
           {nonprofit.contactBlurb}

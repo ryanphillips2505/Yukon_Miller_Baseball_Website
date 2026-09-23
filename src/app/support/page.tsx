@@ -1,4 +1,6 @@
+import { OrganizationInfo } from "@/components/organization-info";
 import { buttonVariants } from "@/components/ui/button";
+import { nonprofit } from "@/lib/nonprofit";
 import { hrc, officers, tcaStore } from "@/lib/support";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
@@ -30,6 +32,9 @@ export default function SupportPage() {
                 {paragraph}
               </p>
             ))}
+            <p className="mt-4 max-w-2xl text-base leading-7 text-zinc-400">
+              {nonprofit.independence}
+            </p>
             <p className="mt-4 max-w-2xl text-base leading-7 text-zinc-400 italic">
               {`* ${hrc.affiliationNote}`}
             </p>
@@ -63,6 +68,7 @@ export default function SupportPage() {
       </header>
 
       <div className="mx-auto max-w-6xl space-y-4 px-4 py-8 sm:space-y-5 sm:px-6 sm:py-10">
+        <OrganizationInfo variant="support" />
         <div className="grid gap-4 lg:grid-cols-2">
           <section className="rounded-2xl border border-white/10 bg-zinc-950 p-5 sm:p-6">
             <h2 className="font-heading text-2xl tracking-wide text-white uppercase">

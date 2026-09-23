@@ -1,5 +1,6 @@
 import { BrandLogo } from "@/components/brand-logo";
 import { NikeSwoosh } from "@/components/nike-swoosh";
+import { nonprofit } from "@/lib/nonprofit";
 import { allNav, program } from "@/lib/site";
 import Link from "next/link";
 
@@ -80,8 +81,18 @@ export function SiteFooter() {
           </div>
         </div>
       </div>
-      <div className="border-t border-white/8 px-4 py-4 text-center text-xs text-zinc-600">
-        Yukon High School Miller Baseball · {program.city}
+      <div className="border-t border-white/8 px-4 py-4 text-center text-xs leading-5 text-zinc-600">
+        <p>Yukon High School Miller Baseball · {program.city}</p>
+        <p className="mt-1.5 tracking-[0.12em] uppercase">{nonprofit.footerLegal}</p>
+        <p className="mt-1">
+          Official website of Yukon HS Home Run Club:{" "}
+          <a
+            href={nonprofit.websiteUrl}
+            className="text-zinc-500 hover:text-zinc-300"
+          >
+            {nonprofit.websiteLabel}
+          </a>
+        </p>
       </div>
     </footer>
   );

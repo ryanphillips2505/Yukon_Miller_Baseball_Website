@@ -1,3 +1,4 @@
+import { OrganizationInfo } from "@/components/organization-info";
 import { PageHero } from "@/components/page-hero";
 import { buttonVariants } from "@/components/ui/button";
 import { officers } from "@/lib/support";
@@ -64,6 +65,7 @@ export default function ContactPage() {
               ))}
             </ul>
           </div>
+          <OrganizationInfo variant="contact" />
         </aside>
       </div>
     </div>

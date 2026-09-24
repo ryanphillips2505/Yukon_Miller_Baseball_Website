@@ -200,7 +200,7 @@ const sponsorList: Sponsor[] = [
   },
   {
     id: "dunkin",
-    name: "Dunkin'",
+    name: "Dunkin' of Yukon",
     mark: "D",
     tier: "home-run",
     placement: "Home Run Club · outfield banner",

@@ -35,7 +35,7 @@ const sponsorLogos: Record<string, SponsorLogo> = {
   "clemens-blair": { src: "/images/sponsors/logos/clemens-blair.png", width: 900, height: 900 },
   "cooper-autogroup": { src: "/images/sponsors/logos/cooper-autogroup.png", width: 900, height: 251 },
   "crabtree": { src: "/images/sponsors/logos/crabtree.png", width: 900, height: 207 },
-  "dunkin": { src: "/images/sponsors/logos/dunkin-wordmark.png", width: 969, height: 188 },
+  "dunkin": { src: "/images/sponsors/logos/dunkin-of-yukon.png", width: 900, height: 265 },
   "cso-orthodontics": { src: "/images/sponsors/logos/cso-orthodontics.png", width: 900, height: 298 },
   "earls-rib-palace": { src: "/images/sponsors/logos/earls-rib-palace.png", width: 622, height: 420 },
   "five-iron-golf": { src: "/images/sponsors/logos/five-iron-golf.png", width: 303, height: 40 },

@@ -49,14 +49,14 @@ export const navPrimary = [
 ] as const;
 
 export const navMore = [
-  { href: "/support", label: "Booster" },
-  { href: "/contact", label: "Contact" },
+  { href: "/alumni", label: "Hall of Honor" },
   { href: "/recruiting", label: "Recruiting" },
   { href: "/camps", label: "Camps" },
-  { href: "/alumni", label: "Hall of Honor" },
+  { href: "/support", label: "Booster" },
   { href: "/fans", label: "Fan info" },
   { href: "/records", label: "Records" },
   { href: "/media", label: "Media" },
+  { href: "/contact", label: "Contact" },
 ] as const;
 
 export const allNav = [...navPrimary, ...navMore];

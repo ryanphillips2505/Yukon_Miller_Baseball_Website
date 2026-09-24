@@ -14,6 +14,18 @@ export const schedule2027Story = {
     height: 1000,
     focus: "50% 18%",
     size: "feature" as const,
+    banner: {
+      src: "/images/news/yukon-millers-release-2027-schedule-banner.jpg",
+      width: 1600,
+      height: 680,
+      focus: "50% 50%",
+    },
+    card: {
+      src: "/images/news/yukon-millers-release-2027-schedule-card.jpg",
+      width: 800,
+      height: 640,
+      focus: "50% 40%",
+    },
   },
   body: [
     "Yukon Millers Baseball has released its 2027 schedule, featuring a challenging slate that includes two defending state champions, multiple tournaments and an out-of-state trip to Mississippi.",

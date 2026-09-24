@@ -4,19 +4,28 @@ import Image from "next/image";
 
 export function ArticleCardImage({
   image,
+  variant = "card",
   className,
 }: {
   image: ArticleImage;
+  variant?: "card" | "banner";
   className?: string;
 }) {
+  const chosen =
+    variant === "banner" && image.banner
+      ? image.banner
+      : variant === "card" && image.card
+        ? image.card
+        : image;
+
   return (
     <Image
-      src={image.src}
+      src={chosen.src}
       alt={image.alt}
-      width={image.width}
-      height={image.height}
+      width={chosen.width}
+      height={chosen.height}
       className={cn("object-cover", className)}
-      style={{ objectPosition: image.focus ?? "center 22%" }}
+      style={{ objectPosition: chosen.focus ?? image.focus ?? "center 22%" }}
     />
   );
 }

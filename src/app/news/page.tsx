@@ -65,7 +65,8 @@ export default function NewsPage() {
                   {article.image ? (
                     <ArticleCardImage
                       image={article.image}
-                      className="mt-4 h-44 w-full rounded-xl sm:mt-0 sm:h-32 sm:w-40 sm:shrink-0"
+                      variant="card"
+                      className="mt-4 h-44 w-full rounded-xl object-cover sm:mt-0 sm:h-32 sm:w-40 sm:shrink-0"
                     />
                   ) : null}
                 </Link>

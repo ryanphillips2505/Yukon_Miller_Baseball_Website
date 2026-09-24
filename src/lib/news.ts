@@ -8,6 +8,13 @@ import { hofBanquetStory } from "@/lib/news-hof-banquet";
 import { joeLytleStory } from "@/lib/news-joe-lytle";
 import { schedule2027Story } from "@/lib/news-2027-schedule";
 
+export type ArticleImageVariant = {
+  src: string;
+  width: number;
+  height: number;
+  focus?: string;
+};
+
 export type ArticleImage = {
   src: string;
   alt: string;
@@ -16,6 +23,8 @@ export type ArticleImage = {
   focus?: string;
   size?: "half" | "feature";
   hero?: boolean;
+  card?: ArticleImageVariant;
+  banner?: ArticleImageVariant;
 };
 
 export type Article = {

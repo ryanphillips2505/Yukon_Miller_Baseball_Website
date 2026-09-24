@@ -151,7 +151,8 @@ export default function HomePage() {
                 {featured.image ? (
                   <ArticleCardImage
                     image={featured.image}
-                    className="h-56 w-full sm:h-72"
+                    variant="banner"
+                    className="h-56 w-full object-cover sm:h-72"
                   />
                 ) : null}
                 <div className="p-8 sm:p-10">

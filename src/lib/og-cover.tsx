@@ -17,6 +17,7 @@ const articleOgSlugs = new Set([
   "three-more-millers-next-level",
   "road-to-state-runs-through-yukon",
   "joe-lytle-banana-ball-all-star",
+  "yukon-millers-release-2027-schedule",
 ]);
 
 export function ogShareImage(

@@ -77,7 +77,7 @@ export default async function NewsArticlePage({
       article.image.hero !== false &&
       article.image.size === "feature" ? (
         <div className="mt-8 md:grid md:grid-cols-[minmax(0,1fr)_minmax(14rem,38%)] md:items-start md:gap-8">
-          <figure className="mx-auto w-full overflow-hidden rounded-2xl border border-white/10 bg-zinc-950 md:order-2 md:mx-0">
+          <figure className="mx-auto w-full max-w-[14.5rem] overflow-hidden rounded-2xl border border-white/10 bg-zinc-950 md:order-2 md:mx-0 md:max-w-none">
             <Image
               src={article.image.src}
               alt={article.image.alt}
@@ -85,7 +85,7 @@ export default async function NewsArticlePage({
               height={article.image.height}
               priority
               className="h-auto w-full"
-              sizes="(max-width: 768px) calc(100vw - 2rem), 340px"
+              sizes="(max-width: 768px) 14.5rem, 340px"
             />
           </figure>
           <div className="max-md:mt-8 md:order-1 [&>div]:mt-0">

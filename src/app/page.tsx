@@ -3,6 +3,7 @@ import { BrandLogo } from "@/components/brand-logo";
 import { buttonVariants } from "@/components/ui/button";
 import { commits } from "@/lib/commits";
 import { latestArticles } from "@/lib/news";
+import { homeOgImage, ogImageSize } from "@/lib/og-cover";
 import { players } from "@/lib/roster";
 import { publicPageSeo } from "@/lib/seo";
 import { cn } from "@/lib/utils";
@@ -10,8 +11,30 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
+const homeShareImage = {
+  url: homeOgImage,
+  width: ogImageSize.width,
+  height: ogImageSize.height,
+  alt: "Yukon Miller Baseball — Home of the Millers",
+};
+
 export const metadata: Metadata = {
   ...publicPageSeo("/"),
+  openGraph: {
+    ...publicPageSeo("/").openGraph,
+    title: "Yukon Miller Baseball",
+    description:
+      "Yukon High School Baseball. Home of the Millers. Schedule, roster, coaches, news, and Home Run Club.",
+    type: "website",
+    images: [homeShareImage],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Yukon Miller Baseball",
+    description:
+      "Yukon High School Baseball. Home of the Millers. Schedule, roster, coaches, news, and Home Run Club.",
+    images: [homeShareImage.url],
+  },
 };
 
 export default function HomePage() {

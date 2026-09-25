@@ -4,6 +4,7 @@ export const ogImageSize = {
 };
 
 export const defaultOgImage = "/images/og/default.jpg";
+export const homeOgImage = "/images/og/home.jpg";
 export const newsIndexOgImage = "/images/og/news.jpg";
 export const campsOgImage = "/images/og/camps.jpg";
 

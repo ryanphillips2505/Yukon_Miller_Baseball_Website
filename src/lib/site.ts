@@ -11,6 +11,12 @@ export const brand = {
     height: 572,
     alt: "Yukon Baseball — Oklahoma outline with YM mark",
   },
+  footer: {
+    src: "/images/yukon-baseball-ok-mill.png",
+    width: 1200,
+    height: 600,
+    alt: "Yukon Baseball — Oklahoma outline with YM mark and Yukon's Best mill",
+  },
   mark: {
     src: "/images/logo-mark.jpg",
     width: 512,

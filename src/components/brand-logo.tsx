@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 import Image from "next/image";
 
 type BrandLogoProps = {
-  variant?: "primary" | "state" | "mark" | "footer";
+  variant?: "primary" | "state" | "mark";
   priority?: boolean;
   className?: string;
   sizes?: string;

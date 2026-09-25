@@ -90,6 +90,14 @@ export const articles: Article[] = [
     category: "Commit",
     excerpt:
       "McClure will play for the Barton Cougars, NJCAA Division I baseball in Great Bend, Kansas.",
+    image: {
+      src: "/images/roster/pryce-mcclure-pitch.jpg",
+      alt: "Pryce McClure pitching in a Yukon Miller uniform",
+      width: 1320,
+      height: 1419,
+      focus: "center 28%",
+      size: "half",
+    },
     body: [
       "Yukon High School Baseball announced that Pryce McClure has committed to Barton Community College.",
       "The Cougars just knocked off No. 2 Cloud County and reached the Plains District final four — NJCAA Division I baseball in Great Bend.",

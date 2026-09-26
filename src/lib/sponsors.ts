@@ -32,6 +32,7 @@ const sponsorLogos: Record<string, SponsorLogo> = {
   "bk-weaver": { src: "/images/sponsors/logos/bk-weaver.png", width: 220, height: 100 },
   "brady-built": { src: "/images/sponsors/logos/brady-built.png", width: 198, height: 153 },
   "browns-driving-school": { src: "/images/sponsors/logos/browns-driving-school.png", width: 780, height: 231 },
+  "caseys": { src: "/images/sponsors/logos/caseys.png", width: 900, height: 351 },
   "clemens-blair": { src: "/images/sponsors/logos/clemens-blair.png", width: 900, height: 900 },
   "cooper-autogroup": { src: "/images/sponsors/logos/cooper-autogroup.png", width: 900, height: 251 },
   "crabtree": { src: "/images/sponsors/logos/crabtree.png", width: 900, height: 207 },
@@ -268,6 +269,14 @@ const sponsorList: Sponsor[] = [
     tier: "home-run",
     placement: "Home Run Club · outfield banner",
     href: "https://www.bancfirst.bank",
+  },
+  {
+    id: "caseys",
+    name: "Casey's General Store",
+    mark: "CG",
+    tier: "home-run",
+    placement: "Home Run Club · outfield banner",
+    href: "https://www.caseys.com",
   },
   {
     id: "notable-roofing",

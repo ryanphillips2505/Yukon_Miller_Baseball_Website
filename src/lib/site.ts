@@ -61,6 +61,24 @@ export const navMore = [
 
 export const allNav = [...navPrimary, ...navMore];
 
+export const social = [
+  {
+    id: "instagram",
+    label: "Instagram",
+    href: "https://www.instagram.com/yukonmillerbb",
+  },
+  {
+    id: "facebook",
+    label: "Facebook",
+    href: "https://www.facebook.com/yukonmillersbaseball",
+  },
+  {
+    id: "x",
+    label: "X",
+    href: "https://x.com/YukonMillerBB",
+  },
+] as const;
+
 export const teams = [
   { id: "varsity", label: "Varsity", field: "Miller Field" },
   { id: "jv-red", label: "JV Red", field: "Miller Field" },

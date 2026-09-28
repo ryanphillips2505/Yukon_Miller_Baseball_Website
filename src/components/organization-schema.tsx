@@ -1,4 +1,5 @@
 import { nonprofit } from "@/lib/nonprofit";
+import { social } from "@/lib/site";
 
 export function OrganizationSchema() {
   const data = {
@@ -9,6 +10,7 @@ export function OrganizationSchema() {
     alternateName: [...nonprofit.alternateNames],
     url: nonprofit.websiteUrl,
     email: nonprofit.email,
+    sameAs: social.map((account) => account.href),
     taxID: nonprofit.ein,
     description: nonprofit.officialSite,
     address: {

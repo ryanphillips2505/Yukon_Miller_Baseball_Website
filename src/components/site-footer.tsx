@@ -1,5 +1,6 @@
 import { BrandLogo } from "@/components/brand-logo";
 import { NikeSwoosh } from "@/components/nike-swoosh";
+import { SocialLinks } from "@/components/social-links";
 import { nonprofit } from "@/lib/nonprofit";
 import { allNav, program } from "@/lib/site";
 import Link from "next/link";
@@ -53,7 +54,8 @@ export function SiteFooter() {
             >
               {program.email}
             </a>
-            <p className="mt-4 text-[0.7rem] font-semibold tracking-[0.2em] text-zinc-500 uppercase">
+            <SocialLinks className="mt-4" />
+            <p className="mt-5 text-[0.7rem] font-semibold tracking-[0.2em] text-zinc-500 uppercase">
               On this site
             </p>
             <div className="mt-3 flex flex-wrap gap-x-3 gap-y-1">

@@ -1,3 +1,4 @@
+import { SocialLinks } from "@/components/social-links";
 import { buttonVariants } from "@/components/ui/button";
 import { nonprofit } from "@/lib/nonprofit";
 import { cn } from "@/lib/utils";
@@ -69,6 +70,9 @@ export function OrganizationInfo({
                 Open email
               </a>
             </div>
+          </Fact>
+          <Fact label="Follow the Millers">
+            <SocialLinks labeled />
           </Fact>
         </div>
         <p className="mt-5 text-sm leading-6 text-zinc-400">

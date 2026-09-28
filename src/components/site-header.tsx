@@ -10,6 +10,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { NikeSwoosh } from "@/components/nike-swoosh";
+import { SocialLinks } from "@/components/social-links";
 import { allNav, navMore, navPrimary, program } from "@/lib/site";
 import { cn } from "@/lib/utils";
 import { ChevronDown, Menu } from "lucide-react";
@@ -171,6 +172,12 @@ export function SiteHeader() {
                   {item.label}
                 </Link>
               ))}
+              <div className="mt-4 border-t border-white/10 pt-4">
+                <p className="px-3 text-[0.65rem] font-semibold tracking-[0.2em] text-zinc-500 uppercase">
+                  Follow
+                </p>
+                <SocialLinks className="mt-3 px-1" />
+              </div>
             </nav>
             </SheetContent>
           </Sheet>

@@ -4,34 +4,46 @@ import { PlayerBioDialog } from "@/components/player-bio-dialog";
 import {
   bioValue,
   displayName,
-  playersForClass,
+  playersForRoster,
   rosterClassYears,
   rosterGroups,
+  rosterPositions,
   type Player,
 } from "@/lib/roster";
 import { ChevronDown } from "lucide-react";
 import { useMemo, useState } from "react";
 
 type ClassFilter = "all" | number;
+type PositionFilter = "all" | string;
 
 export function RosterBoard() {
   const classYears = rosterClassYears();
+  const positions = rosterPositions();
   const [classFilter, setClassFilter] = useState<ClassFilter>("all");
+  const [positionFilter, setPositionFilter] = useState<PositionFilter>("all");
   const [selected, setSelected] = useState<Player | null>(null);
 
   const visiblePlayers = useMemo(
-    () => playersForClass(classFilter),
-    [classFilter],
+    () => playersForRoster(classFilter, positionFilter),
+    [classFilter, positionFilter],
   );
   const groups = rosterGroups(visiblePlayers);
 
-  function changeClass(next: ClassFilter) {
-    setClassFilter(next);
+  function keepSelected(list: Player[]) {
     setSelected((current) => {
       if (!current) return null;
-      const list = playersForClass(next);
       return list.some((player) => player.id === current.id) ? current : null;
     });
+  }
+
+  function changeClass(next: ClassFilter) {
+    setClassFilter(next);
+    keepSelected(playersForRoster(next, positionFilter));
+  }
+
+  function changePosition(next: PositionFilter) {
+    setPositionFilter(next);
+    keepSelected(playersForRoster(classFilter, next));
   }
 
   return (
@@ -48,9 +60,14 @@ export function RosterBoard() {
               Program Roster
             </h2>
             <p className="mt-3 max-w-xl text-sm leading-6 text-zinc-400">
-              {classFilter === "all"
+              {classFilter === "all" && positionFilter === "all"
                 ? "Alphabetical. Select a player for the bio card. Move up and down the list without leaving the popup."
-                : `Class of ${classFilter}, listed A–Z. Select a player for the bio card.`}
+                : `${[
+                    classFilter === "all" ? null : `Class of ${classFilter}`,
+                    positionFilter === "all" ? null : positionFilter,
+                  ]
+                    .filter(Boolean)
+                    .join(" · ")}, listed A–Z. Select a player for the bio card.`}
             </p>
           </div>
           <div>
@@ -63,7 +80,7 @@ export function RosterBoard() {
           </div>
         </div>
         <div className="relative flex items-center gap-4 border-t border-white/8 px-5 py-2 text-[0.62rem] tracking-[0.2em] text-zinc-500 uppercase sm:grid sm:grid-cols-[minmax(0,1fr)_6.5rem_4.5rem_4rem] sm:px-7">
-          <label className="inline-flex min-w-0 items-center gap-2.5 normal-case">
+          <label className="inline-flex min-w-0 flex-wrap items-center gap-2.5 normal-case">
             <span className="tracking-[0.2em] uppercase">Player</span>
             <span className="relative inline-flex">
               <select
@@ -72,13 +89,29 @@ export function RosterBoard() {
                   const value = event.target.value;
                   changeClass(value === "all" ? "all" : Number(value));
                 }}
-                aria-label="Sort by graduating class"
+                aria-label="Filter by graduating class"
                 className="appearance-none rounded-md border border-white/15 bg-black/70 py-1 pr-6 pl-2 text-[0.62rem] tracking-[0.16em] text-zinc-200 uppercase outline-none transition-colors hover:border-white/30 focus-visible:border-[#c8102e]"
               >
                 <option value="all">All classes</option>
                 {classYears.map((year) => (
                   <option key={year} value={year}>
                     Class of {year}
+                  </option>
+                ))}
+              </select>
+              <ChevronDown className="pointer-events-none absolute top-1/2 right-1.5 size-3 -translate-y-1/2 text-zinc-400" />
+            </span>
+            <span className="relative inline-flex">
+              <select
+                value={positionFilter}
+                onChange={(event) => changePosition(event.target.value)}
+                aria-label="Filter by position"
+                className="appearance-none rounded-md border border-white/15 bg-black/70 py-1 pr-6 pl-2 text-[0.62rem] tracking-[0.16em] text-zinc-200 uppercase outline-none transition-colors hover:border-white/30 focus-visible:border-[#c8102e]"
+              >
+                <option value="all">All positions</option>
+                {positions.map((position) => (
+                  <option key={position} value={position}>
+                    {position}
                   </option>
                 ))}
               </select>
@@ -94,7 +127,7 @@ export function RosterBoard() {
       <div>
         {groups.length === 0 ? (
           <p className="px-5 py-10 text-sm text-zinc-500 sm:px-7">
-            No players for that graduating class.
+            No players match those filters.
           </p>
         ) : (
           groups.map(([letter, squad]) => (

@@ -142,3 +142,44 @@ export function playersForClass(
   if (year === "all") return list;
   return list.filter((player) => player.gradYear === year);
 }
+
+export const rosterPositionOrder = [
+  "C",
+  "P",
+  "1B",
+  "INF",
+  "OF",
+  "Util",
+] as const;
+
+export type RosterPosition = (typeof rosterPositionOrder)[number];
+
+export function playerPositions(player: Player) {
+  return (player.position ?? "")
+    .split("/")
+    .map((part) => part.trim())
+    .filter(Boolean);
+}
+
+export function playerPlaysPosition(
+  player: Player,
+  position: string | "all",
+) {
+  if (position === "all") return true;
+  return playerPositions(player).includes(position);
+}
+
+export function rosterPositions(list: Player[] = players) {
+  const present = new Set(list.flatMap(playerPositions));
+  return rosterPositionOrder.filter((position) => present.has(position));
+}
+
+export function playersForRoster(
+  year: number | "all",
+  position: string | "all" = "all",
+  list: Player[] = players,
+) {
+  return playersForClass(year, list).filter((player) =>
+    playerPlaysPosition(player, position),
+  );
+}

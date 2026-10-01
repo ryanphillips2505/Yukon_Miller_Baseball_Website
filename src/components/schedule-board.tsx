@@ -222,30 +222,28 @@ export function ScheduleBoard() {
             "flex flex-col gap-4 pt-4 sm:flex-row sm:items-end sm:justify-between sm:gap-6 sm:pt-5",
           )}
         >
-          <div className="flex items-end gap-5 sm:gap-8">
-            <div>
-              <p className="text-[0.68rem] font-semibold tracking-[0.32em] text-red-400 uppercase">
-                2027
-              </p>
-              <h1 className="font-heading mt-1.5 text-4xl leading-none tracking-wide text-white uppercase sm:text-6xl">
-                {view === "master" ? "Schedule" : teamLabel(view)}
-              </h1>
-            </div>
-            {view === "master" ? (
-              <StatBlock
-                value={String(listedGames).padStart(2, "0")}
-                label="Games"
-                align="center"
-              />
-            ) : null}
+          <div>
+            <p className="text-[0.68rem] font-semibold tracking-[0.32em] text-red-400 uppercase">
+              2027
+            </p>
+            <h1 className="font-heading mt-1.5 text-4xl leading-none tracking-wide text-white uppercase sm:text-6xl">
+              {view === "master" ? "Schedule" : teamLabel(view)}
+            </h1>
           </div>
-          <div className="flex flex-wrap items-end gap-5 sm:justify-end sm:gap-7">
+          <div className="flex flex-wrap items-end gap-10 sm:justify-end sm:gap-16">
             {view === "master" ? (
-              <StatBlock
-                value={standing.display}
-                label={teamLabel(standing.team)}
-                align="center"
-              />
+              <>
+                <StatBlock
+                  value={String(listedGames).padStart(2, "0")}
+                  label="Games"
+                  align="center"
+                />
+                <StatBlock
+                  value={standing.display}
+                  label={teamLabel(standing.team)}
+                  align="center"
+                />
+              </>
             ) : (
               <>
                 <StatBlock value={standing.display} label="Record" />

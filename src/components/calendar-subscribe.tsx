@@ -36,7 +36,7 @@ async function writeClipboard(value: string) {
 
 const actionClass = cn(
   buttonVariants(),
-  "h-8 min-w-[5.75rem] px-3 text-[0.62rem] tracking-[0.12em] uppercase",
+  "h-8 shrink-0 px-3 text-[0.62rem] tracking-[0.12em] uppercase",
 );
 
 function SubscribeButtons({ team }: { team: TeamId }) {
@@ -50,7 +50,7 @@ function SubscribeButtons({ team }: { team: TeamId }) {
   }
 
   return (
-    <div className="flex flex-wrap gap-2">
+    <div className="flex flex-nowrap items-center gap-2 overflow-x-auto">
       <a
         href={links.apple}
         className={actionClass}
@@ -140,25 +140,21 @@ export function CalendarSubscribe({
         30-minute reminder before first pitch. Updates when the schedule
         changes.
       </p>
-      <div className="mt-4 grid gap-3 md:grid-cols-3">
+      <div className="mt-4 divide-y divide-white/8 border-y border-white/8">
         {teams.map((item) => {
           const active = highlight === item.id;
           return (
             <div
               key={item.id}
               className={cn(
-                "rounded-xl border px-4 py-3.5",
-                active
-                  ? "border-white/20 bg-white/[0.04]"
-                  : "border-white/12 bg-white/[0.03]",
+                "flex flex-col gap-3 py-3.5 sm:flex-row sm:items-center sm:justify-between",
+                active && "bg-white/[0.03]",
               )}
             >
-              <p className="font-heading text-lg leading-none tracking-wide text-white uppercase">
+              <p className="font-heading w-[6.5rem] shrink-0 text-lg leading-none tracking-wide text-white uppercase">
                 {item.label}
               </p>
-              <div className="mt-3">
-                <SubscribeButtons team={item.id} />
-              </div>
+              <SubscribeButtons team={item.id} />
             </div>
           );
         })}

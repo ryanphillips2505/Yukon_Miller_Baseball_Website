@@ -4,16 +4,21 @@ import { CalendarSubscribe } from "@/components/calendar-subscribe";
 import {
   formatGameDate,
   formatGameScore,
+  formatWeekdayShort,
   gameCount,
   gameResult,
   gamesForView,
   isAwayGame,
   masterDays,
+  phaseGameCount,
   phaseLabel,
   recordForView,
+  regularSeasonCount,
   scheduleNotes,
+  scrimmageCount,
   versusLabel,
   type Game,
+  type GamePhase,
   type ScheduleView,
 } from "@/lib/schedule";
 import { teams, type TeamId } from "@/lib/site";
@@ -26,12 +31,10 @@ const views: { id: ScheduleView; label: string }[] = [
   ...teams.map((team) => ({ id: team.id, label: team.label })),
 ];
 
+const shell = "mx-auto max-w-[1320px] px-4 sm:px-6";
+
 function teamLabel(id: TeamId) {
   return teams.find((team) => team.id === id)?.label ?? id;
-}
-
-function gameMeta(game: Game) {
-  return [game.time, game.venue].filter(Boolean).join(" · ") || "TBA";
 }
 
 function matchupClass(game: Game) {
@@ -41,23 +44,30 @@ function matchupClass(game: Game) {
 function GameMatchup({ game, className }: { game: Game; className?: string }) {
   const field = fieldForGame(game);
   const href = field ? mapsUrlForField(field) : undefined;
-  const label = `${versusLabel(game.location)} ${game.opponent}`;
-  const color = cn(matchupClass(game), className);
-
-  if (!href || !field) {
-    return <span className={color}>{label}</span>;
-  }
+  const color = matchupClass(game);
+  const opponent = (
+    <span className={cn(color, "min-w-0")}>{game.opponent}</span>
+  );
 
   return (
-    <a
-      href={href}
-      target="_blank"
-      rel="noreferrer"
-      className={cn(color, "underline-offset-4 hover:underline")}
-      aria-label={`Directions to ${field.name}`}
-    >
-      {label}
-    </a>
+    <span className={cn("inline-flex min-w-0 items-baseline gap-2", className)}>
+      <span className="shrink-0 text-[0.7rem] tracking-[0.16em] text-zinc-500 uppercase">
+        {versusLabel(game.location)}
+      </span>
+      {!href || !field ? (
+        opponent
+      ) : (
+        <a
+          href={href}
+          target="_blank"
+          rel="noreferrer"
+          className={cn(color, "min-w-0 underline-offset-4 hover:underline")}
+          aria-label={`Directions to ${field.name}`}
+        >
+          {game.opponent}
+        </a>
+      )}
+    </span>
   );
 }
 
@@ -76,11 +86,27 @@ function HomeAwayKey() {
   );
 }
 
-function PhaseHeader({ phase }: { phase: Game["phase"] }) {
+function PhaseHeader({
+  phase,
+  count,
+  compact,
+}: {
+  phase: GamePhase;
+  count: number;
+  compact?: boolean;
+}) {
   return (
-    <div className="border-b border-white/8 py-2.5">
+    <div
+      className={cn(
+        "flex items-end justify-between gap-4 border-b border-white/10 pb-2",
+        compact ? "pt-4" : "pt-6",
+      )}
+    >
       <p className="text-[0.68rem] font-semibold tracking-[0.28em] text-red-400 uppercase">
         {phaseLabel[phase]}
+      </p>
+      <p className="text-[0.62rem] tracking-[0.2em] text-zinc-500 uppercase">
+        {count} {count === 1 ? "Game" : "Games"}
       </p>
     </div>
   );
@@ -89,10 +115,10 @@ function PhaseHeader({ phase }: { phase: Game["phase"] }) {
 function DateStamp({ weekday, date }: { weekday: string; date: string }) {
   return (
     <div className="min-w-0">
-      <p className="text-[0.62rem] tracking-[0.16em] text-zinc-500 uppercase">
-        {weekday}
+      <p className="text-[0.58rem] tracking-[0.18em] text-zinc-500 uppercase">
+        {formatWeekdayShort(weekday)}
       </p>
-      <p className="font-heading text-lg tracking-wide text-white uppercase">
+      <p className="font-heading text-base leading-tight tracking-wide text-white uppercase sm:text-lg">
         {formatGameDate(date)}
       </p>
     </div>
@@ -115,17 +141,19 @@ function GameDetail({
           {mark}
         </span>{" "}
         <span className="text-zinc-300">{score}</span>
-        {game.venue ? (
-          <span className="text-zinc-400"> · {game.venue}</span>
-        ) : null}
       </p>
     );
   }
 
   return (
-    <p className={cn("text-sm tracking-wide text-zinc-400 uppercase", className)}>
-      {gameMeta(game)}
-    </p>
+    <div className={cn("text-sm tracking-wide text-zinc-400 uppercase", className)}>
+      <p>{game.time ?? "TBA"}</p>
+      {game.venue ? (
+        <p className="mt-0.5 text-[0.7rem] tracking-[0.12em] text-zinc-500">
+          {game.venue}
+        </p>
+      ) : null}
+    </div>
   );
 }
 
@@ -140,61 +168,88 @@ function GameCopy({ game }: { game: Game }) {
   );
 }
 
+function StatBlock({ value, label }: { value: string; label: string }) {
+  return (
+    <div className="min-w-[4.5rem] text-left sm:text-right">
+      <p className="font-heading text-3xl leading-none text-white sm:text-4xl">
+        {value}
+      </p>
+      <p className="mt-1 text-[0.58rem] tracking-[0.18em] text-zinc-500 uppercase">
+        {label}
+      </p>
+    </div>
+  );
+}
+
 export function ScheduleBoard() {
   const [view, setView] = useState<ScheduleView>("master");
   const visible = useMemo(() => gamesForView(view), [view]);
   const days = useMemo(() => masterDays(visible), [visible]);
   const listedGames = useMemo(() => gameCount(visible), [visible]);
   const standing = useMemo(() => recordForView(view), [view]);
+  const regularGames = useMemo(() => regularSeasonCount(visible), [visible]);
+  const scrimmages = useMemo(() => scrimmageCount(visible), [visible]);
+  const phaseCounts = useMemo(
+    () => ({
+      scrimmage: phaseGameCount(visible, "scrimmage"),
+      regular: phaseGameCount(visible, "regular"),
+      postseason: phaseGameCount(visible, "postseason"),
+    }),
+    [visible],
+  );
 
   return (
     <section>
       <header className="border-b border-white/10">
-        <div className="mx-auto flex max-w-6xl items-end justify-between gap-6 px-4 pt-6 sm:px-6 sm:pt-8">
+        <div
+          className={cn(
+            shell,
+            "flex flex-col gap-4 pt-4 sm:flex-row sm:items-end sm:justify-between sm:gap-6 sm:pt-5",
+          )}
+        >
           <div>
             <p className="text-[0.68rem] font-semibold tracking-[0.32em] text-red-400 uppercase">
               2027
             </p>
-            <h1 className="font-heading mt-2 text-4xl leading-none tracking-wide text-white uppercase sm:text-6xl">
+            <h1 className="font-heading mt-1.5 text-4xl leading-none tracking-wide text-white uppercase sm:text-6xl">
               {view === "master" ? "Schedule" : teamLabel(view)}
             </h1>
           </div>
-          <div className="flex shrink-0 items-end gap-5 pb-1 sm:gap-7">
-            <div className="text-right">
-              <p className="font-heading text-4xl leading-none text-white sm:text-5xl">
-                {String(listedGames).padStart(2, "0")}
-              </p>
-              <p className="mt-1 text-[0.62rem] tracking-[0.22em] text-zinc-500 uppercase">
-                Games
-              </p>
-            </div>
-            <div className="text-right">
-              <p className="font-heading text-4xl leading-none text-white sm:text-5xl">
-                {standing.display}
-              </p>
-              <p className="mt-1 text-[0.62rem] tracking-[0.22em] text-zinc-500 uppercase">
-                {standing.label}
-              </p>
-            </div>
+          <div className="flex flex-wrap items-end gap-5 sm:justify-end sm:gap-7">
+            {view === "master" ? (
+              <>
+                <StatBlock
+                  value={String(listedGames).padStart(2, "0")}
+                  label="Games"
+                />
+                <StatBlock value={standing.display} label={standing.label} />
+              </>
+            ) : (
+              <>
+                <StatBlock value={standing.display} label="Record" />
+                <StatBlock
+                  value={String(regularGames)}
+                  label="Regular Season"
+                />
+                <StatBlock value={String(scrimmages)} label="Scrimmages" />
+              </>
+            )}
           </div>
         </div>
-        <div className="mx-auto max-w-6xl px-4 pt-4 sm:px-6">
+        <div className={cn(shell, "pt-3")}>
           <HomeAwayKey />
-          <div className="mt-5">
-            <CalendarSubscribe highlight={view} />
-          </div>
         </div>
-        <div className="mx-auto mt-6 flex max-w-6xl gap-1 overflow-x-auto px-4 sm:px-6">
+        <div className={cn(shell, "mt-3 flex gap-0.5 overflow-x-auto")}>
           {views.map((item) => (
             <button
               key={item.id}
               type="button"
               onClick={() => setView(item.id)}
               className={cn(
-                "relative shrink-0 px-3 py-3 text-[0.8rem] font-medium tracking-[0.14em] uppercase transition-colors",
+                "relative shrink-0 px-2.5 py-2 text-[0.72rem] font-medium tracking-[0.16em] uppercase transition-colors",
                 view === item.id ? "text-white" : "text-zinc-500 hover:text-white",
                 view === item.id &&
-                  "after:absolute after:right-3 after:bottom-0 after:left-3 after:h-0.5 after:bg-[#c8102e]",
+                  "after:absolute after:right-2.5 after:bottom-0 after:left-2.5 after:h-0.5 after:bg-[#c8102e]",
               )}
             >
               {item.label}
@@ -203,8 +258,18 @@ export function ScheduleBoard() {
         </div>
       </header>
 
-      <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        {view === "master" ? <MasterTable days={days} /> : <TeamList days={days} />}
+      <div className={shell}>
+        {view === "master" ? (
+          <MasterTable days={days} phaseCounts={phaseCounts} />
+        ) : (
+          <TeamList days={days} phaseCounts={phaseCounts} />
+        )}
+
+        {view === "master" ? (
+          <CalendarSubscribe highlight={view} />
+        ) : (
+          <CalendarSubscribe team={view} />
+        )}
 
         <footer className="space-y-1 border-t border-white/8 py-5">
           {scheduleNotes.map((note) => (
@@ -220,12 +285,14 @@ export function ScheduleBoard() {
 
 function MasterTable({
   days,
+  phaseCounts,
 }: {
   days: ReturnType<typeof masterDays>;
+  phaseCounts: Record<GamePhase, number>;
 }) {
   return (
     <div>
-      <div className="hidden grid-cols-[7.5rem_1fr_1fr_1fr] gap-4 border-b border-white/8 py-3 text-[0.62rem] tracking-[0.2em] text-zinc-500 uppercase lg:grid">
+      <div className="hidden grid-cols-[5.75rem_1fr_1fr_1fr] gap-4 border-b border-white/8 py-2.5 text-[0.62rem] tracking-[0.2em] text-zinc-500 uppercase lg:grid">
         <span>Date</span>
         <span>Varsity</span>
         <span>JV Red</span>
@@ -240,10 +307,16 @@ function MasterTable({
         };
         return (
           <div key={day.date}>
-            {showPhase ? <PhaseHeader phase={day.phase} /> : null}
+            {showPhase ? (
+              <PhaseHeader
+                phase={day.phase}
+                count={phaseCounts[day.phase]}
+                compact={index === 0}
+              />
+            ) : null}
             <div
               className={cn(
-                "grid gap-4 border-b border-white/8 py-3.5 lg:grid-cols-[7.5rem_1fr_1fr_1fr] lg:items-start",
+                "grid gap-4 border-b border-white/8 py-3 lg:grid-cols-[5.75rem_1fr_1fr_1fr] lg:items-start",
                 index % 2 === 1 && "bg-white/[0.015]",
               )}
             >
@@ -284,24 +357,36 @@ function MasterCell({
   );
 }
 
-function TeamList({ days }: { days: ReturnType<typeof masterDays> }) {
+function TeamList({
+  days,
+  phaseCounts,
+}: {
+  days: ReturnType<typeof masterDays>;
+  phaseCounts: Record<GamePhase, number>;
+}) {
   return (
     <ol>
       {days.map((day, index) => {
         const showPhase = index === 0 || day.phase !== days[index - 1]?.phase;
         return (
           <li key={day.date}>
-            {showPhase ? <PhaseHeader phase={day.phase} /> : null}
+            {showPhase ? (
+              <PhaseHeader
+                phase={day.phase}
+                count={phaseCounts[day.phase]}
+                compact={index === 0}
+              />
+            ) : null}
             {day.games.map((game) => (
               <div
                 key={game.id}
                 className={cn(
-                  "grid gap-1 border-b border-white/8 py-3.5 sm:grid-cols-[7.5rem_minmax(0,1fr)_auto] sm:items-center",
+                  "grid grid-cols-1 gap-2 border-b border-white/8 py-3 sm:grid-cols-[5.75rem_minmax(0,1fr)_auto] sm:items-center sm:gap-4",
                   index % 2 === 1 && "bg-white/[0.015]",
                 )}
               >
                 <DateStamp weekday={day.weekday} date={day.date} />
-                <p className="font-heading text-xl tracking-wide uppercase">
+                <p className="font-heading min-w-0 text-xl tracking-wide uppercase">
                   <GameMatchup game={game} />
                 </p>
                 <GameDetail game={game} className="sm:text-right" />

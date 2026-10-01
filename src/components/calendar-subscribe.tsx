@@ -34,10 +34,8 @@ async function writeClipboard(value: string) {
   }
 }
 
-const actionClass = cn(
-  buttonVariants(),
-  "h-8 shrink-0 px-3 text-[0.62rem] tracking-[0.12em] uppercase",
-);
+const cellClass =
+  "inline-flex h-7 flex-1 items-center justify-center px-1 text-[0.52rem] font-medium tracking-[0.08em] text-zinc-300 uppercase transition-colors hover:bg-white/6 hover:text-white";
 
 function SubscribeButtons({ team }: { team: TeamId }) {
   const links = useMemo(() => calendarSubscribeLinks(team), [team]);
@@ -50,10 +48,10 @@ function SubscribeButtons({ team }: { team: TeamId }) {
   }
 
   return (
-    <div className="flex flex-nowrap items-center gap-2 overflow-x-auto">
+    <div className="flex min-w-0 flex-1 overflow-hidden rounded-md border border-white/12 bg-black/40">
       <a
         href={links.apple}
-        className={actionClass}
+        className={cellClass}
         onClick={() =>
           trackCalendarClick(gaCalendarEvents.apple, gaCalendarEvents.ics)
         }
@@ -64,7 +62,7 @@ function SubscribeButtons({ team }: { team: TeamId }) {
         href={links.google}
         target="_blank"
         rel="noreferrer"
-        className={actionClass}
+        className={cn(cellClass, "border-l border-white/10")}
         onClick={() => trackCalendarClick(gaCalendarEvents.google)}
       >
         Google
@@ -73,88 +71,66 @@ function SubscribeButtons({ team }: { team: TeamId }) {
         href={links.outlook}
         target="_blank"
         rel="noreferrer"
-        className={actionClass}
+        className={cn(cellClass, "border-l border-white/10")}
         onClick={() =>
           trackCalendarClick(gaCalendarEvents.outlook, gaCalendarEvents.ics)
         }
       >
         Outlook
       </a>
-      <button type="button" onClick={copyFeed} className={actionClass}>
-        {copied ? "Copied" : "Copy Link"}
+      <button
+        type="button"
+        onClick={copyFeed}
+        className={cn(cellClass, "border-l border-white/10")}
+      >
+        {copied ? "Copied" : "Copy"}
       </button>
     </div>
   );
 }
 
-function InstructionsLink({ className }: { className?: string }) {
-  return (
-    <Link
-      href="/schedule/instructions"
-      className={cn(actionClass, className)}
-    >
-      Calendar Instructions
-    </Link>
-  );
-}
-
 export function CalendarSubscribe({
   highlight,
-  team,
 }: {
   highlight?: TeamId | "master";
-  team?: TeamId;
 }) {
-  const solo = team ? teams.find((item) => item.id === team) : undefined;
-
-  if (solo) {
-    return (
-      <div className="border-t border-white/8 pt-6">
-        <p className="text-[0.68rem] font-semibold tracking-[0.22em] text-white uppercase">
-          Add {solo.label} to your calendar
-        </p>
-        <p className="mt-1.5 max-w-xl text-xs leading-5 text-zinc-500 sm:text-sm sm:leading-6 sm:text-zinc-400">
-          Automatically updates when the schedule changes.
-          <br />
-          30-minute reminder before first pitch.
-        </p>
-        <div className="mt-4">
-          <SubscribeButtons team={solo.id} />
-        </div>
-        <div className="mt-3">
-          <InstructionsLink />
-        </div>
-      </div>
-    );
-  }
-
   return (
-    <div className="border-t border-white/8 pt-6">
-      <div className="flex flex-wrap items-center justify-between gap-3">
-        <p className="text-[0.68rem] font-semibold tracking-[0.22em] text-white uppercase">
+    <div className="border-t border-white/8 pt-4">
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <p className="text-[0.62rem] font-semibold tracking-[0.22em] text-zinc-500 uppercase">
           Parent calendars
         </p>
-        <InstructionsLink />
+        <Link
+          href="/schedule/instructions"
+          className={cn(
+            buttonVariants(),
+            "h-7 px-3 text-[0.62rem] tracking-[0.12em] uppercase",
+          )}
+        >
+          Instructions
+        </Link>
       </div>
       <p className="mt-1.5 max-w-xl text-xs leading-5 text-zinc-500 sm:text-sm sm:leading-6 sm:text-zinc-400">
         30-minute reminder before first pitch. Updates when the schedule
         changes.
       </p>
-      <div className="mt-4 divide-y divide-white/8 border-y border-white/8">
-        {teams.map((item) => {
-          const active = highlight === item.id;
+      <div className="mt-3 grid gap-2 sm:grid-cols-3">
+        {teams.map((team) => {
+          const active = highlight === team.id;
           return (
             <div
-              key={item.id}
+              key={team.id}
               className={cn(
-                "flex flex-col gap-3 py-3.5 sm:flex-row sm:items-center sm:justify-between",
-                active && "bg-white/[0.03]",
+                "flex items-center gap-3 rounded-xl border px-3 py-2.5",
+                active
+                  ? "border-white/20 bg-white/[0.04]"
+                  : "border-white/10 bg-black/25",
               )}
             >
-              <p className="font-heading w-[6.5rem] shrink-0 text-lg leading-none tracking-wide text-white uppercase">
-                {item.label}
+              <p className="font-heading w-[5.5rem] shrink-0 text-lg leading-none tracking-wide text-white uppercase">
+                {team.label}
               </p>
-              <SubscribeButtons team={item.id} />
+              <SubscribeButtons team={team.id} />
             </div>
           );
         })}

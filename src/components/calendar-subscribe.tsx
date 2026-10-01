@@ -34,8 +34,10 @@ async function writeClipboard(value: string) {
   }
 }
 
-const cellClass =
-  "inline-flex min-h-8 flex-1 items-center justify-center px-2 py-2 text-[0.58rem] font-medium tracking-[0.1em] text-zinc-300 uppercase transition-colors hover:bg-white/6 hover:text-white";
+const actionClass = cn(
+  buttonVariants(),
+  "h-8 min-w-[5.75rem] px-3 text-[0.62rem] tracking-[0.12em] uppercase",
+);
 
 function SubscribeButtons({ team }: { team: TeamId }) {
   const links = useMemo(() => calendarSubscribeLinks(team), [team]);
@@ -48,10 +50,10 @@ function SubscribeButtons({ team }: { team: TeamId }) {
   }
 
   return (
-    <div className="flex min-w-0 flex-1 overflow-hidden rounded-md border border-white/12 bg-black/40">
+    <div className="flex flex-wrap gap-2">
       <a
         href={links.apple}
-        className={cellClass}
+        className={actionClass}
         onClick={() =>
           trackCalendarClick(gaCalendarEvents.apple, gaCalendarEvents.ics)
         }
@@ -62,7 +64,7 @@ function SubscribeButtons({ team }: { team: TeamId }) {
         href={links.google}
         target="_blank"
         rel="noreferrer"
-        className={cn(cellClass, "border-l border-white/10")}
+        className={actionClass}
         onClick={() => trackCalendarClick(gaCalendarEvents.google)}
       >
         Google
@@ -71,18 +73,14 @@ function SubscribeButtons({ team }: { team: TeamId }) {
         href={links.outlook}
         target="_blank"
         rel="noreferrer"
-        className={cn(cellClass, "border-l border-white/10")}
+        className={actionClass}
         onClick={() =>
           trackCalendarClick(gaCalendarEvents.outlook, gaCalendarEvents.ics)
         }
       >
         Outlook
       </a>
-      <button
-        type="button"
-        onClick={copyFeed}
-        className={cn(cellClass, "border-l border-white/10")}
-      >
+      <button type="button" onClick={copyFeed} className={actionClass}>
         {copied ? "Copied" : "Copy Link"}
       </button>
     </div>
@@ -93,11 +91,7 @@ function InstructionsLink({ className }: { className?: string }) {
   return (
     <Link
       href="/schedule/instructions"
-      className={cn(
-        buttonVariants(),
-        "h-8 px-3 text-[0.62rem] tracking-[0.12em] uppercase",
-        className,
-      )}
+      className={cn(actionClass, className)}
     >
       Calendar Instructions
     </Link>
@@ -124,7 +118,7 @@ export function CalendarSubscribe({
           <br />
           30-minute reminder before first pitch.
         </p>
-        <div className="mt-3 max-w-xl">
+        <div className="mt-4">
           <SubscribeButtons team={solo.id} />
         </div>
         <div className="mt-3">
@@ -136,8 +130,8 @@ export function CalendarSubscribe({
 
   return (
     <div className="border-t border-white/8 pt-6">
-      <div className="flex flex-wrap items-center justify-between gap-2">
-        <p className="text-[0.62rem] font-semibold tracking-[0.22em] text-zinc-500 uppercase">
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <p className="text-[0.68rem] font-semibold tracking-[0.22em] text-white uppercase">
           Parent calendars
         </p>
         <InstructionsLink />
@@ -146,23 +140,25 @@ export function CalendarSubscribe({
         30-minute reminder before first pitch. Updates when the schedule
         changes.
       </p>
-      <div className="mt-3 grid gap-2 sm:grid-cols-3">
+      <div className="mt-4 grid gap-3 md:grid-cols-3">
         {teams.map((item) => {
           const active = highlight === item.id;
           return (
             <div
               key={item.id}
               className={cn(
-                "flex items-center gap-3 rounded-xl border px-3 py-2.5",
+                "rounded-xl border px-4 py-3.5",
                 active
                   ? "border-white/20 bg-white/[0.04]"
-                  : "border-white/10 bg-black/25",
+                  : "border-white/12 bg-white/[0.03]",
               )}
             >
-              <p className="font-heading w-[5.5rem] shrink-0 text-lg leading-none tracking-wide text-white uppercase">
+              <p className="font-heading text-lg leading-none tracking-wide text-white uppercase">
                 {item.label}
               </p>
-              <SubscribeButtons team={item.id} />
+              <div className="mt-3">
+                <SubscribeButtons team={item.id} />
+              </div>
             </div>
           );
         })}

@@ -172,6 +172,10 @@ export function formatGameDate(iso: string) {
   });
 }
 
+export function formatWeekdayShort(weekday: string) {
+  return weekday.slice(0, 3).toUpperCase();
+}
+
 export function versusLabel(location: GameLocation) {
   if (location === "away") return "@";
   if (location === "neutral") return "vs";
@@ -187,8 +191,7 @@ export function gamesForView(view: ScheduleView) {
   return games.filter((game) => game.team === view);
 }
 
-export function listedGameCount(game: Pick<Game, "time" | "phase">) {
-  if (game.phase === "scrimmage") return 0;
+function listedSlotCount(game: Pick<Game, "time">) {
   if (!game.time) return 1;
   const times = game.time
     .split("/")
@@ -197,8 +200,27 @@ export function listedGameCount(game: Pick<Game, "time" | "phase">) {
   return times.length > 1 ? times.length : 1;
 }
 
+export function listedGameCount(game: Pick<Game, "time" | "phase">) {
+  if (game.phase === "scrimmage") return 0;
+  return listedSlotCount(game);
+}
+
 export function gameCount(list: Game[]) {
   return list.reduce((total, game) => total + listedGameCount(game), 0);
+}
+
+export function phaseGameCount(list: Game[], phase: GamePhase) {
+  return list
+    .filter((game) => game.phase === phase)
+    .reduce((total, game) => total + listedSlotCount(game), 0);
+}
+
+export function regularSeasonCount(list: Game[]) {
+  return phaseGameCount(list, "regular");
+}
+
+export function scrimmageCount(list: Game[]) {
+  return phaseGameCount(list, "scrimmage");
 }
 
 export function isFinalGame(

@@ -2,7 +2,15 @@ import type { TeamId } from "./site";
 
 export type GamePhase = "scrimmage" | "regular" | "postseason";
 export type GameLocation = "home" | "away" | "neutral";
+export type GameStatus = "scheduled" | "final";
+export type GameResultMark = "W" | "L" | "T";
 export type ScheduleView = "master" | TeamId;
+
+export type TeamRecord = {
+  wins: number;
+  losses: number;
+  ties: number;
+};
 
 export type Game = {
   id: string;
@@ -14,18 +22,15 @@ export type Game = {
   time?: string;
   phase: GamePhase;
   venue?: string;
+  /** Set with `status: "final"` to show W/L and update the record. */
+  yukonScore?: number;
+  opponentScore?: number;
+  status?: GameStatus;
+  /** Defaults to true for regular/postseason finals. Scrimmages never count. */
+  countsTowardRecord?: boolean;
 };
 
-type GameDraft = {
-  date: string;
-  weekday: string;
-  team: TeamId;
-  opponent: string;
-  location: GameLocation;
-  time?: string;
-  phase: GamePhase;
-  venue?: string;
-};
+type GameDraft = Omit<Game, "id">;
 
 const drafts: GameDraft[] = [
   { date: "2027-02-15", weekday: "Monday", team: "varsity", opponent: "Choctaw", location: "away", time: "5:00", phase: "scrimmage" },
@@ -194,6 +199,80 @@ export function listedGameCount(game: Pick<Game, "time" | "phase">) {
 
 export function gameCount(list: Game[]) {
   return list.reduce((total, game) => total + listedGameCount(game), 0);
+}
+
+export function isFinalGame(
+  game: Pick<Game, "status" | "yukonScore" | "opponentScore">,
+) {
+  return (
+    game.status === "final" &&
+    typeof game.yukonScore === "number" &&
+    typeof game.opponentScore === "number"
+  );
+}
+
+export function gameResult(game: Game): GameResultMark | undefined {
+  if (!isFinalGame(game)) return undefined;
+  if (game.yukonScore! > game.opponentScore!) return "W";
+  if (game.yukonScore! < game.opponentScore!) return "L";
+  return "T";
+}
+
+export function formatGameScore(game: Game) {
+  if (!isFinalGame(game)) return undefined;
+  return `${game.yukonScore}–${game.opponentScore}`;
+}
+
+export function formatGameResult(game: Game) {
+  const mark = gameResult(game);
+  const score = formatGameScore(game);
+  if (!mark || !score) return undefined;
+  return `${mark} ${score}`;
+}
+
+export function gameCountsTowardRecord(game: Game) {
+  if (!isFinalGame(game)) return false;
+  if (game.countsTowardRecord === false) return false;
+  if (game.phase === "scrimmage") return false;
+  return true;
+}
+
+export function teamRecord(team: TeamId, list: Game[] = games): TeamRecord {
+  return list.reduce<TeamRecord>(
+    (record, game) => {
+      if (game.team !== team || !gameCountsTowardRecord(game)) return record;
+      const mark = gameResult(game);
+      if (mark === "W") record.wins += 1;
+      else if (mark === "L") record.losses += 1;
+      else if (mark === "T") record.ties += 1;
+      return record;
+    },
+    { wins: 0, losses: 0, ties: 0 },
+  );
+}
+
+export function formatTeamRecord(record: TeamRecord) {
+  if (record.ties > 0) {
+    return `${record.wins}–${record.losses}–${record.ties}`;
+  }
+  return `${record.wins}–${record.losses}`;
+}
+
+const recordLabels: Record<TeamId, string> = {
+  varsity: "Varsity Record",
+  "jv-red": "JV Red Record",
+  "jv-white": "JV White Record",
+};
+
+export function recordForView(view: ScheduleView, list: Game[] = games) {
+  const team: TeamId = view === "master" ? "varsity" : view;
+  const record = teamRecord(team, list);
+  return {
+    team,
+    label: recordLabels[team],
+    record,
+    display: formatTeamRecord(record),
+  };
 }
 
 export function masterDays(list: Game[] = games) {

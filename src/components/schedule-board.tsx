@@ -3,11 +3,14 @@
 import { CalendarSubscribe } from "@/components/calendar-subscribe";
 import {
   formatGameDate,
+  formatGameScore,
   gameCount,
+  gameResult,
   gamesForView,
   isAwayGame,
   masterDays,
   phaseLabel,
+  recordForView,
   scheduleNotes,
   versusLabel,
   type Game,
@@ -96,15 +99,43 @@ function DateStamp({ weekday, date }: { weekday: string; date: string }) {
   );
 }
 
+function GameDetail({
+  game,
+  className,
+}: {
+  game: Game;
+  className?: string;
+}) {
+  const mark = gameResult(game);
+  const score = formatGameScore(game);
+  if (mark && score) {
+    return (
+      <p className={cn("text-sm tracking-wide uppercase", className)}>
+        <span className={mark === "W" ? "text-red-400" : "text-zinc-400"}>
+          {mark}
+        </span>{" "}
+        <span className="text-zinc-300">{score}</span>
+        {game.venue ? (
+          <span className="text-zinc-400"> · {game.venue}</span>
+        ) : null}
+      </p>
+    );
+  }
+
+  return (
+    <p className={cn("text-sm tracking-wide text-zinc-400 uppercase", className)}>
+      {gameMeta(game)}
+    </p>
+  );
+}
+
 function GameCopy({ game }: { game: Game }) {
   return (
     <div className="min-w-0">
       <p className="font-heading text-xl leading-none tracking-wide uppercase">
         <GameMatchup game={game} />
       </p>
-      <p className="mt-1.5 text-sm tracking-wide text-zinc-400 uppercase">
-        {gameMeta(game)}
-      </p>
+      <GameDetail game={game} className="mt-1.5" />
     </div>
   );
 }
@@ -114,6 +145,7 @@ export function ScheduleBoard() {
   const visible = useMemo(() => gamesForView(view), [view]);
   const days = useMemo(() => masterDays(visible), [visible]);
   const listedGames = useMemo(() => gameCount(visible), [visible]);
+  const standing = useMemo(() => recordForView(view), [view]);
 
   return (
     <section>
@@ -127,13 +159,23 @@ export function ScheduleBoard() {
               {view === "master" ? "Schedule" : teamLabel(view)}
             </h1>
           </div>
-          <div className="pb-1 text-right">
-            <p className="font-heading text-4xl leading-none text-white sm:text-5xl">
-              {String(listedGames).padStart(2, "0")}
-            </p>
-            <p className="mt-1 text-[0.62rem] tracking-[0.22em] text-zinc-500 uppercase">
-              Games
-            </p>
+          <div className="flex shrink-0 items-end gap-5 pb-1 sm:gap-7">
+            <div className="text-right">
+              <p className="font-heading text-4xl leading-none text-white sm:text-5xl">
+                {String(listedGames).padStart(2, "0")}
+              </p>
+              <p className="mt-1 text-[0.62rem] tracking-[0.22em] text-zinc-500 uppercase">
+                Games
+              </p>
+            </div>
+            <div className="text-right">
+              <p className="font-heading text-4xl leading-none text-white sm:text-5xl">
+                {standing.display}
+              </p>
+              <p className="mt-1 text-[0.62rem] tracking-[0.22em] text-zinc-500 uppercase">
+                {standing.label}
+              </p>
+            </div>
           </div>
         </div>
         <div className="mx-auto max-w-6xl px-4 pt-4 sm:px-6">
@@ -262,9 +304,7 @@ function TeamList({ days }: { days: ReturnType<typeof masterDays> }) {
                 <p className="font-heading text-xl tracking-wide uppercase">
                   <GameMatchup game={game} />
                 </p>
-                <p className="text-sm tracking-wide text-zinc-400 uppercase sm:text-right">
-                  {gameMeta(game)}
-                </p>
+                <GameDetail game={game} className="sm:text-right" />
               </div>
             ))}
           </li>

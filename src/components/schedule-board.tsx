@@ -238,6 +238,9 @@ export function ScheduleBoard() {
         </div>
         <div className={cn(shell, "pt-3")}>
           <HomeAwayKey />
+          <div className="mt-5">
+            <CalendarSubscribe highlight={view} />
+          </div>
         </div>
         <div className={cn(shell, "mt-3 flex gap-0.5 overflow-x-auto")}>
           {views.map((item) => (
@@ -263,12 +266,6 @@ export function ScheduleBoard() {
           <MasterTable days={days} phaseCounts={phaseCounts} />
         ) : (
           <TeamList days={days} phaseCounts={phaseCounts} />
-        )}
-
-        {view === "master" ? (
-          <CalendarSubscribe highlight={view} />
-        ) : (
-          <CalendarSubscribe team={view} />
         )}
 
         <footer className="space-y-1 border-t border-white/8 py-5">

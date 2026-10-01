@@ -168,9 +168,24 @@ function GameCopy({ game }: { game: Game }) {
   );
 }
 
-function StatBlock({ value, label }: { value: string; label: string }) {
+function StatBlock({
+  value,
+  label,
+  align = "right",
+}: {
+  value: string;
+  label: string;
+  align?: "left" | "center" | "right";
+}) {
   return (
-    <div className="min-w-[4.5rem] text-left sm:text-right">
+    <div
+      className={cn(
+        "min-w-[4.5rem]",
+        align === "left" && "text-left",
+        align === "center" && "text-center",
+        align === "right" && "text-left sm:text-right",
+      )}
+    >
       <p className="font-heading text-3xl leading-none text-white sm:text-4xl">
         {value}
       </p>
@@ -215,14 +230,19 @@ export function ScheduleBoard() {
               {view === "master" ? "Schedule" : teamLabel(view)}
             </h1>
           </div>
-          <div className="flex flex-wrap items-end gap-5 sm:justify-end sm:gap-7">
+          <div className="flex flex-wrap items-end gap-10 sm:justify-end sm:gap-16">
             {view === "master" ? (
               <>
                 <StatBlock
                   value={String(listedGames).padStart(2, "0")}
                   label="Games"
+                  align="center"
                 />
-                <StatBlock value={standing.display} label={standing.label} />
+                <StatBlock
+                  value={standing.display}
+                  label={teamLabel(standing.team)}
+                  align="center"
+                />
               </>
             ) : (
               <>

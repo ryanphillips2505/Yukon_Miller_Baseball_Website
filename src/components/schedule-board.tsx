@@ -90,24 +90,53 @@ function PhaseHeader({
   phase,
   count,
   compact,
+  collapsible,
+  open,
+  onToggle,
 }: {
   phase: GamePhase;
   count: number;
   compact?: boolean;
+  collapsible?: boolean;
+  open?: boolean;
+  onToggle?: () => void;
 }) {
+  const title = (
+    <p className="text-[0.68rem] font-semibold tracking-[0.28em] text-red-400 uppercase">
+      {phaseLabel[phase]}
+    </p>
+  );
+  const meta = (
+    <p className="text-[0.62rem] tracking-[0.2em] text-zinc-500 uppercase">
+      {count} {count === 1 ? "Game" : "Games"}
+      {collapsible ? (
+        <span className="ml-3 text-zinc-400">{open ? "Hide" : "Show"}</span>
+      ) : null}
+    </p>
+  );
+  const rowClass = cn(
+    "flex w-full items-end justify-between gap-4 border-b border-white/10 pb-2 text-left",
+    compact ? "pt-4" : "pt-6",
+  );
+
+  if (collapsible && onToggle) {
+    return (
+      <button
+        type="button"
+        onClick={onToggle}
+        className={cn(rowClass, "cursor-pointer")}
+        aria-expanded={open}
+      >
+        {title}
+        {meta}
+      </button>
+    );
+  }
+
   return (
-    <div
-      className={cn(
-        "flex items-end justify-between gap-4 border-b border-white/10 pb-2",
-        compact ? "pt-4" : "pt-6",
-      )}
-    >
-      <p className="text-[0.68rem] font-semibold tracking-[0.28em] text-red-400 uppercase">
-        {phaseLabel[phase]}
-      </p>
-      <p className="text-[0.62rem] tracking-[0.2em] text-zinc-500 uppercase">
-        {count} {count === 1 ? "Game" : "Games"}
-      </p>
+    <div className={rowClass}>
+      {title}
+      {meta}
     </div>
   );
 }
@@ -198,6 +227,7 @@ function StatBlock({
 
 export function ScheduleBoard() {
   const [view, setView] = useState<ScheduleView>("master");
+  const [scrimmagesOpen, setScrimmagesOpen] = useState(false);
   const visible = useMemo(() => gamesForView(view), [view]);
   const days = useMemo(() => masterDays(visible), [visible]);
   const listedGames = useMemo(() => gameCount(visible), [visible]);
@@ -283,9 +313,19 @@ export function ScheduleBoard() {
 
       <div className={shell}>
         {view === "master" ? (
-          <MasterTable days={days} phaseCounts={phaseCounts} />
+          <MasterTable
+            days={days}
+            phaseCounts={phaseCounts}
+            scrimmagesOpen={scrimmagesOpen}
+            onToggleScrimmages={() => setScrimmagesOpen((open) => !open)}
+          />
         ) : (
-          <TeamList days={days} phaseCounts={phaseCounts} />
+          <TeamList
+            days={days}
+            phaseCounts={phaseCounts}
+            scrimmagesOpen={scrimmagesOpen}
+            onToggleScrimmages={() => setScrimmagesOpen((open) => !open)}
+          />
         )}
 
         <footer className="space-y-1 border-t border-white/8 py-5">
@@ -303,9 +343,13 @@ export function ScheduleBoard() {
 function MasterTable({
   days,
   phaseCounts,
+  scrimmagesOpen,
+  onToggleScrimmages,
 }: {
   days: ReturnType<typeof masterDays>;
   phaseCounts: Record<GamePhase, number>;
+  scrimmagesOpen: boolean;
+  onToggleScrimmages: () => void;
 }) {
   return (
     <div>
@@ -317,6 +361,7 @@ function MasterTable({
       </div>
       {days.map((day, index) => {
         const showPhase = index === 0 || day.phase !== days[index - 1]?.phase;
+        const hideRow = day.phase === "scrimmage" && !scrimmagesOpen;
         const byTeam = {
           varsity: day.games.filter((game) => game.team === "varsity"),
           "jv-red": day.games.filter((game) => game.team === "jv-red"),
@@ -329,19 +374,24 @@ function MasterTable({
                 phase={day.phase}
                 count={phaseCounts[day.phase]}
                 compact={index === 0}
+                collapsible={day.phase === "scrimmage"}
+                open={scrimmagesOpen}
+                onToggle={onToggleScrimmages}
               />
             ) : null}
-            <div
-              className={cn(
-                "grid gap-4 border-b border-white/8 py-3 lg:grid-cols-[5.75rem_1fr_1fr_1fr] lg:items-start",
-                index % 2 === 1 && "bg-white/[0.015]",
-              )}
-            >
-              <DateStamp weekday={day.weekday} date={day.date} />
-              <MasterCell label="Varsity" games={byTeam.varsity} />
-              <MasterCell label="JV Red" games={byTeam["jv-red"]} />
-              <MasterCell label="JV White" games={byTeam["jv-white"]} />
-            </div>
+            {hideRow ? null : (
+              <div
+                className={cn(
+                  "grid gap-4 border-b border-white/8 py-3 lg:grid-cols-[5.75rem_1fr_1fr_1fr] lg:items-start",
+                  index % 2 === 1 && "bg-white/[0.015]",
+                )}
+              >
+                <DateStamp weekday={day.weekday} date={day.date} />
+                <MasterCell label="Varsity" games={byTeam.varsity} />
+                <MasterCell label="JV Red" games={byTeam["jv-red"]} />
+                <MasterCell label="JV White" games={byTeam["jv-white"]} />
+              </div>
+            )}
           </div>
         );
       })}
@@ -377,14 +427,19 @@ function MasterCell({
 function TeamList({
   days,
   phaseCounts,
+  scrimmagesOpen,
+  onToggleScrimmages,
 }: {
   days: ReturnType<typeof masterDays>;
   phaseCounts: Record<GamePhase, number>;
+  scrimmagesOpen: boolean;
+  onToggleScrimmages: () => void;
 }) {
   return (
     <ol>
       {days.map((day, index) => {
         const showPhase = index === 0 || day.phase !== days[index - 1]?.phase;
+        const hideRow = day.phase === "scrimmage" && !scrimmagesOpen;
         return (
           <li key={day.date}>
             {showPhase ? (
@@ -392,23 +447,28 @@ function TeamList({
                 phase={day.phase}
                 count={phaseCounts[day.phase]}
                 compact={index === 0}
+                collapsible={day.phase === "scrimmage"}
+                open={scrimmagesOpen}
+                onToggle={onToggleScrimmages}
               />
             ) : null}
-            {day.games.map((game) => (
-              <div
-                key={game.id}
-                className={cn(
-                  "grid grid-cols-1 gap-2 border-b border-white/8 py-3 sm:grid-cols-[5.75rem_minmax(0,1fr)_auto] sm:items-center sm:gap-4",
-                  index % 2 === 1 && "bg-white/[0.015]",
-                )}
-              >
-                <DateStamp weekday={day.weekday} date={day.date} />
-                <p className="font-heading min-w-0 text-xl tracking-wide uppercase">
-                  <GameMatchup game={game} />
-                </p>
-                <GameDetail game={game} className="sm:text-right" />
-              </div>
-            ))}
+            {hideRow
+              ? null
+              : day.games.map((game) => (
+                  <div
+                    key={game.id}
+                    className={cn(
+                      "grid grid-cols-1 gap-2 border-b border-white/8 py-3 sm:grid-cols-[5.75rem_minmax(0,1fr)_auto] sm:items-center sm:gap-4",
+                      index % 2 === 1 && "bg-white/[0.015]",
+                    )}
+                  >
+                    <DateStamp weekday={day.weekday} date={day.date} />
+                    <p className="font-heading min-w-0 text-xl tracking-wide uppercase">
+                      <GameMatchup game={game} />
+                    </p>
+                    <GameDetail game={game} className="sm:text-right" />
+                  </div>
+                ))}
           </li>
         );
       })}

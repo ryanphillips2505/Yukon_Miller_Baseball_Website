@@ -102,16 +102,18 @@ function PhaseHeader({
   onToggle?: () => void;
 }) {
   const title = (
-    <p className="text-[0.68rem] font-semibold tracking-[0.28em] text-red-400 uppercase">
-      {phaseLabel[phase]}
+    <p className="flex items-baseline gap-3 text-[0.68rem] font-semibold tracking-[0.28em] text-red-400 uppercase">
+      <span>{phaseLabel[phase]}</span>
+      {collapsible ? (
+        <span className="font-bold tracking-[0.18em] text-white">
+          {open ? "Hide" : "Show"}
+        </span>
+      ) : null}
     </p>
   );
   const meta = (
     <p className="text-[0.62rem] tracking-[0.2em] text-zinc-500 uppercase">
       {count} {count === 1 ? "Game" : "Games"}
-      {collapsible ? (
-        <span className="ml-3 text-zinc-400">{open ? "Hide" : "Show"}</span>
-      ) : null}
     </p>
   );
   const rowClass = cn(

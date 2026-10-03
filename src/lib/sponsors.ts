@@ -53,6 +53,7 @@ const sponsorLogos: Record<string, SponsorLogo> = {
   "lowes": { src: "/images/sponsors/logos/lowes.png", width: 900, height: 424 },
   "noahs-7-heaven": { src: "/images/sponsors/logos/noahs-7-heaven.png", width: 600, height: 600 },
   "notable-roofing": { src: "/images/sponsors/logos/notable-roofing.png", width: 900, height: 238 },
+  "oklahoma-tag-yukon": { src: "/images/sponsors/logos/oklahoma-tag-yukon.png", width: 900, height: 281 },
   "opponent-iq": { src: "/images/sponsors/logos/opponent-iq.png", width: 900, height: 340 },
   "rkpb": { src: "/images/sponsors/logos/rkpb.png", width: 373, height: 420 },
   "security-benefit": { src: "/images/sponsors/logos/security-benefit.png", width: 570, height: 112 },
@@ -285,6 +286,14 @@ const sponsorList: Sponsor[] = [
     tier: "home-run",
     placement: "Home Run Club · outfield banner",
     href: "https://www.notableroofing.com",
+  },
+  {
+    id: "oklahoma-tag-yukon",
+    name: "Oklahoma Tag of Yukon",
+    mark: "OT",
+    tier: "home-run",
+    placement: "Home Run Club · outfield banner",
+    href: "https://oktagyukon.com/index.htm",
   },
   {
     id: "h-spraying",

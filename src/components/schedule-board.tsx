@@ -105,7 +105,7 @@ function PhaseHeader({
     <p className="flex items-baseline gap-3 text-[0.68rem] font-semibold tracking-[0.28em] text-red-400 uppercase">
       <span>{phaseLabel[phase]}</span>
       {collapsible ? (
-        <span className="font-bold tracking-[0.18em] text-white">
+        <span className="scrimmage-show">
           {open ? "Hide" : "Show"}
         </span>
       ) : null}

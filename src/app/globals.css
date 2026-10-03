@@ -100,3 +100,10 @@
   font-weight: 600;
   word-spacing: 0.16em;
 }
+
+.scrimmage-show {
+  font-family: var(--font-oswald), ui-sans-serif, system-ui, sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  color: #fff;
+}

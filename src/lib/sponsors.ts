@@ -25,6 +25,7 @@ export type Sponsor = {
 };
 
 const sponsorLogos: Record<string, SponsorLogo> = {
+  "amada-senior-care": { src: "/images/sponsors/logos/amada-senior-care.png", width: 900, height: 178 },
   "army-national-guard": { src: "/images/sponsors/logos/army-national-guard.png", width: 217, height: 232 },
   "bad-brads": { src: "/images/sponsors/logos/bad-brads.png", width: 181, height: 113 },
   "bancfirst": { src: "/images/sponsors/logos/bancfirst.png", width: 900, height: 185 },
@@ -223,6 +224,14 @@ const sponsorList: Sponsor[] = [
     tier: "home-run",
     placement: "Home Run Club · outfield banner",
     href: "https://www.h2health.com/locations/valir-physical-therapy/yukon-ok/",
+  },
+  {
+    id: "amada-senior-care",
+    name: "Amada Senior Care",
+    mark: "AS",
+    tier: "home-run",
+    placement: "Home Run Club · outfield banner",
+    href: "https://www.amadaseniorcare.com/oklahoma-city-senior-care/",
   },
   {
     id: "senior-care",

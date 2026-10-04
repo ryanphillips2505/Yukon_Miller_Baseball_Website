@@ -45,8 +45,8 @@ export function CommitTicker() {
   return (
     <div className="commit-ticker w-full overflow-hidden rounded-2xl border border-white/10 bg-black">
       <div className="flex min-h-14">
-        <div className="relative z-10 flex shrink-0 items-center gap-2 bg-[#c8102e] px-3.5 sm:gap-2.5 sm:px-4">
-          <span className="commit-ticker-live size-1.5 shrink-0 rounded-full bg-white" />
+        <div className="relative z-10 flex shrink-0 items-center gap-2 bg-transparent pr-3.5 pl-4 shadow-[inset_3px_0_0_#c8102e] sm:gap-2.5 sm:pr-4">
+          <span className="commit-ticker-live size-1.5 shrink-0 rounded-full bg-[#c8102e]" />
           <span className="font-heading text-[0.72rem] leading-none tracking-[0.12em] whitespace-nowrap text-white uppercase sm:text-[0.84rem] sm:tracking-[0.14em]">
             Player spotlight
           </span>

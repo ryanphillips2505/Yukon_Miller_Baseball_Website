@@ -85,7 +85,7 @@ export default function HomePage() {
       </section>
 
       <section className="bg-black">
-        <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-12">
+        <div className="mx-auto max-w-6xl px-4 pt-10 pb-0 sm:px-6 sm:pt-12">
           <div className="flex items-end justify-between gap-4">
             <div>
               <p className="text-[0.68rem] font-semibold tracking-[0.32em] text-red-400 uppercase">
@@ -107,8 +107,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="border-t border-white/8 bg-zinc-950">
-        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
+      <section className="bg-zinc-950">
+        <div className="mx-auto max-w-6xl px-4 pt-8 pb-16 sm:px-6 sm:pt-10 sm:pb-20">
           <div className="flex items-end justify-between gap-4">
             <div>
               <p className="text-[0.68rem] font-semibold tracking-[0.32em] text-red-400 uppercase">

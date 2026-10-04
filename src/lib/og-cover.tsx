@@ -19,6 +19,7 @@ const articleOgSlugs = new Set([
   "road-to-state-runs-through-yukon",
   "joe-lytle-banana-ball-all-star",
   "yukon-millers-release-2027-schedule",
+  "gunner-fletcher-southwestern-christian",
 ]);
 
 export function ogShareImage(

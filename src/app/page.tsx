@@ -40,9 +40,8 @@ export default function HomePage() {
 
   return (
     <div>
-      <section className="relative -mt-14 overflow-hidden border-b border-white/8 bg-black">
+      <section className="relative -mt-14 overflow-hidden bg-black">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_18%,rgba(200,16,46,0.16),transparent_55%)]" />
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-[#c8102e] to-transparent" />
         <div className="relative mx-auto w-[min(92vw,52rem)] pt-14 sm:pt-16">
           <div className="relative">
             <div className="pointer-events-none">
@@ -54,7 +53,7 @@ export default function HomePage() {
               />
               <div className="absolute inset-x-0 bottom-0 h-[40%] bg-gradient-to-t from-black via-black/45 to-transparent" />
             </div>
-            <div className="relative z-10 -mt-[20%] flex flex-col items-center px-3 pb-5 text-center sm:-mt-[19%] sm:px-4 sm:pb-6">
+            <div className="relative z-10 -mt-[20%] flex flex-col items-center px-3 pb-0 text-center sm:-mt-[19%] sm:px-4">
               <p className="text-[0.62rem] font-semibold tracking-[0.22em] text-red-400 uppercase sm:text-[0.65rem] sm:tracking-[0.32em]">
                 OSSAA Class 6A Baseball Program
               </p>
@@ -81,16 +80,13 @@ export default function HomePage() {
             </div>
           </div>
         </div>
-      </section>
-
-      <section className="bg-black">
-        <div className="mx-auto max-w-6xl px-4 pt-2 pb-0 sm:px-6 sm:pt-3">
+        <div className="relative mx-auto max-w-6xl px-4 pt-8 pb-8 sm:px-6 sm:pb-10">
           <CommitTicker />
         </div>
       </section>
 
-      <section className="bg-zinc-950">
-        <div className="mx-auto max-w-6xl px-4 pt-6 pb-16 sm:px-6 sm:pt-7 sm:pb-20">
+      <section className="border-t border-white/8 bg-zinc-950">
+        <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
           <div className="flex items-end justify-between gap-4">
             <div>
               <p className="text-[0.68rem] font-semibold tracking-[0.32em] text-red-400 uppercase">
@@ -109,7 +105,7 @@ export default function HomePage() {
           </div>
 
           {featured ? (
-            <div className="mt-10 grid gap-4 lg:grid-cols-[1.35fr_0.85fr]">
+            <div className="mt-8 grid gap-4 lg:grid-cols-[1.35fr_0.85fr]">
               <Link
                 href={`/news/${featured.slug}`}
                 className="overflow-hidden rounded-2xl border border-white/12 bg-black transition-colors hover:border-red-700/40"

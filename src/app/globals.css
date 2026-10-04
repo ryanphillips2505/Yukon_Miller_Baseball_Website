@@ -101,6 +101,11 @@
   word-spacing: 0.16em;
 }
 
+.commit-ticker-window {
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 12px, #000 calc(100% - 2.5rem), transparent);
+  mask-image: linear-gradient(to right, transparent, #000 12px, #000 calc(100% - 2.5rem), transparent);
+}
+
 .commit-ticker-track {
   animation: commit-ticker 36s linear infinite;
 }

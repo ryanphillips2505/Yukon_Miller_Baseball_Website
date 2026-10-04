@@ -34,7 +34,7 @@ function TickerItem({
           {commit.player}
         </span>
         <span className="text-[0.68rem] tracking-[0.14em] text-zinc-400 uppercase">
-          {commit.school}
+          commits to {commit.school}
         </span>
       </span>
     </Link>

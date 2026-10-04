@@ -101,6 +101,54 @@
   word-spacing: 0.16em;
 }
 
+.commit-ticker-window {
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 12px, #000 calc(100% - 2.5rem), transparent);
+  mask-image: linear-gradient(to right, transparent, #000 12px, #000 calc(100% - 2.5rem), transparent);
+}
+
+.commit-ticker-track {
+  animation: commit-ticker 36s linear infinite;
+}
+
+.commit-ticker:hover .commit-ticker-track,
+.commit-ticker:focus-within .commit-ticker-track {
+  animation-play-state: paused;
+}
+
+.commit-ticker-live {
+  animation: commit-ticker-live 1.6s ease-in-out infinite;
+}
+
+@keyframes commit-ticker {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes commit-ticker-live {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .commit-ticker-track,
+  .commit-ticker-live {
+    animation: none;
+  }
+
+  .commit-ticker-window {
+    overflow-x: auto;
+  }
+}
+
 .scrimmage-show {
   font-family: var(--font-oswald), ui-sans-serif, system-ui, sans-serif;
   font-weight: 600;

@@ -1,14 +1,12 @@
 import { ArticleCardImage } from "@/components/article-card-image";
 import { BrandLogo } from "@/components/brand-logo";
+import { CommitTicker } from "@/components/commit-ticker";
 import { buttonVariants } from "@/components/ui/button";
-import { commits } from "@/lib/commits";
 import { latestArticles } from "@/lib/news";
 import { homeOgImage, ogImageSize } from "@/lib/og-cover";
-import { players } from "@/lib/roster";
 import { publicPageSeo } from "@/lib/seo";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 
 const homeShareImage = {
@@ -42,9 +40,8 @@ export default function HomePage() {
 
   return (
     <div>
-      <section className="relative -mt-14 overflow-hidden border-b border-white/8 bg-black">
+      <section className="relative -mt-14 overflow-hidden bg-black">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_18%,rgba(200,16,46,0.16),transparent_55%)]" />
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-[#c8102e] to-transparent" />
         <div className="relative mx-auto w-[min(92vw,52rem)] pt-14 sm:pt-16">
           <div className="relative">
             <div className="pointer-events-none">
@@ -56,7 +53,7 @@ export default function HomePage() {
               />
               <div className="absolute inset-x-0 bottom-0 h-[40%] bg-gradient-to-t from-black via-black/45 to-transparent" />
             </div>
-            <div className="relative z-10 -mt-[20%] flex flex-col items-center px-3 pb-8 text-center sm:-mt-[19%] sm:px-4 sm:pb-10">
+            <div className="relative z-10 -mt-[20%] flex flex-col items-center px-3 pb-0 text-center sm:-mt-[19%] sm:px-4">
               <p className="text-[0.62rem] font-semibold tracking-[0.22em] text-red-400 uppercase sm:text-[0.65rem] sm:tracking-[0.32em]">
                 OSSAA Class 6A Baseball Program
               </p>
@@ -83,71 +80,13 @@ export default function HomePage() {
             </div>
           </div>
         </div>
-      </section>
-
-      <section className="bg-black">
-        <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-12">
-          <div className="flex items-end justify-between gap-4">
-            <div>
-              <p className="text-[0.68rem] font-semibold tracking-[0.32em] text-red-400 uppercase">
-                Players
-              </p>
-              <h2 className="font-heading mt-1.5 text-4xl tracking-wide text-white uppercase sm:text-5xl">
-                Spotlight
-              </h2>
-            </div>
-            <Link
-              href="/roster"
-              className="text-sm tracking-wide text-zinc-400 uppercase hover:text-white"
-            >
-              Roster · {players.length}
-            </Link>
-          </div>
-
-          <div className="mt-8 grid gap-4 lg:grid-cols-3">
-            {commits.map((commit) => (
-              <Link
-                key={commit.id}
-                href={commit.newsSlug ? `/news/${commit.newsSlug}` : "/recruiting"}
-                className="relative flex h-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-zinc-950 p-6 transition-colors hover:border-red-700/40 sm:p-7"
-              >
-                <div
-                  className="absolute inset-y-0 left-0 w-1.5"
-                  style={{
-                    background: `linear-gradient(180deg, ${commit.colors.secondary}, ${commit.colors.primary})`,
-                  }}
-                />
-                <p className="text-[0.62rem] font-semibold tracking-[0.18em] text-red-400 uppercase">
-                  Committed
-                </p>
-                <h3 className="font-heading mt-3 text-3xl leading-none tracking-wide text-white uppercase">
-                  {commit.player}
-                </h3>
-                <p className="mt-4 text-sm leading-6 text-zinc-300">
-                  {commit.school}
-                </p>
-                <p className="mt-1 text-xs tracking-wide text-zinc-500 uppercase">
-                  {commit.mascot} · {commit.division}
-                </p>
-                <div className="mt-auto pt-6">
-                  <div className="flex h-20 items-center justify-center rounded-lg bg-[#f4f1ea] p-3">
-                    <Image
-                      src={commit.logo.src}
-                      alt={commit.logo.alt}
-                      width={commit.logo.width}
-                      height={commit.logo.height}
-                      className="h-full w-auto max-w-full object-contain"
-                    />
-                  </div>
-                </div>
-              </Link>
-            ))}
-          </div>
+        <div className="relative mx-auto max-w-6xl px-4 pt-8 pb-8 sm:px-6 sm:pb-10">
+          <CommitTicker />
         </div>
       </section>
 
       <section className="border-t border-white/8 bg-zinc-950">
-        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
+        <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
           <div className="flex items-end justify-between gap-4">
             <div>
               <p className="text-[0.68rem] font-semibold tracking-[0.32em] text-red-400 uppercase">
@@ -166,7 +105,7 @@ export default function HomePage() {
           </div>
 
           {featured ? (
-            <div className="mt-10 grid gap-4 lg:grid-cols-[1.35fr_0.85fr]">
+            <div className="mt-8 grid gap-4 lg:grid-cols-[1.35fr_0.85fr]">
               <Link
                 href={`/news/${featured.slug}`}
                 className="overflow-hidden rounded-2xl border border-white/12 bg-black transition-colors hover:border-red-700/40"

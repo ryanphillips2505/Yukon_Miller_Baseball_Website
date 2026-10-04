@@ -26,6 +26,8 @@ const articleOgSlugs = new Set([
 const articleOgFiles: Record<string, string> = {
   "gunner-fletcher-southwestern-christian":
     "/images/og/gunner-fletcher-southwestern-christian-eagle.jpg",
+  "czech-festival-parade-2026":
+    "/images/og/czech-festival-parade-2026-balance.jpg",
 };
 
 export function ogShareImage(

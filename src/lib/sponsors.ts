@@ -60,6 +60,7 @@ const sponsorLogos: Record<string, SponsorLogo> = {
   "security-benefit": { src: "/images/sponsors/logos/security-benefit.png", width: 570, height: 112 },
   "senior-care": { src: "/images/sponsors/logos/senior-care.png", width: 200, height: 56 },
   "sod-by-sherry": { src: "/images/sponsors/logos/sod-by-sherry.png", width: 540, height: 260 },
+  "surf-bar": { src: "/images/sponsors/logos/surf-bar.png", width: 900, height: 188 },
   "tfcu": { src: "/images/sponsors/logos/tfcu.png", width: 398, height: 134 },
   "the-lokal": { src: "/images/sponsors/logos/the-lokal.png", width: 237, height: 213 },
   "together-we-church": { src: "/images/sponsors/logos/together-we-church.png", width: 381, height: 420 },
@@ -350,6 +351,14 @@ const sponsorList: Sponsor[] = [
     tier: "home-run",
     placement: "Home Run Club · outfield banner",
     href: "https://www.sodbysherry.com",
+  },
+  {
+    id: "surf-bar",
+    name: "The Surf Bar",
+    mark: "SB",
+    tier: "home-run",
+    placement: "Home Run Club · outfield banner",
+    href: "https://surfbar.com",
   },
   {
     id: "trane",

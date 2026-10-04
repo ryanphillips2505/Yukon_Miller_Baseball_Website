@@ -7,6 +7,7 @@ import { coltonStrangeStory } from "@/lib/news-colton-strange";
 import { hofBanquetStory } from "@/lib/news-hof-banquet";
 import { joeLytleStory } from "@/lib/news-joe-lytle";
 import { schedule2027Story } from "@/lib/news-2027-schedule";
+import { gunnerFletcherStory } from "@/lib/news-gunner-fletcher";
 
 export type ArticleImageVariant = {
   src: string;
@@ -39,6 +40,7 @@ export type Article = {
 };
 
 export const articles: Article[] = [
+  gunnerFletcherStory,
   schedule2027Story,
   joeLytleStory,
   hofBanquetStory,

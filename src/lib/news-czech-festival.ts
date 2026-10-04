@@ -8,13 +8,13 @@ export const czechFestivalStory = {
   excerpt:
     "Yukon Miller Baseball was proud to once again take part in one of our community’s favorite traditions, the 60th Annual Oklahoma Czech Festival Parade in downtown Yukon.",
   image: {
-    src: "/images/news/czech-festival-parade-2026-tight.jpg",
+    src: "/images/news/czech-festival-parade-2026-tight2.jpg",
     alt: "The Yukon Miller Baseball program together in front of the Czech Festival Parade float and Czechin’ Our Roots banner",
     width: 1600,
-    height: 635,
+    height: 676,
     focus: "50% 55%",
     banner: {
-      src: "/images/news/czech-festival-parade-2026-banner2.jpg",
+      src: "/images/news/czech-festival-parade-2026-banner3.jpg",
       width: 1600,
       height: 680,
       focus: "50% 48%",

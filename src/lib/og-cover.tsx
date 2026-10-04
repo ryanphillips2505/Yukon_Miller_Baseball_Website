@@ -24,7 +24,7 @@ const articleOgSlugs = new Set([
 
 const articleOgFiles: Record<string, string> = {
   "gunner-fletcher-southwestern-christian":
-    "/images/og/gunner-fletcher-southwestern-christian-face.jpg",
+    "/images/og/gunner-fletcher-southwestern-christian-eagle.jpg",
 };
 
 export function ogShareImage(

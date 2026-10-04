@@ -22,6 +22,11 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
+        source: "/dashboard",
+        destination: "https://weightgain.yukonbaseball.com/dashboard",
+        permanent: false,
+      },
+      {
         source: "/schedule-fields",
         destination: "/schedule",
         permanent: true,

@@ -20,6 +20,7 @@ const articleOgSlugs = new Set([
   "joe-lytle-banana-ball-all-star",
   "yukon-millers-release-2027-schedule",
   "gunner-fletcher-southwestern-christian",
+  "czech-festival-parade-2026",
 ]);
 
 const articleOgFiles: Record<string, string> = {

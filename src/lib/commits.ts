@@ -81,4 +81,23 @@ export const commits: Commit[] = [
     },
     newsSlug: "pryce-mcclure-barton",
   },
+  {
+    id: "gunner-fletcher",
+    pick: "04",
+    player: "Gunner Fletcher",
+    school: "Southwestern Christian University",
+    mascot: "Eagles",
+    division: "NAIA",
+    conference: "Sooner Athletic Conference",
+    city: "Bethany, Oklahoma",
+    stadium: "Eagle Field at Dolese Park",
+    colors: { primary: "#0B1E4A", secondary: "#E36C1A" },
+    logo: {
+      src: "/images/schools/southwestern-christian-eagles.png",
+      width: 458,
+      height: 320,
+      alt: "Southwestern Christian University Eagles baseball logo",
+    },
+    newsSlug: "gunner-fletcher-southwestern-christian",
+  },
 ];

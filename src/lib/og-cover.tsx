@@ -22,13 +22,18 @@ const articleOgSlugs = new Set([
   "gunner-fletcher-southwestern-christian",
 ]);
 
+const articleOgFiles: Record<string, string> = {
+  "gunner-fletcher-southwestern-christian":
+    "/images/og/gunner-fletcher-southwestern-christian-face.jpg",
+};
+
 export function ogShareImage(
   slug?: string,
   alt = "Yukon Miller Baseball",
 ) {
   const url =
     slug && articleOgSlugs.has(slug)
-      ? `/images/og/${slug}.jpg`
+      ? (articleOgFiles[slug] ?? `/images/og/${slug}.jpg`)
       : defaultOgImage;
   return {
     url,

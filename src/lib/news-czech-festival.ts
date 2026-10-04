@@ -101,10 +101,10 @@ export const czechFestivalStory = {
           height: 800,
         },
         {
-          src: "/images/news/czech-festival-parade-2026-red.jpg",
-          alt: "Yukon Miller Baseball players in red Yukon’s Best jerseys standing on the Czech Festival Parade float",
+          src: "/images/news/czech-festival-parade-2026-squad.jpg",
+          alt: "Yukon Miller Baseball players in black and red uniforms with the parade float and Czechin’ Our Roots banner",
           width: 1200,
-          height: 800,
+          height: 900,
         },
       ],
     },

@@ -2,7 +2,7 @@ import type { ArticleBlock } from "@/lib/news-blocks";
 
 export const czechFestivalStory = {
   slug: "czech-festival-parade-2026",
-  title: "Yukon Baseball Hits a Home Run at the 60th Annual Czech Festival Parade",
+  title: "Yukon Baseball Celebrates a Yukon Tradition at the 60th Annual Czech Festival Parade",
   date: "October 4, 2026",
   category: "News" as const,
   excerpt:

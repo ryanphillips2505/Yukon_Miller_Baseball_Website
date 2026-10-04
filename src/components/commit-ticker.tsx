@@ -43,7 +43,7 @@ function TickerItem({
 
 export function CommitTicker() {
   return (
-    <div className="commit-ticker mt-6 w-full overflow-hidden rounded-2xl border border-white/10 border-t-[#c8102e] bg-black shadow-[inset_0_1px_0_rgba(200,16,46,0.35)]">
+    <div className="commit-ticker w-full overflow-hidden rounded-2xl border border-white/10 border-t-[#c8102e] bg-black shadow-[inset_0_1px_0_rgba(200,16,46,0.35)]">
       <div className="flex min-h-14">
         <div className="relative z-10 flex shrink-0 items-center gap-2 bg-[#c8102e] px-3.5 sm:gap-2.5 sm:px-4">
           <span className="commit-ticker-live size-1.5 shrink-0 rounded-full bg-white" />

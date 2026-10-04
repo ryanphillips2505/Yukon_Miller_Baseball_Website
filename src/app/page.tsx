@@ -4,7 +4,6 @@ import { CommitTicker } from "@/components/commit-ticker";
 import { buttonVariants } from "@/components/ui/button";
 import { latestArticles } from "@/lib/news";
 import { homeOgImage, ogImageSize } from "@/lib/og-cover";
-import { players } from "@/lib/roster";
 import { publicPageSeo } from "@/lib/seo";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
@@ -85,24 +84,7 @@ export default function HomePage() {
       </section>
 
       <section className="bg-black">
-        <div className="mx-auto max-w-6xl px-4 pt-10 pb-0 sm:px-6 sm:pt-12">
-          <div className="flex items-end justify-between gap-4">
-            <div>
-              <p className="text-[0.68rem] font-semibold tracking-[0.32em] text-red-400 uppercase">
-                Players
-              </p>
-              <h2 className="font-heading mt-1.5 text-4xl tracking-wide text-white uppercase sm:text-5xl">
-                Spotlight
-              </h2>
-            </div>
-            <Link
-              href="/roster"
-              className="text-sm tracking-wide text-zinc-400 uppercase hover:text-white"
-            >
-              Roster · {players.length}
-            </Link>
-          </div>
-
+        <div className="mx-auto max-w-6xl px-4 pt-8 pb-0 sm:px-6 sm:pt-10">
           <CommitTicker />
         </div>
       </section>

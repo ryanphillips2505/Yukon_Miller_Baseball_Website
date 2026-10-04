@@ -1,14 +1,13 @@
 import { ArticleCardImage } from "@/components/article-card-image";
 import { BrandLogo } from "@/components/brand-logo";
+import { CommitTicker } from "@/components/commit-ticker";
 import { buttonVariants } from "@/components/ui/button";
-import { commits } from "@/lib/commits";
 import { latestArticles } from "@/lib/news";
 import { homeOgImage, ogImageSize } from "@/lib/og-cover";
 import { players } from "@/lib/roster";
 import { publicPageSeo } from "@/lib/seo";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 
 const homeShareImage = {
@@ -104,45 +103,7 @@ export default function HomePage() {
             </Link>
           </div>
 
-          <div className="mt-8 grid gap-4 lg:grid-cols-3">
-            {commits.map((commit) => (
-              <Link
-                key={commit.id}
-                href={commit.newsSlug ? `/news/${commit.newsSlug}` : "/recruiting"}
-                className="relative flex h-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-zinc-950 p-6 transition-colors hover:border-red-700/40 sm:p-7"
-              >
-                <div
-                  className="absolute inset-y-0 left-0 w-1.5"
-                  style={{
-                    background: `linear-gradient(180deg, ${commit.colors.secondary}, ${commit.colors.primary})`,
-                  }}
-                />
-                <p className="text-[0.62rem] font-semibold tracking-[0.18em] text-red-400 uppercase">
-                  Committed
-                </p>
-                <h3 className="font-heading mt-3 text-3xl leading-none tracking-wide text-white uppercase">
-                  {commit.player}
-                </h3>
-                <p className="mt-4 text-sm leading-6 text-zinc-300">
-                  {commit.school}
-                </p>
-                <p className="mt-1 text-xs tracking-wide text-zinc-500 uppercase">
-                  {commit.mascot} · {commit.division}
-                </p>
-                <div className="mt-auto pt-6">
-                  <div className="flex h-20 items-center justify-center rounded-lg bg-[#f4f1ea] p-3">
-                    <Image
-                      src={commit.logo.src}
-                      alt={commit.logo.alt}
-                      width={commit.logo.width}
-                      height={commit.logo.height}
-                      className="h-full w-auto max-w-full object-contain"
-                    />
-                  </div>
-                </div>
-              </Link>
-            ))}
-          </div>
+          <CommitTicker />
         </div>
       </section>
 

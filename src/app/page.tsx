@@ -54,7 +54,7 @@ export default function HomePage() {
               />
               <div className="absolute inset-x-0 bottom-0 h-[40%] bg-gradient-to-t from-black via-black/45 to-transparent" />
             </div>
-            <div className="relative z-10 -mt-[20%] flex flex-col items-center px-3 pb-8 text-center sm:-mt-[19%] sm:px-4 sm:pb-10">
+            <div className="relative z-10 -mt-[20%] flex flex-col items-center px-3 pb-5 text-center sm:-mt-[19%] sm:px-4 sm:pb-6">
               <p className="text-[0.62rem] font-semibold tracking-[0.22em] text-red-400 uppercase sm:text-[0.65rem] sm:tracking-[0.32em]">
                 OSSAA Class 6A Baseball Program
               </p>
@@ -84,13 +84,13 @@ export default function HomePage() {
       </section>
 
       <section className="bg-black">
-        <div className="mx-auto max-w-6xl px-4 pt-8 pb-0 sm:px-6 sm:pt-10">
+        <div className="mx-auto max-w-6xl px-4 pt-2 pb-0 sm:px-6 sm:pt-3">
           <CommitTicker />
         </div>
       </section>
 
       <section className="bg-zinc-950">
-        <div className="mx-auto max-w-6xl px-4 pt-8 pb-16 sm:px-6 sm:pt-10 sm:pb-20">
+        <div className="mx-auto max-w-6xl px-4 pt-6 pb-16 sm:px-6 sm:pt-7 sm:pb-20">
           <div className="flex items-end justify-between gap-4">
             <div>
               <p className="text-[0.68rem] font-semibold tracking-[0.32em] text-red-400 uppercase">

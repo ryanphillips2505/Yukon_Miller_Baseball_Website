@@ -39,6 +39,17 @@ export const czechFestivalStory = {
       text: "Players and coaches made their way down historic Route 66 aboard the Yukon Baseball float as thousands of people gathered along Main Street for the annual celebration. This year’s festival marked a special milestone, celebrating 60 years of the Oklahoma Czech Festival during the 100th anniversary year of Route 66.",
     },
     {
+      type: "image",
+      src: "/images/news/czech-festival-parade-2026-red-tight.jpg",
+      alt: "Yukon Miller Baseball players in red Yukon’s Best jerseys standing on the Czech Festival Parade float",
+      width: 1400,
+      height: 667,
+    },
+    {
+      type: "p",
+      text: "For Yukon Baseball, participating in the Czech Festival Parade has become much more than another event on the calendar. It is a player and coach favorite each year and an opportunity for our program to be part of a tradition that brings the entire Yukon community together.",
+    },
+    {
       type: "gallery",
       photos: [
         {
@@ -54,17 +65,6 @@ export const czechFestivalStory = {
           height: 825,
         },
       ],
-    },
-    {
-      type: "p",
-      text: "For Yukon Baseball, participating in the Czech Festival Parade has become much more than another event on the calendar. It is a player and coach favorite each year and an opportunity for our program to be part of a tradition that brings the entire Yukon community together.",
-    },
-    {
-      type: "image",
-      src: "/images/news/czech-festival-parade-2026-red.jpg",
-      alt: "Yukon Miller Baseball players in red Yukon’s Best jerseys standing on the Czech Festival Parade float",
-      width: 1200,
-      height: 800,
     },
     {
       type: "p",

@@ -259,7 +259,7 @@ function StatBlock({
 }
 
 export function ScheduleBoard() {
-  const [view, setView] = useState<ScheduleView>("master");
+  const [view, setView] = useState<ScheduleView>("varsity");
   const [scrimmagesOpen, setScrimmagesOpen] = useState(false);
   const visible = useMemo(() => gamesForView(view), [view]);
   const days = useMemo(() => masterDays(visible), [visible]);

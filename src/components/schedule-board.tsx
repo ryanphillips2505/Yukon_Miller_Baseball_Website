@@ -138,10 +138,10 @@ function MapsChevron({ game }: { game: Game }) {
       href={maps.href}
       target="_blank"
       rel="noreferrer"
-      className="flex size-8 shrink-0 items-center justify-end text-zinc-500 sm:hidden"
+      className="flex size-8 shrink-0 items-center justify-end text-zinc-400 sm:hidden"
       aria-label={`Directions to ${maps.field.name}`}
     >
-      <ChevronRight className="size-5" strokeWidth={1.75} aria-hidden />
+      <ChevronRight className="size-5" strokeWidth={2} aria-hidden />
     </a>
   );
 }
@@ -280,7 +280,7 @@ function StatBlock({
   return (
     <div
       className={cn(
-        "min-w-[4.5rem]",
+        "min-w-0 sm:min-w-[4.5rem]",
         align === "left" && "text-left",
         align === "center" && "text-center",
         align === "right" && "text-left sm:text-right",
@@ -289,7 +289,7 @@ function StatBlock({
       <p className="font-heading text-3xl leading-none text-white sm:text-4xl">
         {value}
       </p>
-      <p className="mt-1 text-[0.58rem] tracking-[0.18em] text-zinc-500 uppercase">
+      <p className="mt-1 text-[0.52rem] tracking-[0.14em] text-zinc-500 uppercase sm:text-[0.58rem] sm:tracking-[0.18em]">
         {label}
       </p>
     </div>
@@ -333,7 +333,12 @@ export function ScheduleBoard() {
             <HomeAwayKey className="mt-3" />
           </div>
           <div className="flex flex-col items-start gap-2.5 sm:items-end sm:pt-7">
-            <div className="flex w-full flex-wrap items-end justify-between gap-4 sm:w-auto sm:justify-end sm:gap-16">
+            <div
+              className={cn(
+                "grid w-full items-end gap-3 sm:flex sm:w-auto sm:justify-end sm:gap-16",
+                view === "master" ? "grid-cols-2" : "grid-cols-3",
+              )}
+            >
               {view === "master" ? (
                 <>
                   <StatBlock
@@ -554,7 +559,7 @@ function TeamList({
                     )}
                   >
                     <DateStamp weekday={day.weekday} date={day.date} />
-                    <div className="min-w-0 sm:contents">
+                    <div className="min-w-0 overflow-hidden sm:contents">
                       <p className="font-heading min-w-0 text-[1.35rem] leading-none tracking-wide uppercase sm:text-xl">
                         <GameMatchup game={game} />
                       </p>

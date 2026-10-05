@@ -276,9 +276,12 @@ export function ScheduleBoard() {
             <p className="text-[0.68rem] font-semibold tracking-[0.32em] text-red-400 uppercase">
               2027
             </p>
-            <h1 className="font-heading mt-1.5 text-4xl leading-none tracking-wide text-white uppercase sm:text-6xl">
-              {view === "master" ? "Schedule" : teamLabel(view)}
-            </h1>
+            <div className="mt-1.5 flex flex-wrap items-end gap-3 sm:gap-4">
+              <h1 className="font-heading text-4xl leading-none tracking-wide text-white uppercase sm:text-6xl">
+                {view === "master" ? "Schedule" : teamLabel(view)}
+              </h1>
+              <BuyTicketsLink className="mb-1 shrink-0" />
+            </div>
           </div>
           <div className="flex flex-wrap items-end gap-10 sm:justify-end sm:gap-16">
             {view === "master" ? (
@@ -308,17 +311,6 @@ export function ScheduleBoard() {
         </div>
         <div className={cn(shell, "pt-3")}>
           <HomeAwayKey />
-          <div className="mt-4 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-white/10 bg-black/25 px-3 py-2.5 sm:px-4">
-            <div className="min-w-0">
-              <p className="font-heading text-lg leading-none tracking-wide text-white uppercase">
-                Tickets
-              </p>
-              <p className="mt-1 text-xs text-zinc-500">
-                Yukon home games through GoFan
-              </p>
-            </div>
-            <BuyTicketsLink className="w-full sm:w-auto" />
-          </div>
           <div className="mt-5">
             <CalendarSubscribe highlight={view} />
           </div>

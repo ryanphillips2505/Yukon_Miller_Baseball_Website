@@ -23,6 +23,7 @@ import {
 import { program, teams, type TeamId } from "@/lib/site";
 import { cn } from "@/lib/utils";
 import { fieldForGame, mapsUrlForField } from "@/lib/venues";
+import { ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { useMemo, useState } from "react";
 
@@ -91,19 +92,56 @@ function HomeAwayKey({ className }: { className?: string }) {
   );
 }
 
+const actionLinkClass =
+  "inline-flex min-h-9 items-center gap-1.5 text-[0.68rem] font-semibold tracking-[0.16em] text-red-400 uppercase transition-colors hover:text-red-300";
+
 function BuyTicketsLink({ className }: { className?: string }) {
   return (
     <a
       href={program.ticketsUrl}
       target="_blank"
       rel="noreferrer"
-      className={cn(
-        "inline-flex min-h-9 items-center gap-1.5 text-[0.68rem] font-semibold tracking-[0.16em] text-red-400 uppercase transition-colors hover:text-red-300",
-        className,
-      )}
+      className={cn(actionLinkClass, className)}
     >
       Buy Tickets
       <span aria-hidden>→</span>
+    </a>
+  );
+}
+
+function SyncCalendarLink({ className }: { className?: string }) {
+  return (
+    <Link
+      href="/schedule/instructions"
+      className={cn(actionLinkClass, className)}
+    >
+      Sync Calendar
+      <span aria-hidden>→</span>
+    </Link>
+  );
+}
+
+function gameMaps(game: Game) {
+  const field = fieldForGame(game);
+  if (!field) return undefined;
+  return { field, href: mapsUrlForField(field) };
+}
+
+function MapsChevron({ game }: { game: Game }) {
+  const maps = gameMaps(game);
+  if (!maps) {
+    return <span className="size-8 shrink-0 sm:hidden" aria-hidden />;
+  }
+
+  return (
+    <a
+      href={maps.href}
+      target="_blank"
+      rel="noreferrer"
+      className="flex size-8 shrink-0 items-center justify-end text-zinc-400 sm:hidden"
+      aria-label={`Directions to ${maps.field.name}`}
+    >
+      <ChevronRight className="size-5" strokeWidth={2} aria-hidden />
     </a>
   );
 }
@@ -242,7 +280,7 @@ function StatBlock({
   return (
     <div
       className={cn(
-        "min-w-[4.5rem]",
+        "min-w-0 sm:min-w-[4.5rem]",
         align === "left" && "text-left",
         align === "center" && "text-center",
         align === "right" && "text-left sm:text-right",
@@ -251,7 +289,7 @@ function StatBlock({
       <p className="font-heading text-3xl leading-none text-white sm:text-4xl">
         {value}
       </p>
-      <p className="mt-1 text-[0.58rem] tracking-[0.18em] text-zinc-500 uppercase">
+      <p className="mt-1 text-[0.52rem] tracking-[0.14em] text-zinc-500 uppercase sm:text-[0.58rem] sm:tracking-[0.18em]">
         {label}
       </p>
     </div>
@@ -295,7 +333,12 @@ export function ScheduleBoard() {
             <HomeAwayKey className="mt-3" />
           </div>
           <div className="flex flex-col items-start gap-2.5 sm:items-end sm:pt-7">
-            <div className="flex flex-wrap items-end gap-10 sm:justify-end sm:gap-16">
+            <div
+              className={cn(
+                "grid w-full items-end gap-3 sm:flex sm:w-auto sm:justify-end sm:gap-16",
+                view === "master" ? "grid-cols-2" : "grid-cols-3",
+              )}
+            >
               {view === "master" ? (
                 <>
                   <StatBlock
@@ -320,32 +363,41 @@ export function ScheduleBoard() {
                 </>
               )}
             </div>
-            <BuyTicketsLink />
+            <BuyTicketsLink className="hidden sm:inline-flex" />
           </div>
         </div>
-        <div className={cn(shell, "pt-3")}>
+        <div
+          className={cn(
+            shell,
+            "flex items-center justify-between gap-6 pt-3 sm:hidden",
+          )}
+        >
+          <BuyTicketsLink />
+          <SyncCalendarLink />
+        </div>
+        <div className={cn(shell, "hidden pt-3 sm:block")}>
           <p className="max-w-4xl text-[0.8rem] leading-6 text-zinc-500 sm:text-sm sm:leading-6">
             Never miss a game. Sync the Yukon Baseball schedule to your
             calendar.{" "}
-            <Link
-              href="/schedule/instructions"
-              className="font-semibold tracking-[0.16em] text-red-400 uppercase transition-colors hover:text-red-300"
-            >
-              Sync Calendar →
-            </Link>
+            <SyncCalendarLink className="inline min-h-0" />
           </p>
         </div>
-        <div className={cn(shell, "mt-2.5 flex gap-0.5 overflow-x-auto")}>
+        <div
+          className={cn(
+            shell,
+            "mt-2.5 flex justify-between gap-1 overflow-x-auto sm:justify-start sm:gap-0.5",
+          )}
+        >
           {views.map((item) => (
             <button
               key={item.id}
               type="button"
               onClick={() => setView(item.id)}
               className={cn(
-                "relative shrink-0 px-2.5 py-2 text-[0.72rem] font-medium tracking-[0.16em] uppercase transition-colors",
+                "relative shrink-0 px-1 py-2 text-[0.68rem] font-medium tracking-[0.16em] uppercase transition-colors sm:px-2.5 sm:text-[0.72rem]",
                 view === item.id ? "text-white" : "text-zinc-500 hover:text-white",
                 view === item.id &&
-                  "after:absolute after:right-2.5 after:bottom-0 after:left-2.5 after:h-0.5 after:bg-[#c8102e]",
+                  "after:absolute after:right-1 after:bottom-0 after:left-1 after:h-0.5 after:bg-[#c8102e] sm:after:right-2.5 sm:after:left-2.5",
               )}
             >
               {item.label}
@@ -502,15 +554,21 @@ function TeamList({
                   <div
                     key={game.id}
                     className={cn(
-                      "grid grid-cols-1 gap-2 border-b border-white/8 py-3 sm:grid-cols-[5.75rem_minmax(0,1fr)_auto] sm:items-center sm:gap-4",
+                      "grid grid-cols-[4.75rem_minmax(0,1fr)_2rem] items-center gap-3 border-b border-white/8 py-3.5 sm:grid-cols-[5.75rem_minmax(0,1fr)_auto] sm:gap-4",
                       index % 2 === 1 && "bg-white/[0.015]",
                     )}
                   >
                     <DateStamp weekday={day.weekday} date={day.date} />
-                    <p className="font-heading min-w-0 text-xl tracking-wide uppercase">
-                      <GameMatchup game={game} />
-                    </p>
-                    <GameDetail game={game} className="sm:text-right" />
+                    <div className="min-w-0 overflow-hidden sm:contents">
+                      <p className="font-heading min-w-0 text-[1.35rem] leading-none tracking-wide uppercase sm:text-xl">
+                        <GameMatchup game={game} />
+                      </p>
+                      <GameDetail
+                        game={game}
+                        className="mt-1.5 sm:mt-0 sm:text-right"
+                      />
+                    </div>
+                    <MapsChevron game={game} />
                   </div>
                 ))}
           </li>

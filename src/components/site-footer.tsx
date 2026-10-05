@@ -50,9 +50,10 @@ export function SiteFooter() {
             </p>
             <a
               href={`mailto:${program.email}`}
-              className="mt-3 block text-sm text-zinc-300 hover:text-white"
+              className="mt-3 inline-flex items-center gap-1.5 text-sm text-red-400 hover:text-red-300"
             >
-              {program.email}
+              Contact Yukon Baseball
+              <span aria-hidden>→</span>
             </a>
             <SocialLinks className="mt-4" />
             <p className="mt-5 text-[0.7rem] font-semibold tracking-[0.2em] text-zinc-500 uppercase">

@@ -30,6 +30,7 @@ export const program = {
   cityStateZip: "Yukon, OK 73099",
   mapsUrl:
     "https://maps.google.com/?q=1777+S+Yukon+Parkway,+Yukon,+OK+73099",
+  ticketsUrl: "https://gofan.co/app/school/OK13164",
   directions:
     "Miller Field sits behind Yukon High School on Yukon Parkway, two miles north of I-40 at exit 138.",
   quote: {

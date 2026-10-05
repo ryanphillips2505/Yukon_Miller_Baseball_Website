@@ -1,3 +1,4 @@
+import { CalendarSubscribeBoards } from "@/components/calendar-subscribe";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { publicPageSeo } from "@/lib/seo";
@@ -17,7 +18,7 @@ const steps = [
     body: [
       "Tap Apple next to Varsity, JV Red, or JV White.",
       "When Calendar asks to subscribe, add the calendar. That keeps the feed live so date and time changes come through.",
-      "If a file downloads instead, that copy will not update. Tap Copy on the Schedule page, then add a subscribed calendar and paste the link. On iPhone or iPad: Settings → Calendar → Accounts → Add Account → Other → Add Subscribed Calendar. On a Mac: Calendar → File → New Calendar Subscription.",
+      "If a file downloads instead, that copy will not update. Tap Copy next to the team, then add a subscribed calendar and paste the link. On iPhone or iPad: Settings → Calendar → Accounts → Add Account → Other → Add Subscribed Calendar. On a Mac: Calendar → File → New Calendar Subscription.",
     ],
   },
   {
@@ -53,20 +54,12 @@ export default function CalendarInstructionsPage() {
             Each device you sync this calendar to has its own refresh settings.
             Please check them to ensure you get the latest updates.
           </p>
+          <div className="mt-8">
+            <CalendarSubscribeBoards />
+          </div>
         </div>
       </header>
       <div className="mx-auto max-w-3xl space-y-8 px-4 py-10 sm:px-6">
-        <section>
-          <h2 className="font-heading text-2xl tracking-wide text-white uppercase">
-            Subscribe from the schedule
-          </h2>
-          <p className="mt-3 text-sm leading-6 text-zinc-400">
-            On the Schedule page, each team has Apple, Google, Outlook, and
-            Copy. Subscribe separately to Varsity, JV Red, and JV White if you
-            follow more than one team.
-          </p>
-        </section>
-
         {steps.map((step) => (
           <section
             key={step.title}

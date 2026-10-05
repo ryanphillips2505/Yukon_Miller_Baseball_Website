@@ -1,6 +1,5 @@
 "use client";
 
-import { CalendarSubscribe } from "@/components/calendar-subscribe";
 import { buttonVariants } from "@/components/ui/button";
 import {
   formatGameDate,
@@ -25,6 +24,7 @@ import {
 import { program, teams, type TeamId } from "@/lib/site";
 import { cn } from "@/lib/utils";
 import { fieldForGame, mapsUrlForField } from "@/lib/venues";
+import Link from "next/link";
 import { useMemo, useState } from "react";
 
 const views: { id: ScheduleView; label: string }[] = [
@@ -311,9 +311,16 @@ export function ScheduleBoard() {
         </div>
         <div className={cn(shell, "pt-3")}>
           <HomeAwayKey />
-          <div className="mt-5">
-            <CalendarSubscribe highlight={view} />
-          </div>
+          <p className="mt-5 max-w-3xl text-sm leading-6 text-zinc-400">
+            Never miss a game. Add the Yukon Baseball schedule to your phone or
+            computer.{" "}
+            <Link
+              href="/schedule/instructions"
+              className="font-semibold tracking-[0.16em] text-red-400 uppercase hover:text-red-300"
+            >
+              Sync Calendar →
+            </Link>
+          </p>
         </div>
         <div className={cn(shell, "mt-3 flex gap-0.5 overflow-x-auto")}>
           {views.map((item) => (

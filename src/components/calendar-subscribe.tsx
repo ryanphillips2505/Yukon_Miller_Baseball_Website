@@ -1,12 +1,10 @@
 "use client";
 
-import { buttonVariants } from "@/components/ui/button";
 import { calendarSubscribeLinks } from "@/lib/calendar";
 import { gaCalendarEvents, gaEvent } from "@/lib/ga";
 import { teams, type TeamId } from "@/lib/site";
 import { cn } from "@/lib/utils";
 import { track } from "@vercel/analytics";
-import Link from "next/link";
 import { useMemo, useState } from "react";
 
 function trackCalendarClick(
@@ -89,52 +87,20 @@ function SubscribeButtons({ team }: { team: TeamId }) {
   );
 }
 
-export function CalendarSubscribe({
-  highlight,
-}: {
-  highlight?: TeamId | "master";
-}) {
+export function CalendarSubscribeBoards() {
   return (
-    <div className="border-t border-white/8 pt-4">
-      <div className="flex flex-wrap items-center justify-between gap-2">
-        <p className="text-[0.62rem] font-semibold tracking-[0.22em] text-zinc-500 uppercase">
-          Parent calendars
-        </p>
-        <Link
-          href="/schedule/instructions"
-          className={cn(
-            buttonVariants(),
-            "h-7 px-3 text-[0.62rem] tracking-[0.12em] uppercase",
-          )}
+    <div className="grid gap-2">
+      {teams.map((team) => (
+        <div
+          key={team.id}
+          className="flex items-center gap-3 rounded-xl border border-white/10 bg-black/25 px-3 py-2.5"
         >
-          Instructions
-        </Link>
-      </div>
-      <p className="mt-1.5 max-w-xl text-xs leading-5 text-zinc-500 sm:text-sm sm:leading-6 sm:text-zinc-400">
-        30-minute reminder before first pitch. Updates when the schedule
-        changes.
-      </p>
-      <div className="mt-3 grid gap-2 sm:grid-cols-3">
-        {teams.map((team) => {
-          const active = highlight === team.id;
-          return (
-            <div
-              key={team.id}
-              className={cn(
-                "flex items-center gap-3 rounded-xl border px-3 py-2.5",
-                active
-                  ? "border-white/20 bg-white/[0.04]"
-                  : "border-white/10 bg-black/25",
-              )}
-            >
-              <p className="font-heading w-[5.5rem] shrink-0 text-lg leading-none tracking-wide text-white uppercase">
-                {team.label}
-              </p>
-              <SubscribeButtons team={team.id} />
-            </div>
-          );
-        })}
-      </div>
+          <p className="font-heading w-[5.5rem] shrink-0 text-lg leading-none tracking-wide text-white uppercase">
+            {team.label}
+          </p>
+          <SubscribeButtons team={team.id} />
+        </div>
+      ))}
     </div>
   );
 }

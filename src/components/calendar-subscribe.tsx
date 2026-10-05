@@ -104,3 +104,5 @@ export function CalendarSubscribeBoards() {
     </div>
   );
 }
+
+export { CalendarSubscribeBoards as CalendarSubscribe };

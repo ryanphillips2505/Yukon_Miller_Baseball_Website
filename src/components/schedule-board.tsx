@@ -23,7 +23,7 @@ import {
 import { program, teams, type TeamId } from "@/lib/site";
 import { cn } from "@/lib/utils";
 import { fieldForGame, mapsUrlForField } from "@/lib/venues";
-import { ChevronRight } from "lucide-react";
+import { MapPin } from "lucide-react";
 import Link from "next/link";
 import { useMemo, useState } from "react";
 
@@ -127,7 +127,7 @@ function gameMaps(game: Game) {
   return { field, href: mapsUrlForField(field) };
 }
 
-function MapsChevron({ game }: { game: Game }) {
+function MapsPin({ game }: { game: Game }) {
   const maps = gameMaps(game);
   if (!maps) {
     return <span className="size-8 shrink-0 sm:hidden" aria-hidden />;
@@ -138,10 +138,10 @@ function MapsChevron({ game }: { game: Game }) {
       href={maps.href}
       target="_blank"
       rel="noreferrer"
-      className="flex size-8 shrink-0 items-center justify-end text-zinc-400 sm:hidden"
+      className="flex size-8 shrink-0 items-center justify-end text-zinc-500 sm:hidden"
       aria-label={`Directions to ${maps.field.name}`}
     >
-      <ChevronRight className="size-5" strokeWidth={2} aria-hidden />
+      <MapPin className="size-[1.15rem]" strokeWidth={1.5} aria-hidden />
     </a>
   );
 }
@@ -568,7 +568,7 @@ function TeamList({
                         className="mt-1.5 sm:mt-0 sm:text-right"
                       />
                     </div>
-                    <MapsChevron game={game} />
+                    <MapsPin game={game} />
                   </div>
                 ))}
           </li>

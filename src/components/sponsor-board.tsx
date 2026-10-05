@@ -229,9 +229,9 @@ export function SponsorBoard() {
               </p>
               <a
                 href={`mailto:${program.email}?subject=${encodeURIComponent("Yukon Baseball sponsorship")}`}
-                className="mt-2.5 inline-block text-sm text-zinc-400 underline decoration-white/20 underline-offset-4 transition-colors hover:text-white"
+                className="mt-2.5 inline-block text-sm text-zinc-400 transition-colors hover:text-red-400"
               >
-                Email {program.email}
+                Contact Yukon Baseball →
               </a>
             </div>
             <div className="flex items-center gap-4">

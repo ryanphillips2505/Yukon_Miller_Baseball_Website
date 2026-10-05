@@ -1,6 +1,5 @@
 "use client";
 
-import { buttonVariants } from "@/components/ui/button";
 import {
   formatGameDate,
   formatGameScore,
@@ -72,9 +71,14 @@ function GameMatchup({ game, className }: { game: Game; className?: string }) {
   );
 }
 
-function HomeAwayKey() {
+function HomeAwayKey({ className }: { className?: string }) {
   return (
-    <div className="flex flex-wrap items-center gap-x-5 gap-y-1 text-[0.62rem] tracking-[0.18em] uppercase">
+    <div
+      className={cn(
+        "flex flex-wrap items-center gap-x-5 gap-y-1 text-[0.62rem] tracking-[0.18em] uppercase",
+        className,
+      )}
+    >
       <span className="inline-flex items-center gap-2 text-white">
         <span className="size-1.5 rounded-full bg-white" aria-hidden />
         Home · vs
@@ -94,12 +98,12 @@ function BuyTicketsLink({ className }: { className?: string }) {
       target="_blank"
       rel="noreferrer"
       className={cn(
-        buttonVariants(),
-        "h-9 px-4 text-[0.68rem] tracking-[0.16em] uppercase",
+        "inline-flex min-h-9 items-center gap-1.5 text-[0.68rem] font-semibold tracking-[0.16em] text-red-400 uppercase transition-colors hover:text-red-300",
         className,
       )}
     >
       Buy Tickets
+      <span aria-hidden>→</span>
     </a>
   );
 }
@@ -111,6 +115,7 @@ function PhaseHeader({
   collapsible,
   open,
   onToggle,
+  unit = "games",
 }: {
   phase: GamePhase;
   count: number;
@@ -118,6 +123,7 @@ function PhaseHeader({
   collapsible?: boolean;
   open?: boolean;
   onToggle?: () => void;
+  unit?: "games" | "events";
 }) {
   const title = (
     <p className="flex items-baseline gap-3 text-[0.68rem] font-semibold tracking-[0.28em] text-red-400 uppercase">
@@ -131,12 +137,19 @@ function PhaseHeader({
   );
   const meta = (
     <p className="text-[0.62rem] tracking-[0.2em] text-zinc-500 uppercase">
-      {count} {count === 1 ? "Game" : "Games"}
+      {count}{" "}
+      {unit === "events"
+        ? count === 1
+          ? "Event"
+          : "Events"
+        : count === 1
+          ? "Game"
+          : "Games"}
     </p>
   );
   const rowClass = cn(
     "flex w-full items-end justify-between gap-4 border-b border-white/10 pb-2 text-left",
-    compact ? "pt-4" : "pt-6",
+    compact ? "pt-3" : "pt-6",
   );
 
   if (collapsible && onToggle) {
@@ -269,60 +282,60 @@ export function ScheduleBoard() {
         <div
           className={cn(
             shell,
-            "flex flex-col gap-4 pt-4 sm:flex-row sm:items-end sm:justify-between sm:gap-6 sm:pt-5",
+            "flex flex-col gap-4 pt-4 sm:flex-row sm:items-start sm:justify-between sm:gap-8 sm:pt-5",
           )}
         >
           <div>
             <p className="text-[0.68rem] font-semibold tracking-[0.32em] text-red-400 uppercase">
               2027
             </p>
-            <div className="mt-1.5 flex flex-wrap items-end gap-3 sm:gap-4">
-              <h1 className="font-heading text-4xl leading-none tracking-wide text-white uppercase sm:text-6xl">
-                {view === "master" ? "Schedule" : teamLabel(view)}
-              </h1>
-              <BuyTicketsLink className="mb-1 shrink-0" />
-            </div>
+            <h1 className="font-heading mt-1.5 text-4xl leading-none tracking-wide text-white uppercase sm:text-6xl">
+              {view === "master" ? "Schedule" : teamLabel(view)}
+            </h1>
+            <HomeAwayKey className="mt-3" />
           </div>
-          <div className="flex flex-wrap items-end gap-10 sm:justify-end sm:gap-16">
-            {view === "master" ? (
-              <>
-                <StatBlock
-                  value={String(listedGames).padStart(2, "0")}
-                  label="Games"
-                  align="center"
-                />
-                <StatBlock
-                  value={standing.display}
-                  label={teamLabel(standing.team)}
-                  align="center"
-                />
-              </>
-            ) : (
-              <>
-                <StatBlock value={standing.display} label="Record" />
-                <StatBlock
-                  value={String(regularGames)}
-                  label="Regular Season"
-                />
-                <StatBlock value={String(scrimmages)} label="Scrimmages" />
-              </>
-            )}
+          <div className="flex flex-col items-start gap-2.5 sm:items-end sm:pt-7">
+            <div className="flex flex-wrap items-end gap-10 sm:justify-end sm:gap-16">
+              {view === "master" ? (
+                <>
+                  <StatBlock
+                    value={String(listedGames).padStart(2, "0")}
+                    label="Total Events"
+                    align="center"
+                  />
+                  <StatBlock
+                    value={standing.display}
+                    label={teamLabel(standing.team)}
+                    align="center"
+                  />
+                </>
+              ) : (
+                <>
+                  <StatBlock value={standing.display} label="Record" />
+                  <StatBlock
+                    value={String(regularGames)}
+                    label="Regular Season"
+                  />
+                  <StatBlock value={String(scrimmages)} label="Scrimmages" />
+                </>
+              )}
+            </div>
+            <BuyTicketsLink />
           </div>
         </div>
         <div className={cn(shell, "pt-3")}>
-          <HomeAwayKey />
-          <p className="mt-5 max-w-3xl text-sm leading-6 text-zinc-400">
-            Never miss a game. Add the Yukon Baseball schedule to your phone or
-            computer.{" "}
+          <p className="max-w-4xl text-[0.8rem] leading-6 text-zinc-500 sm:text-sm sm:leading-6">
+            Never miss a game. Sync the Yukon Baseball schedule to your
+            calendar.{" "}
             <Link
               href="/schedule/instructions"
-              className="font-semibold tracking-[0.16em] text-red-400 uppercase hover:text-red-300"
+              className="font-semibold tracking-[0.16em] text-red-400 uppercase transition-colors hover:text-red-300"
             >
               Sync Calendar →
             </Link>
           </p>
         </div>
-        <div className={cn(shell, "mt-3 flex gap-0.5 overflow-x-auto")}>
+        <div className={cn(shell, "mt-2.5 flex gap-0.5 overflow-x-auto")}>
           {views.map((item) => (
             <button
               key={item.id}
@@ -407,6 +420,7 @@ function MasterTable({
                 collapsible={day.phase === "scrimmage"}
                 open={scrimmagesOpen}
                 onToggle={onToggleScrimmages}
+                unit={day.phase === "regular" ? "events" : "games"}
               />
             ) : null}
             {hideRow ? null : (

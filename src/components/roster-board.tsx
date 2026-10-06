@@ -61,7 +61,7 @@ export function RosterBoard() {
             </h2>
             <p className="mt-3 max-w-xl text-sm leading-6 text-zinc-400">
               {classFilter === "all" && positionFilter === "all"
-                ? "Alphabetical. Select a player for the bio card. Move up and down the list without leaving the popup."
+                ? "Select a player for the bio card. Move up and down the list without leaving the popup."
                 : `${[
                     classFilter === "all" ? null : `Class of ${classFilter}`,
                     positionFilter === "all" ? null : positionFilter,

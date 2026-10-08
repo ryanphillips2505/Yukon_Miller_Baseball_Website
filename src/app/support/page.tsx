@@ -69,12 +69,6 @@ export default function SupportPage() {
               Email YHRC
             </a>
           </div>
-          <a
-            href={`mailto:${hrc.email}`}
-            className="mt-3 inline-block break-all text-sm text-red-400 hover:text-red-300"
-          >
-            {hrc.email}
-          </a>
           <ul className="mt-5 space-y-2.5">
             {officers.map((officer) => (
               <li

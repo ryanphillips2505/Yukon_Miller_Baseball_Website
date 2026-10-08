@@ -57,7 +57,6 @@ export const navMore = [
   { href: "/fans", label: "Fan info" },
   { href: "/records", label: "Records" },
   { href: "/media", label: "Media" },
-  { href: "/contact", label: "Contact" },
 ] as const;
 
 export const allNav = [...navPrimary, ...navMore];

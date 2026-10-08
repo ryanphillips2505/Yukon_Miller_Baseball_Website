@@ -61,6 +61,11 @@ const nextConfig: NextConfig = {
         destination: "/media",
         permanent: true,
       },
+      {
+        source: "/contact",
+        destination: "/support#contact",
+        permanent: true,
+      },
     ];
   },
   async headers() {

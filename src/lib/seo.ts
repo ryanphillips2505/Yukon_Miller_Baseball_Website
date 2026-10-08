@@ -12,7 +12,6 @@ export const sitemapPaths = [
   "/sponsors",
   "/facilities",
   "/support",
-  "/contact",
   "/recruiting",
   "/camps",
   "/alumni",

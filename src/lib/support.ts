@@ -6,7 +6,7 @@ export const hrc = {
   poBox: "Yukon Home Run Club | PO Box 850433 | Yukon, OK 73085",
   venmo: "@Yukon-Millers-YHRC",
   venmoHref: "https://venmo.com/u/Yukon-Millers-YHRC",
-  about: [nonprofit.mission, nonprofit.relationship, nonprofit.independence],
+  about: [nonprofit.mission, nonprofit.independence],
   howItRuns: [
     {
       title: "Monthly Meetings",
@@ -22,8 +22,12 @@ export const hrc = {
       body: "@Yukon-Millers-YHRC",
     },
   ],
+  memberships: [
+    { name: "Individual Membership", price: "$10" },
+    { name: "Family Membership", price: "$20" },
+  ],
   donations: {
-    title: "Donations & Payments",
+    title: "Membership, Donations & Payments",
     body: "Yukon Home Run Club accepts Venmo, check, or credit card. Credit card payments include a 5% service fee. Checks should be made payable to Yukon Home Run Club.",
   },
   volunteerSignup: {

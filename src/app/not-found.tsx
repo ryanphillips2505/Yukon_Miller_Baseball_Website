@@ -20,7 +20,7 @@ export default function NotFound() {
           Home
         </Link>
         <Link
-          href="/contact"
+          href="/support#contact"
           className={cn(buttonVariants({ variant: "outline" }), "h-10 border-white/15 px-4")}
         >
           Contact

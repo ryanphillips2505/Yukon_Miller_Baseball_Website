@@ -1,13 +1,16 @@
 import { ArticleCardImage } from "@/components/article-card-image";
 import { EmptyState } from "@/components/empty-state";
 import { PageHero } from "@/components/page-hero";
-import { articles } from "@/lib/news";
+import { buttonVariants } from "@/components/ui/button";
+import { archivedArticles, latestArticles, latestNewsLimit } from "@/lib/news";
 import { newsIndexOgImage, ogImageSize } from "@/lib/og-cover";
 import { publicPageSeo } from "@/lib/seo";
+import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
 import Link from "next/link";
 
-const latestPhoto = articles.find((article) => article.image)?.image;
+const latestStories = latestArticles(latestNewsLimit);
+const latestPhoto = latestStories.find((article) => article.image)?.image;
 const newsShareImage = {
   url: newsIndexOgImage,
   width: ogImageSize.width,
@@ -38,14 +41,14 @@ export default function NewsPage() {
     <div>
       <PageHero kicker="Updates" title="News" />
       <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
-        {articles.length === 0 ? (
+        {latestStories.length === 0 ? (
           <EmptyState
             title="No stories posted"
             body="The first update will be a real one. Weather and time changes also live here so parents are not hunting group texts."
           />
         ) : (
           <ul className="space-y-4">
-            {articles.map((article) => (
+            {latestStories.map((article) => (
               <li key={article.slug}>
                 <Link
                   href={`/news/${article.slug}`}
@@ -74,6 +77,18 @@ export default function NewsPage() {
             ))}
           </ul>
         )}
+        {archivedArticles().length > 0 ? (
+          <Link
+            href="/news/archive"
+            className={cn(
+              buttonVariants({ variant: "outline" }),
+              "mt-8 h-10 border-white/15 px-4 uppercase",
+            )}
+          >
+            View news archive
+            <span aria-hidden>→</span>
+          </Link>
+        ) : null}
       </div>
     </div>
   );

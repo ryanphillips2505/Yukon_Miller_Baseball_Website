@@ -111,10 +111,25 @@ export const articles: Article[] = [
   seniors2026Story,
 ];
 
+const reservedSlug = "archive";
+
+if (articles.some((article) => article.slug === reservedSlug)) {
+  throw new Error(
+    `The slug "${reservedSlug}" is reserved for /news/archive and cannot be an article.`,
+  );
+}
+
+export const latestNewsLimit = 8;
+
 export function getArticle(slug: string) {
+  if (slug === reservedSlug) return undefined;
   return articles.find((article) => article.slug === slug);
 }
 
 export function latestArticles(limit = 3) {
   return articles.slice(0, limit);
+}
+
+export function archivedArticles() {
+  return articles.slice(latestNewsLimit);
 }

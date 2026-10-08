@@ -5,6 +5,7 @@ export const CANONICAL_ORIGIN = "https://www.yukonbaseball.com";
 export const sitemapPaths = [
   "/",
   "/news",
+  "/news/archive",
   "/roster",
   "/coaches",
   "/schedule",

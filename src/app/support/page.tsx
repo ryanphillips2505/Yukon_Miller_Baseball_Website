@@ -54,6 +54,8 @@ export default function SupportPage() {
       </header>
 
       <div className="mx-auto max-w-6xl space-y-4 px-4 py-8 sm:space-y-5 sm:px-6 sm:py-10">
+        <OrganizationInfo />
+
         <section
           id="contact"
           className="scroll-mt-20 rounded-2xl border border-white/10 bg-zinc-950 p-5 sm:p-6"
@@ -81,8 +83,6 @@ export default function SupportPage() {
             ))}
           </ul>
         </section>
-
-        <OrganizationInfo />
 
         <section className="rounded-2xl border border-white/10 bg-zinc-950 p-5 sm:p-6">
           <h2 className="font-heading text-2xl tracking-wide text-white uppercase">

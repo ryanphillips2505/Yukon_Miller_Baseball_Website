@@ -41,7 +41,7 @@ export default function SupportPage() {
         >
           <div className="flex items-start justify-between gap-3">
             <h2 className="font-heading text-2xl tracking-wide text-white uppercase">
-              Leadership & Contact
+              Home Run Club
             </h2>
             <a
               href={`mailto:${hrc.email}`}

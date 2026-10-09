@@ -94,9 +94,15 @@ export function SeasonHistoryIndex() {
                   className="group flex flex-col gap-4 py-5 transition-colors hover:bg-white/[0.045] sm:flex-row sm:items-end sm:justify-between sm:py-6"
                 >
                   <div className="min-w-0">
-                    <p className="font-heading text-4xl leading-none tracking-wide text-white uppercase sm:text-5xl">
-                      {season.year}
-                    </p>
+                    <div className="flex items-baseline gap-6 lg:gap-8">
+                      <p className="font-heading text-4xl leading-none tracking-wide text-white uppercase sm:text-5xl">
+                        {season.year}
+                      </p>
+                      <span className="hidden shrink-0 items-center gap-1.5 text-[0.68rem] font-semibold tracking-[0.16em] text-red-400 uppercase transition-colors group-hover:text-red-300 lg:inline-flex">
+                        View results
+                        <span aria-hidden>→</span>
+                      </span>
+                    </div>
                     <p className="mt-2 text-[0.68rem] tracking-[0.22em] text-zinc-500 uppercase">
                       {season.teamLabel}
                     </p>
@@ -104,7 +110,7 @@ export function SeasonHistoryIndex() {
                   <div className="flex flex-wrap items-end gap-x-8 gap-y-3 sm:gap-x-16">
                     <StatBlock value={record.display} label="Record" />
                     <StatBlock value={String(record.games)} label="Games" />
-                    <span className="inline-flex items-center gap-1.5 pb-0.5 text-[0.68rem] font-semibold tracking-[0.16em] text-red-400 uppercase transition-colors group-hover:text-red-300">
+                    <span className="inline-flex items-center gap-1.5 pb-0.5 text-[0.68rem] font-semibold tracking-[0.16em] text-red-400 uppercase transition-colors group-hover:text-red-300 lg:hidden">
                       View results
                       <span aria-hidden>→</span>
                     </span>

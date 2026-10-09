@@ -1,4 +1,4 @@
-export type HistoricalLocation = "home" | "away";
+export type HistoricalLocation = "home" | "away" | "neutral" | "unknown";
 
 export type HistoricalGame = {
   number: number;
@@ -7,6 +7,9 @@ export type HistoricalGame = {
   location: HistoricalLocation;
   yukonScore: number;
   opponentScore: number;
+  district?: boolean;
+  tournament?: string;
+  phase?: "postseason";
 };
 
 export type HistoricalSeason = {

@@ -91,7 +91,7 @@ export function SeasonHistoryIndex() {
               <li key={season.year} className="border-b border-white/8">
                 <Link
                   href={`/schedule/history/${season.year}`}
-                  className="group relative flex flex-col gap-4 py-5 pr-8 transition-colors hover:bg-white/[0.045] sm:flex-row sm:items-end sm:justify-between sm:py-6"
+                  className="group flex flex-col gap-4 py-5 transition-colors hover:bg-white/[0.045] sm:flex-row sm:items-end sm:justify-between sm:py-6"
                 >
                   <div className="min-w-0">
                     <p className="font-heading text-4xl leading-none tracking-wide text-white uppercase sm:text-5xl">
@@ -101,16 +101,14 @@ export function SeasonHistoryIndex() {
                       {season.teamLabel}
                     </p>
                   </div>
-                  <div className="flex gap-8 sm:gap-16">
+                  <div className="flex flex-wrap items-end gap-x-8 gap-y-3 sm:gap-x-16">
                     <StatBlock value={record.display} label="Record" />
                     <StatBlock value={String(record.games)} label="Games" />
+                    <span className="inline-flex items-center gap-1.5 pb-0.5 text-[0.68rem] font-semibold tracking-[0.16em] text-red-400 uppercase transition-colors group-hover:text-red-300">
+                      View results
+                      <span aria-hidden>→</span>
+                    </span>
                   </div>
-                  <span
-                    aria-hidden
-                    className="absolute top-1/2 right-0 -translate-y-1/2 text-sm tracking-normal text-zinc-400 transition-colors group-hover:text-white"
-                  >
-                    →
-                  </span>
                 </Link>
               </li>
             );

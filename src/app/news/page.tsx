@@ -85,7 +85,7 @@ export default function NewsPage() {
               "mt-8 h-10 border-white/15 px-4 uppercase",
             )}
           >
-            View news archive
+            View more news
             <span aria-hidden>→</span>
           </Link>
         ) : null}

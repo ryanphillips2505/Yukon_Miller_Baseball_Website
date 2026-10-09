@@ -16,44 +16,49 @@ export default function SupportPage() {
   return (
     <div>
       <header className="border-b border-white/8 bg-black">
-        <div className="mx-auto grid max-w-6xl items-start gap-8 px-4 py-10 sm:px-6 sm:py-12 lg:grid-cols-[minmax(0,1.15fr)_minmax(20rem,0.85fr)] lg:gap-10">
-          <div>
-            <p className="text-[0.7rem] font-semibold tracking-[0.24em] text-red-400 uppercase">
-              Boosters
-            </p>
-            <h1 className="font-heading mt-2 text-4xl tracking-wide text-white uppercase sm:text-5xl">
-              Home Run Club
-            </h1>
-            {hrc.about.map((paragraph) => (
-              <p
-                key={paragraph}
-                className="mt-4 max-w-2xl text-base leading-7 text-zinc-400"
-              >
-                {paragraph}
-              </p>
-            ))}
-          </div>
-          <section className="rounded-2xl border border-white/10 bg-zinc-950 p-5 sm:p-6">
-            <h2 className="font-heading text-2xl tracking-wide text-white uppercase">
-              Volunteer Opportunities
-            </h2>
-            <p className="mt-4 text-sm leading-6 text-zinc-400">
-              Varsity, JV Red, and JV White each need gate, concession, and field
-              help. Pick a shift on the board.
-            </p>
-            <a
-              href={hrc.volunteerSignup.href}
-              target="_blank"
-              rel="noreferrer"
-              className="mt-5 inline-block font-heading text-xl tracking-wide text-red-400 uppercase underline decoration-red-400 decoration-2 underline-offset-8 transition-colors hover:text-red-300 hover:decoration-red-300"
+        <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-12">
+          <p className="text-[0.7rem] font-semibold tracking-[0.24em] text-red-400 uppercase">
+            Boosters
+          </p>
+          <h1 className="font-heading mt-2 text-4xl tracking-wide text-white uppercase sm:text-5xl">
+            Home Run Club
+          </h1>
+          {hrc.about.map((paragraph) => (
+            <p
+              key={paragraph}
+              className="mt-4 max-w-2xl text-base leading-7 text-zinc-400"
             >
-              {hrc.volunteerSignup.label}
-            </a>
-          </section>
+              {paragraph}
+            </p>
+          ))}
         </div>
       </header>
 
       <div className="mx-auto max-w-6xl space-y-4 px-4 py-8 sm:space-y-5 sm:px-6 sm:py-10">
+        <section className="rounded-2xl border border-white/10 bg-zinc-950 p-5 sm:p-6">
+          <h2 className="font-heading text-2xl tracking-wide text-white uppercase">
+            Volunteer Opportunities
+          </h2>
+          <p className="mt-4 max-w-2xl text-sm leading-6 text-zinc-400">
+            Yukon Baseball needs volunteers through the season. Current signups
+            are listed here.
+          </p>
+          <ul className="mt-5 space-y-4">
+            {[hrc.volunteerSignup].map((opportunity) => (
+              <li key={opportunity.href}>
+                <a
+                  href={opportunity.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-block font-heading text-xl tracking-wide text-red-400 uppercase underline decoration-red-400 decoration-2 underline-offset-8 transition-colors hover:text-red-300 hover:decoration-red-300"
+                >
+                  {opportunity.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+
         <OrganizationInfo />
 
         <section
@@ -62,7 +67,7 @@ export default function SupportPage() {
         >
           <div className="flex items-start justify-between gap-3">
             <h2 className="font-heading text-2xl tracking-wide text-white uppercase">
-              Home Run Club Officers
+              Leadership & Contact
             </h2>
             <a
               href={`mailto:${hrc.email}`}

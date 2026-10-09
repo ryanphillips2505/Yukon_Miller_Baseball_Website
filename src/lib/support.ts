@@ -1,12 +1,12 @@
-import { nonprofit } from "@/lib/nonprofit";
-
 export const hrc = {
   name: "Home Run Club",
   email: "yukonmillerbaseball@gmail.com",
   poBox: "Yukon Home Run Club | PO Box 850433 | Yukon, OK 73085",
   venmo: "@Yukon-Millers-YHRC",
   venmoHref: "https://venmo.com/u/Yukon-Millers-YHRC",
-  about: [nonprofit.mission, nonprofit.independence],
+  about: [
+    "YUKON HS HOME RUN CLUB is an independent 501(c)(3) nonprofit organization dedicated to supporting Yukon Baseball through fundraising, sponsorships, and community partnerships. Our goal is to provide additional resources, opportunities, and experiences that help support the players and strengthen the baseball program.",
+  ],
   howItRuns: [
     {
       title: "Monthly Meetings",

@@ -12,17 +12,17 @@ const newsShareImage = {
   url: newsIndexOgImage,
   width: ogImageSize.width,
   height: ogImageSize.height,
-  alt: "Yukon Miller Baseball news archive",
+  alt: "More Yukon Miller Baseball news",
 };
 
 export const metadata: Metadata = {
-  title: "News archive",
-  description: "Older Yukon Miller Baseball stories, commits, and program updates.",
+  title: "More news",
+  description: "More Yukon Miller Baseball stories, commits, and program updates.",
   ...publicPageSeo("/news/archive"),
   openGraph: {
     ...publicPageSeo("/news/archive").openGraph,
-    title: "News archive",
-    description: "Older Yukon Miller Baseball stories, commits, and program updates.",
+    title: "More news",
+    description: "More Yukon Miller Baseball stories, commits, and program updates.",
     images: [newsShareImage],
   },
   twitter: {
@@ -38,8 +38,8 @@ export default function NewsArchivePage() {
     <div>
       <PageHero
         kicker="Updates"
-        title="News archive"
-        lede="Older stories stay here. The news page keeps the latest eight."
+        title="More news"
+        lede="More Yukon Miller Baseball stories, commits, and program updates."
       />
       <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
         {stories.length === 0 ? (

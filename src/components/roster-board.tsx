@@ -51,7 +51,7 @@ export function RosterBoard() {
       <header className="relative overflow-hidden border-b border-white/10 bg-[linear-gradient(180deg,#1a0a0d_0%,#0a0a0c_100%)]">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_12%_0%,rgba(200,16,46,0.28),transparent_42%)]" />
         <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#c8102e] to-transparent" />
-        <div className="relative flex flex-col gap-5 px-5 py-6 sm:flex-row sm:items-end sm:justify-between sm:px-7">
+        <div className="relative flex flex-col gap-4 px-5 py-4 sm:flex-row sm:items-end sm:justify-between sm:px-7 sm:py-5">
           <div>
             <p className="text-[0.68rem] font-semibold tracking-[0.32em] text-red-400 uppercase">
               Yukon Miller Baseball
@@ -59,16 +59,16 @@ export function RosterBoard() {
             <h2 className="font-heading mt-2 text-4xl leading-none tracking-wide text-white uppercase sm:text-5xl">
               Program Roster
             </h2>
-            <p className="mt-3 max-w-xl text-sm leading-6 text-zinc-400">
-              {classFilter === "all" && positionFilter === "all"
-                ? "Select a player for the bio card. Move up and down the list without leaving the popup."
-                : `${[
-                    classFilter === "all" ? null : `Class of ${classFilter}`,
-                    positionFilter === "all" ? null : positionFilter,
-                  ]
-                    .filter(Boolean)
-                    .join(" · ")}, listed A–Z. Select a player for the bio card.`}
-            </p>
+            {classFilter !== "all" || positionFilter !== "all" ? (
+              <p className="mt-3 max-w-xl text-sm leading-6 text-zinc-400">
+                {`${[
+                  classFilter === "all" ? null : `Class of ${classFilter}`,
+                  positionFilter === "all" ? null : positionFilter,
+                ]
+                  .filter(Boolean)
+                  .join(" · ")}, listed A–Z. Select a player for the bio card.`}
+              </p>
+            ) : null}
           </div>
           <div>
             <p className="font-heading text-4xl leading-none text-white">

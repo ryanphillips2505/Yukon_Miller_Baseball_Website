@@ -11,9 +11,10 @@ export default function RosterPage() {
       <PageHero
         kicker="Players"
         title="Roster"
-        lede="The program roster, listed A–Z. Use the class and position menus next to Player to narrow the list. Select a player for name, class, position, bats, throws, and photo."
+        lede="Browse the Yukon Miller Baseball roster by class or position. Select a player to view their profile."
+        className="pb-5 sm:pb-6"
       />
-      <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
+      <div className="mx-auto max-w-6xl px-4 pt-3 pb-10 sm:px-6 sm:pt-4">
         <RosterBoard />
       </div>
     </div>

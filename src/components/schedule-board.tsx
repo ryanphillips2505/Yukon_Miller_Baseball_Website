@@ -409,7 +409,7 @@ export function ScheduleBoard() {
             href="/schedule/history"
             className="inline-flex shrink-0 items-center gap-1.5 self-end py-2 text-[0.68rem] font-medium tracking-[0.16em] text-red-400 uppercase transition-colors hover:text-red-300 sm:self-auto sm:text-[0.72rem]"
           >
-            Season history
+            Past seasons
             <span aria-hidden>→</span>
           </Link>
         </div>

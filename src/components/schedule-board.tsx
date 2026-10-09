@@ -385,24 +385,33 @@ export function ScheduleBoard() {
         <div
           className={cn(
             shell,
-            "mt-2.5 flex justify-between gap-1 overflow-x-auto sm:justify-start sm:gap-0.5",
+            "mt-2.5 flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between",
           )}
         >
-          {views.map((item) => (
-            <button
-              key={item.id}
-              type="button"
-              onClick={() => setView(item.id)}
-              className={cn(
-                "relative shrink-0 px-1 py-2 text-[0.68rem] font-medium tracking-[0.16em] uppercase transition-colors sm:px-2.5 sm:text-[0.72rem]",
-                view === item.id ? "text-white" : "text-zinc-500 hover:text-white",
-                view === item.id &&
-                  "after:absolute after:right-1 after:bottom-0 after:left-1 after:h-0.5 after:bg-[#c8102e] sm:after:right-2.5 sm:after:left-2.5",
-              )}
-            >
-              {item.label}
-            </button>
-          ))}
+          <div className="flex justify-between gap-1 overflow-x-auto sm:justify-start sm:gap-0.5">
+            {views.map((item) => (
+              <button
+                key={item.id}
+                type="button"
+                onClick={() => setView(item.id)}
+                className={cn(
+                  "relative shrink-0 px-1 py-2 text-[0.68rem] font-medium tracking-[0.16em] uppercase transition-colors sm:px-2.5 sm:text-[0.72rem]",
+                  view === item.id ? "text-white" : "text-zinc-500 hover:text-white",
+                  view === item.id &&
+                    "after:absolute after:right-1 after:bottom-0 after:left-1 after:h-0.5 after:bg-[#c8102e] sm:after:right-2.5 sm:after:left-2.5",
+                )}
+              >
+                {item.label}
+              </button>
+            ))}
+          </div>
+          <Link
+            href="/schedule/history"
+            className="inline-flex shrink-0 items-center gap-1.5 self-end py-2 text-[0.68rem] font-medium tracking-[0.16em] text-red-400 uppercase transition-colors hover:text-red-300 sm:self-auto sm:text-[0.72rem]"
+          >
+            Season history
+            <span aria-hidden>→</span>
+          </Link>
         </div>
       </header>
 

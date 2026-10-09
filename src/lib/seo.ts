@@ -10,6 +10,7 @@ export const sitemapPaths = [
   "/coaches",
   "/schedule",
   "/schedule/instructions",
+  "/schedule/history",
   "/sponsors",
   "/facilities",
   "/support",

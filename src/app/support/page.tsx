@@ -40,10 +40,10 @@ export default function SupportPage() {
             Volunteer Opportunities
           </h2>
           <p className="mt-4 max-w-2xl text-sm leading-6 text-zinc-400">
-            Yukon Baseball needs volunteers through the season.
+            Yukon Baseball needs volunteers through the season.{" "}
             {hrc.volunteerSignups.length > 0
-              ? " Current signups are listed here."
-              : null}
+              ? "Current signups are listed here."
+              : "Signup links will be posted before the spring season."}
           </p>
           {hrc.volunteerSignups.length > 0 ? (
             <ul className="mt-5 space-y-4">

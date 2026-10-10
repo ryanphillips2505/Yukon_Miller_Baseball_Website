@@ -2,7 +2,6 @@ import { PageHero } from "@/components/page-hero";
 import { fields } from "@/lib/facilities";
 import { publicPageSeo } from "@/lib/seo";
 import { program, teams } from "@/lib/site";
-import { hrc } from "@/lib/support";
 import type { Metadata } from "next";
 import Link from "next/link";
 
@@ -78,14 +77,6 @@ export default function FansPage() {
             <p className="mt-2 text-sm leading-6 text-zinc-400">
               Gate, concession, and field work run through YUKON HS HOME RUN CLUB.
             </p>
-            <a
-              href={hrc.volunteerSignup.href}
-              target="_blank"
-              rel="noreferrer"
-              className="mt-4 inline-block font-heading text-lg tracking-wide text-red-400 uppercase underline decoration-red-400 decoration-2 underline-offset-6 transition-colors hover:text-red-300 hover:decoration-red-300"
-            >
-              {hrc.volunteerSignup.label}
-            </a>
           </div>
           <div className="rounded-2xl border border-white/10 bg-zinc-950 p-5">
             <h3 className="font-heading text-lg tracking-wide text-white uppercase">

@@ -40,23 +40,27 @@ export default function SupportPage() {
             Volunteer Opportunities
           </h2>
           <p className="mt-4 max-w-2xl text-sm leading-6 text-zinc-400">
-            Yukon Baseball needs volunteers through the season. Current signups
-            are listed here.
+            Yukon Baseball needs volunteers through the season.
+            {hrc.volunteerSignups.length > 0
+              ? " Current signups are listed here."
+              : null}
           </p>
-          <ul className="mt-5 space-y-4">
-            {[hrc.volunteerSignup].map((opportunity) => (
-              <li key={opportunity.href}>
-                <a
-                  href={opportunity.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-block font-heading text-xl tracking-wide text-red-400 uppercase underline decoration-red-400 decoration-2 underline-offset-8 transition-colors hover:text-red-300 hover:decoration-red-300"
-                >
-                  {opportunity.label}
-                </a>
-              </li>
-            ))}
-          </ul>
+          {hrc.volunteerSignups.length > 0 ? (
+            <ul className="mt-5 space-y-4">
+              {hrc.volunteerSignups.map((opportunity) => (
+                <li key={opportunity.href}>
+                  <a
+                    href={opportunity.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-block font-heading text-xl tracking-wide text-red-400 uppercase underline decoration-red-400 decoration-2 underline-offset-8 transition-colors hover:text-red-300 hover:decoration-red-300"
+                  >
+                    {opportunity.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          ) : null}
         </section>
 
         <OrganizationInfo />

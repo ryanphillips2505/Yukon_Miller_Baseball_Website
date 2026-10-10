@@ -30,10 +30,7 @@ export const hrc = {
     title: "Membership, Donations & Payments",
     body: "Yukon Home Run Club accepts Venmo, check, or credit card. Credit card payments include a 5% service fee. Checks should be made payable to Yukon Home Run Club.",
   },
-  volunteerSignup: {
-    href: "https://signup.com/go/BHtuvug",
-    label: "Volunteer For Fall State",
-  },
+  volunteerSignups: [] as { href: string; label: string }[],
 };
 
 export const officers = [

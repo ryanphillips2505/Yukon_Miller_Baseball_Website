@@ -1,8 +1,9 @@
 import { MinutesLogin } from "@/components/minutes-login";
-import { MinutesVault } from "@/components/minutes-vault";
+import { MinutesSession } from "@/components/minutes-session";
 import { PageHero } from "@/components/page-hero";
-import { minutesRole } from "@/lib/minutes-auth";
+import { minutesAccess } from "@/lib/minutes-auth";
 import { listMinutesLibrary } from "@/lib/minutes-store";
+import { MINUTES_EXPIRED_MESSAGE } from "@/lib/minutes-session";
 import type { Metadata } from "next";
 
 export const dynamic = "force-dynamic";
@@ -13,10 +14,11 @@ export const metadata: Metadata = {
 };
 
 export default async function MinutesPage() {
-  const role = await minutesRole();
-  const library = role
-    ? await listMinutesLibrary()
-    : { files: [], unavailable: false };
+  const access = await minutesAccess();
+  const library =
+    access.state === "active"
+      ? await listMinutesLibrary()
+      : { files: [], unavailable: false };
 
   return (
     <div>
@@ -26,14 +28,17 @@ export default async function MinutesPage() {
         lede="Password-protected minutes for YUKON HS HOME RUN CLUB officers and coaching staff."
       />
       <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 sm:py-10">
-        {role ? (
-          <MinutesVault
+        {access.state === "active" ? (
+          <MinutesSession
+            lastActivity={access.lastActivity}
             initialFiles={library.files}
-            canAdmin={role === "admin"}
+            canAdmin={access.role === "admin"}
             documentsUnavailable={library.unavailable}
           />
         ) : (
-          <MinutesLogin />
+          <MinutesLogin
+            notice={access.state === "expired" ? MINUTES_EXPIRED_MESSAGE : undefined}
+          />
         )}
       </div>
     </div>

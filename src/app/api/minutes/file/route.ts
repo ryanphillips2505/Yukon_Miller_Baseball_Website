@@ -1,4 +1,4 @@
-import { minutesAdmin, minutesAuthed } from "@/lib/minutes-auth";
+import { requireMinutes } from "@/lib/minutes-auth";
 import {
   createMinutesDownloadUrl,
   deleteMinutes,
@@ -52,9 +52,8 @@ async function inlinePdf(name: string) {
 }
 
 export async function GET(request: Request) {
-  if (!(await minutesAuthed())) {
-    return NextResponse.json({ error: "Sign in required." }, { status: 401 });
-  }
+  const { response } = await requireMinutes();
+  if (response) return response;
 
   const name = fileNameFrom(request);
   if (!name) {
@@ -99,15 +98,12 @@ export async function GET(request: Request) {
 }
 
 export async function DELETE(request: Request) {
-  if (!(await minutesAuthed())) {
-    return NextResponse.json({ error: "Sign in required." }, { status: 401 });
-  }
-  if (!(await minutesAdmin())) {
-    return NextResponse.json(
-      { error: "Admin sign-in required to remove files." },
-      { status: 403 },
-    );
-  }
+  const { response } = await requireMinutes({
+    admin: true,
+    touch: true,
+    adminError: "Admin sign-in required to remove files.",
+  });
+  if (response) return response;
 
   const name = fileNameFrom(request);
   if (!name) {

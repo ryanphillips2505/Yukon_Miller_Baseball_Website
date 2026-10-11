@@ -1,4 +1,4 @@
-import { minutesAdmin, minutesAuthed } from "@/lib/minutes-auth";
+import { requireMinutes } from "@/lib/minutes-auth";
 import {
   createMinutesUploadUrl,
   MAX_MINUTES_BYTES,
@@ -11,15 +11,12 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 export async function POST(request: Request) {
-  if (!(await minutesAuthed())) {
-    return NextResponse.json({ error: "Sign in required." }, { status: 401 });
-  }
-  if (!(await minutesAdmin())) {
-    return NextResponse.json(
-      { error: "Admin sign-in required to upload." },
-      { status: 403 },
-    );
-  }
+  const { response } = await requireMinutes({
+    admin: true,
+    touch: true,
+    adminError: "Admin sign-in required to upload.",
+  });
+  if (response) return response;
   if (!minutesUsesBlob()) {
     return NextResponse.json(
       { error: "Direct upload is not available here." },

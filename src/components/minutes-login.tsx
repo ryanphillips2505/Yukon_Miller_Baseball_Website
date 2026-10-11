@@ -1,14 +1,35 @@
 "use client";
 
 import { buttonVariants } from "@/components/ui/button";
+import { MINUTES_EXPIRED_NOTICE_KEY } from "@/lib/minutes-session";
 import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, useSyncExternalStore, type FormEvent } from "react";
 
-export function MinutesLogin() {
+function storedExpiryNotice() {
+  return sessionStorage.getItem(MINUTES_EXPIRED_NOTICE_KEY) ?? "";
+}
+
+function useStoredExpiryNotice() {
+  return useSyncExternalStore(
+    () => () => {},
+    storedExpiryNotice,
+    () => "",
+  );
+}
+
+export function MinutesLogin({ notice }: { notice?: string }) {
   const router = useRouter();
+  const storedNotice = useStoredExpiryNotice();
+  const [dismissed, setDismissed] = useState(false);
   const [error, setError] = useState("");
   const [pending, setPending] = useState(false);
+  const sessionNotice = dismissed ? "" : notice || storedNotice;
+
+  useEffect(() => {
+    if (!sessionNotice) return;
+    void fetch("/api/minutes/auth", { method: "DELETE" });
+  }, [sessionNotice]);
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -29,6 +50,8 @@ export function MinutesLogin() {
         setError(data.error || "Wrong password.");
         return;
       }
+      sessionStorage.removeItem(MINUTES_EXPIRED_NOTICE_KEY);
+      setDismissed(true);
       router.refresh();
     } catch {
       setError("Could not sign in. Try again.");
@@ -60,6 +83,11 @@ export function MinutesLogin() {
           required
         />
       </label>
+      {sessionNotice ? (
+        <p className="mt-4 text-sm leading-6 text-amber-200" role="status">
+          {sessionNotice}
+        </p>
+      ) : null}
       {error ? <p className="mt-3 text-sm text-red-400">{error}</p> : null}
       <button
         type="submit"

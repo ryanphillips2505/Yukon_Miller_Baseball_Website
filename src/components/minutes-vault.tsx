@@ -1,6 +1,7 @@
 "use client";
 
 import { MinutesPdfViewer, minutesFileUrl } from "@/components/minutes-pdf-viewer";
+import { publishMinutesLock } from "@/lib/minutes-session";
 import { buttonVariants } from "@/components/ui/button";
 import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import { cn } from "@/lib/utils";
@@ -90,10 +91,12 @@ export function MinutesVault({
   initialFiles,
   canAdmin,
   documentsUnavailable = false,
+  onSessionExpired,
 }: {
   initialFiles: MinutesFile[];
   canAdmin: boolean;
   documentsUnavailable?: boolean;
+  onSessionExpired?: () => void;
 }) {
   const router = useRouter();
   const [files, setFiles] = useState(initialFiles);
@@ -114,8 +117,12 @@ export function MinutesVault({
 
   async function refreshFiles() {
     const response = await fetch("/api/minutes");
-    let data: { files?: MinutesFile[]; unavailable?: boolean; error?: string } =
-      {};
+    let data: {
+      files?: MinutesFile[];
+      unavailable?: boolean;
+      error?: string;
+      expired?: boolean;
+    } = {};
     try {
       data = (await response.json()) as typeof data;
     } catch {
@@ -124,6 +131,10 @@ export function MinutesVault({
       return;
     }
     if (response.status === 401) {
+      if (data.expired) {
+        onSessionExpired?.();
+        return;
+      }
       throw new Error("Sign in required.");
     }
     if (!response.ok || data.unavailable) {
@@ -144,7 +155,12 @@ export function MinutesVault({
       url?: string;
       contentType?: string;
       error?: string;
+      expired?: boolean;
     };
+    if (started.status === 401 && startData.expired) {
+      onSessionExpired?.();
+      return true;
+    }
     if (started.status === 503) return false;
     if (!started.ok || !startData.url) {
       throw new Error(startData.error || "Upload failed.");
@@ -177,7 +193,12 @@ export function MinutesVault({
       files?: MinutesFile[];
       unavailable?: boolean;
       error?: string;
+      expired?: boolean;
     };
+    if (response.status === 401 && data.expired) {
+      onSessionExpired?.();
+      return;
+    }
     if (!response.ok) {
       throw new Error(data.error || "Upload failed.");
     }
@@ -214,7 +235,11 @@ export function MinutesVault({
         { method: "DELETE" },
       );
       if (!response.ok) {
-        const data = (await response.json()) as { error?: string };
+        const data = (await response.json()) as { error?: string; expired?: boolean };
+        if (response.status === 401 && data.expired) {
+          onSessionExpired?.();
+          return;
+        }
         setError(data.error || "Could not remove that file.");
         return;
       }
@@ -227,6 +252,7 @@ export function MinutesVault({
   }
 
   async function onLock() {
+    publishMinutesLock();
     await fetch("/api/minutes/auth", { method: "DELETE" });
     router.refresh();
   }

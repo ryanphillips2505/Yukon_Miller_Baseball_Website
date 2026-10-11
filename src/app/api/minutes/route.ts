@@ -1,4 +1,4 @@
-import { minutesAdmin, minutesAuthed } from "@/lib/minutes-auth";
+import { requireMinutes } from "@/lib/minutes-auth";
 import {
   isAllowedDocument,
   listMinutesLibrary,
@@ -13,9 +13,8 @@ export const dynamic = "force-dynamic";
 export const maxDuration = 60;
 
 export async function GET() {
-  if (!(await minutesAuthed())) {
-    return NextResponse.json({ error: "Sign in required." }, { status: 401 });
-  }
+  const { response } = await requireMinutes();
+  if (response) return response;
 
   try {
     const library = await listMinutesLibrary();
@@ -29,15 +28,12 @@ export async function GET() {
 }
 
 export async function POST(request: Request) {
-  if (!(await minutesAuthed())) {
-    return NextResponse.json({ error: "Sign in required." }, { status: 401 });
-  }
-  if (!(await minutesAdmin())) {
-    return NextResponse.json(
-      { error: "Admin sign-in required to upload." },
-      { status: 403 },
-    );
-  }
+  const { response } = await requireMinutes({
+    admin: true,
+    touch: true,
+    adminError: "Admin sign-in required to upload.",
+  });
+  if (response) return response;
 
   const form = await request.formData();
   const file = form.get("file");

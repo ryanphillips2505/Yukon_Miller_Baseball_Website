@@ -1,7 +1,7 @@
 import { minutesAdmin, minutesAuthed } from "@/lib/minutes-auth";
 import {
   isAllowedDocument,
-  listMinutes,
+  listMinutesLibrary,
   MAX_MINUTES_BYTES,
   safeMinutesName,
   saveMinutes,
@@ -17,8 +17,15 @@ export async function GET() {
     return NextResponse.json({ error: "Sign in required." }, { status: 401 });
   }
 
-  const files = await listMinutes();
-  return NextResponse.json({ files });
+  try {
+    const library = await listMinutesLibrary();
+    return NextResponse.json({
+      files: library.files,
+      unavailable: library.unavailable,
+    });
+  } catch {
+    return NextResponse.json({ files: [], unavailable: true });
+  }
 }
 
 export async function POST(request: Request) {
@@ -68,6 +75,14 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: message }, { status: 500 });
   }
 
-  const files = await listMinutes();
-  return NextResponse.json({ ok: true, files });
+  try {
+    const library = await listMinutesLibrary();
+    return NextResponse.json({
+      ok: true,
+      files: library.files,
+      unavailable: library.unavailable,
+    });
+  } catch {
+    return NextResponse.json({ ok: true, files: [], unavailable: true });
+  }
 }

@@ -2,7 +2,7 @@ import { MinutesLogin } from "@/components/minutes-login";
 import { MinutesVault } from "@/components/minutes-vault";
 import { PageHero } from "@/components/page-hero";
 import { minutesRole } from "@/lib/minutes-auth";
-import { listMinutes } from "@/lib/minutes-store";
+import { listMinutesLibrary } from "@/lib/minutes-store";
 import type { Metadata } from "next";
 
 export const dynamic = "force-dynamic";
@@ -14,7 +14,9 @@ export const metadata: Metadata = {
 
 export default async function MinutesPage() {
   const role = await minutesRole();
-  const files = role ? await listMinutes() : [];
+  const library = role
+    ? await listMinutesLibrary()
+    : { files: [], unavailable: false };
 
   return (
     <div>
@@ -25,7 +27,11 @@ export default async function MinutesPage() {
       />
       <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 sm:py-10">
         {role ? (
-          <MinutesVault initialFiles={files} canAdmin={role === "admin"} />
+          <MinutesVault
+            initialFiles={library.files}
+            canAdmin={role === "admin"}
+            documentsUnavailable={library.unavailable}
+          />
         ) : (
           <MinutesLogin />
         )}

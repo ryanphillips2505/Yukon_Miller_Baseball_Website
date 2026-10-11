@@ -1,8 +1,10 @@
 import "server-only";
 
 import { del, get, issueSignedToken, list, presignUrl, put } from "@vercel/blob";
+import { createReadStream } from "fs";
 import { mkdir, readdir, readFile, stat, unlink, writeFile } from "fs/promises";
 import path from "path";
+import { Readable } from "stream";
 import { ensureMinutesBlobStoreId } from "@/lib/minutes-blob";
 import {
   deleteGithubMinutes,
@@ -33,10 +35,16 @@ function localDir() {
 
 export function minutesUsesBlob() {
   return Boolean(
-    process.env.BLOB_READ_WRITE_TOKEN ||
-      process.env.BLOB_STORE_ID ||
-      (process.env.VERCEL && process.env.VERCEL_OIDC_TOKEN),
+    process.env.BLOB_READ_WRITE_TOKEN?.trim() ||
+      process.env.BLOB_STORE_ID?.trim(),
   );
+}
+
+async function blobAuth() {
+  const token = process.env.BLOB_READ_WRITE_TOKEN?.trim();
+  if (token) return { token };
+  const storeId = await ensureMinutesBlobStoreId();
+  return storeId ? { storeId } : {};
 }
 
 export function minutesBlobPath(name: string) {
@@ -105,13 +113,8 @@ async function listLocal(): Promise<MinutesFile[]> {
   return files.sort((a, b) => b.uploadedAt.localeCompare(a.uploadedAt));
 }
 
-async function blobOptions() {
-  const storeId = await ensureMinutesBlobStoreId();
-  return storeId ? { storeId } : {};
-}
-
 export async function createMinutesUploadUrl(name: string) {
-  const storeId = await ensureMinutesBlobStoreId();
+  const auth = await blobAuth();
   const pathname = minutesBlobPath(name);
   const token = await issueSignedToken({
     pathname,
@@ -119,7 +122,7 @@ export async function createMinutesUploadUrl(name: string) {
     allowedContentTypes: MINUTES_CONTENT_TYPES,
     maximumSizeInBytes: MAX_MINUTES_BYTES,
     validUntil: Date.now() + 15 * 60 * 1000,
-    ...(storeId ? { storeId } : {}),
+    ...auth,
   });
   const { presignedUrl } = await presignUrl(token, {
     operation: "put",
@@ -131,6 +134,7 @@ export async function createMinutesUploadUrl(name: string) {
     allowOverwrite: true,
     cacheControlMaxAge: 60,
     validUntil: Date.now() + 15 * 60 * 1000,
+    ...auth,
   });
   return {
     url: presignedUrl,
@@ -140,13 +144,13 @@ export async function createMinutesUploadUrl(name: string) {
 }
 
 export async function createMinutesDownloadUrl(name: string) {
-  const storeId = await ensureMinutesBlobStoreId();
+  const auth = await blobAuth();
   const pathname = minutesBlobPath(name);
   const token = await issueSignedToken({
     pathname,
     operations: ["get"],
     validUntil: Date.now() + 5 * 60 * 1000,
-    ...(storeId ? { storeId } : {}),
+    ...auth,
   });
   const { presignedUrl } = await presignUrl(token, {
     operation: "get",
@@ -154,12 +158,13 @@ export async function createMinutesDownloadUrl(name: string) {
     access: "private",
     useCache: false,
     validUntil: Date.now() + 5 * 60 * 1000,
+    ...auth,
   });
   return presignedUrl;
 }
 
 async function listBlob(): Promise<MinutesFile[]> {
-  const result = await list({ prefix: BLOB_PREFIX, ...(await blobOptions()) });
+  const result = await list({ prefix: BLOB_PREFIX, ...(await blobAuth()) });
   return result.blobs
     .map((blob) => ({
       name: blob.pathname.slice(BLOB_PREFIX.length),
@@ -173,17 +178,25 @@ async function listBlob(): Promise<MinutesFile[]> {
     .sort((a, b) => b.uploadedAt.localeCompare(a.uploadedAt));
 }
 
-export async function listMinutes(): Promise<MinutesFile[]> {
-  if (minutesUsesBlob()) {
-    try {
-      return await listBlob();
-    } catch {
-      if (minutesUsesGithub()) return listGithubMinutes();
-      throw new Error("Could not load minutes.");
+export async function listMinutesLibrary(): Promise<{
+  files: MinutesFile[];
+  unavailable: boolean;
+}> {
+  try {
+    if (minutesUsesBlob()) {
+      try {
+        return { files: await listBlob(), unavailable: false };
+      } catch {
+        if (!minutesUsesGithub()) return { files: [], unavailable: true };
+      }
     }
+    if (minutesUsesGithub()) {
+      return { files: await listGithubMinutes(), unavailable: false };
+    }
+    return { files: await listLocal(), unavailable: false };
+  } catch {
+    return { files: [], unavailable: true };
   }
-  if (minutesUsesGithub()) return listGithubMinutes();
-  return listLocal();
 }
 
 export async function saveMinutes(name: string, bytes: Uint8Array) {
@@ -195,16 +208,15 @@ export async function saveMinutes(name: string, bytes: Uint8Array) {
         allowOverwrite: true,
         contentType: contentTypeForMinutes(name),
         cacheControlMaxAge: 60,
-        ...(await blobOptions()),
+        ...(await blobAuth()),
       });
       return;
-    } catch (error) {
+    } catch {
       if (minutesUsesGithub()) {
         await saveGithubMinutes(name, bytes);
         return;
       }
-      const detail = error instanceof Error ? error.message : "storage error";
-      throw new Error(`Could not save that file (${detail}).`);
+      throw new Error("Could not save that file.");
     }
   }
 
@@ -222,12 +234,45 @@ export async function saveMinutes(name: string, bytes: Uint8Array) {
   await writeFile(path.join(dir, name), bytes);
 }
 
+export async function openMinutes(name: string) {
+  if (minutesUsesBlob()) {
+    try {
+      const result = await get(minutesBlobPath(name), {
+        access: "private",
+        ...(await blobAuth()),
+      });
+      if (result && result.statusCode === 200 && result.stream) {
+        return { body: result.stream, size: result.blob.size };
+      }
+    } catch {
+      // Fall through to GitHub or local.
+    }
+  }
+
+  if (minutesUsesGithub()) {
+    const bytes = await readGithubMinutes(name);
+    if (!bytes) return null;
+    return { body: Buffer.from(bytes), size: bytes.byteLength };
+  }
+
+  try {
+    const filePath = path.join(localDir(), name);
+    const info = await stat(filePath);
+    return {
+      body: Readable.toWeb(createReadStream(filePath)) as ReadableStream<Uint8Array>,
+      size: info.size,
+    };
+  } catch {
+    return null;
+  }
+}
+
 export async function readMinutes(name: string) {
   if (minutesUsesBlob()) {
     try {
       const result = await get(minutesBlobPath(name), {
         access: "private",
-        ...(await blobOptions()),
+        ...(await blobAuth()),
       });
       if (result && result.statusCode === 200) {
         const chunks: Uint8Array[] = [];
@@ -264,7 +309,7 @@ export async function readMinutes(name: string) {
 export async function deleteMinutes(name: string) {
   if (minutesUsesBlob()) {
     try {
-      await del(minutesBlobPath(name), await blobOptions());
+      await del(minutesBlobPath(name), await blobAuth());
       return;
     } catch {
       if (!minutesUsesGithub()) throw new Error("Could not remove that file.");

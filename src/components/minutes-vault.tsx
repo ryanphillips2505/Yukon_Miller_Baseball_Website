@@ -1,6 +1,8 @@
 "use client";
 
+import { MinutesPdfViewer, minutesFileUrl } from "@/components/minutes-pdf-viewer";
 import { buttonVariants } from "@/components/ui/button";
+import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import { useState, type ChangeEvent } from "react";
@@ -17,6 +19,63 @@ function formatSize(bytes: number) {
   return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
 }
 
+function isPdf(name: string) {
+  return name.toLowerCase().endsWith(".pdf");
+}
+
+function MinutesFileActions({
+  file,
+  canAdmin,
+  removing,
+  onRemove,
+}: {
+  file: MinutesFile;
+  canAdmin: boolean;
+  removing: boolean;
+  onRemove: (name: string) => void;
+}) {
+  const [open, setOpen] = useState(false);
+  const pdf = isPdf(file.name);
+
+  return (
+    <div className="flex gap-2">
+      {pdf ? (
+        <Dialog open={open} onOpenChange={setOpen}>
+          <DialogTrigger
+            className={cn(buttonVariants(), "h-9 px-3 text-xs uppercase")}
+          >
+            View
+          </DialogTrigger>
+          {open ? <MinutesPdfViewer name={file.name} /> : null}
+        </Dialog>
+      ) : null}
+      <a
+        href={minutesFileUrl(file.name)}
+        className={cn(
+          buttonVariants({ variant: pdf ? "outline" : "default" }),
+          "h-9 px-3 text-xs uppercase",
+          pdf && "border-white/15",
+        )}
+      >
+        Download
+      </a>
+      {canAdmin ? (
+        <button
+          type="button"
+          disabled={removing}
+          onClick={() => onRemove(file.name)}
+          className={cn(
+            buttonVariants({ variant: "outline" }),
+            "h-9 border-white/15 px-3 text-xs uppercase",
+          )}
+        >
+          {removing ? "Removing…" : "Remove"}
+        </button>
+      ) : null}
+    </div>
+  );
+}
+
 function formatDate(value: string) {
   const date = new Date(value);
   if (Number.isNaN(date.getTime())) return value;
@@ -30,26 +89,49 @@ function formatDate(value: string) {
 export function MinutesVault({
   initialFiles,
   canAdmin,
+  documentsUnavailable = false,
 }: {
   initialFiles: MinutesFile[];
   canAdmin: boolean;
+  documentsUnavailable?: boolean;
 }) {
   const router = useRouter();
   const [files, setFiles] = useState(initialFiles);
+  const [unavailable, setUnavailable] = useState(documentsUnavailable);
   const [error, setError] = useState("");
   const [uploading, setUploading] = useState(false);
   const [removing, setRemoving] = useState<string | null>(null);
 
+  function applyLibrary(data: { files?: MinutesFile[]; unavailable?: boolean }) {
+    if (data.unavailable) {
+      setUnavailable(true);
+      setFiles([]);
+      return;
+    }
+    setUnavailable(false);
+    setFiles(data.files ?? []);
+  }
+
   async function refreshFiles() {
     const response = await fetch("/api/minutes");
-    const data = (await response.json()) as {
-      files?: MinutesFile[];
-      error?: string;
-    };
-    if (!response.ok) {
-      throw new Error(data.error || "Could not refresh the file list.");
+    let data: { files?: MinutesFile[]; unavailable?: boolean; error?: string } =
+      {};
+    try {
+      data = (await response.json()) as typeof data;
+    } catch {
+      setUnavailable(true);
+      setFiles([]);
+      return;
     }
-    setFiles(data.files ?? []);
+    if (response.status === 401) {
+      throw new Error("Sign in required.");
+    }
+    if (!response.ok || data.unavailable) {
+      setUnavailable(true);
+      setFiles([]);
+      return;
+    }
+    applyLibrary(data);
   }
 
   async function uploadDirect(file: File) {
@@ -93,12 +175,13 @@ export function MinutesVault({
     const response = await fetch("/api/minutes", { method: "POST", body });
     const data = (await response.json()) as {
       files?: MinutesFile[];
+      unavailable?: boolean;
       error?: string;
     };
     if (!response.ok) {
       throw new Error(data.error || "Upload failed.");
     }
-    setFiles(data.files ?? []);
+    applyLibrary(data);
   }
 
   async function onUpload(event: ChangeEvent<HTMLInputElement>) {
@@ -195,7 +278,11 @@ export function MinutesVault({
 
       {error ? <p className="mt-4 text-sm text-red-400">{error}</p> : null}
 
-      {files.length === 0 ? (
+      {unavailable ? (
+        <p className="mt-8 text-sm text-zinc-300" role="status">
+          Documents are temporarily unavailable. Try again in a few minutes.
+        </p>
+      ) : files.length === 0 ? (
         <p className="mt-8 text-sm text-zinc-500">
           {canAdmin
             ? "No minutes uploaded yet. Use Upload to add the first file."
@@ -214,27 +301,12 @@ export function MinutesVault({
                   {formatDate(file.uploadedAt)} · {formatSize(file.size)}
                 </p>
               </div>
-              <div className="flex gap-2">
-                <a
-                  href={`/api/minutes/file?name=${encodeURIComponent(file.name)}`}
-                  className={cn(buttonVariants(), "h-9 px-3 text-xs uppercase")}
-                >
-                  Download
-                </a>
-                {canAdmin ? (
-                  <button
-                    type="button"
-                    disabled={removing === file.name}
-                    onClick={() => onRemove(file.name)}
-                    className={cn(
-                      buttonVariants({ variant: "outline" }),
-                      "h-9 border-white/15 px-3 text-xs uppercase",
-                    )}
-                  >
-                    {removing === file.name ? "Removing…" : "Remove"}
-                  </button>
-                ) : null}
-              </div>
+              <MinutesFileActions
+                file={file}
+                canAdmin={canAdmin}
+                removing={removing === file.name}
+                onRemove={onRemove}
+              />
             </li>
           ))}
         </ul>

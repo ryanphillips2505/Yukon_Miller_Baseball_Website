@@ -3,6 +3,7 @@ import {
   createMinutesDownloadUrl,
   deleteMinutes,
   minutesUsesBlob,
+  openMinutes,
   readMinutes,
   safeMinutesName,
 } from "@/lib/minutes-store";
@@ -17,6 +18,39 @@ function fileNameFrom(request: Request) {
   return safeMinutesName(url.searchParams.get("name") ?? "");
 }
 
+function wantsInlinePdf(request: Request) {
+  return new URL(request.url).searchParams.get("inline") === "1";
+}
+
+function isPdfName(name: string) {
+  return name.toLowerCase().endsWith(".pdf");
+}
+
+async function inlinePdf(name: string) {
+  if (!isPdfName(name)) {
+    return NextResponse.json(
+      { error: "Only PDF files can be previewed." },
+      { status: 400 },
+    );
+  }
+
+  const file = await openMinutes(name);
+  if (!file) {
+    return NextResponse.json({ error: "File not found." }, { status: 404 });
+  }
+
+  return new NextResponse(file.body, {
+    headers: {
+      "Content-Type": "application/pdf",
+      "Content-Disposition": `inline; filename="${name.replace(/"/g, "")}"`,
+      "Content-Length": String(file.size),
+      "Cache-Control": "private, no-store",
+      "X-Content-Type-Options": "nosniff",
+      "Content-Security-Policy": "frame-ancestors 'self'",
+    },
+  });
+}
+
 export async function GET(request: Request) {
   if (!(await minutesAuthed())) {
     return NextResponse.json({ error: "Sign in required." }, { status: 401 });
@@ -25,6 +59,10 @@ export async function GET(request: Request) {
   const name = fileNameFrom(request);
   if (!name) {
     return NextResponse.json({ error: "Invalid file name." }, { status: 400 });
+  }
+
+  if (wantsInlinePdf(request)) {
+    return inlinePdf(name);
   }
 
   if (minutesUsesBlob()) {

@@ -56,10 +56,9 @@ export async function POST(request: Request) {
   try {
     const upload = await createMinutesUploadUrl(name);
     return NextResponse.json(upload);
-  } catch (error) {
-    const detail = error instanceof Error ? error.message : "storage error";
+  } catch {
     return NextResponse.json(
-      { error: `Could not start upload (${detail}).` },
+      { error: "Could not start upload." },
       { status: 500 },
     );
   }

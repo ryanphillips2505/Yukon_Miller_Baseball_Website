@@ -1,35 +1,59 @@
-import { EmptyState } from "@/components/empty-state";
+import { MediaLibrary } from "@/components/media-library";
+import { MinutesLogin } from "@/components/minutes-login";
+import { MinutesSessionGuard } from "@/components/minutes-session-guard";
 import { PageHero } from "@/components/page-hero";
-import { PhotoSlot } from "@/components/photo-slot";
-import { publicPageSeo } from "@/lib/seo";
-import { program } from "@/lib/site";
+import { emptyCatalog, toMediaCards } from "@/lib/media-catalog";
+import { readMediaCatalog } from "@/lib/media-store";
+import { minutesAccess } from "@/lib/minutes-auth";
+import { MINUTES_EXPIRED_MESSAGE } from "@/lib/minutes-session";
 import type { Metadata } from "next";
 
-export const metadata: Metadata = { title: "Media", ...publicPageSeo("/media") };
+export const dynamic = "force-dynamic";
 
-export default function MediaPage() {
+export const metadata: Metadata = {
+  title: "Media",
+  robots: { index: false, follow: false },
+};
+
+const loginDescription =
+  "The Media Library and Meeting Minutes use the same password.";
+const loginSubmitLabel = "Open library";
+
+export default async function MediaPage() {
+  const access = await minutesAccess();
+  const read =
+    access.state === "active" ? await readMediaCatalog() : null;
+  const catalog = read?.status === "ready" ? read.catalog : emptyCatalog();
+
   return (
     <div>
       <PageHero
-        kicker="Gallery"
+        kicker="Library"
         title="Media"
-        lede="Game photos, wallpapers, and video land here when the program drops files. These frames stay empty on purpose."
+        lede="Shared photos, video, and albums for players, parents, and authorized members."
       />
-      <div className="mx-auto max-w-6xl space-y-8 px-4 py-10 sm:px-6">
-        <EmptyState
-          title="No media uploaded"
-          body="Send team photos, phone wallpapers, or highlight links to the staff. Nothing here is stock and nothing is pulled from another school."
-          action={{ href: `mailto:${program.email}`, label: "Email media" }}
-        />
-        <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
-          {["Varsity", "JV Red", "JV White", "Miller Field"].map((label) => (
-            <PhotoSlot
-              key={label}
-              label={`${label} coming`}
-              className="aspect-[3/4] rounded-2xl border border-white/8"
+      <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 sm:py-10">
+        {access.state === "active" ? (
+          <MinutesSessionGuard
+            lastActivity={access.lastActivity}
+            loginDescription={loginDescription}
+            loginSubmitLabel={loginSubmitLabel}
+          >
+            <MediaLibrary
+              key={`${catalog.version}:${read?.status ?? "signed-out"}`}
+              version={catalog.version}
+              items={toMediaCards(catalog)}
+              canAdmin={access.role === "admin"}
+              unavailable={read?.status === "unavailable"}
             />
-          ))}
-        </div>
+          </MinutesSessionGuard>
+        ) : (
+          <MinutesLogin
+            notice={access.state === "expired" ? MINUTES_EXPIRED_MESSAGE : undefined}
+            description={loginDescription}
+            submitLabel={loginSubmitLabel}
+          />
+        )}
       </div>
     </div>
   );

@@ -19,7 +19,6 @@ export const sitemapPaths = [
   "/alumni",
   "/fans",
   "/records",
-  "/media",
 ] as const;
 
 export function canonicalUrl(path: string) {

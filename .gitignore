@@ -43,5 +43,9 @@ next-env.d.ts
 # local minutes vault (never serve from public/)
 /data/minutes/*
 !/data/minutes/.gitkeep
+
+# local media catalog (never serve from public/)
+/data/media/*
+!/data/media/.gitkeep
 .minutes-repo/
 .minutes-deploy

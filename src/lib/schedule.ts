@@ -126,6 +126,13 @@ const drafts: GameDraft[] = [
   { date: "2027-04-29", weekday: "Thursday", team: "jv-red", opponent: "Moore", location: "away", time: "5:00 / 7:00", phase: "regular" },
   { date: "2027-04-29", weekday: "Thursday", team: "jv-white", opponent: "Piedmont", location: "home", time: "5:00 / 7:00", phase: "regular" },
   { date: "2027-04-30", weekday: "Friday", team: "varsity", opponent: "Jenks", location: "home", time: "6:00", phase: "regular" },
+
+  { date: "2027-05-06", weekday: "Thursday", team: "varsity", opponent: "OSSAA Regionals", location: "neutral", time: "TBD", phase: "postseason", venue: "TBD" },
+  { date: "2027-05-07", weekday: "Friday", team: "varsity", opponent: "OSSAA Regionals", location: "neutral", time: "TBD", phase: "postseason", venue: "TBD" },
+  { date: "2027-05-08", weekday: "Saturday", team: "varsity", opponent: "OSSAA Regionals", location: "neutral", time: "TBD", phase: "postseason", venue: "TBD" },
+  { date: "2027-05-13", weekday: "Thursday", team: "varsity", opponent: "OSSAA State Tournament", location: "neutral", time: "TBD", phase: "postseason", venue: "TBD" },
+  { date: "2027-05-14", weekday: "Friday", team: "varsity", opponent: "OSSAA State Tournament", location: "neutral", time: "TBD", phase: "postseason", venue: "TBD" },
+  { date: "2027-05-15", weekday: "Saturday", team: "varsity", opponent: "OSSAA State Tournament", location: "neutral", time: "TBD", phase: "postseason", venue: "TBD" },
 ];
 
 function calendarSlug(value: string) {
